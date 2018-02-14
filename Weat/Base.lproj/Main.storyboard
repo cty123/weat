@@ -38,21 +38,77 @@
             </objects>
             <point key="canvasLocation" x="-506" y="29"/>
         </scene>
-        <!--Item 2-->
+        <!--Explore View Controller-->
+        <scene sceneID="jj6-IR-cg7">
+            <objects>
+                <viewController id="KOV-31-VdV" customClass="ExploreViewController" customModule="Weat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VMH-Gn-iV0">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="M5m-sW-hAS"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="Explore" id="tEu-Eh-UKe">
+                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
+                    </tabBarItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hxh-iI-Q7P" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2314" y="-659"/>
+        </scene>
+        <!--Checkin View Controller-->
+        <scene sceneID="Esl-p0-DsU">
+            <objects>
+                <viewController id="qWv-m6-Pq1" customClass="CheckinViewController" customModule="Weat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GNb-Gu-D82">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="HeJ-tz-iYO"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="Checkin" id="luZ-1r-oLZ">
+                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
+                    </tabBarItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hrc-hE-Kf6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2314" y="29"/>
+        </scene>
+        <!--Groups View Controller-->
+        <scene sceneID="lOw-dI-7i7">
+            <objects>
+                <viewController id="5HS-J0-HqI" customClass="GroupsViewController" customModule="Weat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="KLm-L1-TJ0">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="3Cu-lU-mD4"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="Groups" id="PnX-fM-rwG">
+                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
+                    </tabBarItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4AN-0Q-FMQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2314" y="777"/>
+        </scene>
+        <!--Profile View Controller-->
         <scene sceneID="daP-UB-dhx">
             <objects>
-                <viewController id="d7j-ry-NWb" sceneMemberID="viewController">
+                <viewController id="d7j-ry-NWb" customClass="ProfileViewController" customModule="Weat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zac-jc-A11">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="LVL-mU-AZa"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="G2v-Fw-1r6"/>
+                    <tabBarItem key="tabBarItem" title="" image="Profile" id="G2v-Fw-1r6">
+                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
+                    </tabBarItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Dr-hj-hNb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1984" y="365"/>
+            <point key="canvasLocation" x="2314" y="1558"/>
         </scene>
         <!--Login Controller-->
         <scene sceneID="Ufc-kv-LSj">
@@ -83,21 +139,24 @@
             </objects>
             <point key="canvasLocation" x="315" y="-847"/>
         </scene>
-        <!--Item 1-->
+        <!--Feed View Controller-->
         <scene sceneID="pAu-l0-YL8">
             <objects>
-                <viewController id="bwq-om-EAg" customClass="FriendFeedController" customModule="Weat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="bwq-om-EAg" customClass="FeedViewController" customModule="Weat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="c4d-zQ-Ndz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="S7J-hm-P4o"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="eL1-M2-TJe"/>
+                    <tabBarItem key="tabBarItem" title="" image="Feed" id="eL1-M2-TJe">
+                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
+                    </tabBarItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K2n-cQ-TqT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1984" y="-311"/>
+            <point key="canvasLocation" x="2314" y="-1380"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="TsF-el-AgK">
@@ -110,7 +169,10 @@
                     </tabBar>
                     <connections>
                         <segue destination="bwq-om-EAg" kind="relationship" relationship="viewControllers" id="Tw1-Pl-NX6"/>
-                        <segue destination="d7j-ry-NWb" kind="relationship" relationship="viewControllers" id="Poc-G2-jPr"/>
+                        <segue destination="KOV-31-VdV" kind="relationship" relationship="viewControllers" id="xle-At-JE4"/>
+                        <segue destination="qWv-m6-Pq1" kind="relationship" relationship="viewControllers" id="VpF-jq-lrN"/>
+                        <segue destination="5HS-J0-HqI" kind="relationship" relationship="viewControllers" id="40u-5W-fZm"/>
+                        <segue destination="d7j-ry-NWb" kind="relationship" relationship="viewControllers" id="jbc-G3-LYy"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZKq-kh-uSq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -118,6 +180,13 @@
             <point key="canvasLocation" x="1170" y="29"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Checkin" width="30" height="30"/>
+        <image name="Explore" width="30" height="30"/>
+        <image name="Feed" width="30" height="30"/>
+        <image name="Groups" width="30" height="30"/>
+        <image name="Profile" width="30" height="30"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="rf3-X4-aDO"/>
     </inferredMetricsTieBreakers>
