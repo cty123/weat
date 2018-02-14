@@ -12,6 +12,7 @@ class LoginController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -35,6 +36,7 @@ class LoginController: UIViewController{
                     } else {
                         self.fbLoginSuccess = true
                         //Successfully loggedIn
+                        
                         self.loginbtn.titleLabel?.text = "Facebook Logout"
                         FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, relationship_status"]).start(completionHandler: {(connection, result, error) -> Void in
                             if (error == nil){
@@ -47,8 +49,9 @@ class LoginController: UIViewController{
         } else {
             //Facebook session is active
             //Facebook Logout
-            loginManager.logOut()
-            self.loginbtn.titleLabel?.text = "Facebook Login"
+            loginManager.logOut()   // Why are we logging out?
+            self.loginbtn.titleLabel?.text = "Facebook Login" // Might not want this when we have a logout button
+            
         }
     }
     
