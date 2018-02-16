@@ -7,9 +7,13 @@
 //
 
 import UIKit
+import FBSDKLoginKit
 
 class ProfileViewController: UIViewController {
-
+    @IBOutlet weak var loginbtn: UIButton!
+    
+    let loginManager: FBSDKLoginManager = FBSDKLoginManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

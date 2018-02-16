@@ -1,6 +1,8 @@
 import UIKit
 import FBSDKLoginKit
 import FBSDKCoreKit
+import Alamofire
+import SwiftyJSON
 
 class LoginController: UIViewController{
     
@@ -36,6 +38,34 @@ class LoginController: UIViewController{
                     } else {
                         self.fbLoginSuccess = true
                         //Successfully loggedIn
+                        
+                        // Complete Weat API call
+                        let token = FBSDKAccessToken.current().tokenString!
+                        let url = "http://localhost:8000/auth/facebook/token?access_token=\(String(describing: token))"
+                        print("Getting url \(String(describing: url))")
+                        Alamofire.request(url, method: .get).validate().responseJSON { response in
+                            switch response.result {
+                            case .success(let value):
+                                let json = JSON(value)
+                                UserDefaults.standard.set(json["id"].int, forKey: "id")
+                                UserDefaults.standard.set(json["name"].string, forKey: "name")
+                                UserDefaults.standard.set(json["email"].string, forKey: "email")
+                                UserDefaults.standard.set(json["location"].string, forKey: "location")
+                                UserDefaults.standard.set(json["privacy"].int, forKey: "privacy")
+                                UserDefaults.standard.set(json["phone"].string, forKey: "phone")
+                                print(json)
+                                // Testing pulling friends
+                                /*FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "friends"]).start(completionHandler: { (connection, result, error) -> Void in
+                                    if (error == nil){
+                                        print(result as Any)
+                                    } else {
+                                        print(error as Any)
+                                    }
+                                })*/
+                            case .failure(let error):
+                                print(error)
+                            }
+                        }
                         
                         self.loginbtn.titleLabel?.text = "Facebook Logout"
                         FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, relationship_status"]).start(completionHandler: {(connection, result, error) -> Void in
