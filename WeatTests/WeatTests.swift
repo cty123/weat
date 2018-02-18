@@ -24,6 +24,14 @@ class WeatTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let user = User()
+        User.getUserInfo(user: user, access_token: "test", profile_id: "1"){
+            user.name = "cty123"
+            user.privacy = 2
+            user.phone = "110"
+            user.save(access_token: "test")
+            print(user.name)
+        }
     }
     
     func testPerformanceExample() {
