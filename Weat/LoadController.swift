@@ -21,7 +21,6 @@ class LoadController: UIViewController {
                 switch response.result {
                 case .success(let value):
                     let json = JSON(value)
-                    print(json)  // Prints "you're logged in" if successful
                     UserDefaults.standard.set(json["id"].int, forKey: "id")
                     UserDefaults.standard.set(json["name"].string, forKey: "name")
                     UserDefaults.standard.set(json["email"].string, forKey: "email")

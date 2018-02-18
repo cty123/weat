@@ -53,7 +53,6 @@ class LoginController: UIViewController{
                                 UserDefaults.standard.set(json["location"].string, forKey: "location")
                                 UserDefaults.standard.set(json["privacy"].int, forKey: "privacy")
                                 UserDefaults.standard.set(json["phone"].string, forKey: "phone")
-                                print(json)
                                 // Testing pulling friends
                                 /*FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "friends"]).start(completionHandler: { (connection, result, error) -> Void in
                                     if (error == nil){

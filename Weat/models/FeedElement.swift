@@ -13,7 +13,7 @@ class FeedElement: Decodable{
     var updatedAt: Int?
     var restaurant_id: Int?
     
-    static func getFeedElement(feed_obj: JSON) -> FeedElement {
+    static func makeFeedElement(feed_obj: JSON) -> FeedElement {
         let element:FeedElement = FeedElement()
         element.restaurant = feed_obj["restaurant"].string
         element.feed_text = feed_obj["feed_text"].string

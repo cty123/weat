@@ -5,9 +5,10 @@ import Alamofire
 import SwiftyJSON
 
 class  FeedViewController: UIViewController {
-    var global_feed = Feed.getFeed(feed_type: "/all")
-    var friends_feed = Feed.getFeed(feed_type: "/friends")
-    var your_feed = Feed.getFeed(feed_type: "")
+    var global_feed:Feed
+    
+    //var friends_feed = Feed.getFeed(feed_type: "/friends")
+    //var your_feed = Feed.getFeed(feed_type: "")
     
     @IBAction func indexChanged(sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex
