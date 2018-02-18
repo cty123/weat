@@ -5,12 +5,12 @@ import FBSDKCoreKit
 
 class Feed: Decodable{
     var message: String?
-    var data: Data?
+    var data: [FeedElement]?
     
-    static func getYouFeed() -> Feed {
+    static func getFeed(feed_type: String) -> Feed {
         let token = FBSDKAccessToken.current().tokenString!
         let user_id = UserDefaults.standard.integer(forKey: "id")
-        let url = "http://127.0.0.1:8000/user/feed?access_token=\(String(describing: token))&profile_id=\(String(describing: user_id))"
+        let url = "http://127.0.0.1:8000/user/feed\(String(describing: feed_type))?access_token=\(String(describing: token))&profile_id=\(String(describing: user_id))"
         let feed:Feed = Feed()
         print(url as Any)
         Alamofire.request(url, method:.get).validate().responseJSON { response in
@@ -19,15 +19,21 @@ class Feed: Decodable{
                 let json = JSON(value)
                 print(json)
                 feed.message = json["message"].string
-                feed.data = try? json["feed"].rawData()
-                print(feed)
+                for obj in json["feed"] {
+                    print("here")
+                    feed.data?.append(FeedElement.getFeedElement(feed_obj: obj.1))
+                }
+                
+                print(feed.data)
             case .failure(let error):
                 print(error)
             }
         }
         return feed
     }
+    
+    static func getData(array: JSON) {
+        
+    }
 }
-
-
 

@@ -11,6 +11,7 @@
 		1414F8CB2034D6D30018C0B7 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414F8CA2034D6D30018C0B7 /* ExploreViewController.swift */; };
 		1414F8CD2034D9240018C0B7 /* CheckinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414F8CC2034D9240018C0B7 /* CheckinViewController.swift */; };
 		1414F8CF2034D9390018C0B7 /* GroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414F8CE2034D9390018C0B7 /* GroupsViewController.swift */; };
+		14503F5720375362007165CF /* FeedElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14503F5620375362007165CF /* FeedElement.swift */; };
 		14A7E86520362A5600F8655C /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A7E86420362A5600F8655C /* Feed.swift */; };
 		14A7E86720365C8800F8655C /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A7E86620365C8800F8655C /* CurrentUser.swift */; };
 		4437886DF57BB2316786CBE5 /* Pods_WeatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E26D6587C8052AB156A919CB /* Pods_WeatTests.framework */; };
@@ -41,6 +42,7 @@
 		1414F8CA2034D6D30018C0B7 /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		1414F8CC2034D9240018C0B7 /* CheckinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinViewController.swift; sourceTree = "<group>"; };
 		1414F8CE2034D9390018C0B7 /* GroupsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsViewController.swift; sourceTree = "<group>"; };
+		14503F5620375362007165CF /* FeedElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedElement.swift; sourceTree = "<group>"; };
 		14A7E86420362A5600F8655C /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		14A7E86620365C8800F8655C /* CurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
 		3F5C277665A3A4B2373A20A9 /* Pods-Weat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weat.release.xcconfig"; path = "Pods/Target Support Files/Pods-Weat/Pods-Weat.release.xcconfig"; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 				E0E572D02033CD8E00E7822B /* User.swift */,
 				14A7E86420362A5600F8655C /* Feed.swift */,
 				14A7E86620365C8800F8655C /* CurrentUser.swift */,
+				14503F5620375362007165CF /* FeedElement.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -396,6 +399,7 @@
 				1414F8CD2034D9240018C0B7 /* CheckinViewController.swift in Sources */,
 				E0E572CF2033CD6B00E7822B /* FeedViewController.swift in Sources */,
 				E0E572CC2033CBF100E7822B /* LoadController.swift in Sources */,
+				14503F5720375362007165CF /* FeedElement.swift in Sources */,
 				E0E572D12033CD8E00E7822B /* User.swift in Sources */,
 				14A7E86720365C8800F8655C /* CurrentUser.swift in Sources */,
 				1414F8CB2034D6D30018C0B7 /* ExploreViewController.swift in Sources */,
