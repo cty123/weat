@@ -38,7 +38,7 @@ struct SimpleData {
         "KFC",
         "Panda Express",
         "Dairy Queen",
-        "Two Fellas"
+        "Two Fellas" // 🔥
     ]
     
 }

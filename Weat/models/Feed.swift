@@ -19,7 +19,7 @@ class Feed {
                 let json = JSON(value)
                 feed.message = json["message"].string!
                 for obj in json["feed"] {
-                    let feed_element = FeedElement.makeFeedElement(feed_obj: obj.1)
+                    let feed_element = FeedElement(feed_obj: obj.1)
                     feed.data.append(feed_element)
                 }
                 break;

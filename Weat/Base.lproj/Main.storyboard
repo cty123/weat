@@ -186,6 +186,10 @@
                         <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
                     </tabBarItem>
+                    <connections>
+                        <outlet property="segmentedControl" destination="NoZ-aO-9te" id="vDV-JZ-zFb"/>
+                        <outlet property="tableView" destination="qzn-h7-QaU" id="Mmg-wR-8w0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K2n-cQ-TqT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
