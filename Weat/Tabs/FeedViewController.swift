@@ -15,7 +15,7 @@ class  FeedViewController: UIViewController, UITableViewDataSource, UITableViewD
     @IBAction func indexChanged(sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex
         {
-        // Change this to occur on pull down
+        // TODO: Change this to occur on pull down
         case 0:
             Feed.getFeed(feed_type: "/all", completion: {
                 (feed: Feed?) in
@@ -24,8 +24,7 @@ class  FeedViewController: UIViewController, UITableViewDataSource, UITableViewD
                     return
                 }
                 self.global_feed = new_feed
-                print(self.global_feed.data)
-                // Move to everyone list view
+                self.tableView.reloadData()
             })
             
         case 1:
@@ -36,8 +35,7 @@ class  FeedViewController: UIViewController, UITableViewDataSource, UITableViewD
                     return
                 }
                 self.friends_feed = new_feed
-                print(self.friends_feed.data)
-                // Move to friends list view
+                self.tableView.reloadData()
             })
             
         default:
@@ -48,8 +46,7 @@ class  FeedViewController: UIViewController, UITableViewDataSource, UITableViewD
                     return
                 }
                 self.your_feed = new_feed
-                print(self.your_feed.data)
-                // Move to everyone list view
+                self.tableView.reloadData()
             })
         }
         
@@ -62,7 +59,19 @@ class  FeedViewController: UIViewController, UITableViewDataSource, UITableViewD
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        // Load in friend feed
+        Feed.getFeed(feed_type: "/friends", completion: {
+            (feed: Feed?) in
+            guard let new_feed = feed else {
+                print("error")
+                return
+            }
+            self.friends_feed = new_feed
+            self.tableView.reloadData()
+        })
+        
         self.segmentedControl.setup(segmentNames: segments, color: UIColor.orange)
+        self.segmentedControl.selectedSegmentIndex = 1
         
         // table view init
         tableView.delegate = self
@@ -81,19 +90,18 @@ class  FeedViewController: UIViewController, UITableViewDataSource, UITableViewD
         var count: Int = 5
         switch self.segmentedControl.selectedSegmentIndex {
         case 0:
-            // feed, TODO: set page size
+            // global feed, TODO: set page size
             count = global_feed.data.count
         case 1:
-            // friends, TODO: user.friends.size
+             // friends feed
             count = friends_feed.data.count
         case 2:
-            // favorites, TODO: user.favorites.size
+             // your feed
             count = your_feed.data.count
         default:
             // should never happen
             break
         }
-        print(count)
         return count
     }
     
@@ -116,11 +124,11 @@ class  FeedViewController: UIViewController, UITableViewDataSource, UITableViewD
             cell.labelTitle.text = "\(String(describing: friends_feed.data[indexPath.row].feed_text))"
             return cell
             
-        case 2: // you feed
+        case 2: // your feed
             cell.labelTitle.text = "\(String(describing: your_feed.data[indexPath.row].feed_text))"
             return cell
             
-        default: // should never happend
+        default: // should never happen
             return UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: nil)
         }
         
