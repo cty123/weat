@@ -5,27 +5,49 @@ import Alamofire
 import SwiftyJSON
 
 class  FeedViewController: UIViewController {
-    var global_feed:Feed
+    var global_feed = Feed()
+    var friends_feed = Feed()
+    var your_feed = Feed()
     
-    //var friends_feed = Feed.getFeed(feed_type: "/friends")
-    //var your_feed = Feed.getFeed(feed_type: "")
     
     @IBAction func indexChanged(sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex
         {
         case 0:
-            print("Everyone")
-            print(global_feed.data as Any)
-            // Move to everyone list view
+            Feed.getFeed(feed_type: "/all", completion: {
+                (feed: Feed?) in
+                guard let new_feed = feed else {
+                    print("error")
+                    return
+                }
+                self.global_feed = new_feed
+                print(self.global_feed.data)
+                // Move to everyone list view
+            })
             
         case 1:
-            print("Friends")
-            print(friends_feed.data as Any)
-            // Move to friends list view
+            Feed.getFeed(feed_type: "/friends", completion: {
+                (feed: Feed?) in
+                guard let new_feed = feed else {
+                    print("error")
+                    return
+                }
+                self.friends_feed = new_feed
+                print(self.friends_feed.data)
+                // Move to friends list view
+            })
+            
         default:
-            print("You")
-            print(your_feed.data as Any)
-            // Move to your list view
+            Feed.getFeed(feed_type: "", completion: {
+                (feed: Feed?) in
+                guard let new_feed = feed else {
+                    print("error")
+                    return
+                }
+                self.your_feed = new_feed
+                print(self.your_feed.data)
+                // Move to everyone list view
+            })
             break;
         }
     }
