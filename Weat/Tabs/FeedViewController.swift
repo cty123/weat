@@ -113,19 +113,58 @@ class  FeedViewController: UIViewController, UITableViewDataSource, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = Bundle.main.loadNibNamed("FeedTableViewCell", owner: self, options: nil)?.first as! FeedTableViewCell
         
+        var your_name: String
+        
         switch self.segmentedControl.selectedSegmentIndex {
             
+           /* var restaurant_name: String
+            var restaurant_id: Int
+            
+            var feed_text: String
+            var feed_id: Int
+            var createdAt: Int
+            
+            var actor_name: String
+            var actor_id: Int
+            
+            var receiver_name: String
+            var receiver_id: Int*/
         case 0: // global feed
-            cell.labelTitle.text = "\(String(describing: global_feed.data[indexPath.row].feed_text))"
-            cell.labelSubtitle.text = "and had a great time!"
+            let feed_obj = global_feed.data[indexPath.row]
+            
+            if(feed_obj.actor_id == UserDefaults.standard.integer(forKey: "id")) {
+                your_name = "You"
+            } else {
+                your_name = feed_obj.actor_name
+            }
+            
+            
+            let feed_str = "\(String(describing: your_name)) \(String(describing: feed_obj.feed_text)) \(String(describing: feed_obj.restaurant_name))"
+            cell.labelTitle.text = "\(String(describing: feed_str))"
+            cell.labelSubtitle.text = "with \(String(describing: feed_obj.receiver_name))"
             return cell
             
         case 1: // friends feed
-            cell.labelTitle.text = "\(String(describing: friends_feed.data[indexPath.row].feed_text))"
+            let feed_obj = friends_feed.data[indexPath.row]
+            
+            if(feed_obj.actor_id == UserDefaults.standard.integer(forKey: "id")) {
+                your_name = "You"
+            } else {
+                your_name = feed_obj.actor_name
+            }
+            
+            
+            let feed_str = "\(String(describing: your_name)) \(String(describing: feed_obj.feed_text)) \(String(describing: feed_obj.restaurant_name))"
+            cell.labelTitle.text = "\(String(describing: feed_str))"
+            cell.labelSubtitle.text = "with \(String(describing: feed_obj.receiver_name))"
             return cell
             
         case 2: // your feed
-            cell.labelTitle.text = "\(String(describing: your_feed.data[indexPath.row].feed_text))"
+            let feed_obj = your_feed.data[indexPath.row]
+            
+            let feed_str = "You \(String(describing: feed_obj.feed_text)) \(String(describing: feed_obj.restaurant_name))"
+            cell.labelTitle.text = "\(String(describing: feed_str))"
+            cell.labelSubtitle.text = "with \(String(describing: feed_obj.receiver_name))"
             return cell
             
         default: // should never happen

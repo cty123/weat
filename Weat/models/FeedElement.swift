@@ -2,40 +2,33 @@ import Foundation
 import SwiftyJSON
 
 class FeedElement: Decodable{
-    var restaurant: String
+    var restaurant_name: String
+    var restaurant_id: Int
+    
     var feed_text: String
-    /* Uncomment and add these fields
-    var user: User
-    var user_id: Int
-    var friend: User
-    var friend_id: Int
-    var id: Int
+    var feed_id: Int
     var createdAt: Int
-    var updatedAt: Int
-    var restaurant_id: Int*/
     
-    static func makeFeedElement(feed_obj: JSON) -> FeedElement {
-        let element = FeedElement()
-        //element.restaurant = feed_obj["restaurant"].string
-        //element.feed_text = feed_obj["feed_text"].string
-        
-        /* Dummy values */
-        //element.restaurant = "restaurant dummy"
-        element.feed_text = "feed_text dummy"
-        return element
-    }
+    var actor_name: String
+    var actor_id: Int
     
-    init() {
-        restaurant = "restaurant dummy"
-        feed_text = "feed_text dummy"
-    }
+    var receiver_name: String
+    var receiver_id: Int
+    
     
     init(feed_obj: JSON) {
-        if(feed_obj["restaurant"].string != nil) {
-            restaurant = feed_obj["restaurant"].string!
-        } else {
-            restaurant = ""
-        }
-        feed_text = feed_obj["feed_text"].string!
+        restaurant_name = (feed_obj["restaurant"].string != nil ? feed_obj["restaurant"].string! : "")
+        restaurant_id = (feed_obj["restaurant_id"].int != nil ? feed_obj["restaurant_id"].int! : -1)
+        
+        feed_text = (feed_obj["feed_text"].string != nil ? feed_obj["feed_text"].string! : "")
+        feed_id = (feed_obj["id"].int != nil ? feed_obj["id"].int! : -1)
+        createdAt = (feed_obj["createdAt"].int != nil ? feed_obj["createdAt"].int! : -1)
+        
+        actor_name = (feed_obj["user"]["name"].string != nil ? feed_obj["user"]["name"].string! : "")
+        actor_id = (feed_obj["user"]["id"].int != nil ? feed_obj["user"]["id"].int! : -1)
+        
+        receiver_name = (feed_obj["friend"]["name"].string != nil ? feed_obj["friend"]["name"].string! : "")
+        receiver_id = (feed_obj["friend"]["id"].int != nil ? feed_obj["friend"]["id"].int! : -1)
+        
     }
 }
