@@ -87,9 +87,86 @@ class Friend {
     }
     
 // Accept or reject friend request
-
-// Search friend
-
-// Add facebook friend
+    func setFriendRequest(friend_id: String, acceptance: Int, completion: @escaping(Bool)->()){
+        let url = "http://127.0.0.1:8000/user/friends/pending"
+        let headers = [
+            "Content-Type": "application/x-www-form-urlencoded"
+        ]
+        let params = [
+            "access_token": FBSDKAccessToken.current().tokenString!,
+            "acceptance": String(acceptance),
+            "friend_id": friend_id
+        ]
+        var status = false
+        Alamofire.request(url, method:.post, parameters: params, encoding:URLEncoding.httpBody, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                status = true
+                print(json)
+            case .failure(let error):
+                print(error)
+            }
+            completion(status)
+        }
+    }
     
+// Search friend
+    func searchFriend(search_criteria:String, page: Int?, limit: Int?, completion:@escaping(User)->()){
+        let url = "http://127.0.0.1:8000/user/friends/search"
+        var params = [
+            "access_token": FBSDKAccessToken.current().tokenString!,
+            "search_criteria": search_criteria,
+            "page": String(describing: page),
+            "limit": String(describing: limit)
+        ]
+        if params["page"] == nil {
+            params["page"] = "0"
+        }
+        if params["limit"] == nil {
+            params["limit"] = "50"
+        }
+        let user = User()
+        Alamofire.request(url, method:.get, parameters:params).validate().responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                for friend in json["users"].arrayValue{
+                    user.id = friend["id"].intValue
+                    user.name = friend["name"].stringValue
+                    user.email = friend["email"].stringValue
+                    user.phone = friend["phone"].stringValue
+                    user.location = friend["location"].stringValue
+                    user.privacy = friend["privacy"].intValue
+                }
+            case .failure(let error):
+                print(error)
+            }
+            completion(user)
+        }
+    }
+    
+// Add facebook friend
+    func addFacebookFriends(facebook_links:String, completion:@escaping (Bool)->()){
+        let url = "http://127.0.0.1:8000/user/friends/search"
+        let headers = [
+            "Content-Type": "application/x-www-form-urlencoded"
+        ]
+        let params = [
+            "access_token": FBSDKAccessToken.current().tokenString!,
+            "facebook_links": facebook_links
+        ]
+        var status = false
+        Alamofire.request(url, method:.post, parameters: params, encoding:URLEncoding.httpBody, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                status = true
+                print(json)
+            case .failure(let error):
+                print(error)
+            }
+            completion(status)
+        }
+    }
 }
