@@ -25,6 +25,8 @@
 		84EE6833203A41FC00A11D41 /* RestaurantTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84EE6831203A41FC00A11D41 /* RestaurantTableViewCell.xib */; };
 		84EE6835203A42EE00A11D41 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EE6834203A42EE00A11D41 /* Extensions.swift */; };
 		84EE6837203A430D00A11D41 /* SimpleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EE6836203A430D00A11D41 /* SimpleData.swift */; };
+		E0BD5DC0203BA8BF00602FD2 /* Rate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0BD5DBF203BA8BF00602FD2 /* Rate.swift */; };
+		E0BD5DC2203BA9EB00602FD2 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0BD5DC1203BA9EB00602FD2 /* Friend.swift */; };
 		E0E572AC2033CB3B00E7822B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E572AB2033CB3A00E7822B /* AppDelegate.swift */; };
 		E0E572AE2033CB3B00E7822B /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E572AD2033CB3B00E7822B /* LoginController.swift */; };
 		E0E572B12033CB3B00E7822B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0E572AF2033CB3B00E7822B /* Main.storyboard */; };
@@ -68,6 +70,8 @@
 		84EE6836203A430D00A11D41 /* SimpleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleData.swift; sourceTree = "<group>"; };
 		8B72BB2C83393A9A9E49E7C9 /* Pods_Weat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Weat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DADA406A0D7663C50B998E12 /* Pods-WeatTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WeatTests/Pods-WeatTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E0BD5DBF203BA8BF00602FD2 /* Rate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rate.swift; sourceTree = "<group>"; };
+		E0BD5DC1203BA9EB00602FD2 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		E0E572A82033CB3A00E7822B /* Weat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0E572AB2033CB3A00E7822B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E0E572AD2033CB3B00E7822B /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
@@ -213,6 +217,8 @@
 				E0E572D02033CD8E00E7822B /* User.swift */,
 				14A7E86420362A5600F8655C /* Feed.swift */,
 				14503F5620375362007165CF /* FeedElement.swift */,
+				E0BD5DBF203BA8BF00602FD2 /* Rate.swift */,
+				E0BD5DC1203BA9EB00602FD2 /* Friend.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -440,12 +446,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0BD5DC0203BA8BF00602FD2 /* Rate.swift in Sources */,
 				1414F8C92034D5850018C0B7 /* ProfileViewController.swift in Sources */,
 				14A7E86520362A5600F8655C /* Feed.swift in Sources */,
 				E0E572AE2033CB3B00E7822B /* LoginController.swift in Sources */,
 				1414F8CD2034D9240018C0B7 /* CheckinViewController.swift in Sources */,
 				84EE6832203A41FC00A11D41 /* RestaurantTableViewCell.swift in Sources */,
 				84EE681E203A40C800A11D41 /* ProfileMainViewController.swift in Sources */,
+				E0BD5DC2203BA9EB00602FD2 /* Friend.swift in Sources */,
 				E0E572CF2033CD6B00E7822B /* FeedViewController.swift in Sources */,
 				84EE6837203A430D00A11D41 /* SimpleData.swift in Sources */,
 				E0E572CC2033CBF100E7822B /* LoadController.swift in Sources */,
