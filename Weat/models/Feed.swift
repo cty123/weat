@@ -18,6 +18,7 @@ class Feed {
             case .success(let value):
                 let json = JSON(value)
                 feed.message = json["message"].string!
+                print(json)
                 for obj in json["feed"] {
                     let feed_element = FeedElement(feed_obj: obj.1)
                     feed.data.append(feed_element)

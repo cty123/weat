@@ -17,7 +17,7 @@ class FeedElement: Decodable{
     
     
     init(feed_obj: JSON) {
-        restaurant_name = (feed_obj["restaurant"].string != nil ? feed_obj["restaurant"].string! : "")
+        restaurant_name = (feed_obj["restaurant"]["name"].string != nil ? feed_obj["restaurant"]["name"].string! : "")
         restaurant_id = (feed_obj["restaurant_id"].int != nil ? feed_obj["restaurant_id"].int! : -1)
         
         feed_text = (feed_obj["feed_text"].string != nil ? feed_obj["feed_text"].string! : "")

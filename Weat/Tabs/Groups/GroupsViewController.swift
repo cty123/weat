@@ -1,14 +1,14 @@
 //
-//  ExploreViewController.swift
+//  GroupsViewController.swift
 //  Weat
 //
-//  Created by Sean Becker on 2/14/18.
+//  Created by Sean Becker on 2/20/18.
 //  Copyright © 2018 Weat. All rights reserved.
 //
 
 import UIKit
 
-class ExploreViewController: UIViewController {
+class GroupsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

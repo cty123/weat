@@ -81,8 +81,8 @@ class ProfileMainViewController: UIViewController, UITableViewDataSource, UITabl
             
         case 0: // feed
             let cell = Bundle.main.loadNibNamed("FeedTableViewCell", owner: self, options: nil)?.first as! FeedTableViewCell
-            cell.labelTitle.text = "\(String(describing: SimpleData.Users[indexPath.row])) went out to eat"
-            cell.labelSubtitle.text = "and had a great time!"
+            cell.labelName.text = "\(String(describing: SimpleData.Users[indexPath.row]))"
+            cell.labelRestaurant.text = "Dummy Restaurant"
             return cell
             
         case 1: // friends

@@ -1,14 +1,14 @@
 //
-//  GroupsViewController.swift
+//  ProfileViewController.swift
 //  Weat
 //
-//  Created by Sean Becker on 2/14/18.
+//  Created by Sean Becker on 2/20/18.
 //  Copyright © 2018 Weat. All rights reserved.
 //
 
 import UIKit
 
-class GroupsViewController: UIViewController {
+class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
