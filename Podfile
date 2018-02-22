@@ -9,7 +9,10 @@ target 'Weat' do
   pod 'Alamofire'
   pod 'SwiftyJSON'
   pod 'FBSDKLoginKit'
-  pod 'FBSDKCoreKit'  
+  pod 'FBSDKCoreKit'
+  pod 'GooglePlaces'
+  pod 'GooglePlacePicker'
+  pod 'GoogleMaps'
 
   target 'WeatTests' do
     inherit! :search_paths

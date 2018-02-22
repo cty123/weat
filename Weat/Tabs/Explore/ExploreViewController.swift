@@ -19,30 +19,26 @@ class ExploreViewController: UIViewController {
         // Choose child
         if(sender.selectedSegmentIndex == 0) {
             nextController = self.storyboard?.instantiateViewController(withIdentifier: "Map") as! MapViewController
-            prevController = self.storyboard?.instantiateViewController(withIdentifier: "List") as! ListViewController
+            //prevController = self.storyboard?.instantiateViewController(withIdentifier: "List") as! ListViewController
         } else {
             nextController = self.storyboard?.instantiateViewController(withIdentifier: "List") as! ListViewController
-            prevController = self.storyboard?.instantiateViewController(withIdentifier: "Map") as! MapViewController
+            //prevController = self.storyboard?.instantiateViewController(withIdentifier: "Map") as! MapViewController
         }
-        
-        // Figure out how to make transition
-        
-        // Add child to subview
-        self.addChildViewController(nextController)
-        self.view.addSubview(nextController.view)
         
         // Set up new child
         nextController.view.frame = self.view.bounds
         nextController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
-        // Notify new child
-        nextController.didMove(toParentViewController: self)
-        
-        // Remove old child
+        // Notify old child
+        prevController = self.childViewControllers.last!
         prevController.willMove(toParentViewController: nil)
-        
         prevController.view.removeFromSuperview()
         prevController.removeFromParentViewController()
+        
+        // Add child to subview
+        self.addChildViewController(nextController)
+        self.view.addSubview(nextController.view)
+        nextController.didMove(toParentViewController: self)
         
         
     }

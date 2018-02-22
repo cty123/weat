@@ -17,6 +17,10 @@
             </dict>
         </dict>
     </dict>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Show your location on a map</string>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>Show your location on a map</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
