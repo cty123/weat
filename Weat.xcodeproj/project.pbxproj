@@ -20,6 +20,7 @@
 		14179572203D341400611D6F /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14179571203D341400611D6F /* ListViewController.swift */; };
 		14179574203D3DD600611D6F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14179573203D3DD600611D6F /* MapViewController.swift */; };
 		14503F5720375362007165CF /* FeedElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14503F5620375362007165CF /* FeedElement.swift */; };
+		1463088D203E9AC500241DE3 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1463088C203E9AC500241DE3 /* APIKeys.swift */; };
 		14A7E86520362A5600F8655C /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A7E86420362A5600F8655C /* Feed.swift */; };
 		14FA4ECD203DFD8700B20E09 /* RestaurantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FA4ECB203DFD8700B20E09 /* RestaurantViewController.swift */; };
 		14FA4ED0203E062E00B20E09 /* RestaurantViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14FA4ECF203E062E00B20E09 /* RestaurantViewController.xib */; };
@@ -71,6 +72,7 @@
 		14179571203D341400611D6F /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		14179573203D3DD600611D6F /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		14503F5620375362007165CF /* FeedElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedElement.swift; sourceTree = "<group>"; };
+		1463088C203E9AC500241DE3 /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		14A7E86420362A5600F8655C /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		14FA4ECB203DFD8700B20E09 /* RestaurantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantViewController.swift; sourceTree = "<group>"; };
 		14FA4ECF203E062E00B20E09 /* RestaurantViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RestaurantViewController.xib; path = ../../../../../../../.Trash/RestaurantViewController.xib; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 				E0E572CD2033CCEC00E7822B /* models */,
 				84EE6834203A42EE00A11D41 /* Extensions.swift */,
 				84EE6836203A430D00A11D41 /* SimpleData.swift */,
+				1463088C203E9AC500241DE3 /* APIKeys.swift */,
 			);
 			path = Weat;
 			sourceTree = "<group>";
@@ -532,6 +535,7 @@
 				14179562203D2CB800611D6F /* CheckinViewController.swift in Sources */,
 				E0E572AE2033CB3B00E7822B /* LoginController.swift in Sources */,
 				84EE6832203A41FC00A11D41 /* RestaurantTableViewCell.swift in Sources */,
+				1463088D203E9AC500241DE3 /* APIKeys.swift in Sources */,
 				84EE681E203A40C800A11D41 /* ProfileMainViewController.swift in Sources */,
 				E0BD5DC2203BA9EB00602FD2 /* Friend.swift in Sources */,
 				84EE6837203A430D00A11D41 /* SimpleData.swift in Sources */,

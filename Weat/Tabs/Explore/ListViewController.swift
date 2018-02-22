@@ -1,10 +1,41 @@
 import UIKit
 import GooglePlacePicker
+import Alamofire
+import SwiftyJSON
 
-class ListViewController: GMSPlacePickerViewController, GMSPlacePickerViewControllerDelegate {
+class ListViewController: UIViewController {
+    
+    var locationManager = CLLocationManager()
+    var defaultLocation: CLLocation?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        locationManager = CLLocationManager()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        locationManager.distanceFilter = 50
+        locationManager.startUpdatingLocation()
+        locationManager.delegate = self
+        
+        
+        
+        /*placesClient.currentPlace(callback: { (placeLikelihoodList, error) -> Void in
+            if let error = error {
+                print("Pick Place error: \(error.localizedDescription)")
+                return
+            }
+            
+            if let placeLikelihoodList = placeLikelihoodList {
+                for likelihood in placeLikelihoodList.likelihoods {
+                    let place = likelihood.place
+                    print("Current Place name \(place.name) at likelihood \(likelihood.likelihood)")
+                    print("Current Place address \(String(describing: place.formattedAddress))")
+                    print("Current Place attributions \(String(describing: place.attributions))")
+                    print("Current PlaceID \(place.placeID)")
+                }
+            }
+        })*/
+        
         
     }
     
@@ -15,45 +46,60 @@ class ListViewController: GMSPlacePickerViewController, GMSPlacePickerViewContro
     
     override func viewDidAppear(_ animated: Bool) {
         // Set location
-        /*let center = CLLocationCoordinate2D(latitude: -33.865143, longitude: 151.2099)
-        let northEast = CLLocationCoordinate2D(latitude: center.latitude + 0.001,
-                                               longitude: center.longitude + 0.001)
-        let southWest = CLLocationCoordinate2D(latitude: center.latitude - 0.001,
-                                               longitude: center.longitude - 0.001)
-        let viewport = GMSCoordinateBounds(coordinate: northEast, coordinate: southWest)
-        
-        // Set up map*/
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        let config = GMSPlacePickerConfig(viewport: nil)
-        let placePicker = GMSPlacePickerViewController(config: config)
-        placePicker.delegate = self
+    func sendApiCall() {
+        if(defaultLocation == nil) {
+            return
+        }
+        let lat = defaultLocation!.coordinate.latitude
+        let long = defaultLocation!.coordinate.longitude
+        let api_key = kPlacesWebAPIKey
         
-        //present(placePicker, animated: animated, completion: nil)
-        self.navigationController?.pushViewController(placePicker, animated: true)
+        let url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(String(describing: lat)),\(String(describing: long))&radius=8000&type=restaurant&key=\(String(describing: api_key))"
+        //print(url)
+        
+        Alamofire.request(url, method:.get, parameters:nil).validate().responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                print(json)
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+}
+
+extension ListViewController: CLLocationManagerDelegate {
+    
+    // Handle incoming location events.
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        defaultLocation = locations.last!
+        sendApiCall()
     }
     
-    func placePicker(_ viewController: GMSPlacePickerViewController, didPick place: GMSPlace) {
-        // Create the next view controller we are going to display and present it.
-        let nextScreen = RestaurantViewController(place: place)
-        print(place)
-        
-        self.navigationController?.pushViewController(nextScreen, animated: true)
-        //viewController.dismiss(animated: true, completion: nil)
-        //self.mapViewController?.coordinate = place.coordinate
+    // Handle authorization for the location manager.
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .restricted:
+            print("Location access was restricted.")
+        case .denied:
+            print("User denied access to location.")
+        case .notDetermined:
+            print("Location status not determined.")
+        case .authorizedAlways: fallthrough
+        case .authorizedWhenInUse:
+            print("Location status is OK.")
+        }
     }
     
-    func placePicker(_ viewController: GMSPlacePickerViewController, didFailWithError error: Error) {
-        // In your own app you should handle this better, but for the demo we are just going to log
-        // a message.
-        NSLog("An error occurred while picking a place: \(error)")
+    // Handle location manager errors.
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        locationManager.stopUpdatingLocation()
+        print("Error: \(error)")
     }
     
-    func placePickerDidCancel(_ viewController: GMSPlacePickerViewController) {
-        NSLog("The place picker was canceled by the user")
-        
-        // Dismiss the place picker.
-        viewController.dismiss(animated: true, completion: nil)
-    }
+    
 }

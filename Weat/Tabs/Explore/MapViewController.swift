@@ -55,7 +55,13 @@ class MapViewController: UIViewController {
         view.insertSubview(mapView, at: 0)
         mapView.isHidden = true
         
-        
+        for likelihood in likelyPlaces {
+            let place = likelihood
+            print("Current Place name \(place.name)")
+            print("Current Place address \(String(describing: place.formattedAddress))")
+            print("Current Place attributions \(String(describing: place.attributions))")
+            print("Current PlaceID \(place.placeID)")
+        }
     }
 
     override func didReceiveMemoryWarning() {
