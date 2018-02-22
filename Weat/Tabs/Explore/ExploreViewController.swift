@@ -11,7 +11,7 @@ import UIKit
 class ExploreViewController: UIViewController {
     
     @IBOutlet weak var container: UIView!
-    @IBOutlet weak var seg: UISegmentedControl!
+    @IBOutlet var seg: UISegmentedControl!
     @IBAction func indexChanged(_ sender: UISegmentedControl) {
         
         var nextController: UIViewController
@@ -58,6 +58,14 @@ class ExploreViewController: UIViewController {
         
         
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if(seg.selectedSegmentIndex == 1) {
+            seg.selectedSegmentIndex = 0
+            seg.sendActions(for: UIControlEvents.valueChanged)
+        }
     }
 
     override func didReceiveMemoryWarning() {

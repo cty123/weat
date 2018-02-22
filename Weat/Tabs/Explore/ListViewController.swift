@@ -15,15 +15,18 @@ class ListViewController: GMSPlacePickerViewController, GMSPlacePickerViewContro
     
     override func viewDidAppear(_ animated: Bool) {
         // Set location
-        let center = CLLocationCoordinate2D(latitude: -33.865143, longitude: 151.2099)
+        /*let center = CLLocationCoordinate2D(latitude: -33.865143, longitude: 151.2099)
         let northEast = CLLocationCoordinate2D(latitude: center.latitude + 0.001,
                                                longitude: center.longitude + 0.001)
         let southWest = CLLocationCoordinate2D(latitude: center.latitude - 0.001,
                                                longitude: center.longitude - 0.001)
         let viewport = GMSCoordinateBounds(coordinate: northEast, coordinate: southWest)
         
-        // Set up map
-        let config = GMSPlacePickerConfig(viewport: viewport)
+        // Set up map*/
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let config = GMSPlacePickerConfig(viewport: nil)
         let placePicker = GMSPlacePickerViewController(config: config)
         placePicker.delegate = self
         
