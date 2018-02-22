@@ -24,10 +24,8 @@ class WeatTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
-        User.getUserInfo(profile_id: "1"){ user in
-            user.deleteUser(){ status in
-                print("success")
-            }
+        Friend.searchFriend(search_criteria: "123", page: nil, limit: nil){users in
+            print(users)
         }
     }
     

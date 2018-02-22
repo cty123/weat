@@ -67,7 +67,7 @@ class User: Decodable{
         }
     }
     
-    //Delete User account from the database
+    //Delete User account from the database   ----- not tested
     func deleteUser(completion: @escaping (Bool) -> ()){
         let url = "http://127.0.0.1:8000/user"
         let headers = [
