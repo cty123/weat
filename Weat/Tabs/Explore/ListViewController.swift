@@ -37,7 +37,6 @@ class ListViewController: GMSPlacePickerViewController, GMSPlacePickerViewContro
         print(place)
         
         self.navigationController?.pushViewController(nextScreen, animated: true)
-        self.navigationController.add
         //viewController.dismiss(animated: true, completion: nil)
         //self.mapViewController?.coordinate = place.coordinate
     }
