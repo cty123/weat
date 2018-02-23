@@ -16,8 +16,14 @@ class RestaurantViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let doneButton:UIBarButtonItem = UIBarButtonItem()
+        doneButton.target = self
+        doneButton.title = "Done"
+        doneButton.action = #selector(RestaurantViewController.leaveView)
+        self.navigationItem.rightBarButtonItem = doneButton
         // Do any additional setup after loading the view.
+        
+        restaurantName.text = place.name
     }
     
     init(place: GMSPlace) {
@@ -36,7 +42,17 @@ class RestaurantViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        restaurantName.text = place.name
+    }
+    
+    @objc func leaveView(sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
+        let transition = CATransition()
+        transition.duration = 0.5
+        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        transition.type = kCATransitionFade
+        self.navigationController?.view.layer.add(transition, forKey: nil)
+        _ = self.navigationController?.popToRootViewController(animated: true)
+        //self.navigationController?.popViewController(animated: false)
     }
     
     /*

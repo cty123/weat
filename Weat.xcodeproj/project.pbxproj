@@ -18,6 +18,8 @@
 		14179572203D341400611D6F /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14179571203D341400611D6F /* ListViewController.swift */; };
 		14179574203D3DD600611D6F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14179573203D3DD600611D6F /* MapViewController.swift */; };
 		14503F5720375362007165CF /* FeedElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14503F5620375362007165CF /* FeedElement.swift */; };
+		1463088D203E9AC500241DE3 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1463088C203E9AC500241DE3 /* APIKeys.swift */; };
+		1463088F203F9BBC00241DE3 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1463088E203F9BBC00241DE3 /* Restaurant.swift */; };
 		14A7E86520362A5600F8655C /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A7E86420362A5600F8655C /* Feed.swift */; };
 		14FA4ECD203DFD8700B20E09 /* RestaurantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FA4ECB203DFD8700B20E09 /* RestaurantViewController.swift */; };
 		4437886DF57BB2316786CBE5 /* Pods_WeatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E26D6587C8052AB156A919CB /* Pods_WeatTests.framework */; };
@@ -74,6 +76,8 @@
 		14179571203D341400611D6F /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		14179573203D3DD600611D6F /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		14503F5620375362007165CF /* FeedElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedElement.swift; sourceTree = "<group>"; };
+		1463088C203E9AC500241DE3 /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
+		1463088E203F9BBC00241DE3 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		14A7E86420362A5600F8655C /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		14FA4ECB203DFD8700B20E09 /* RestaurantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantViewController.swift; sourceTree = "<group>"; };
 		3F5C277665A3A4B2373A20A9 /* Pods-Weat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weat.release.xcconfig"; path = "Pods/Target Support Files/Pods-Weat/Pods-Weat.release.xcconfig"; sourceTree = "<group>"; };
@@ -273,6 +277,7 @@
 				E0E572CD2033CCEC00E7822B /* models */,
 				84EE6834203A42EE00A11D41 /* Extensions.swift */,
 				84EE6836203A430D00A11D41 /* SimpleData.swift */,
+				1463088C203E9AC500241DE3 /* APIKeys.swift */,
 			);
 			path = Weat;
 			sourceTree = "<group>";
@@ -294,6 +299,7 @@
 				14503F5620375362007165CF /* FeedElement.swift */,
 				E0BD5DBF203BA8BF00602FD2 /* Rate.swift */,
 				E0BD5DC1203BA9EB00602FD2 /* Friend.swift */,
+				1463088E203F9BBC00241DE3 /* Restaurant.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -558,6 +564,7 @@
 				1417955D203D2B2F00611D6F /* ExploreViewController.swift in Sources */,
 				14179568203D2DDE00611D6F /* GroupsViewController.swift in Sources */,
 				84EE682E203A41CC00A11D41 /* FriendTableViewCell.swift in Sources */,
+				1463088F203F9BBC00241DE3 /* Restaurant.swift in Sources */,
 				84EE6835203A42EE00A11D41 /* Extensions.swift in Sources */,
 				14179572203D341400611D6F /* ListViewController.swift in Sources */,
 				E0E572AC2033CB3B00E7822B /* AppDelegate.swift in Sources */,

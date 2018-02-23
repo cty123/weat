@@ -5,8 +5,8 @@ import FBSDKCoreKit
 
 class Friend {
 
-//Get friends of this user
-    func getFriends(profile_id:String, completion: @escaping (([User])) -> ()){
+    //Get friends of this user
+    static func getFriends(profile_id:String, completion: @escaping (([User])) -> ()){
         let url = "http://127.0.0.1:8000/user/friends"
         let params = [
             "access_token": FBSDKAccessToken.current().tokenString!,
@@ -34,8 +34,8 @@ class Friend {
         }
     }
     
-// send friend request
-    func sendFriendRequest(friend_id:String, completion: @escaping(Bool)->()){
+    // send friend request
+    static func sendFriendRequest(friend_id:String, completion: @escaping(Bool)->()){
         let url = "http://127.0.0.1:8000/user/friends"
         let headers = [
             "Content-Type": "application/x-www-form-urlencoded"
@@ -58,8 +58,8 @@ class Friend {
         }
     }
     
-// pull friend request
-    func pullFriendRequest(completion:@escaping(([User]))->()){
+    // pull friend request
+    static func pullFriendRequest(completion:@escaping(([User]))->()){
         let url = "http://127.0.0.1:8000/user/friends/pending"
         let params = [
             "access_token": FBSDKAccessToken.current().tokenString!
@@ -85,9 +85,11 @@ class Friend {
             completion(users)
         }
     }
-    
-// Accept or reject friend request
-    func setFriendRequest(friend_id: String, acceptance: Int, completion: @escaping(Bool)->()){
+    /**
+     * acceptance -- 0 pending, 1 accept, 2 deny
+     */
+    // Accept or reject friend request
+    static func setFriendRequest(friend_id: String, acceptance: Int, completion: @escaping(Bool)->()){
         let url = "http://127.0.0.1:8000/user/friends/pending"
         let headers = [
             "Content-Type": "application/x-www-form-urlencoded"
@@ -111,43 +113,37 @@ class Friend {
         }
     }
     
-// Search friend
-    func searchFriend(search_criteria:String, page: Int?, limit: Int?, completion:@escaping(User)->()){
+    // Search friend
+    static func searchFriend(search_criteria:String, page: Int?, limit: Int?, completion:@escaping(([User]))->()){
         let url = "http://127.0.0.1:8000/user/friends/search"
         var params = [
             "access_token": FBSDKAccessToken.current().tokenString!,
             "search_criteria": search_criteria,
-            "page": String(describing: page),
-            "limit": String(describing: limit)
         ]
-        if params["page"] == nil {
-            params["page"] = "0"
-        }
-        if params["limit"] == nil {
-            params["limit"] = "50"
-        }
-        let user = User()
+        var users = [User]()
         Alamofire.request(url, method:.get, parameters:params).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
                 for friend in json["users"].arrayValue{
-                    user.id = friend["id"].intValue
-                    user.name = friend["name"].stringValue
-                    user.email = friend["email"].stringValue
-                    user.phone = friend["phone"].stringValue
-                    user.location = friend["location"].stringValue
-                    user.privacy = friend["privacy"].intValue
+                    let tmpUser = User()
+                    tmpUser.id = friend["id"].intValue
+                    tmpUser.name = friend["name"].stringValue
+                    tmpUser.email = friend["email"].stringValue
+                    tmpUser.phone = friend["phone"].stringValue
+                    tmpUser.location = friend["location"].stringValue
+                    tmpUser.privacy = friend["privacy"].intValue
+                    users.append(tmpUser)
                 }
             case .failure(let error):
                 print(error)
             }
-            completion(user)
+            completion(users)
         }
     }
     
-// Add facebook friend
-    func addFacebookFriends(facebook_links:String, completion:@escaping (Bool)->()){
+    // Add facebook friend          ---- not tested
+    static func addFacebookFriends(facebook_links:String, completion:@escaping (Bool)->()){
         let url = "http://127.0.0.1:8000/user/friends/search"
         let headers = [
             "Content-Type": "application/x-www-form-urlencoded"
