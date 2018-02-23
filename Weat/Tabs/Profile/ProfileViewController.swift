@@ -21,6 +21,14 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
     
+    
+    // temporary button action to bring up friend requests
+    @IBAction func buttonViewRequests(_ sender: Any) {
+        // open next view controller
+        let friendRequestsViewController = FriendRequestsViewController(nibName: "FriendRequestsViewController", bundle: nil)
+        self.present(friendRequestsViewController, animated: true, completion: nil)
+    }
+    
     // vars
     var friendLinks: [String] = []      // array of friends' facebook user_id
     var friends: [User] = []            // array of friends
@@ -32,8 +40,18 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         super.viewDidLoad()
         
         // get friends
-        let id = UserDefaults.standard.string(forKey: "String")
-        // Friend.getFriends(<#T##Friend#>)
+        let id = UserDefaults.standard.string(forKey: "id")
+        Friend.getFriends(profile_id: id!, completion: {
+            (users: [User]?) in
+            
+            // TODO: fix this
+            if (users != nil) {
+                self.friends = users!
+            } else {
+                print("error getting friends")
+            }
+            
+        })
         
         // init segmented control
         self.segmentedControl.setup(segmentNames: segments, color: UIColor.orange)
@@ -147,6 +165,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         if (self.segmentedControl.selectedSegmentIndex == 1) {
             let friendViewController = FriendViewController(nibName: "FriendViewController", bundle: nil)
             friendViewController.facebookLink = "1493264010796475"
+            friendViewController.weatID = String(describing: friends[indexPath.row].id)
             self.present(friendViewController, animated: true, completion: nil)
         }
         

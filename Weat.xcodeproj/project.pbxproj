@@ -18,7 +18,6 @@
 		14179572203D341400611D6F /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14179571203D341400611D6F /* ListViewController.swift */; };
 		14179574203D3DD600611D6F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14179573203D3DD600611D6F /* MapViewController.swift */; };
 		14503F5720375362007165CF /* FeedElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14503F5620375362007165CF /* FeedElement.swift */; };
-		1463088D203E9AC500241DE3 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1463088C203E9AC500241DE3 /* APIKeys.swift */; };
 		1463088F203F9BBC00241DE3 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1463088E203F9BBC00241DE3 /* Restaurant.swift */; };
 		14A7E86520362A5600F8655C /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A7E86420362A5600F8655C /* Feed.swift */; };
 		14FA4ECD203DFD8700B20E09 /* RestaurantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FA4ECB203DFD8700B20E09 /* RestaurantViewController.swift */; };
@@ -36,10 +35,10 @@
 		A85E9925203FDEB100A95558 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85E9924203FDEB100A95558 /* ProfileViewController.swift */; };
 		A85E992C2040063800A95558 /* FriendRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85E992A2040063800A95558 /* FriendRequestTableViewCell.swift */; };
 		A85E992D2040063800A95558 /* FriendRequestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A85E992B2040063800A95558 /* FriendRequestTableViewCell.xib */; };
-		A85E99302040067D00A95558 /* FriendNotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85E992E2040067D00A95558 /* FriendNotificationTableViewCell.swift */; };
-		A85E99312040067D00A95558 /* FriendNotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A85E992F2040067D00A95558 /* FriendNotificationTableViewCell.xib */; };
 		A85E9934204008EA00A95558 /* FriendRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85E9932204008EA00A95558 /* FriendRequestsViewController.swift */; };
 		A85E9935204008EA00A95558 /* FriendRequestsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A85E9933204008EA00A95558 /* FriendRequestsViewController.xib */; };
+		A85E99382040252500A95558 /* FacebookFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85E99362040252500A95558 /* FacebookFriendsViewController.swift */; };
+		A85E99392040252500A95558 /* FacebookFriendsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A85E99372040252500A95558 /* FacebookFriendsViewController.xib */; };
 		A8AE7FCA203F9D5B007C9506 /* FriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8AE7FC8203F9D5B007C9506 /* FriendViewController.swift */; };
 		A8AE7FCB203F9D5B007C9506 /* FriendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8AE7FC9203F9D5B007C9506 /* FriendViewController.xib */; };
 		E0BD5DC0203BA8BF00602FD2 /* Rate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0BD5DBF203BA8BF00602FD2 /* Rate.swift */; };
@@ -96,10 +95,10 @@
 		A85E9924203FDEB100A95558 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		A85E992A2040063800A95558 /* FriendRequestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestTableViewCell.swift; sourceTree = "<group>"; };
 		A85E992B2040063800A95558 /* FriendRequestTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendRequestTableViewCell.xib; sourceTree = "<group>"; };
-		A85E992E2040067D00A95558 /* FriendNotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendNotificationTableViewCell.swift; sourceTree = "<group>"; };
-		A85E992F2040067D00A95558 /* FriendNotificationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendNotificationTableViewCell.xib; sourceTree = "<group>"; };
 		A85E9932204008EA00A95558 /* FriendRequestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestsViewController.swift; sourceTree = "<group>"; };
 		A85E9933204008EA00A95558 /* FriendRequestsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendRequestsViewController.xib; sourceTree = "<group>"; };
+		A85E99362040252500A95558 /* FacebookFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookFriendsViewController.swift; sourceTree = "<group>"; };
+		A85E99372040252500A95558 /* FacebookFriendsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FacebookFriendsViewController.xib; sourceTree = "<group>"; };
 		A8AE7FC8203F9D5B007C9506 /* FriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendViewController.swift; sourceTree = "<group>"; };
 		A8AE7FC9203F9D5B007C9506 /* FriendViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendViewController.xib; sourceTree = "<group>"; };
 		DADA406A0D7663C50B998E12 /* Pods-WeatTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WeatTests/Pods-WeatTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -176,12 +175,14 @@
 		14179565203D2DA100611D6F /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				A85E9924203FDEB100A95558 /* ProfileViewController.swift */,
-				84EE6819203A3F9800A11D41 /* Profile.storyboard */,
-				A8AE7FC8203F9D5B007C9506 /* FriendViewController.swift */,
-				A8AE7FC9203F9D5B007C9506 /* FriendViewController.xib */,
+				A85E99362040252500A95558 /* FacebookFriendsViewController.swift */,
+				A85E99372040252500A95558 /* FacebookFriendsViewController.xib */,
 				A85E9932204008EA00A95558 /* FriendRequestsViewController.swift */,
 				A85E9933204008EA00A95558 /* FriendRequestsViewController.xib */,
+				A8AE7FC8203F9D5B007C9506 /* FriendViewController.swift */,
+				A8AE7FC9203F9D5B007C9506 /* FriendViewController.xib */,
+				A85E9924203FDEB100A95558 /* ProfileViewController.swift */,
+				84EE6819203A3F9800A11D41 /* Profile.storyboard */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -232,8 +233,6 @@
 			children = (
 				A85E992A2040063800A95558 /* FriendRequestTableViewCell.swift */,
 				A85E992B2040063800A95558 /* FriendRequestTableViewCell.xib */,
-				A85E992E2040067D00A95558 /* FriendNotificationTableViewCell.swift */,
-				A85E992F2040067D00A95558 /* FriendNotificationTableViewCell.xib */,
 				84EE682C203A41CC00A11D41 /* FriendTableViewCell.swift */,
 				84EE682D203A41CC00A11D41 /* FriendTableViewCell.xib */,
 				84EE6830203A41FC00A11D41 /* RestaurantTableViewCell.swift */,
@@ -396,7 +395,7 @@
 				A8AE7FCB203F9D5B007C9506 /* FriendViewController.xib in Resources */,
 				A85E9935204008EA00A95558 /* FriendRequestsViewController.xib in Resources */,
 				14179564203D2CC300611D6F /* Checkin.storyboard in Resources */,
-				A85E99312040067D00A95558 /* FriendNotificationTableViewCell.xib in Resources */,
+				A85E99392040252500A95558 /* FacebookFriendsViewController.xib in Resources */,
 				E0E572B62033CB3B00E7822B /* LaunchScreen.storyboard in Resources */,
 				84EE682F203A41CC00A11D41 /* FriendTableViewCell.xib in Resources */,
 				140924C9203D241E00D6F8C8 /* Feed.storyboard in Resources */,
@@ -544,7 +543,6 @@
 			files = (
 				E0BD5DC0203BA8BF00602FD2 /* Rate.swift in Sources */,
 				14A7E86520362A5600F8655C /* Feed.swift in Sources */,
-				A85E99302040067D00A95558 /* FriendNotificationTableViewCell.swift in Sources */,
 				14179562203D2CB800611D6F /* CheckinViewController.swift in Sources */,
 				E0E572AE2033CB3B00E7822B /* LoginController.swift in Sources */,
 				A8AE7FCA203F9D5B007C9506 /* FriendViewController.swift in Sources */,
@@ -553,6 +551,7 @@
 				84EE6837203A430D00A11D41 /* SimpleData.swift in Sources */,
 				140924C7203D241300D6F8C8 /* FeedViewController.swift in Sources */,
 				14FA4ECD203DFD8700B20E09 /* RestaurantViewController.swift in Sources */,
+				A85E99382040252500A95558 /* FacebookFriendsViewController.swift in Sources */,
 				E0E572CC2033CBF100E7822B /* LoadController.swift in Sources */,
 				14503F5720375362007165CF /* FeedElement.swift in Sources */,
 				E0E572D12033CD8E00E7822B /* User.swift in Sources */,

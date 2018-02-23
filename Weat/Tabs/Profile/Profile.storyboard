@@ -37,19 +37,10 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="unb-Fi-Rcp">
-                                <rect key="frame" x="0.0" y="224" width="375" height="443"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="unb-Fi-Rcp">
+                                <rect key="frame" x="0.0" y="276" width="375" height="391"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="W3u-r4-1cG">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="W3u-r4-1cG" id="xK5-ZQ-RyH">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wFa-6F-KMK">
                                 <rect key="frame" x="124" y="138" width="235" height="21"/>
@@ -78,27 +69,36 @@
                                 <rect key="frame" x="124" y="138" width="235" height="30"/>
                                 <state key="normal" title="edit profile (of current user)"/>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dUK-yJ-GpL">
+                                <rect key="frame" x="0.0" y="224" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="eVN-cf-aWA"/>
+                                </constraints>
+                                <state key="normal" title="view friend requests"/>
+                                <connections>
+                                    <action selector="buttonViewRequests:" destination="Q6K-cU-UXP" eventType="touchUpInside" id="MfE-M9-wlL"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="dUK-yJ-GpL" firstAttribute="leading" secondItem="dbG-fS-9U0" secondAttribute="leading" id="05O-EA-lJK"/>
                             <constraint firstItem="gWg-LE-nt6" firstAttribute="top" secondItem="cDi-WV-oG6" secondAttribute="bottom" constant="16" id="2gZ-oU-35l"/>
                             <constraint firstItem="gWg-LE-nt6" firstAttribute="leading" secondItem="VDr-wt-1RC" secondAttribute="trailing" constant="8" id="4SU-92-b1K"/>
                             <constraint firstItem="dbG-fS-9U0" firstAttribute="trailing" secondItem="gWg-LE-nt6" secondAttribute="trailing" constant="16" id="56x-WZ-67m"/>
                             <constraint firstItem="cDi-WV-oG6" firstAttribute="leading" secondItem="dbG-fS-9U0" secondAttribute="leading" id="8sP-5M-P7D"/>
-                            <constraint firstItem="unb-Fi-Rcp" firstAttribute="trailing" secondItem="dbG-fS-9U0" secondAttribute="trailing" id="9jB-aL-szM"/>
                             <constraint firstItem="cDi-WV-oG6" firstAttribute="trailing" secondItem="dbG-fS-9U0" secondAttribute="trailing" id="DCx-sW-Y8F"/>
                             <constraint firstItem="ffk-y5-96G" firstAttribute="leading" secondItem="VDr-wt-1RC" secondAttribute="trailing" constant="8" id="Gx1-Cl-2G8"/>
+                            <constraint firstItem="dUK-yJ-GpL" firstAttribute="trailing" secondItem="dbG-fS-9U0" secondAttribute="trailing" id="IBm-Ro-KCK"/>
                             <constraint firstItem="VDr-wt-1RC" firstAttribute="top" secondItem="cDi-WV-oG6" secondAttribute="bottom" constant="16" id="IJd-vD-iPV"/>
-                            <constraint firstItem="unb-Fi-Rcp" firstAttribute="leading" secondItem="dbG-fS-9U0" secondAttribute="leading" id="Mq5-gW-mna"/>
-                            <constraint firstItem="unb-Fi-Rcp" firstAttribute="bottom" secondItem="dbG-fS-9U0" secondAttribute="bottom" id="P7C-nH-Ac3"/>
                             <constraint firstItem="64m-1N-U0h" firstAttribute="trailing" secondItem="dbG-fS-9U0" secondAttribute="trailing" id="UAs-R1-blW"/>
+                            <constraint firstItem="dUK-yJ-GpL" firstAttribute="top" secondItem="64m-1N-U0h" secondAttribute="bottom" constant="8" id="Vdh-lC-e9F"/>
                             <constraint firstItem="VDr-wt-1RC" firstAttribute="leading" secondItem="dbG-fS-9U0" secondAttribute="leading" constant="16" id="Vyg-Ls-nY7"/>
                             <constraint firstItem="dbG-fS-9U0" firstAttribute="trailing" secondItem="uoQ-VD-783" secondAttribute="trailing" constant="16" id="XDi-c1-S2p"/>
                             <constraint firstItem="64m-1N-U0h" firstAttribute="leading" secondItem="dbG-fS-9U0" secondAttribute="leading" id="Zow-RH-4pc"/>
                             <constraint firstItem="uoQ-VD-783" firstAttribute="leading" secondItem="VDr-wt-1RC" secondAttribute="trailing" constant="8" id="dDs-nk-kx3"/>
                             <constraint firstItem="64m-1N-U0h" firstAttribute="leading" secondItem="dbG-fS-9U0" secondAttribute="leading" id="jWr-hM-TX8"/>
                             <constraint firstItem="64m-1N-U0h" firstAttribute="top" secondItem="VDr-wt-1RC" secondAttribute="bottom" constant="8" id="lJy-hN-Qz9"/>
-                            <constraint firstItem="unb-Fi-Rcp" firstAttribute="top" secondItem="64m-1N-U0h" secondAttribute="bottom" constant="8" id="mcz-vW-NH2"/>
                             <constraint firstItem="ffk-y5-96G" firstAttribute="top" secondItem="uoQ-VD-783" secondAttribute="bottom" constant="8" id="n5i-c2-dWG"/>
                             <constraint firstItem="cDi-WV-oG6" firstAttribute="top" secondItem="dbG-fS-9U0" secondAttribute="top" id="nib-4E-vS0"/>
                             <constraint firstItem="64m-1N-U0h" firstAttribute="trailing" secondItem="dbG-fS-9U0" secondAttribute="trailing" id="oCP-jG-Ysy"/>

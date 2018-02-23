@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FriendRequestsViewController" customModule="Weat" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FacebookFriendsViewController" customModule="Weat" customModuleProvider="target">
             <connections>
-                <outlet property="navigationBar" destination="fQu-qZ-L3e" id="6q4-P6-9hJ"/>
-                <outlet property="tableView" destination="8Cj-YK-Wew" id="uQQ-Ee-9sQ"/>
+                <outlet property="navigationBar" destination="raL-F3-siE" id="QAI-e4-DRb"/>
+                <outlet property="tableView" destination="VbJ-i4-Qew" id="sWl-kb-ki5"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -22,26 +22,26 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fQu-qZ-L3e">
+                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="raL-F3-siE">
                     <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                     <items>
-                        <navigationItem title="Friend Requests" id="yGO-Zc-mea"/>
+                        <navigationItem title="Facebook Friends" id="ek7-rW-3pe"/>
                     </items>
                 </navigationBar>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8Cj-YK-Wew">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VbJ-i4-Qew">
                     <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="fQu-qZ-L3e" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="0PL-vn-lL6"/>
-                <constraint firstItem="8Cj-YK-Wew" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="2Yb-9h-C4B"/>
-                <constraint firstItem="fQu-qZ-L3e" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="82W-v1-RSX"/>
-                <constraint firstItem="8Cj-YK-Wew" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="JWl-og-gmU"/>
-                <constraint firstItem="fQu-qZ-L3e" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="NwZ-nI-NtO"/>
-                <constraint firstItem="8Cj-YK-Wew" firstAttribute="top" secondItem="fQu-qZ-L3e" secondAttribute="bottom" id="Tzs-rV-X5V"/>
-                <constraint firstItem="8Cj-YK-Wew" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="moh-AY-M4S"/>
+                <constraint firstItem="VbJ-i4-Qew" firstAttribute="top" secondItem="raL-F3-siE" secondAttribute="bottom" id="HHB-Lw-7g8"/>
+                <constraint firstItem="raL-F3-siE" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Mzd-3u-7IQ"/>
+                <constraint firstItem="VbJ-i4-Qew" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ODv-Nh-1j8"/>
+                <constraint firstItem="VbJ-i4-Qew" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="b9w-5w-pFE"/>
+                <constraint firstItem="VbJ-i4-Qew" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="dTD-BC-Sc1"/>
+                <constraint firstItem="raL-F3-siE" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="wJe-OU-5CQ"/>
+                <constraint firstItem="raL-F3-siE" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="wh4-yz-gkJ"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="34.5" y="55.5"/>

@@ -28,8 +28,10 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     // init with this view
-    var facebookLink: String = ""            // not facebook_link from Weat! pulled directly from facebook api
-    var friendLinks: [String] = []           // array of friends' facebook user_id
+    var weatID: String = ""                 //
+    var facebookLink: String = ""            //
+    var friends: [User] = []            // array of friend
+    
     
     // segmented control segments
     let segments = ["Feed", "Friends", /*"Favorites"*/]
@@ -102,6 +104,7 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
         case 1:
             // friends, TODO: user.friends.size
             print("FRIENDS")
+            return self.friends.count
         case 2:
             // favorites, TODO: user.favorites.size
             print("FAVORITES")
@@ -110,8 +113,8 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
             break
         }
         
-        // TODO: remove this
-        return SimpleData.Users.count
+        // return 0 otherwise
+        return 0
         
     }
     
@@ -132,7 +135,7 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
         case 1: // friends
             let cell = Bundle.main.loadNibNamed("FriendTableViewCell", owner: self, options: nil)?.first as! FriendTableViewCell
-            cell.labelName.text = "\(String(describing: SimpleData.Users[indexPath.row]))"
+            cell.labelName.text = self.friends[indexPath.row].name
             return cell
             
         case 2: // favorites
@@ -151,8 +154,8 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // open next view controller
         let friendViewController = FriendViewController(nibName: "FriendViewController", bundle: nil)
         friendViewController.facebookLink = "1493264010796475"
+        friendViewController.weatID = String(describing: friends[indexPath.row].id)
         self.present(friendViewController, animated: true, completion: nil)
-        
         
         // unselect row
         tableView.deselectRow(at: indexPath, animated: true)
