@@ -68,6 +68,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ffk-y5-96G">
                                 <rect key="frame" x="124" y="138" width="235" height="30"/>
                                 <state key="normal" title="edit profile (of current user)"/>
+                                <connections>
+                                    <action selector="pressEdit:" destination="Q6K-cU-UXP" eventType="touchUpInside" id="4re-Ru-xID"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dUK-yJ-GpL">
                                 <rect key="frame" x="0.0" y="224" width="375" height="44"/>
@@ -108,7 +111,8 @@
                         <viewLayoutGuide key="safeArea" id="dbG-fS-9U0"/>
                     </view>
                     <connections>
-                        <outlet property="buttonFriend" destination="ffk-y5-96G" id="ucL-XZ-6N6"/>
+                        <outlet property="buttonEdit" destination="ffk-y5-96G" id="ucL-XZ-6N6"/>
+                        <outlet property="buttonViewFriendRequests" destination="dUK-yJ-GpL" id="qRd-xm-fhy"/>
                         <outlet property="imageViewProfilePicture" destination="VDr-wt-1RC" id="Nw4-7j-xrT"/>
                         <outlet property="labelLocation" destination="uoQ-VD-783" id="jFx-kP-ePm"/>
                         <outlet property="labelName" destination="gWg-LE-nt6" id="gMB-hO-5o7"/>

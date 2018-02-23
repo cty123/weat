@@ -17,9 +17,10 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var imageViewProfilePicture: UIImageView!
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var labelLocation: UILabel!
-    @IBOutlet weak var buttonFriend: UIButton!
+    @IBOutlet weak var buttonEdit: UIButton!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var buttonViewFriendRequests: UIButton!
     
     
     // temporary button action to bring up friend requests
@@ -29,6 +30,12 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         self.present(friendRequestsViewController, animated: true, completion: nil)
     }
     
+    @IBAction func pressEdit(_ sender: Any) {
+        let editProfileViewController = EditProfileViewController(nibName: "EditProfileViewController", bundle: nil)
+        self.present(editProfileViewController, animated: true, completion: nil)
+    }
+    
+    
     // vars
     var friendLinks: [String] = []      // array of friends' facebook user_id
     var friends: [User] = []            // array of friends
@@ -36,12 +43,19 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     // segmented control segments
     let segments = ["Feed", "Friends", /*"Favorites"*/]
     
+    // update name location (TODO: remove this)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.labelName.text = UserDefaults.standard.string(forKey: "name")
+        self.labelLocation.text = UserDefaults.standard.string(forKey: "location")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // get friends
-        let id = UserDefaults.standard.string(forKey: "id")
-        Friend.getFriends(profile_id: id!, completion: {
+        let id = String(describing: UserDefaults.standard.integer(forKey: "id"))
+        Friend.getFriends(profile_id: id, completion: {
             (users: [User]?) in
             
             // TODO: fix this
@@ -53,19 +67,21 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             
         })
         
+        
         // init segmented control
         self.segmentedControl.setup(segmentNames: segments, color: UIColor.orange)
         
         // init button
-        self.buttonFriend.setup(title: "Edit Profile", color: UIColor.orange)
+        self.buttonEdit.setup(title: "Edit Profile", color: UIColor.orange)
+        self.buttonViewFriendRequests.setup(title: "Friend Requests", color: UIColor.orange)
         
         // add "find friends" button
         //navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: "", target: self, action: #selector(action))
         
         // table view init
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.reloadData()
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.reloadData()
         
         // populate profile
         FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "name, location, picture.type(large)"]).start(completionHandler: { (connection, result, error) -> Void in
@@ -84,7 +100,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 }
                 
                 // name
-                self.labelName.text = json["name"].string!
+                // self.labelName.text = json["name"].string!
                 
                 // location
                 // ?
