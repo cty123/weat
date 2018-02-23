@@ -10,14 +10,16 @@ import UIKit
 import GooglePlaces
 import GooglePlacePicker
 import GoogleMaps
+import Alamofire
+import SwiftyJSON
 
-class MapViewController: UIViewController {
-
+class MapViewController: UIViewController, UISearchBarDelegate {
     var locationManager = CLLocationManager()
     var defaultLocation: CLLocation?
     var mapView: GMSMapView!
     var placesClient: GMSPlacesClient!
-    var zoomLevel: Float = 15.0
+    var zoomLevel: Float = 12.0
+    var searchActive : Bool = false
     
     // An array to hold the list of likely places.
     var likelyPlaces: [GMSPlace] = []
@@ -25,11 +27,13 @@ class MapViewController: UIViewController {
     // The currently selected place.
     var selectedPlace: GMSPlace?
     
-
     @IBOutlet weak var searchBar: UISearchBar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        searchBar.delegate = self
+        
         // Do any additional setup after loading the view.
         locationManager = CLLocationManager()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -55,13 +59,6 @@ class MapViewController: UIViewController {
         view.insertSubview(mapView, at: 0)
         mapView.isHidden = true
         
-        for likelihood in likelyPlaces {
-            let place = likelihood
-            print("Current Place name \(place.name)")
-            print("Current Place address \(String(describing: place.formattedAddress))")
-            print("Current Place attributions \(String(describing: place.attributions))")
-            print("Current PlaceID \(place.placeID)")
-        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -80,7 +77,27 @@ class MapViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     
-
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchActive = true;
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchActive = false;
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = false;
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = false;
+        self.searchBar.endEditing(true)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print(searchText)
+    }
+    
 }
 
 extension MapViewController: CLLocationManagerDelegate {
@@ -88,7 +105,6 @@ extension MapViewController: CLLocationManagerDelegate {
     // Handle incoming location events.
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location: CLLocation = locations.last!
-        print("Location: \(location)")
         
         let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
                                               longitude: location.coordinate.longitude,
@@ -100,8 +116,34 @@ extension MapViewController: CLLocationManagerDelegate {
         } else {
             mapView.animate(to: camera)
         }
-        
+        dropPins(lat: locations[0].coordinate.latitude, lng: locations[0].coordinate.longitude)
         //listLikelyPlaces()
+    }
+    
+    func dropPins(lat: Double, lng: Double) {
+        let api_key = kPlacesWebAPIKey
+        var restaurants: [Restaurant] = []
+        
+        let url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(String(describing: lat)),\(String(describing: lng))&radius=8000&type=restaurant&key=\(String(describing: api_key))"
+        
+        Alamofire.request(url, method:.get, parameters:nil).validate().responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                for obj in json["results"] {
+                    let restaurant = Restaurant(json: obj.1)
+                    restaurants.append(restaurant)
+                }
+                for obj in restaurants {
+                    let position = CLLocationCoordinate2D(latitude: obj.latitude, longitude: obj.longitude)
+                    let marker = GMSMarker(position: position)
+                    marker.title = obj.name
+                    marker.map = self.mapView
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
     // Handle authorization for the location manager.

@@ -29,7 +29,7 @@ class Feed {
             }
             completion(feed)
         }
-        
+
     }
 }
 

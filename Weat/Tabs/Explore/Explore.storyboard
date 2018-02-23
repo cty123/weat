@@ -49,7 +49,6 @@
         <!--List View Controller-->
         <scene sceneID="SPM-ws-ceT">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="KeV-p1-vXa" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="List" id="XU4-9w-OnN" customClass="ListViewController" customModule="Weat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DCp-wN-juP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -59,6 +58,7 @@
                     </view>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KeV-p1-vXa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="940" y="375.56221889055473"/>
         </scene>
@@ -70,7 +70,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="UNp-17-yQa">
+                            <searchBar contentMode="redraw" text="" translatesAutoresizingMaskIntoConstraints="NO" id="UNp-17-yQa">
                                 <rect key="frame" x="0.0" y="20" width="375" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
@@ -84,7 +84,7 @@
                         <viewLayoutGuide key="safeArea" id="aQW-7k-5N3"/>
                     </view>
                     <connections>
-                        <outlet property="searchBar" destination="UNp-17-yQa" id="j15-u7-ZI2"/>
+                        <outlet property="searchBar" destination="UNp-17-yQa" id="zPJ-BM-wFy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MfU-st-ciW" userLabel="First Responder" sceneMemberID="firstResponder"/>
