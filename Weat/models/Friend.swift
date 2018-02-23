@@ -7,7 +7,7 @@ class Friend {
 
     //Get friends of this user
     static func getFriends(profile_id:String, completion: @escaping (([User])) -> ()){
-        let url = "http://127.0.0.1:8000/user/friends"
+        let url = "\(String(WeatAPIUrl))/user/friends"
         let params = [
             "access_token": FBSDKAccessToken.current().tokenString!,
             "profile_id": profile_id
@@ -36,7 +36,7 @@ class Friend {
     
     // send friend request
     static func sendFriendRequest(friend_id:String, completion: @escaping(Bool)->()){
-        let url = "http://127.0.0.1:8000/user/friends"
+        let url = "\(String(WeatAPIUrl))/user/friends"
         let headers = [
             "Content-Type": "application/x-www-form-urlencoded"
         ]
@@ -60,7 +60,7 @@ class Friend {
     
     // pull friend request
     static func pullFriendRequest(completion:@escaping(([User]))->()){
-        let url = "http://127.0.0.1:8000/user/friends/pending"
+        let url = "\(String(WeatAPIUrl))/user/friends/pending"
         let params = [
             "access_token": FBSDKAccessToken.current().tokenString!
         ]
@@ -90,7 +90,7 @@ class Friend {
      */
     // Accept or reject friend request
     static func setFriendRequest(friend_id: String, acceptance: Int, completion: @escaping(Bool)->()){
-        let url = "http://127.0.0.1:8000/user/friends/pending"
+        let url = "\(String(WeatAPIUrl))/user/friends/pending"
         let headers = [
             "Content-Type": "application/x-www-form-urlencoded"
         ]
@@ -115,8 +115,8 @@ class Friend {
     
     // Search friend
     static func searchFriend(search_criteria:String, page: Int?, limit: Int?, completion:@escaping(([User]))->()){
-        let url = "http://127.0.0.1:8000/user/friends/search"
-        var params = [
+        let url = "\(String(WeatAPIUrl))/user/friends/search"
+        let params = [
             "access_token": FBSDKAccessToken.current().tokenString!,
             "search_criteria": search_criteria,
         ]
@@ -144,7 +144,7 @@ class Friend {
     
     // Add facebook friend          ---- not tested
     static func addFacebookFriends(facebook_links:String, completion:@escaping (Bool)->()){
-        let url = "http://127.0.0.1:8000/user/friends/search"
+        let url = "\(String(WeatAPIUrl))/user/friends/search"
         let headers = [
             "Content-Type": "application/x-www-form-urlencoded"
         ]

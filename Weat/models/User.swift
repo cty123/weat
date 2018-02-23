@@ -13,7 +13,7 @@ class User: Decodable{
     
     // Get User info
     static func getUserInfo(profile_id:String, completion: @escaping (User) -> ()){
-        let url = "http://127.0.0.1:8000/user/profile"
+        let url = "\(String(WeatAPIUrl))/user/profile"
         let params = [
             "access_token" : FBSDKAccessToken.current().tokenString!,
             "profile_id" : profile_id
@@ -40,7 +40,7 @@ class User: Decodable{
     
     // Change user profile
     func updateUserInfo(completion: @escaping (Bool) -> ()){
-        let url = "http://127.0.0.1:8000/user/profile"
+        let url = "\(String(WeatAPIUrl))/user/profile"
         let headers = [
             "Content-Type": "application/x-www-form-urlencoded"
         ]
@@ -69,7 +69,7 @@ class User: Decodable{
     
     //Delete User account from the database   ----- not tested
     func deleteUser(completion: @escaping (Bool) -> ()){
-        let url = "http://127.0.0.1:8000/user"
+        let url = "\(String(WeatAPIUrl))/user"
         let headers = [
             "Content-Type": "application/x-www-form-urlencoded"
         ]

@@ -9,7 +9,7 @@ class Rate{
     
     // Post a new rating
     static func postRating(restaurant_id:String, rating:String, rating_text:String, completion:@escaping(Bool)->()){
-        let url = "http://127.0.0.1:8000/rating"
+        let url = "\(String(WeatAPIUrl))/rating"
         let params = [
             "access_token": FBSDKAccessToken.current().tokenString!,
             "restaurant_id": restaurant_id,
@@ -35,7 +35,7 @@ class Rate{
     
     // Pull ratings from server --------- not finished
 //    static func getRatings(restaurant_id:String){
-//        let url = "http://127.0.0.1:8000/rating/details"
+//        let url = "\(String(describing: WeatAPIUrl))/rating/details"
 //        let params = [
 //            "access_token": FBSDKAccessToken.current().tokenString!,
 //            "restaurant_id": restaurant_id

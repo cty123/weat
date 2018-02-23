@@ -41,7 +41,7 @@ class LoginController: UIViewController{
                         
                         // Complete Weat API call
                         let token = FBSDKAccessToken.current().tokenString!
-                        let url = "http://localhost:8000/auth/facebook/token?access_token=\(String(describing: token))"
+                        let url = "\(String(WeatAPIUrl))/auth/facebook/token?access_token=\(String(describing: token))"
                         print("Getting url \(String(describing: url))")
                         Alamofire.request(url, method: .get).validate().responseJSON { response in
                             switch response.result {

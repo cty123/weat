@@ -11,7 +11,7 @@ class Feed {
         let feed = Feed()
         let token = FBSDKAccessToken.current().tokenString!
         let user_id = UserDefaults.standard.integer(forKey: "id")
-        let url = "http://127.0.0.1:8000/user/feed\(String(describing: feed_type))?access_token=\(String(describing: token))&profile_id=\(String(describing: user_id))"
+        let url = "\(String(WeatAPIUrl))/user/feed\(String(describing: feed_type))?access_token=\(String(describing: token))&profile_id=\(String(describing: user_id))"
         print(url as Any)
         Alamofire.request(url, method:.get).validate().responseJSON { response in
             switch response.result {
