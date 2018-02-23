@@ -121,7 +121,7 @@ extension MapViewController: CLLocationManagerDelegate {
     }
     
     func dropPins(lat: Double, lng: Double) {
-        let api_key = kPlacesWebAPIKey
+        let api_key = "AIzaSyBwesCsXhnK5qdbaSkjrKDOlGHgYGhDMdg"
         var restaurants: [Restaurant] = []
         
         let url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(String(describing: lat)),\(String(describing: lng))&radius=8000&type=restaurant&key=\(String(describing: api_key))"

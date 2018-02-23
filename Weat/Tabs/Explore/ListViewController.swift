@@ -54,7 +54,7 @@ class ListViewController: UIViewController {
         }
         let lat = defaultLocation!.coordinate.latitude
         let long = defaultLocation!.coordinate.longitude
-        let api_key = kPlacesWebAPIKey
+        let api_key = "AIzaSyBwesCsXhnK5qdbaSkjrKDOlGHgYGhDMdg"
         
         let url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(String(describing: lat)),\(String(describing: long))&radius=8000&type=restaurant&key=\(String(describing: api_key))"
         //print(url)
