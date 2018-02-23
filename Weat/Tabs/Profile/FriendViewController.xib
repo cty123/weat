@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FriendViewController" customModule="Weat" customModuleProvider="target">
+            <connections>
+                <outlet property="buttonAddFriend" destination="A8N-8G-4xf" id="hN3-wA-uTF"/>
+                <outlet property="imageViewProfilePic" destination="Te5-C5-AT4" id="uRU-5X-Cih"/>
+                <outlet property="labelLocation" destination="EPe-h5-71R" id="3XP-2L-rOd"/>
+                <outlet property="labelName" destination="Mrr-KM-E7d" id="h5c-r4-A3U"/>
+                <outlet property="navigationBar" destination="MbX-PC-kgH" id="4kH-bO-aaa"/>
+                <outlet property="segmentedControl" destination="Ci6-e1-rFb" id="K86-ok-zlz"/>
+                <outlet property="tableView" destination="MH8-YB-4FL" id="Puf-hO-s6V"/>
+                <outlet property="view" destination="IIB-mi-n9l" id="DJy-8n-VyU"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="IIB-mi-n9l">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MbX-PC-kgH">
+                    <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                    <items>
+                        <navigationItem title="Profile" id="QKd-qc-ngf"/>
+                    </items>
+                </navigationBar>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Te5-C5-AT4">
+                    <rect key="frame" x="16" y="80" width="100" height="100"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="TbF-Lr-e3Q"/>
+                        <constraint firstAttribute="height" constant="100" id="W2p-Ef-erK"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sean becker (friend's name)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mrr-KM-E7d">
+                    <rect key="frame" x="124" y="80" width="235" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MH8-YB-4FL">
+                    <rect key="frame" x="0.0" y="224" width="375" height="443"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </tableView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8kf-vN-dsr">
+                    <rect key="frame" x="124" y="138" width="235" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="west lala (friend's location)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EPe-h5-71R">
+                    <rect key="frame" x="124" y="109" width="235" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Ci6-e1-rFb">
+                    <rect key="frame" x="0.0" y="188" width="375" height="29"/>
+                    <segments>
+                        <segment title="First"/>
+                        <segment title="Second"/>
+                    </segments>
+                </segmentedControl>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A8N-8G-4xf">
+                    <rect key="frame" x="124" y="138" width="235" height="30"/>
+                    <state key="normal" title="add friend/remove friend"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="MbX-PC-kgH" firstAttribute="leading" secondItem="KjK-13-eBa" secondAttribute="leading" id="1dn-9m-J2k"/>
+                <constraint firstItem="A8N-8G-4xf" firstAttribute="leading" secondItem="Te5-C5-AT4" secondAttribute="trailing" constant="8" id="3A9-Zc-4NT"/>
+                <constraint firstItem="EPe-h5-71R" firstAttribute="top" secondItem="Mrr-KM-E7d" secondAttribute="bottom" constant="8" id="4h5-gO-aKG"/>
+                <constraint firstItem="MH8-YB-4FL" firstAttribute="top" secondItem="Ci6-e1-rFb" secondAttribute="bottom" constant="8" id="8Lm-IF-mm9"/>
+                <constraint firstItem="Ci6-e1-rFb" firstAttribute="top" secondItem="Te5-C5-AT4" secondAttribute="bottom" constant="8" id="8Q0-vS-uzE"/>
+                <constraint firstItem="KjK-13-eBa" firstAttribute="trailing" secondItem="Mrr-KM-E7d" secondAttribute="trailing" constant="16" id="8Qu-jG-MMc"/>
+                <constraint firstItem="Ci6-e1-rFb" firstAttribute="leading" secondItem="KjK-13-eBa" secondAttribute="leading" id="9Rr-wv-t6L"/>
+                <constraint firstItem="Mrr-KM-E7d" firstAttribute="leading" secondItem="Te5-C5-AT4" secondAttribute="trailing" constant="8" id="IC0-sr-aCE"/>
+                <constraint firstItem="Te5-C5-AT4" firstAttribute="top" secondItem="MbX-PC-kgH" secondAttribute="bottom" constant="16" id="KPm-Zr-YCP"/>
+                <constraint firstItem="MbX-PC-kgH" firstAttribute="trailing" secondItem="KjK-13-eBa" secondAttribute="trailing" id="L5z-LI-Kic"/>
+                <constraint firstItem="MH8-YB-4FL" firstAttribute="bottom" secondItem="KjK-13-eBa" secondAttribute="bottom" id="Lsp-q4-ceN"/>
+                <constraint firstItem="Ci6-e1-rFb" firstAttribute="leading" secondItem="KjK-13-eBa" secondAttribute="leading" id="RZL-vf-0sa"/>
+                <constraint firstItem="Mrr-KM-E7d" firstAttribute="top" secondItem="MbX-PC-kgH" secondAttribute="bottom" constant="16" id="alR-e4-jod"/>
+                <constraint firstItem="A8N-8G-4xf" firstAttribute="top" secondItem="EPe-h5-71R" secondAttribute="bottom" constant="8" id="bNJ-Sm-7Dd"/>
+                <constraint firstItem="MbX-PC-kgH" firstAttribute="top" secondItem="KjK-13-eBa" secondAttribute="top" id="cfe-Zn-gjG"/>
+                <constraint firstItem="Te5-C5-AT4" firstAttribute="leading" secondItem="KjK-13-eBa" secondAttribute="leading" constant="16" id="fyg-Qq-EWp"/>
+                <constraint firstItem="Ci6-e1-rFb" firstAttribute="trailing" secondItem="KjK-13-eBa" secondAttribute="trailing" id="jLO-FL-lcb"/>
+                <constraint firstItem="KjK-13-eBa" firstAttribute="trailing" secondItem="EPe-h5-71R" secondAttribute="trailing" constant="16" id="mx7-vD-W4r"/>
+                <constraint firstItem="MH8-YB-4FL" firstAttribute="trailing" secondItem="KjK-13-eBa" secondAttribute="trailing" id="oEi-7O-rZh"/>
+                <constraint firstItem="KjK-13-eBa" firstAttribute="trailing" secondItem="A8N-8G-4xf" secondAttribute="trailing" constant="16" id="u8E-bA-c0B"/>
+                <constraint firstItem="EPe-h5-71R" firstAttribute="leading" secondItem="Te5-C5-AT4" secondAttribute="trailing" constant="8" id="yXo-oF-32J"/>
+                <constraint firstItem="Ci6-e1-rFb" firstAttribute="trailing" secondItem="KjK-13-eBa" secondAttribute="trailing" id="zKl-FZ-g0g"/>
+                <constraint firstItem="MH8-YB-4FL" firstAttribute="leading" secondItem="KjK-13-eBa" secondAttribute="leading" id="zcP-gb-pRR"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="KjK-13-eBa"/>
+            <point key="canvasLocation" x="36" y="56"/>
+        </view>
+    </objects>
+</document>

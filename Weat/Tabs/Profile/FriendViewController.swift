@@ -1,41 +1,86 @@
 //
-//  ProfileMainViewController.swift
+//  FriendViewController.swift
 //  Weat
 //
-//  Created by admin on 2/18/18.
+//  Created by Jordan Barkley on 2/22/18.
 //  Copyright © 2018 Weat. All rights reserved.
 //
 
 import UIKit
+import FBSDKLoginKit
+import FBSDKCoreKit
+import SwiftyJSON
 
-class ProfileMainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
+class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
     // outlets
-    @IBOutlet weak var imageProfilePicture: UIImageView!
+    @IBOutlet weak var navigationBar: UINavigationBar!
+    @IBOutlet weak var imageViewProfilePic: UIImageView!
     @IBOutlet weak var labelName: UILabel!
-    @IBOutlet weak var bio: UILabel!
-    @IBOutlet weak var buttonFriend: UIButton!
+    @IBOutlet weak var labelLocation: UILabel!
+    @IBOutlet weak var buttonAddFriend: UIButton!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
     
+    // action for closing button
+    @IBAction func action(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true, completion: nil)
+    }
+
+    // init with this view
+    var facebookLink: String = ""            // not facebook_link from Weat! pulled directly from facebook api
+    var friendLinks: [String] = []           // array of friends' facebook user_id
+    
     // segmented control segments
-    let segments = ["Feed", "Friends", "Favorites"]
+    let segments = ["Feed", "Friends", /*"Favorites"*/]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // init segmented control
         self.segmentedControl.setup(segmentNames: segments, color: UIColor.orange)
         
-        // init button
-        self.buttonFriend.setup(title: "Add Friend", color: UIColor.orange)
+        // init add friend button
+        self.buttonAddFriend.setup(title: "Add Friend", color: UIColor.orange)
+        
+        // add close button
+        navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(action))
         
         // table view init
         tableView.delegate = self
         tableView.dataSource = self
         tableView.reloadData()
         
-        // populate user field
-        // TODO
+        // populate profile
+        FBSDKGraphRequest(graphPath: self.facebookLink, parameters: ["fields": "name, location, picture.type(large)"]).start(completionHandler: { (connection, result, error) -> Void in
+            if (error == nil){
+                
+                print(result as Any)
+                
+                // get json
+                let json = JSON(result!)
+                
+                // profile picture
+                let urlString: String = json["picture","data","url"].string!
+                let url = URL(string: urlString)
+                if let data = try? Data(contentsOf: url!) {
+                    self.imageViewProfilePic.image = UIImage(data: data)!
+                }
+                
+                // name
+                self.labelName.text = json["name"].string!
+                
+                // location
+                // ?
+                
+                
+            } else {
+                print(error as Any)
+            }
+        })
+        
+        self.labelName.text = self.facebookLink
+
+        
     }
     
     // when the segment is changed
@@ -102,11 +147,16 @@ class ProfileMainViewController: UIViewController, UITableViewDataSource, UITabl
         
     }
     
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // keeps a row from being permenantly selected
+        // open next view controller
+        let friendViewController = FriendViewController(nibName: "FriendViewController", bundle: nil)
+        friendViewController.facebookLink = "1493264010796475"
+        self.present(friendViewController, animated: true, completion: nil)
+        
+        
+        // unselect row
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
-}
 
+
+}
