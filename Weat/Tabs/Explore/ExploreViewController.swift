@@ -46,7 +46,7 @@ class ExploreViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Change segmented control looks
-        seg.setup(segmentNames: ["Map", "List"], color: UIColor.orange)
+        //seg.setup(segmentNames: ["Map", "List"], color: UIColor.orange)
         
         // Show maps view
         let initialController = self.storyboard?.instantiateViewController(withIdentifier: "Map") as! MapViewController
@@ -55,6 +55,7 @@ class ExploreViewController: UIViewController {
         initialController.view.frame = self.view.bounds
         initialController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         initialController.didMove(toParentViewController: self)
+        
         
         
         // Do any additional setup after loading the view.
