@@ -31,40 +31,32 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Date" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XIF-bh-Cgv">
-                        <rect key="frame" x="214" y="3" width="66" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Rating" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HR3-kF-7gM">
-                        <rect key="frame" x="214" y="19" width="66" height="21"/>
+                        <rect key="frame" x="238" y="11" width="66" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="HR3-kF-7gM" firstAttribute="centerY" secondItem="oDi-Oi-rG1" secondAttribute="centerY" id="02U-xx-VCl"/>
+                    <constraint firstItem="HR3-kF-7gM" firstAttribute="leading" secondItem="oDi-Oi-rG1" secondAttribute="leading" constant="238" id="51v-U9-fBm"/>
                     <constraint firstItem="yCd-6g-rXM" firstAttribute="top" secondItem="oDi-Oi-rG1" secondAttribute="top" constant="4" id="7S7-7O-PA4"/>
                     <constraint firstAttribute="trailing" secondItem="yCd-6g-rXM" secondAttribute="trailing" constant="16" id="89H-fi-DYG"/>
                     <constraint firstItem="yCd-6g-rXM" firstAttribute="leading" secondItem="oDi-Oi-rG1" secondAttribute="leading" constant="16" id="B5u-u2-gpY"/>
-                    <constraint firstAttribute="trailing" secondItem="XIF-bh-Cgv" secondAttribute="trailing" constant="16" id="PSY-dG-wxI"/>
                     <constraint firstAttribute="trailing" secondItem="e9c-54-Moe" secondAttribute="trailing" constant="16" id="RSb-Ib-PLW"/>
                     <constraint firstAttribute="bottom" secondItem="e9c-54-Moe" secondAttribute="bottom" constant="4" id="Shx-Ou-0e7"/>
-                    <constraint firstAttribute="trailing" secondItem="HR3-kF-7gM" secondAttribute="trailing" constant="16" id="bph-m0-Jfu"/>
-                    <constraint firstItem="XIF-bh-Cgv" firstAttribute="top" secondItem="oDi-Oi-rG1" secondAttribute="top" constant="4" id="dHe-n4-wqT"/>
-                    <constraint firstAttribute="bottom" secondItem="HR3-kF-7gM" secondAttribute="bottom" constant="4" id="jPq-sl-aBY"/>
+                    <constraint firstAttribute="trailing" secondItem="HR3-kF-7gM" secondAttribute="trailing" constant="16" id="qEX-yL-gyw"/>
                     <constraint firstItem="e9c-54-Moe" firstAttribute="leading" secondItem="oDi-Oi-rG1" secondAttribute="leading" constant="16" id="vZ6-QO-zfB"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="Oah-IC-uRv"/>
             <connections>
-                <outlet property="labelDate" destination="XIF-bh-Cgv" id="Koh-HN-RO7"/>
                 <outlet property="labelName" destination="yCd-6g-rXM" id="Ss9-gB-MVf"/>
                 <outlet property="labelRating" destination="HR3-kF-7gM" id="rYa-Ac-CZC"/>
                 <outlet property="labelRestaurant" destination="e9c-54-Moe" id="owg-Dn-X3L"/>
             </connections>
-            <point key="canvasLocation" x="25" y="52"/>
+            <point key="canvasLocation" x="28" y="10"/>
         </tableViewCell>
     </objects>
 </document>

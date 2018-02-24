@@ -110,6 +110,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="dbG-fS-9U0"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="" image="Profile" id="YcM-jR-EAn">
+                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
+                    </tabBarItem>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="buttonEdit" destination="ffk-y5-96G" id="ucL-XZ-6N6"/>
                         <outlet property="buttonViewFriendRequests" destination="dUK-yJ-GpL" id="qRd-xm-fhy"/>
@@ -125,4 +129,7 @@
             <point key="canvasLocation" x="-55.200000000000003" y="256.82158920539734"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Profile" width="30" height="30"/>
+    </resources>
 </document>

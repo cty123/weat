@@ -20,6 +20,7 @@ class MapViewController: UIViewController, UISearchBarDelegate {
     var placesClient: GMSPlacesClient!
     var zoomLevel: Float = 12.0
     var searchActive : Bool = false
+    var restaurants: [Restaurant] = []
     
     // An array to hold the list of likely places.
     var likelyPlaces: [GMSPlace] = []
@@ -121,24 +122,21 @@ extension MapViewController: CLLocationManagerDelegate {
     }
     
     func dropPins(lat: Double, lng: Double) {
-        let api_key = "AIzaSyBwesCsXhnK5qdbaSkjrKDOlGHgYGhDMdg"
-        var restaurants: [Restaurant] = []
         
-        let url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(String(describing: lat)),\(String(describing: lng))&radius=8000&type=restaurant&key=\(String(describing: api_key))"
+        let url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(String(describing: lat)),\(String(describing: lng))&radius=8000&type=restaurant&key=\(String(describing: kPlacesWebAPIKey))"
         
         Alamofire.request(url, method:.get, parameters:nil).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
                 for obj in json["results"] {
-                    let restaurant = Restaurant(json: obj.1)
-                    restaurants.append(restaurant)
-                }
-                for obj in restaurants {
-                    let position = CLLocationCoordinate2D(latitude: obj.latitude, longitude: obj.longitude)
-                    let marker = GMSMarker(position: position)
-                    marker.title = obj.name
-                    marker.map = self.mapView
+                    Restaurant.getRestaurantInfo(json: obj.1, retrieveImage: false, completion: { (restaurant: Restaurant) in
+                        self.restaurants.append(restaurant)
+                        let position = CLLocationCoordinate2D(latitude: restaurant.latitude!, longitude: restaurant.longitude!)
+                        let marker = GMSMarker(position: position)
+                        marker.title = restaurant.name
+                        marker.map = self.mapView
+                    })
                 }
             case .failure(let error):
                 print(error)

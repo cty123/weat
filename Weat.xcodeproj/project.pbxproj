@@ -19,6 +19,7 @@
 		14179574203D3DD600611D6F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14179573203D3DD600611D6F /* MapViewController.swift */; };
 		14503F5720375362007165CF /* FeedElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14503F5620375362007165CF /* FeedElement.swift */; };
 		1463088F203F9BBC00241DE3 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1463088E203F9BBC00241DE3 /* Restaurant.swift */; };
+		146308902040707000241DE3 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1463088C203E9AC500241DE3 /* APIKeys.swift */; };
 		14A7E86520362A5600F8655C /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A7E86420362A5600F8655C /* Feed.swift */; };
 		14FA4ECD203DFD8700B20E09 /* RestaurantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FA4ECB203DFD8700B20E09 /* RestaurantViewController.swift */; };
 		4437886DF57BB2316786CBE5 /* Pods_WeatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E26D6587C8052AB156A919CB /* Pods_WeatTests.framework */; };
@@ -210,6 +211,8 @@
 				14179573203D3DD600611D6F /* MapViewController.swift */,
 				14179571203D341400611D6F /* ListViewController.swift */,
 				14FA4ECB203DFD8700B20E09 /* RestaurantViewController.swift */,
+				84EE6830203A41FC00A11D41 /* RestaurantTableViewCell.swift */,
+				84EE6831203A41FC00A11D41 /* RestaurantTableViewCell.xib */,
 			);
 			path = Explore;
 			sourceTree = "<group>";
@@ -241,8 +244,6 @@
 				A85E992B2040063800A95558 /* FriendRequestTableViewCell.xib */,
 				84EE682C203A41CC00A11D41 /* FriendTableViewCell.swift */,
 				84EE682D203A41CC00A11D41 /* FriendTableViewCell.xib */,
-				84EE6830203A41FC00A11D41 /* RestaurantTableViewCell.swift */,
-				84EE6831203A41FC00A11D41 /* RestaurantTableViewCell.xib */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -270,6 +271,7 @@
 		E0E572AA2033CB3A00E7822B /* Weat */ = {
 			isa = PBXGroup;
 			children = (
+				1463088C203E9AC500241DE3 /* APIKeys.swift */,
 				84EE681F203A411500A11D41 /* TableViewCells */,
 				1414F8C72034D5460018C0B7 /* Tabs */,
 				E0E572AB2033CB3A00E7822B /* AppDelegate.swift */,
@@ -282,7 +284,6 @@
 				E0E572CD2033CCEC00E7822B /* models */,
 				84EE6834203A42EE00A11D41 /* Extensions.swift */,
 				84EE6836203A430D00A11D41 /* SimpleData.swift */,
-				1463088C203E9AC500241DE3 /* APIKeys.swift */,
 			);
 			path = Weat;
 			sourceTree = "<group>";
@@ -550,6 +551,7 @@
 			files = (
 				E0BD5DC0203BA8BF00602FD2 /* Rate.swift in Sources */,
 				14A7E86520362A5600F8655C /* Feed.swift in Sources */,
+				146308902040707000241DE3 /* APIKeys.swift in Sources */,
 				14179562203D2CB800611D6F /* CheckinViewController.swift in Sources */,
 				E0E572AE2033CB3B00E7822B /* LoginController.swift in Sources */,
 				A8AE7FCA203F9D5B007C9506 /* FriendViewController.swift in Sources */,

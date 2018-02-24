@@ -3,11 +3,13 @@ import GooglePlacePicker
 import Alamofire
 import SwiftyJSON
 
-class ListViewController: UIViewController {
+class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var locationManager = CLLocationManager()
     var defaultLocation: CLLocation?
+    var restaurants: [Restaurant] = []
     
+    @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         locationManager = CLLocationManager()
@@ -17,26 +19,10 @@ class ListViewController: UIViewController {
         locationManager.startUpdatingLocation()
         locationManager.delegate = self
         
-        
-        
-        /*placesClient.currentPlace(callback: { (placeLikelihoodList, error) -> Void in
-            if let error = error {
-                print("Pick Place error: \(error.localizedDescription)")
-                return
-            }
-            
-            if let placeLikelihoodList = placeLikelihoodList {
-                for likelihood in placeLikelihoodList.likelihoods {
-                    let place = likelihood.place
-                    print("Current Place name \(place.name) at likelihood \(likelihood.likelihood)")
-                    print("Current Place address \(String(describing: place.formattedAddress))")
-                    print("Current Place attributions \(String(describing: place.attributions))")
-                    print("Current PlaceID \(place.placeID)")
-                }
-            }
-        })*/
-        
-        
+        // table view init
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -48,27 +34,61 @@ class ListViewController: UIViewController {
         // Set location
     }
     
-    func sendApiCall() {
-        if(defaultLocation == nil) {
-            return
-        }
-        let lat = defaultLocation!.coordinate.latitude
-        let long = defaultLocation!.coordinate.longitude
-        let api_key = "AIzaSyBwesCsXhnK5qdbaSkjrKDOlGHgYGhDMdg"
-        
-        let url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(String(describing: lat)),\(String(describing: long))&radius=8000&type=restaurant&key=\(String(describing: api_key))"
-        //print(url)
+    func getNearby(lat: Double, lng: Double) {
+        let url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(String(describing: lat)),\(String(describing: lng))&radius=8000&type=restaurant&key=\(String(describing: kPlacesWebAPIKey))"
         
         Alamofire.request(url, method:.get, parameters:nil).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
-                print(json)
-                
+                if let error_message: String = json["error_message"].string {
+                    print(error_message)
+                } else {
+                    for obj in json["results"] {
+                        Restaurant.getRestaurantInfo(json: obj.1, retrieveImage: true, completion: { (restaurant: Restaurant) in
+                            self.restaurants.append(restaurant)
+                            self.tableView.reloadData()
+                        })
+                    }
+                }
             case .failure(let error):
                 print(error)
+                print("There was an error")
             }
         }
+    }
+    
+    // tableview stuff
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // feed = 0
+        let count: Int = restaurants.count
+        return count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        // 44 is the standard height of a row
+        return 44
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = Bundle.main.loadNibNamed("RestaurantTableViewCell", owner: self, options: nil)?.first as! RestaurantTableViewCell
+            
+        let list_obj = restaurants[indexPath.row]
+        
+        cell.labelName.text = "\(String(describing: list_obj.name!))"
+        cell.imageViewPic.image = list_obj.image!
+        cell.labelDetail.text = "Rating holder"
+        return cell
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // keeps a row from being permenantly selected
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
@@ -77,7 +97,7 @@ extension ListViewController: CLLocationManagerDelegate {
     // Handle incoming location events.
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         defaultLocation = locations.last!
-        sendApiCall()
+        getNearby(lat: locations[0].coordinate.latitude, lng: locations[0].coordinate.longitude)
     }
     
     // Handle authorization for the location manager.

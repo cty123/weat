@@ -137,7 +137,6 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             cell.labelName.text = "\(String(describing: feed_obj.actor_name))"
             cell.labelRestaurant.text = "\(String(describing: feed_obj.restaurant_name))"
-            cell.labelDate.text = "Dummy Date"
             cell.labelRating.text = "Dummy Rating"
             return cell
             
@@ -146,7 +145,6 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             cell.labelName.text = "\(String(describing: feed_obj.actor_name))"
             cell.labelRestaurant.text = "\(String(describing: feed_obj.restaurant_name))"
-            cell.labelDate.text = "Dummy Date"
             cell.labelRating.text = "Dummy Rating"
             return cell
             
@@ -154,7 +152,6 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             let feed_obj = your_feed.data[indexPath.row]
             cell.labelName.text = "\(String(describing: UserDefaults.standard.string(forKey: "name")!))"
             cell.labelRestaurant.text = "\(String(describing: feed_obj.restaurant_name))"
-            cell.labelDate.text = "Dummy Date"
             cell.labelRating.text = "Dummy Rating"
             return cell
             

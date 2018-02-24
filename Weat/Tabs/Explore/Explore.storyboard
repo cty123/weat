@@ -53,10 +53,28 @@
                     <view key="view" contentMode="scaleToFill" id="DCp-wN-juP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ihq-1r-Coa">
+                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ihq-1r-Coa" firstAttribute="top" secondItem="eTs-zI-7BL" secondAttribute="top" id="8ac-uZ-Q9w"/>
+                            <constraint firstItem="ihq-1r-Coa" firstAttribute="trailing" secondItem="eTs-zI-7BL" secondAttribute="trailing" id="gri-xT-fSa"/>
+                            <constraint firstItem="ihq-1r-Coa" firstAttribute="bottom" secondItem="eTs-zI-7BL" secondAttribute="bottom" id="jE7-rc-mNK"/>
+                            <constraint firstItem="ihq-1r-Coa" firstAttribute="leading" secondItem="eTs-zI-7BL" secondAttribute="leading" id="pqX-mf-jz5"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="eTs-zI-7BL"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="" image="Explore" id="Xen-iH-jZJ">
+                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
+                    </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="tableView" destination="ihq-1r-Coa" id="Oxq-fc-aIB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KeV-p1-vXa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
