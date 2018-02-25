@@ -89,28 +89,9 @@
                     <view key="view" contentMode="scaleToFill" id="0ch-Je-xPb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <searchBar contentMode="redraw" text="" placeholder="Triple XXX, West Lafayette" translatesAutoresizingMaskIntoConstraints="NO" id="UNp-17-yQa">
-                                <rect key="frame" x="0.0" y="20" width="375" height="56"/>
-                                <color key="barTintColor" name="systemOrangeColor" catalog="System" colorSpace="catalog"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <scopeButtonTitles>
-                                    <string>Title</string>
-                                    <string>Title</string>
-                                </scopeButtonTitles>
-                            </searchBar>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="UNp-17-yQa" firstAttribute="centerX" secondItem="aQW-7k-5N3" secondAttribute="centerX" id="Bhb-Ek-mxw"/>
-                            <constraint firstItem="UNp-17-yQa" firstAttribute="width" secondItem="0ch-Je-xPb" secondAttribute="width" id="CN3-ob-fLq"/>
-                            <constraint firstItem="UNp-17-yQa" firstAttribute="top" secondItem="aQW-7k-5N3" secondAttribute="top" id="ptS-JQ-NFF"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="aQW-7k-5N3"/>
                     </view>
-                    <connections>
-                        <outlet property="searchBar" destination="UNp-17-yQa" id="zPJ-BM-wFy"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MfU-st-ciW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

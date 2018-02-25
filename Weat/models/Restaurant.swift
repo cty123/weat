@@ -19,7 +19,7 @@ class Restaurant {
         // TODO: Check if google returns bad json
         
         let restaurant = Restaurant()
-        let jsonArr:[JSON] = json["photos"].array!
+        let jsonArr:[JSON] = json["photos"].array! // add error check
         let photo_reference:String = jsonArr[0]["photo_reference"].string!
         let url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=\(String(photo_reference))&key=\(String(kPlacesWebAPIKey))"
         restaurant.latitude = json["geometry"]["location"]["lat"].double!

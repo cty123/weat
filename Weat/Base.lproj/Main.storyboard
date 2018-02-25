@@ -68,18 +68,6 @@
             <point key="canvasLocation" x="315" y="-847"/>
         </scene>
         <!--Feed-->
-        <scene sceneID="0uX-95-Pw0">
-            <objects>
-                <viewControllerPlaceholder storyboardIdentifier="Feed" storyboardName="Feed" id="S2M-KM-Pzb" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="Feed" id="Vou-7S-34C">
-                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
-                    </tabBarItem>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tEF-PH-Yro" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2204" y="-1163"/>
-        </scene>
-        <!--Feed-->
         <scene sceneID="HID-HV-y4m">
             <objects>
                 <viewControllerPlaceholder storyboardName="Feed" id="xQf-hj-yaV" sceneMemberID="viewController">
@@ -143,10 +131,9 @@
         <scene sceneID="TsF-el-AgK">
             <objects>
                 <tabBarController id="vVZ-Rz-GoO" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="n4U-AR-JjL">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="n4U-AR-JjL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="selectedImageTintColor" name="systemOrangeColor" catalog="System" colorSpace="catalog"/>
                     </tabBar>
                     <connections>

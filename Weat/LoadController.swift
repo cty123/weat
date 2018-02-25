@@ -7,6 +7,8 @@ import SwiftyJSON
 
 class LoadController: UIViewController {
     var isLoggedIn = false
+    var latitude: Double?   // Used to store location for explore view
+    var longitude: Double?  // Used to store location for explore view
     
     override func viewDidLoad() {
         super.viewDidLoad()

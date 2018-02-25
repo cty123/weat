@@ -10,7 +10,6 @@ import UIKit
 
 class ExploreViewController: UIViewController {
     
-    @IBOutlet weak var container: UIView!
     @IBOutlet var seg: UISegmentedControl!
     @IBAction func indexChanged(_ sender: UISegmentedControl) {
         

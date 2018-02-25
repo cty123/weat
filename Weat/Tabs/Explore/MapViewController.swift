@@ -28,28 +28,59 @@ class MapViewController: UIViewController, UISearchBarDelegate {
     // The currently selected place.
     var selectedPlace: GMSPlace?
     
-    @IBOutlet weak var searchBar: UISearchBar!
+    var resultsViewController: GMSAutocompleteResultsViewController?
+    var searchController: UISearchController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        searchBar.delegate = self
-        //self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        
+        // Set Google Maps autocomplete result controller
+        resultsViewController = GMSAutocompleteResultsViewController()
+        resultsViewController?.delegate = self
+        
+        // Initialize search controller for google autocomplete
+        searchController = UISearchController(searchResultsController: resultsViewController)
+        searchController?.searchResultsUpdater = resultsViewController
+        searchController?.hidesNavigationBarDuringPresentation = false
+        
+        // Initialize search bar
+        let searchBar = searchController?.searchBar
+        searchBar?.sizeToFit()
+        searchBar?.backgroundImage = UIImage.imageWithColor(color: UIColor(red: 1, green: 0.5871, blue: 0, alpha: 1.0), size: CGSize(width: (searchBar?.frame.width)!,height: (searchBar?.frame.height)!))
+        
+        // Initialize subview for search bar
+        let subView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 45.0))
+        
+        // Add searchbar to view
+        subView.addSubview((searchController?.searchBar)!)
+        view.addSubview(subView)
+        
+        // When UISearchController presents the results view, present it in
+        // this view controller, not one further up the chain.
+        definesPresentationContext = true
+        
+        // Get rid of shadow under navbar
         self.navigationController?.navigationBar.shadowImage = UIImage()
-        searchBar.backgroundImage =  UIImage.imageWithColor(color: UIColor(red: 1, green: 0.5871, blue: 0, alpha: 1.0), size: CGSize(width: searchBar.frame.width,height: searchBar.frame.height))
-        // Do any additional setup after loading the view.
+        
+        // Start doing location stuff
         locationManager = CLLocationManager()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
         locationManager.distanceFilter = 50
-        locationManager.startUpdatingLocation()
         locationManager.delegate = self
         
+        // If we don't have a location yet, we want to start updating the location as soon as possible
+        if(exploreLocations.latitude == nil || exploreLocations.longitude == nil) {
+            locationManager.startUpdatingLocation()
+        }
         placesClient = GMSPlacesClient.shared()
         
+        // Placeholder for default location
         if(defaultLocation == nil) {
             defaultLocation = CLLocation.init(latitude: 0, longitude: 0)
         }
+        
+        // Move to location on map
         let camera = GMSCameraPosition.camera(withLatitude: defaultLocation!.coordinate.latitude,
                                               longitude: defaultLocation!.coordinate.longitude,
                                               zoom: zoomLevel)
@@ -57,10 +88,17 @@ class MapViewController: UIViewController, UISearchBarDelegate {
         mapView.settings.myLocationButton = true
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         mapView.isMyLocationEnabled = true
-        
-        // Add the map to the view, hide it until we've got a location update.
+        mapView.delegate = self
+        // Add the map to the view. If we haven't set a location yet, hide it until we've got a location.
+        // Otherwise, move to the given location
         view.insertSubview(mapView, at: 0)
-        mapView.isHidden = true
+        if(exploreLocations.latitude == nil || exploreLocations.longitude == nil) {
+            mapView.isHidden = true
+        } else {
+            moveTo(latitude: exploreLocations.latitude!, longitude: exploreLocations.longitude!)
+            mapView.isHidden = false
+        }
+        
         
     }
 
@@ -68,8 +106,6 @@ class MapViewController: UIViewController, UISearchBarDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
     
     
     // MARK: - Navigation
@@ -80,27 +116,14 @@ class MapViewController: UIViewController, UISearchBarDelegate {
         // Pass the selected object to the new view controller.
     }
     
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchActive = true;
+    func moveTo(latitude: Double, longitude: Double) {
+        let camera = GMSCameraPosition.camera(withLatitude: latitude,
+                                              longitude: longitude,
+                                              zoom: zoomLevel)
+        mapView.clear()
+        mapView.animate(to: camera)
+        dropPins(lat: latitude, lng: longitude)
     }
-    
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        searchActive = false;
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchActive = false;
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchActive = false;
-        self.searchBar.endEditing(true)
-    }
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print(searchText)
-    }
-    
 }
 
 extension MapViewController: CLLocationManagerDelegate {
@@ -108,11 +131,9 @@ extension MapViewController: CLLocationManagerDelegate {
     // Handle incoming location events.
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location: CLLocation = locations.last!
-        
         let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
                                               longitude: location.coordinate.longitude,
                                               zoom: zoomLevel)
-        
         if mapView.isHidden {
             mapView.isHidden = false
             mapView.camera = camera
@@ -120,7 +141,8 @@ extension MapViewController: CLLocationManagerDelegate {
             mapView.animate(to: camera)
         }
         dropPins(lat: locations[0].coordinate.latitude, lng: locations[0].coordinate.longitude)
-        //listLikelyPlaces()
+        exploreLocations.latitude = locations[0].coordinate.latitude
+        exploreLocations.longitude = locations[0].coordinate.longitude
     }
     
     func dropPins(lat: Double, lng: Double) {
@@ -170,6 +192,33 @@ extension MapViewController: CLLocationManagerDelegate {
     }
 }
 
+// Handle the user's selection.
+extension MapViewController: GMSAutocompleteResultsViewControllerDelegate {
+    func resultsController(_ resultsController: GMSAutocompleteResultsViewController,
+                           didAutocompleteWith place: GMSPlace) {
+        searchController?.isActive = false
+        locationManager.stopUpdatingLocation()
+        moveTo(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
+        exploreLocations.latitude = place.coordinate.latitude
+        exploreLocations.longitude = place.coordinate.longitude
+    }
+    
+    func resultsController(_ resultsController: GMSAutocompleteResultsViewController,
+                           didFailAutocompleteWithError error: Error){
+        // TODO: handle the error.
+        print("Error: ", error.localizedDescription)
+    }
+    
+    // Turn the network activity indicator on and off again.
+    func didRequestAutocompletePredictions(forResultsController resultsController: GMSAutocompleteResultsViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+    }
+    
+    func didUpdateAutocompletePredictions(forResultsController resultsController: GMSAutocompleteResultsViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+    }
+}
+
 extension UIImage {
     
     class func imageWithColor(color: UIColor, size: CGSize) -> UIImage {
@@ -180,5 +229,12 @@ extension UIImage {
         let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         return image
+    }
+}
+
+extension MapViewController: GMSMapViewDelegate {
+    func didTapMyLocationButton(for mapView: GMSMapView) -> Bool {
+        locationManager.startUpdatingLocation()
+        return false
     }
 }

@@ -17,6 +17,7 @@
 		1417956A203D2DE800611D6F /* Groups.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14179569203D2DE800611D6F /* Groups.storyboard */; };
 		14179572203D341400611D6F /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14179571203D341400611D6F /* ListViewController.swift */; };
 		14179574203D3DD600611D6F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14179573203D3DD600611D6F /* MapViewController.swift */; };
+		142E6E1C20426EE7009E1A8B /* ExploreLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142E6E1B20426EE7009E1A8B /* ExploreLocation.swift */; };
 		14503F5720375362007165CF /* FeedElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14503F5620375362007165CF /* FeedElement.swift */; };
 		1463088F203F9BBC00241DE3 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1463088E203F9BBC00241DE3 /* Restaurant.swift */; };
 		146308902040707000241DE3 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1463088C203E9AC500241DE3 /* APIKeys.swift */; };
@@ -77,6 +78,7 @@
 		14179569203D2DE800611D6F /* Groups.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Groups.storyboard; sourceTree = "<group>"; };
 		14179571203D341400611D6F /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		14179573203D3DD600611D6F /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		142E6E1B20426EE7009E1A8B /* ExploreLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreLocation.swift; sourceTree = "<group>"; };
 		14503F5620375362007165CF /* FeedElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedElement.swift; sourceTree = "<group>"; };
 		1463088C203E9AC500241DE3 /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		1463088E203F9BBC00241DE3 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 				14FA4ECB203DFD8700B20E09 /* RestaurantViewController.swift */,
 				84EE6830203A41FC00A11D41 /* RestaurantTableViewCell.swift */,
 				84EE6831203A41FC00A11D41 /* RestaurantTableViewCell.xib */,
+				142E6E1B20426EE7009E1A8B /* ExploreLocation.swift */,
 			);
 			path = Explore;
 			sourceTree = "<group>";
@@ -559,6 +562,7 @@
 				E0BD5DC2203BA9EB00602FD2 /* Friend.swift in Sources */,
 				84EE6837203A430D00A11D41 /* SimpleData.swift in Sources */,
 				140924C7203D241300D6F8C8 /* FeedViewController.swift in Sources */,
+				142E6E1C20426EE7009E1A8B /* ExploreLocation.swift in Sources */,
 				14FA4ECD203DFD8700B20E09 /* RestaurantViewController.swift in Sources */,
 				A85E99382040252500A95558 /* FacebookFriendsViewController.swift in Sources */,
 				E0E572CC2033CBF100E7822B /* LoadController.swift in Sources */,

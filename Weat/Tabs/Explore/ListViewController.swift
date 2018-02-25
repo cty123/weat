@@ -16,7 +16,11 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
         locationManager.distanceFilter = 50
-        locationManager.startUpdatingLocation()
+        if(exploreLocations.latitude == nil || exploreLocations.longitude == nil) {
+            locationManager.startUpdatingLocation()
+        } else {
+            getNearby(lat: exploreLocations.latitude!, lng: exploreLocations.longitude!)
+        }
         locationManager.delegate = self
         
         // table view init
@@ -40,7 +44,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         Alamofire.request(url, method:.get, parameters:nil).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
-                let json = JSON(value)
+                var json = JSON(value)
                 if let error_message: String = json["error_message"].string {
                     print(error_message)
                 } else {
@@ -50,6 +54,33 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                             self.tableView.reloadData()
                         })
                     }
+                    // Google Places only allows 20 results per query, but includes a 'next page' token if there are more results (up to 60 results, so 3 pages)
+                    // Below allows you to get more results.
+                    // TODO: make this code less ugly
+                        /*if let next_page_token = json["next_page_token"].string {
+                            url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(String(describing: lat)),\(String(describing: lng))&radius=8000&type=restaurant&key=\(String(describing: kPlacesWebAPIKey))&pagetoken=\(next_page_token)"
+                            Alamofire.request(url, method:.get, parameters:nil).validate().responseJSON { response in
+                                switch response.result {
+                                case .success(let value):
+                                    print(json)
+                                    json = JSON(value)
+                                    if let error_message: String = json["error_message"].string {
+                                        print(error_message)
+                                    } else {
+                                        for obj in json["results"] {
+                                            Restaurant.getRestaurantInfo(json: obj.1, retrieveImage: true, completion: { (restaurant: Restaurant) in
+                                                self.restaurants.append(restaurant)
+                                                self.tableView.reloadData()
+                                                print(self.restaurants.count)
+                                            })
+                                        }
+                                    }
+                                case .failure(let error):
+                                    print(error)
+                                    print("There was an error")
+                                }
+                            }
+                        }*/
                 }
             case .failure(let error):
                 print(error)
