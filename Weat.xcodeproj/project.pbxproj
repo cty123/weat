@@ -19,6 +19,8 @@
 		14179574203D3DD600611D6F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14179573203D3DD600611D6F /* MapViewController.swift */; };
 		142E6E1C20426EE7009E1A8B /* ExploreLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142E6E1B20426EE7009E1A8B /* ExploreLocation.swift */; };
 		14503F5720375362007165CF /* FeedElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14503F5620375362007165CF /* FeedElement.swift */; };
+		145F83E520436F5400FAFEAF /* FindFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145F83E320436F5400FAFEAF /* FindFriendsViewController.swift */; };
+		145F83E620436F5400FAFEAF /* FindFriendsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 145F83E420436F5400FAFEAF /* FindFriendsViewController.xib */; };
 		1463088F203F9BBC00241DE3 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1463088E203F9BBC00241DE3 /* Restaurant.swift */; };
 		146308902040707000241DE3 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1463088C203E9AC500241DE3 /* APIKeys.swift */; };
 		14A7E86520362A5600F8655C /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A7E86420362A5600F8655C /* Feed.swift */; };
@@ -80,6 +82,8 @@
 		14179573203D3DD600611D6F /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		142E6E1B20426EE7009E1A8B /* ExploreLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreLocation.swift; sourceTree = "<group>"; };
 		14503F5620375362007165CF /* FeedElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedElement.swift; sourceTree = "<group>"; };
+		145F83E320436F5400FAFEAF /* FindFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindFriendsViewController.swift; sourceTree = "<group>"; };
+		145F83E420436F5400FAFEAF /* FindFriendsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FindFriendsViewController.xib; sourceTree = "<group>"; };
 		1463088C203E9AC500241DE3 /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		1463088E203F9BBC00241DE3 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		14A7E86420362A5600F8655C /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
@@ -192,6 +196,8 @@
 				A8AE7FC9203F9D5B007C9506 /* FriendViewController.xib */,
 				A85E9924203FDEB100A95558 /* ProfileViewController.swift */,
 				84EE6819203A3F9800A11D41 /* Profile.storyboard */,
+				145F83E320436F5400FAFEAF /* FindFriendsViewController.swift */,
+				145F83E420436F5400FAFEAF /* FindFriendsViewController.xib */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -407,6 +413,7 @@
 				14179564203D2CC300611D6F /* Checkin.storyboard in Resources */,
 				A85E99392040252500A95558 /* FacebookFriendsViewController.xib in Resources */,
 				A85E993D2040501400A95558 /* EditProfileViewController.xib in Resources */,
+				145F83E620436F5400FAFEAF /* FindFriendsViewController.xib in Resources */,
 				E0E572B62033CB3B00E7822B /* LaunchScreen.storyboard in Resources */,
 				84EE682F203A41CC00A11D41 /* FriendTableViewCell.xib in Resources */,
 				140924C9203D241E00D6F8C8 /* Feed.storyboard in Resources */,
@@ -557,6 +564,7 @@
 				146308902040707000241DE3 /* APIKeys.swift in Sources */,
 				14179562203D2CB800611D6F /* CheckinViewController.swift in Sources */,
 				E0E572AE2033CB3B00E7822B /* LoginController.swift in Sources */,
+				145F83E520436F5400FAFEAF /* FindFriendsViewController.swift in Sources */,
 				A8AE7FCA203F9D5B007C9506 /* FriendViewController.swift in Sources */,
 				84EE6832203A41FC00A11D41 /* RestaurantTableViewCell.swift in Sources */,
 				E0BD5DC2203BA9EB00602FD2 /* Friend.swift in Sources */,

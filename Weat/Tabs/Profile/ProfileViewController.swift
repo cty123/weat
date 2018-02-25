@@ -21,7 +21,9 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var buttonViewFriendRequests: UIButton!
-    
+    @IBOutlet weak var friendRequestLabel: UILabel!
+    @IBOutlet weak var friendRequestCountLabel: UILabel!
+    @IBOutlet weak var friendRequestNextLabel: UILabel!
     
     // temporary button action to bring up friend requests
     @IBAction func buttonViewRequests(_ sender: Any) {
@@ -35,6 +37,10 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         self.present(editProfileViewController, animated: true, completion: nil)
     }
     
+    @IBAction func addFriendsButtonPress(_ sender: UIButton) {
+        let findFriendsViewController = FindFriendsViewController(nibName: "FindFriendsViewController", bundle: nil)
+        self.present(findFriendsViewController, animated: true, completion: nil)
+    }
     
     // vars
     var friendLinks: [String] = []      // array of friends' facebook user_id
@@ -48,6 +54,23 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         super.viewWillAppear(animated)
         self.labelName.text = UserDefaults.standard.string(forKey: "name")
         self.labelLocation.text = UserDefaults.standard.string(forKey: "location")
+        
+        // get friend requests
+        Friend.pullFriendRequest(completion: {
+            (requests: [User]) in
+            if(requests.count > 0) {
+                self.friendRequestLabel.text = "Friend requests"
+                self.friendRequestNextLabel.text = ">"
+                self.friendRequestCountLabel.text = "\(requests.count)"
+                self.buttonViewFriendRequests.layer.borderWidth = 0.3
+                self.buttonViewFriendRequests.layer.borderColor = UIColor.black.cgColor
+            } else {
+                self.friendRequestLabel.text = ""
+                self.friendRequestNextLabel.text = ""
+                self.friendRequestCountLabel.text = ""
+                self.buttonViewFriendRequests.isHidden = true
+            }
+        })
     }
     
     override func viewDidLoad() {
@@ -68,15 +91,13 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         })
         
         
+        
         // init segmented control
         self.segmentedControl.setup(segmentNames: segments, color: UIColor.orange)
         
         // init button
         self.buttonEdit.setup(title: "Edit Profile", color: UIColor.orange)
-        self.buttonViewFriendRequests.setup(title: "Friend Requests", color: UIColor.orange)
-        
-        // add "find friends" button
-        //navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: "", target: self, action: #selector(action))
+        //self.buttonViewFriendRequests.setup(title: "Friend Requests", color: UIColor.orange)
         
         // table view init
         self.tableView.delegate = self
@@ -97,6 +118,10 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 let url = URL(string: urlString)
                 if let data = try? Data(contentsOf: url!) {
                     self.imageViewProfilePicture.image = UIImage(data: data)!
+                    // Make image circular
+                    self.imageViewProfilePicture.layer.cornerRadius = self.imageViewProfilePicture.frame.size.height / 2;
+                    self.imageViewProfilePicture.layer.masksToBounds = true;
+                    self.imageViewProfilePicture.layer.borderWidth = 0;
                 }
                 
                 // name
