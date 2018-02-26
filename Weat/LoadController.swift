@@ -17,7 +17,7 @@ class LoadController: UIViewController {
         
         if(FBSDKAccessToken.current() != nil) {
             let token = FBSDKAccessToken.current().tokenString!
-            let url = "http://localhost:8000/auth/facebook/token?access_token=\(String(describing: token))"
+            let url = "\(WeatAPIUrl)/auth/facebook/token?access_token=\(String(describing: token))"
             print("Getting url \(String(describing: url))")
             Alamofire.request(url, method: .get).validate().responseJSON { response in
                 switch response.result {
@@ -29,6 +29,7 @@ class LoadController: UIViewController {
                     UserDefaults.standard.set(json["location"].string, forKey: "location")
                     UserDefaults.standard.set(json["privacy"].int, forKey: "privacy")
                     UserDefaults.standard.set(json["phone"].string, forKey: "phone")
+                    self.isLoggedIn = true
                     // Testing pulling friends
                     /*FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "friends"]).start(completionHandler: { (connection, result, error) -> Void in
                         if (error == nil){
@@ -38,21 +39,10 @@ class LoadController: UIViewController {
                         }
                     })*/
                 case .failure(let error):
-                    print(error)
+                    self.isLoggedIn = false
                 }
             }
-        }
-        
-        if FBSDKAccessToken.current() != nil {
-            isLoggedIn = true
-            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "friends"]).start(completionHandler: { (connection, result, error) -> Void in
-                if (error == nil){
-                    print(result as Any)
-                } else {
-                    print(error as Any)
-                }
-            })
-        }else{
+        } else {
             isLoggedIn = false
         }
     }

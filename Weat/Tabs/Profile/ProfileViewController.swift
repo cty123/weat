@@ -23,10 +23,12 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var buttonViewFriendRequests: UIButton!
     @IBOutlet weak var friendRequestLabel: UILabel!
     @IBOutlet weak var friendRequestCountLabel: UILabel!
-    @IBOutlet weak var friendRequestNextLabel: UILabel!
+    @IBOutlet weak var notificationsLabel: UILabel!
+    @IBOutlet weak var restaurantOrangeDot: UIImageView!
+    @IBOutlet weak var friendOrangeDot: UIImageView!
     
-    // temporary button action to bring up friend requests
-    @IBAction func buttonViewRequests(_ sender: Any) {
+    
+    @IBAction func viewFriendRequests(_ sender: Any) {
         // open next view controller
         let friendRequestsViewController = FriendRequestsViewController(nibName: "FriendRequestsViewController", bundle: nil)
         self.present(friendRequestsViewController, animated: true, completion: nil)
@@ -55,18 +57,22 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         self.labelName.text = UserDefaults.standard.string(forKey: "name")
         self.labelLocation.text = UserDefaults.standard.string(forKey: "location")
         
+        self.notificationsLabel.text = ""
+        
+        restaurantOrangeDot.image = UIImage(named: "OrangeDot") // Only really do this when we have a notification
+        friendOrangeDot.image = UIImage(named: "OrangeDot")
         // get friend requests
         Friend.pullFriendRequest(completion: {
             (requests: [User]) in
             if(requests.count > 0) {
+                self.notificationsLabel.text = "Notifications"
+                self.notificationsLabel.font = UIFont.boldSystemFont(ofSize: 17.0)
                 self.friendRequestLabel.text = "Friend requests"
-                self.friendRequestNextLabel.text = ">"
                 self.friendRequestCountLabel.text = "\(requests.count)"
-                self.buttonViewFriendRequests.layer.borderWidth = 0.3
-                self.buttonViewFriendRequests.layer.borderColor = UIColor.black.cgColor
+                self.buttonViewFriendRequests.addBottomBorderWithColor(color: UIColor.lightGray, width: 0.4)
+                self.buttonViewFriendRequests.isHidden = false
             } else {
                 self.friendRequestLabel.text = ""
-                self.friendRequestNextLabel.text = ""
                 self.friendRequestCountLabel.text = ""
                 self.buttonViewFriendRequests.isHidden = true
             }
@@ -214,5 +220,14 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+}
+
+extension UIView {
+    func addBottomBorderWithColor(color: UIColor, width: CGFloat) {
+        let border = CALayer()
+        border.backgroundColor = color.cgColor
+        border.frame = CGRect(x: 0, y: self.frame.size.height - width, width: self.frame.size.width, height: width)
+        self.layer.addSublayer(border)
+    }
 }
 
