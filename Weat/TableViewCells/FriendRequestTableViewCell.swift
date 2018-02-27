@@ -16,26 +16,30 @@ class FriendRequestTableViewCell: UITableViewCell {
     @IBOutlet weak var buttonConfirm: UIButton!
     
     //acceptance - 0 pending, 1 accept, 2 deny
-    var acceptance: Int = 0
+    var friend: User?
     
     @IBAction func pressDeny(_ sender: Any) {
-        self.acceptance = 2
-        self.buttonConfirm.isHidden = true
-        self.buttonDeny.isHidden = true
-        print("DENY")
+        Friend.setFriendRequest(friend_id: (friend?.id!)!, acceptance: 2, completion: {
+            (ret: Bool) in
+            print("Denied friend request to \((self.friend?.name)!).")
+            self.buttonConfirm.isHidden = true
+            self.buttonDeny.isHidden = true
+        })
     }
     
     @IBAction func pressConfirm(_ sender: Any) {
-        self.acceptance = 1
-        self.buttonDeny.isHidden = true
-        self.buttonConfirm.isHidden = true
-        print("CONFIRM")
+        Friend.setFriendRequest(friend_id: (friend?.id!)!, acceptance: 1, completion: {
+            (ret: Bool) in
+            print("Accepted friend request to \((self.friend?.name)!).")
+            self.buttonDeny.isHidden = true
+            self.buttonConfirm.isHidden = true
+        })
+        
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
     
 }

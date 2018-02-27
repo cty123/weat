@@ -69,6 +69,7 @@ class Friend {
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
+                print(json)
                 for friend in json["pending_friends"].arrayValue{
                     let tmpUser = User()
                     tmpUser.id = friend["joinUser"]["id"].intValue
@@ -89,7 +90,7 @@ class Friend {
      * acceptance -- 0 pending, 1 accept, 2 deny
      */
     // Accept or reject friend request
-    static func setFriendRequest(friend_id: String, acceptance: Int, completion: @escaping(Bool)->()){
+    static func setFriendRequest(friend_id: Int, acceptance: Int, completion: @escaping(Bool)->()){
         let url = "\(String(WeatAPIUrl))/user/friends/pending"
         let headers = [
             "Content-Type": "application/x-www-form-urlencoded"
@@ -97,7 +98,7 @@ class Friend {
         let params = [
             "access_token": FBSDKAccessToken.current().tokenString!,
             "acceptance": String(acceptance),
-            "friend_id": friend_id
+            "friend_id": String(friend_id)
         ]
         var status = false
         Alamofire.request(url, method:.post, parameters: params, encoding:URLEncoding.httpBody, headers: headers).validate().responseJSON { response in

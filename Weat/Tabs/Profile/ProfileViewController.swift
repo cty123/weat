@@ -54,27 +54,29 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     // update name location (TODO: remove this)
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        // Set profile text
         self.labelName.text = UserDefaults.standard.string(forKey: "name")
         self.labelLocation.text = UserDefaults.standard.string(forKey: "location")
         
-        self.notificationsLabel.text = ""
+        // Set notifications format
+        self.notificationsLabel.font = UIFont.boldSystemFont(ofSize: 17.0)
+        self.buttonViewFriendRequests.addFullWidthBottomBorderWithColor(color: UIColor.lightGray, width: 0.4)
         
         restaurantOrangeDot.image = UIImage(named: "OrangeDot") // Only really do this when we have a notification
-        friendOrangeDot.image = UIImage(named: "OrangeDot")
-        // get friend requests
+        
+        // Get friend requests
         Friend.pullFriendRequest(completion: {
             (requests: [User]) in
+            self.friendRequestCountLabel.text = "\(requests.count)"
+            
+            // Set global friend requests variable
+            profileVars.friendRequests = requests
+            
             if(requests.count > 0) {
-                self.notificationsLabel.text = "Notifications"
-                self.notificationsLabel.font = UIFont.boldSystemFont(ofSize: 17.0)
-                self.friendRequestLabel.text = "Friend requests"
-                self.friendRequestCountLabel.text = "\(requests.count)"
-                self.buttonViewFriendRequests.addBottomBorderWithColor(color: UIColor.lightGray, width: 0.4)
-                self.buttonViewFriendRequests.isHidden = false
+                self.friendOrangeDot.image = UIImage(named: "OrangeDot")
             } else {
-                self.friendRequestLabel.text = ""
-                self.friendRequestCountLabel.text = ""
-                self.buttonViewFriendRequests.isHidden = true
+                self.friendOrangeDot.image = nil
             }
         })
     }
@@ -227,6 +229,13 @@ extension UIView {
         let border = CALayer()
         border.backgroundColor = color.cgColor
         border.frame = CGRect(x: 0, y: self.frame.size.height - width, width: self.frame.size.width, height: width)
+        self.layer.addSublayer(border)
+    }
+    
+    func addFullWidthBottomBorderWithColor(color: UIColor, width: CGFloat) {
+        let border = CALayer()
+        border.backgroundColor = color.cgColor
+        border.frame = CGRect(x: 0, y: self.frame.size.height - width, width: (self.superview?.frame.size.width)!, height: width)
         self.layer.addSublayer(border)
     }
 }

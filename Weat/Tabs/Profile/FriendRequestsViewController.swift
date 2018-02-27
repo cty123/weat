@@ -18,7 +18,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDelegate, UITab
     // action for closing button
     @IBAction func action(_ sender: UIBarButtonItem) {
         // respond to all friend requests based on the status
-        var i: Int = 0
+        /*var i: Int = 0
         for friend in pendingRequests {
             
             let cell = self.tableView.cellForRow(at: IndexPath(row: i, section: 0)) as! FriendRequestTableViewCell
@@ -29,7 +29,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDelegate, UITab
             })
         
             i = i + 1
-        }
+        }*/
         
         self.dismiss(animated: true, completion: nil)
     }
@@ -45,7 +45,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDelegate, UITab
         self.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(action))
         
         // get requests
-        Friend.pullFriendRequest(completion: {
+        /*Friend.pullFriendRequest(completion: {
             (users: [User]?) in
             
             // TODO: fix this
@@ -54,7 +54,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDelegate, UITab
             } else {
                 print("error getting friend requests")
             }
-        })
+        })*/
         
         self.tableView.dataSource = self
         self.tableView.delegate = self
@@ -69,7 +69,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDelegate, UITab
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // return self.pendingRequests.count
-        return 10
+        return profileVars.friendRequests.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -83,10 +83,11 @@ class FriendRequestsViewController: UIViewController, UITableViewDelegate, UITab
         // set up buttons
         cell.buttonDeny.setup(title: "Deny", color: UIColor.orange)
         cell.buttonConfirm.setup(title: "Confirm", color: UIColor.orange)
-        
+        let friend = profileVars.friendRequests[indexPath.row]
+        cell.friend = friend
         // set up name
         // cell.labelName.text = self.pendingRequests[indexPath.row].name
-        cell.labelName.text = "Test User Friend Request"
+        cell.labelName.text = "\((friend.name)!)"
         
         return cell
     }

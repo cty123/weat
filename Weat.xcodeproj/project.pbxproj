@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		140924C7203D241300D6F8C8 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140924C6203D241300D6F8C8 /* FeedViewController.swift */; };
 		140924C9203D241E00D6F8C8 /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 140924C8203D241E00D6F8C8 /* Feed.storyboard */; };
+		14125B392044E61A00B612CE /* GlobalProfileVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14125B382044E61A00B612CE /* GlobalProfileVars.swift */; };
 		1417955D203D2B2F00611D6F /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1417955C203D2B2F00611D6F /* ExploreViewController.swift */; };
 		1417955F203D2B3B00611D6F /* Explore.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1417955E203D2B3B00611D6F /* Explore.storyboard */; };
 		14179562203D2CB800611D6F /* CheckinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14179561203D2CB800611D6F /* CheckinViewController.swift */; };
@@ -72,6 +73,7 @@
 /* Begin PBXFileReference section */
 		140924C6203D241300D6F8C8 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		140924C8203D241E00D6F8C8 /* Feed.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
+		14125B382044E61A00B612CE /* GlobalProfileVars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalProfileVars.swift; sourceTree = "<group>"; };
 		1417955C203D2B2F00611D6F /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		1417955E203D2B3B00611D6F /* Explore.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Explore.storyboard; sourceTree = "<group>"; };
 		14179561203D2CB800611D6F /* CheckinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinViewController.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 				84EE6819203A3F9800A11D41 /* Profile.storyboard */,
 				145F83E320436F5400FAFEAF /* FindFriendsViewController.swift */,
 				145F83E420436F5400FAFEAF /* FindFriendsViewController.xib */,
+				14125B382044E61A00B612CE /* GlobalProfileVars.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -560,6 +563,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E0BD5DC0203BA8BF00602FD2 /* Rate.swift in Sources */,
+				14125B392044E61A00B612CE /* GlobalProfileVars.swift in Sources */,
 				14A7E86520362A5600F8655C /* Feed.swift in Sources */,
 				146308902040707000241DE3 /* APIKeys.swift in Sources */,
 				14179562203D2CB800611D6F /* CheckinViewController.swift in Sources */,
