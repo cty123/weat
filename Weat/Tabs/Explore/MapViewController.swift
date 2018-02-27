@@ -6,6 +6,8 @@
 //  Copyright © 2018 Weat. All rights reserved.
 //
 
+// TODO: Discuss what happens when restaurant is clicked in autocomplete (either stay on map view or go to restaurant view)
+
 import UIKit
 import GooglePlaces
 import GooglePlacePicker
