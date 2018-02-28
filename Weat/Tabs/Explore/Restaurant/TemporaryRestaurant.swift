@@ -9,7 +9,7 @@
 import UIKit
 import GooglePlaces
 
-class RestaurantViewController: UIViewController {
+class TempRestaurantViewController: UIViewController {
     private let place: GMSPlace
     
     @IBOutlet weak var restaurantName: UILabel!
@@ -19,7 +19,7 @@ class RestaurantViewController: UIViewController {
         let doneButton:UIBarButtonItem = UIBarButtonItem()
         doneButton.target = self
         doneButton.title = "Done"
-        doneButton.action = #selector(RestaurantViewController.leaveView)
+        doneButton.action = #selector(TempRestaurantViewController.leaveView)
         self.navigationItem.rightBarButtonItem = doneButton
         // Do any additional setup after loading the view.
         

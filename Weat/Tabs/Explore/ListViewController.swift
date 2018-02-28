@@ -198,10 +198,14 @@ extension ListViewController: GMSAutocompleteResultsViewControllerDelegate {
         for type in types {
             if(type == "restaurant") {
                 isRestaurant = true
+                break
             }
         }
         if(isRestaurant) {
-            // TODO: Go to restaurant page
+            let restaurantViewController = RestaurantViewController(nibName: "RestaurantViewController", bundle: nil)
+            restaurantViewController.place = place
+            restaurantViewController.back_string = "< List"
+            self.present(restaurantViewController, animated: true, completion: nil)
         } else {
             getNearby(lat: exploreLocations.latitude!, lng: exploreLocations.longitude!)
         }
