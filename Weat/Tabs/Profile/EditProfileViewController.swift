@@ -25,22 +25,24 @@ class EditProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let name = UserDefaults.standard.string(forKey: "name") {
-            self.textFieldName.text = name
+        // populate fields
+        let user = User()
+        let id = UserDefaults.standard.string(forKey: "id")
+
+        User.getUserInfo(profile_id: id!){user in
+            self.textFieldName.text = user.name
+            self.textFieldEmail.text = user.email
+            self.textFieldPhone.text = user.phone
+            self.textFieldLocation.text = user.location
         }
         
-        if let email = UserDefaults.standard.string(forKey: "email") {
-            self.textFieldEmail.text = email
-        }
-        
-        if let phone = UserDefaults.standard.string(forKey: "phone") {
-            self.textFieldPhone.text = phone
-        }
-        
-        if let location = UserDefaults.standard.string(forKey: "location") {
-            self.textFieldLocation.text = location
-        }
-        
+        /*
+        self.textFieldName.text = user.name
+        self.textFieldEmail.text = user.email
+        self.textFieldPhone.text = user.phone
+        self.textFieldLocation.text = user.location
+        */
+ 
         self.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(action))
 
 
@@ -71,11 +73,21 @@ class EditProfileViewController: UIViewController {
             location = ""
         }
         
-        // TODO: update db!!!! can't do it atm
-        UserDefaults.standard.set(name, forKey: "name")
-        UserDefaults.standard.set(email, forKey: "email")
-        UserDefaults.standard.set(phone, forKey: "phone")
-        UserDefaults.standard.set(location, forKey: "location")
+        // update user in db
+        let user = User()
+        user.id = UserDefaults.standard.integer(forKey: "id")
+        user.name = name
+        user.email = email
+        user.phone = phone
+        user.location = location
+        user.privacy = 0
+        user.updateUserInfo() { status in
+            if status {
+                print ("success")
+            } else {
+                print ("faiure")
+            }
+        }
 
     }
 
