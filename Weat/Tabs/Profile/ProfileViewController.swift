@@ -56,8 +56,14 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         super.viewWillAppear(animated)
         
         // Set profile text
-        self.labelName.text = UserDefaults.standard.string(forKey: "name")
-        self.labelLocation.text = UserDefaults.standard.string(forKey: "location")
+        let user = User()
+        let id = UserDefaults.standard.string(forKey: "id")
+        
+        User.getUserInfo(profile_id: id!){user in
+            self.labelName.text = user.name
+            self.labelLocation.text = user.location
+        }
+        
         
         // Set notifications format
         self.notificationsLabel.font = UIFont.boldSystemFont(ofSize: 17.0)
