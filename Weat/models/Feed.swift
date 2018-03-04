@@ -6,6 +6,7 @@ import FBSDKCoreKit
 class Feed {
     var message: String = "Not OK"
     var data: [FeedElement] = []
+    var dataUnarchived: [FeedElement] = []
     
     static func getFeed(feed_type: String, completion: @escaping (Feed) -> Void) {
         let feed = Feed()
@@ -22,6 +23,10 @@ class Feed {
                 for obj in json["feed"] {
                     let feed_element = FeedElement(feed_obj: obj.1)
                     feed.data.append(feed_element)
+                    if (!feed_element.archived) {
+                        feed.dataUnarchived.append(feed_element)
+                    }
+                    
                 }
                 break;
             case .failure(let error):

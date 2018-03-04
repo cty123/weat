@@ -9,12 +9,16 @@ class FeedElement: Decodable{
     var feed_id: Int
     var createdAt: Int
     
-    var actor_name: String
+    var actor_name: String          // user name
     var actor_id: Int
     
-    var receiver_name: String
+    var receiver_name: String       // friend name
     var receiver_id: Int
     
+    // sprint 2
+    // var menu_item_id: Int
+    
+    var archived: Bool
     
     init(feed_obj: JSON) {
         restaurant_name = (feed_obj["restaurant"]["name"].string != nil ? feed_obj["restaurant"]["name"].string! : "")
@@ -29,6 +33,8 @@ class FeedElement: Decodable{
         
         receiver_name = (feed_obj["friend"]["name"].string != nil ? feed_obj["friend"]["name"].string! : "")
         receiver_id = (feed_obj["friend"]["id"].int != nil ? feed_obj["friend"]["id"].int! : -1)
+        
+        archived = (feed_obj["archived"].bool != nil ? feed_obj["archived"].bool! : true)
         
     }
 }
