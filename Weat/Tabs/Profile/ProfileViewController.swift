@@ -45,8 +45,10 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     // vars
-    var friendLinks: [String] = []      // array of friends' facebook user_id
-    var friends: [User] = []            // array of friends
+    var friendLinks: [String] = []          // array of friends' facebook user_id
+    var friends: [User] = []                // array of friends
+    var personalFeed: Feed? = nil           // feed
+    var showArchivedFeedItems = false       // toggle to allow user to see archived feed items
     
     // segmented control segments
     let segments = ["Feed", "Friends", /*"Favorites"*/]
@@ -154,7 +156,28 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     
     // when the segment is changed
     @IBAction func segmentChanged(_ sender: Any) {
+        
+        // TODO: pull to refresh instead
+        switch self.segmentedControl.selectedSegmentIndex {
+        case 0: // feed
+            /*
+            Feed.getFeed(feed_type: "/friends", completion: {
+                (feed: Feed?) in
+                guard let new_feed = feed else {
+                    print("error, file: \(#file), function: \(#function), line: \(#line)")
+                    return
+                }
+                self.personalFeed = new_feed
+            })
+            */
+            break
+        default:
+            break
+        }
+        
         tableView.reloadData()
+
+        
     }
     
     // tableview stuff
@@ -166,8 +189,12 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         // feed = 0
         switch self.segmentedControl.selectedSegmentIndex {
         case 0:
-            // feed, TODO: set page size
-            print("FEED")
+            if (self.showArchivedFeedItems) {
+                // return self.personalFeed?.data.count
+            } else {
+                // return self.personalFeed?.unarchivedData.count
+            }
+            return 10
         case 1:
             return self.friends.count
         case 2:
@@ -180,7 +207,6 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         
         // just return 0 otherwise
         return 0
-        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -196,6 +222,15 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             let cell = Bundle.main.loadNibNamed("FeedTableViewCell", owner: self, options: nil)?.first as! FeedTableViewCell
             cell.labelName.text = "\(String(describing: SimpleData.Users[indexPath.row]))"
             cell.labelRestaurant.text = "Dummy Restaurant"
+            
+            if (self.showArchivedFeedItems) {
+                cell.labelName.text = self.personalFeed?.data[indexPath.row].actor_name
+                cell.labelName.text = self.personalFeed?.data[indexPath.row].restaurant_name
+            } else {
+                cell.labelName.text = self.personalFeed?.dataUnarchived[indexPath.row].actor_name
+                cell.labelName.text = self.personalFeed?.dataUnarchived[indexPath.row].restaurant_name
+            }
+            
             return cell
             
         case 1: // friends
@@ -219,6 +254,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         // friends: open next view controller
         if (self.segmentedControl.selectedSegmentIndex == 1) {
             let friendViewController = FriendViewController(nibName: "FriendViewController", bundle: nil)
+            // todo facebook id
             friendViewController.facebookLink = "1493264010796475"
             friendViewController.weatID = String(describing: friends[indexPath.row].id)
             self.present(friendViewController, animated: true, completion: nil)
@@ -227,6 +263,25 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         // unselect row
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    /// delete stuff
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            // self.personalFeed?.unarchivedData.remove(at: indexPath.row)
+            // TODO: archive here not just remove for show
+            print("deleted this cell i guess \(indexPath.row)")
+            tableView.reloadData()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        return "Archive"
+    }
+    /// delete stuff
     
 }
 

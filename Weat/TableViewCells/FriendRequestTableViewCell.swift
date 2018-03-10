@@ -16,7 +16,7 @@ class FriendRequestTableViewCell: UITableViewCell {
     @IBOutlet weak var buttonConfirm: UIButton!
     
     //acceptance - 0 pending, 1 accept, 2 deny
-    var friend: User?
+    var friend: User? = nil
     
     @IBAction func pressDeny(_ sender: Any) {
         Friend.setFriendRequest(friend_id: (friend?.id!)!, acceptance: 2, completion: {
