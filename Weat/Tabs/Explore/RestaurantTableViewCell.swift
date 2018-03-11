@@ -13,6 +13,6 @@ class RestaurantTableViewCell: UITableViewCell {
     @IBOutlet weak var imageViewPic: UIImageView!
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var labelDetail: UILabel!
-    
+    var restaurant: Restaurant!
 }
 

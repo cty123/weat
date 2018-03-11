@@ -18,15 +18,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Weat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lOi-II-eQU">
-                                <rect key="frame" x="140" y="274" width="40" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lOi-II-eQU">
+                                <rect key="frame" x="140" y="283.5" width="40" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="lOi-II-eQU" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="xOd-qt-85l"/>
+                            <constraint firstItem="lOi-II-eQU" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="zbq-Tv-upP"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
@@ -46,16 +49,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z2h-WD-BIR">
-                                <rect key="frame" x="141" y="269" width="38" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Login"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z2h-WD-BIR">
+                                <rect key="frame" x="108" y="279" width="104" height="30"/>
+                                <state key="normal" title="Facebook login"/>
                                 <connections>
                                     <action selector="loginToFacebook:" destination="UES-Zn-mJ5" eventType="touchUpInside" id="96n-5l-B4n"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Z2h-WD-BIR" firstAttribute="centerY" secondItem="GJt-9A-GML" secondAttribute="centerY" id="F05-qK-bQ9"/>
+                            <constraint firstItem="Z2h-WD-BIR" firstAttribute="centerX" secondItem="GJt-9A-GML" secondAttribute="centerX" id="eXC-6Q-xG1"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="GJt-9A-GML"/>
                     </view>
                     <connections>
@@ -65,7 +71,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6LQ-AI-Ral" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="315" y="-847"/>
+            <point key="canvasLocation" x="315" y="-847.18309859154931"/>
         </scene>
         <!--Feed-->
         <scene sceneID="HID-HV-y4m">

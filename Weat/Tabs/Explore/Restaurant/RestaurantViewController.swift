@@ -22,6 +22,7 @@ class RestaurantViewController: UIViewController {
     @IBOutlet weak var navigationBar: UINavigationBar!
     
     var place: GMSPlace?
+    var restaurant: Restaurant?
     var back_string: String?
     
     @IBAction func action(_ sender: UIBarButtonItem) {
@@ -32,11 +33,19 @@ class RestaurantViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if(back_string == nil) {
-            back_string = "< Back"
+            back_string = "< Back" // Change '<' to be a uiimage
         }
         
-        restaurantNameLabel.text = place?.name
-        phoneNumberLabel.text = place?.phoneNumber
+        // use place to fill in details if possible
+        if(place != nil) {
+            restaurantNameLabel.text = place?.name
+            phoneNumberLabel.text = place?.phoneNumber
+        }
+        // use restaurant to fill in details if GMSPlace not supplied
+        else if(restaurant != nil) {
+            restaurantNameLabel.text = restaurant?.name
+            phoneNumberLabel.text = restaurant?.phone
+        }
         // set price text from place.price
         
         // get our food and service ratings

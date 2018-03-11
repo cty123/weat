@@ -15,6 +15,10 @@ class LoadController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         // Authenticate using Weat API
         
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         if(FBSDKAccessToken.current() != nil) {
             let token = FBSDKAccessToken.current().tokenString!
             let url = "\(WeatAPIUrl)/auth/facebook/token?access_token=\(String(describing: token))"
@@ -30,29 +34,29 @@ class LoadController: UIViewController {
                     UserDefaults.standard.set(json["privacy"].int, forKey: "privacy")
                     UserDefaults.standard.set(json["phone"].string, forKey: "phone")
                     self.isLoggedIn = true
+                    self.performSegue(withIdentifier: "enterApp", sender: self)
                     // Testing pulling friends
                     /*FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "friends"]).start(completionHandler: { (connection, result, error) -> Void in
-                        if (error == nil){
-                            print(result as Any)
-                        } else {
-                            print(error as Any)
-                        }
-                    })*/
+                     if (error == nil){
+                     print(result as Any)
+                     } else {
+                     print(error as Any)
+                     }
+                     })*/
                 case .failure(let error):
                     self.isLoggedIn = false
+                    self.performSegue(withIdentifier: "enterLogin", sender: self)
                 }
             }
         } else {
+            self.performSegue(withIdentifier: "enterLogin", sender: self)
             isLoggedIn = false
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
         if (isLoggedIn)
         {
-            performSegue(withIdentifier: "enterApp", sender: self)
+     //       performSegue(withIdentifier: "enterApp", sender: self)
         }else{
-            performSegue(withIdentifier: "enterLogin", sender: self)
+    //        performSegue(withIdentifier: "enterLogin", sender: self)
         }
     }
 }

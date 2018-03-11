@@ -16,6 +16,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     var searchController: UISearchController?
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -146,6 +147,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.labelName.text = "\(String(describing: list_obj.name!))"
         cell.imageViewPic.image = list_obj.image!
         cell.labelDetail.text = "Rating holder"
+        cell.restaurant = list_obj
         return cell
         
     }
@@ -153,6 +155,17 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // keeps a row from being permenantly selected
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        // get restaurant details at index path clicked
+        let cell = tableView.cellForRow(at: indexPath) as! RestaurantTableViewCell
+        Restaurant.getDetails(oldRestaurant: cell.restaurant, completion: { (restaurant: Restaurant) in
+            // move to restaurant view
+            let restaurantViewController = RestaurantViewController(nibName: "RestaurantViewController", bundle: nil)
+            restaurantViewController.restaurant = restaurant
+            restaurantViewController.back_string = "< List" // change
+            self.present(restaurantViewController, animated: true, completion: nil)
+        })
+        
     }
 }
 
