@@ -34,6 +34,7 @@ class LoadController: UIViewController {
                     UserDefaults.standard.set(json["privacy"].int, forKey: "privacy")
                     UserDefaults.standard.set(json["phone"].string, forKey: "phone")
                     self.isLoggedIn = true
+                    print("performing segue from loadController")
                     self.performSegue(withIdentifier: "enterApp", sender: self)
                     // Testing pulling friends
                     /*FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "friends"]).start(completionHandler: { (connection, result, error) -> Void in
@@ -44,6 +45,7 @@ class LoadController: UIViewController {
                      }
                      })*/
                 case .failure(let error):
+                    print("load controller error: \(error)")
                     self.isLoggedIn = false
                     self.performSegue(withIdentifier: "enterLogin", sender: self)
                 }

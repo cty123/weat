@@ -10,6 +10,7 @@ class LoginController: UIViewController{
     
     let loginManager: FBSDKLoginManager = FBSDKLoginManager()
     var fbLoginSuccess = false
+    var weatLoginSuccess = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,7 +19,7 @@ class LoginController: UIViewController{
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        if (FBSDKAccessToken.current() != nil && fbLoginSuccess == true)
+        if (FBSDKAccessToken.current() != nil && fbLoginSuccess == true && weatLoginSuccess == true)
         {
             performSegue(withIdentifier: "finishLogin", sender: self)
         }
@@ -53,6 +54,7 @@ class LoginController: UIViewController{
                                 UserDefaults.standard.set(json["location"].string, forKey: "location")
                                 UserDefaults.standard.set(json["privacy"].int, forKey: "privacy")
                                 UserDefaults.standard.set(json["phone"].string, forKey: "phone")
+                                self.weatLoginSuccess = true
                                 // Testing pulling friends
                                 /*FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "friends"]).start(completionHandler: { (connection, result, error) -> Void in
                                     if (error == nil){
