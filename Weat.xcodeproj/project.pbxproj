@@ -48,6 +48,8 @@
 		A85E993D2040501400A95558 /* EditProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A85E993B2040501400A95558 /* EditProfileViewController.xib */; };
 		A8AE7FCA203F9D5B007C9506 /* FriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8AE7FC8203F9D5B007C9506 /* FriendViewController.swift */; };
 		A8AE7FCB203F9D5B007C9506 /* FriendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8AE7FC9203F9D5B007C9506 /* FriendViewController.xib */; };
+		E0192DD92054C3F0005C5DDF /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0192DD82054C3F0005C5DDF /* Rating.swift */; };
+		E0192DDB2054C4BB005C5DDF /* Menu_item.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0192DDA2054C4BB005C5DDF /* Menu_item.swift */; };
 		E0BD5DC0203BA8BF00602FD2 /* Rate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0BD5DBF203BA8BF00602FD2 /* Rate.swift */; };
 		E0BD5DC2203BA9EB00602FD2 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0BD5DC1203BA9EB00602FD2 /* Friend.swift */; };
 		E0E572AC2033CB3B00E7822B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E572AB2033CB3A00E7822B /* AppDelegate.swift */; };
@@ -115,6 +117,8 @@
 		A8AE7FC8203F9D5B007C9506 /* FriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendViewController.swift; sourceTree = "<group>"; };
 		A8AE7FC9203F9D5B007C9506 /* FriendViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendViewController.xib; sourceTree = "<group>"; };
 		DADA406A0D7663C50B998E12 /* Pods-WeatTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WeatTests/Pods-WeatTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E0192DD82054C3F0005C5DDF /* Rating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
+		E0192DDA2054C4BB005C5DDF /* Menu_item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu_item.swift; sourceTree = "<group>"; };
 		E0BD5DBF203BA8BF00602FD2 /* Rate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rate.swift; sourceTree = "<group>"; };
 		E0BD5DC1203BA9EB00602FD2 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		E0E572A82033CB3A00E7822B /* Weat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -326,6 +330,8 @@
 				E0BD5DBF203BA8BF00602FD2 /* Rate.swift */,
 				E0BD5DC1203BA9EB00602FD2 /* Friend.swift */,
 				1463088E203F9BBC00241DE3 /* Restaurant.swift */,
+				E0192DD82054C3F0005C5DDF /* Rating.swift */,
+				E0192DDA2054C4BB005C5DDF /* Menu_item.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -570,6 +576,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0192DDB2054C4BB005C5DDF /* Menu_item.swift in Sources */,
 				E0BD5DC0203BA8BF00602FD2 /* Rate.swift in Sources */,
 				14125B392044E61A00B612CE /* GlobalProfileVars.swift in Sources */,
 				14A7E86520362A5600F8655C /* Feed.swift in Sources */,
@@ -582,6 +589,7 @@
 				E0BD5DC2203BA9EB00602FD2 /* Friend.swift in Sources */,
 				84EE6837203A430D00A11D41 /* SimpleData.swift in Sources */,
 				140924C7203D241300D6F8C8 /* FeedViewController.swift in Sources */,
+				E0192DD92054C3F0005C5DDF /* Rating.swift in Sources */,
 				142E6E1C20426EE7009E1A8B /* ExploreLocation.swift in Sources */,
 				14FA4ECD203DFD8700B20E09 /* TemporaryRestaurant.swift in Sources */,
 				A85E99382040252500A95558 /* FacebookFriendsViewController.swift in Sources */,
