@@ -10,7 +10,7 @@ import Foundation
 class Rating {
     var id: Int?
     // The writer/author of this rating
-    var author: User?
+    var author: String?
     
     var restaurant_id: Int?
     var food_rating: Int?
