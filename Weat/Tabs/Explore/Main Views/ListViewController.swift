@@ -83,7 +83,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                     print(error_message)
                 } else {
                     for obj in json["results"] {
-                        Restaurant.getRestaurantInfo(json: obj.1, retrieveImage: true, completion: { (restaurant: Restaurant) in
+                        Restaurant.getRestaurantInfo(google_link: obj.1["place_id"].string!, completion: { (restaurant: Restaurant) in
                             self.restaurants.append(restaurant)
                             self.tableView.reloadData()
                         })
@@ -158,14 +158,11 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         // get restaurant details at index path clicked
         let cell = tableView.cellForRow(at: indexPath) as! RestaurantTableViewCell
-        Restaurant.getDetails(oldRestaurant: cell.restaurant, completion: { (restaurant: Restaurant) in
-            // move to restaurant view
-            let restaurantViewController = RestaurantViewController(nibName: "RestaurantViewController", bundle: nil)
-            restaurantViewController.restaurant = restaurant
-            restaurantViewController.back_string = "< List" // change
-            self.present(restaurantViewController, animated: true, completion: nil)
-        })
-        
+        let restaurantViewController = RestaurantViewController(nibName: "RestaurantViewController", bundle: nil)
+        restaurantViewController.restaurant = cell.restaurant
+        restaurantViewController.back_string = "List"
+        restaurantViewController.viewWillAppear(true)
+        self.present(restaurantViewController, animated: true, completion: nil)
     }
 }
 
@@ -216,9 +213,11 @@ extension ListViewController: GMSAutocompleteResultsViewControllerDelegate {
         }
         if(isRestaurant) {
             let restaurantViewController = RestaurantViewController(nibName: "RestaurantViewController", bundle: nil)
-            restaurantViewController.place = place
-            restaurantViewController.back_string = "< List"
-            self.present(restaurantViewController, animated: true, completion: nil)
+            Restaurant.getRestaurantInfo(google_link: place.placeID, completion: { (restaurant: Restaurant) in
+                restaurantViewController.restaurant = restaurant
+                restaurantViewController.back_string = "List"
+                self.present(restaurantViewController, animated: true, completion: nil)
+            })
         } else {
             getNearby(lat: exploreLocations.latitude!, lng: exploreLocations.longitude!)
         }

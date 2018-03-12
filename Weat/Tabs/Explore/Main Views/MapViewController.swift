@@ -156,7 +156,7 @@ extension MapViewController: CLLocationManagerDelegate {
             case .success(let value):
                 let json = JSON(value)
                 for obj in json["results"] {
-                    Restaurant.getRestaurantInfo(json: obj.1, retrieveImage: false, completion: { (restaurant: Restaurant) in
+                    Restaurant.getRestaurantInfo(google_link: obj.1["place_id"].string!, completion: { (restaurant: Restaurant) in
                         self.restaurants.append(restaurant)
                         let position = CLLocationCoordinate2D(latitude: restaurant.latitude!, longitude: restaurant.longitude!)
                         let marker = GMSMarker(position: position)

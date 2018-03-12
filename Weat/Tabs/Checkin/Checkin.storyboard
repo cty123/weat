@@ -18,25 +18,45 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Checkin Page" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zm1-w7-abr">
-                                <rect key="frame" x="135" y="323" width="105" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Are you at..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zm1-w7-abr">
+                                <rect key="frame" x="141" y="308.5" width="92" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="7Ul-Xp-Azb">
+                                <rect key="frame" x="177" y="280" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h3e-ME-bVS" userLabel="Restaurant">
+                                <rect key="frame" x="97" y="337" width="181" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Zm1-w7-abr" firstAttribute="centerY" secondItem="7Ml-Xj-JIv" secondAttribute="centerY" id="7g2-hN-qzc"/>
+                            <constraint firstItem="h3e-ME-bVS" firstAttribute="centerX" secondItem="7Ml-Xj-JIv" secondAttribute="centerX" id="Lim-9a-HWy"/>
+                            <constraint firstItem="Zm1-w7-abr" firstAttribute="top" secondItem="7Ul-Xp-Azb" secondAttribute="bottom" constant="8.5" id="MZL-pP-wSD"/>
+                            <constraint firstItem="7Ul-Xp-Azb" firstAttribute="centerX" secondItem="7Ml-Xj-JIv" secondAttribute="centerX" id="NjU-rT-G4c"/>
+                            <constraint firstItem="Zm1-w7-abr" firstAttribute="centerX" secondItem="7Ml-Xj-JIv" secondAttribute="centerX" id="hQe-Am-hn4"/>
+                            <constraint firstItem="h3e-ME-bVS" firstAttribute="top" secondItem="Zm1-w7-abr" secondAttribute="bottom" constant="7.5" id="q7M-O5-vuR"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="7Ml-Xj-JIv"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="Checkin" id="tes-4E-Bug">
                         <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="7Ul-Xp-Azb" id="4zc-Qn-cbd"/>
+                        <outlet property="restaurantLabel" destination="h3e-ME-bVS" id="iYf-Np-ZTC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pAw-uK-g21" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="257" y="-214"/>
+            <point key="canvasLocation" x="256.80000000000001" y="-214.54272863568218"/>
         </scene>
     </scenes>
     <resources>

@@ -15,65 +15,82 @@ import FBSDKLoginKit
 class Restaurant {
     var latitude: Double?
     var longitude: Double?
+    var price: String?
     var name: String?
     var image: UIImage?
-    var google_id: String?
+    var google_link: String?
     var phone: String?
+    var open_now: String?
     
-    static func getRestaurantInfo(json: JSON, retrieveImage: Bool, completion: @escaping (Restaurant) -> ()){
-        // TODO: Check if google returns bad json
+    static func getRestaurantInfo(google_link: String, completion: @escaping (Restaurant) -> ()){
         let restaurant = Restaurant()
-        let jsonArr:[JSON] = json["photos"].array! // add error check
-        let photo_reference:String = jsonArr[0]["photo_reference"].string!
-        let photo_url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=\(String(photo_reference))&key=\(String(kPlacesWebAPIKey))"
-        restaurant.google_id = json["place_id"].string!
-        restaurant.latitude = json["geometry"]["location"]["lat"].double!
-        restaurant.longitude = json["geometry"]["location"]["lng"].double!
-        restaurant.name = json["name"].string!
-        if(retrieveImage) {
-            Alamofire.request(photo_url, method:.get, parameters:nil).validate().responseData(completionHandler: {
-                (response) in
-                if(response.error == nil) {
-                    if let data = response.data {
-                        restaurant.image = UIImage(data: data)
-                    } else {
-                        restaurant.image = UIImage(named: "Explore")
-                    }
-                } else {
-                    print(response.error ?? "Couldn't get restaurant info from Google (Restaurant.swift)")
-                }
-                completion(restaurant)
-            })
-        } else {
-            completion(restaurant)
-        }
-    }
-    
-    static func getDetails(oldRestaurant: Restaurant, completion: @escaping (Restaurant) -> ()) {
-        let restaurant = Restaurant()
-        restaurant.google_id = oldRestaurant.google_id
-        restaurant.image = oldRestaurant.image
-        restaurant.latitude = oldRestaurant.latitude
-        restaurant.longitude = oldRestaurant.longitude
-        restaurant.name = oldRestaurant.name
-        let info_url = "https://maps.googleapis.com/maps/api/place/details/json?placeid=\(String(describing: restaurant.google_id))&key=\(kPlacesWebAPIKey)"
+        restaurant.google_link = google_link
+        var photo_url: String = ""
+        
+        // use google link to get details
+        let info_url = "https://maps.googleapis.com/maps/api/place/details/json?placeid=\(String(describing: google_link))&key=\(kPlacesWebAPIKey)"
         Alamofire.request(info_url, method:.get, parameters:nil).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
                 var json = JSON(value)
                 if let error_message: String = json["error_message"].string {
-                    print(error_message)
+                    print("restaurant model error: " + error_message)
                 } else {
-                    restaurant.phone = json["formatted_phone_number"].string
+                    restaurant.latitude = json["result"]["geometry"]["location"]["lat"].double
+                    restaurant.longitude = json["result"]["geometry"]["location"]["lng"].double
+                    restaurant.name = json["result"]["name"].string
+                    restaurant.phone = json["result"]["formatted_phone_number"].string
+                    switch json["result"]["open_now"].bool {
+                    case true?:
+                        restaurant.open_now = "Open"
+                    default:
+                        restaurant.open_now = "Closed"
+                    }
                     // add more details here as needed
+                    switch json["result"]["price_level"].int {
+                    case 0?:
+                        restaurant.price = "Free"
+                    case 1?:
+                        restaurant.price = "Inexpensive"
+                    case 2?:
+                        restaurant.price = "Moderate"
+                    case 3?:
+                        restaurant.price = "Expensive"
+                    case 4?:
+                        restaurant.price = "Very Expensive"
+                    default:
+                        restaurant.price = "Moderate"
+                    }
+                    // use details to get photo
+                    if(json["result"]["photos"].array != nil) {
+                        let jsonArr:[JSON] = json["result"]["photos"].array!
+                        let photo_reference:String = jsonArr[0]["photo_reference"].string!
+                        photo_url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=\(String(photo_reference))&key=\(String(kPlacesWebAPIKey))"
+                        Alamofire.request(photo_url, method:.get, parameters:nil).validate().responseData(completionHandler: {
+                            (response) in
+                            if(response.error == nil) {
+                                if let data = response.data {
+                                    restaurant.image = UIImage(data: data)
+                                } else {
+                                    restaurant.image = UIImage(named: "Explore")
+                                }
+                            } else {
+                                print(response.error ?? "Couldn't get restaurant info from Google (Restaurant.swift)")
+                            }
+                            completion(restaurant)
+                        })
+                    } else {
+                        completion(restaurant)
+                    }
                 }
             case .failure(let error):
                 print(error)
                 print("There was an error")
+                completion(restaurant)
             }
-            completion(restaurant)
         }
     }
+    
     
     /*
      * Get menu for a restaurant, this function is for menu ONLY, for menu with friends ratings/comments, use "getRestaurantMenuWithRating()"

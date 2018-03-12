@@ -21,47 +21,91 @@ class RestaurantViewController: UIViewController {
     @IBOutlet weak var headerImage: UIImageView!
     @IBOutlet weak var navigationBar: UINavigationBar!
     
-    var place: GMSPlace?
+    @IBOutlet weak var recommendButton: UIButton!
+    @IBOutlet weak var favoriteButton: UIButton!
+    @IBOutlet weak var recordVisitButton: UIButton!
+    @IBOutlet weak var menuButton: UIButton!
+    
     var restaurant: Restaurant?
     var back_string: String?
+    var ratings: [Rating]?
     
-    @IBAction func action(_ sender: UIBarButtonItem) {
+    @IBAction func dismiss(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
     }
     
     
+    @IBAction func callButtonPress(_ sender: Any) {
+        // call restaurant using its phone number
+        // test this when server up
+        if(restaurant?.phone == nil) {
+            return
+        }
+        let cleanNumber = (restaurant?.phone)!.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "-", with: "")
+        guard let number = URL(string: "telprompt://" + cleanNumber) else {
+            return }
+        
+        UIApplication.shared.open(number, options: [:], completionHandler: nil)
+    }
+    
+    @IBAction func recommendButtonPress(_ sender: Any) {
+        // go to recommend to friend view
+        let recommendViewController = RecommendViewController(nibName: "RecommendViewController", bundle: nil)
+        self.present(recommendViewController, animated: true, completion: nil)
+    }
+    
+    @IBAction func favoriteButtonPress(_ sender: Any) {
+        // save restaurant as favorite and do something on front end
+    }
+    
+    @IBAction func menuButtonPress(_ sender: Any) {
+        // go to menu view
+        let menuViewController = MenuViewController(nibName: "MenuViewController", bundle: nil)
+        self.present(menuViewController, animated: true, completion: nil)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if(back_string == nil) {
-            back_string = "< Back" // Change '<' to be a uiimage
+            back_string = "Back"
         }
         
-        // use place to fill in details if possible
-        if(place != nil) {
-            restaurantNameLabel.text = place?.name
-            phoneNumberLabel.text = place?.phoneNumber
-        }
-        // use restaurant to fill in details if GMSPlace not supplied
-        else if(restaurant != nil) {
+        
+        
+        // use restaurant to fill in details
+        if(restaurant != nil) {
+            // get ratings
+            Restaurant.getRestaurantRating(google_link: (restaurant?.google_link)!, completion: { (ratings: [Rating]) in
+                self.ratings = ratings
+                // reload tableview
+            })
+            
+            // Google things
+            // TODO: error check
             restaurantNameLabel.text = restaurant?.name
             phoneNumberLabel.text = restaurant?.phone
+            priceLabel.text = restaurant?.price
+            headerImage.image = restaurant?.image
+            hoursLabel.text = restaurant?.open_now
+            
+            
+            // Weat things
+            // service rating
+            // serviceRatingLabel.text =
+            // food rating
+            // foodRatingLabel.text =
+            // tags text
+            
         }
-        // set price text from place.price
         
-        // get our food and service ratings
-        // get image
-        // get tags
-        // get reviews
+        self.recommendButton.addFullWidthBottomBorderWithColor(color: UIColor.lightGray, width: 0.4)
+        self.recordVisitButton.addFullWidthBottomBorderWithColor(color: UIColor.lightGray, width: 0.4)
+        self.recommendButton.addRightBorderWithColor(color: UIColor.lightGray, width: 0.4)
+        self.favoriteButton.addRightBorderWithColor(color: UIColor.lightGray, width: 0.4)
+        //self.favoriteButton.addFullWidthBottomBorderWithColor(color: UIColor.lightGray, width: 0.4)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let doneButton:UIBarButtonItem = UIBarButtonItem()
-        doneButton.target = self
-        doneButton.title = "\((back_string)!)"
-        doneButton.action = #selector(action)
-        self.navigationBar.topItem?.leftBarButtonItem = doneButton
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {

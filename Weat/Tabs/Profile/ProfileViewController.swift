@@ -51,7 +51,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     var showArchivedFeedItems = false       // toggle to allow user to see archived feed items
     
     // segmented control segments
-    let segments = ["Feed", "Friends", /*"Favorites"*/]
+    let segments = ["Feed", "Friends", /*"Favorites"*/] // what do we actually want here?
     
     // update name location (TODO: remove this)
     override func viewWillAppear(_ animated: Bool) {
@@ -297,6 +297,13 @@ extension UIView {
         let border = CALayer()
         border.backgroundColor = color.cgColor
         border.frame = CGRect(x: 0, y: self.frame.size.height - width, width: (self.superview?.frame.size.width)!, height: width)
+        self.layer.addSublayer(border)
+    }
+    
+    func addRightBorderWithColor(color: UIColor, width: CGFloat) {
+        let border = CALayer()
+        border.backgroundColor = color.cgColor
+        border.frame = CGRect(x: self.frame.size.width - width, y: 0, width: width, height: self.frame.size.height)
         self.layer.addSublayer(border)
     }
 }
