@@ -36,10 +36,15 @@ class Restaurant {
                 if let error_message: String = json["error_message"].string {
                     print("restaurant model error: " + error_message)
                 } else {
-                    restaurant.latitude = json["result"]["geometry"]["location"]["lat"].double
-                    restaurant.longitude = json["result"]["geometry"]["location"]["lng"].double
-                    restaurant.name = json["result"]["name"].string
-                    restaurant.phone = json["result"]["formatted_phone_number"].string
+                    let latitude = json["result"]["geometry"]["location"]["lat"].double
+                    let longitude = json["result"]["geometry"]["location"]["lng"].double
+                    let name = json["result"]["name"].string
+                    let phone = json["result"]["formatted_phone_number"].string
+                    
+                    restaurant.latitude = (latitude != nil ? latitude : 0.0)!
+                    restaurant.longitude = (longitude != nil ? longitude : 0.0)!
+                    restaurant.name = (name != nil ? name : "No name...")!
+                    restaurant.phone = (phone != nil ? phone : "No phone...")!
                     switch json["result"]["open_now"].bool {
                     case true?:
                         restaurant.open_now = "Open"
@@ -91,8 +96,7 @@ class Restaurant {
         }
     }
     
-    
-    /*
+    /* TESTED
      * Get menu for a restaurant, this function is for menu ONLY, for menu with friends ratings/comments, use "getRestaurantMenuWithRating()"
      * The result is a array of Menu_item with "rating" property equals to "nil"
      * Parameter: google_link, String

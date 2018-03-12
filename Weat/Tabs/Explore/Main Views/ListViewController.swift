@@ -161,7 +161,6 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         let restaurantViewController = RestaurantViewController(nibName: "RestaurantViewController", bundle: nil)
         restaurantViewController.restaurant = cell.restaurant
         restaurantViewController.back_string = "List"
-        restaurantViewController.viewWillAppear(true)
         self.present(restaurantViewController, animated: true, completion: nil)
     }
 }
