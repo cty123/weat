@@ -24,8 +24,10 @@ class WeatTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
-        testRestaurantMenu()
-        testRestaurantRating()
+        //testRestaurantMenu()
+        //testRestaurantRating()
+        //testPostFavorite()
+        //testDeleteFavorite()
     }
     
     func testRestaurantMenu(){
@@ -44,6 +46,38 @@ class WeatTests: XCTestCase {
         Restaurant.getRestaurantRating(google_link: "link"){ ratings in
             for rating in ratings{
                 print("{\n\(rating.id!)\n\(rating.food_rating!)\n\(rating.service_rating!)\n\(rating.rating_text!)\n\(rating.time!)\n}")
+            }
+        }
+    }
+    
+    func testPostFavorite(){
+        Favorite.addFavoriteRestaurant(google_link: "link"){ status in
+            if (status) {
+                print("success")
+            }else{
+                print("failed")
+            }
+        }
+    }
+    
+    func testDeleteFavorite(){
+        Favorite.deleteFavoriteRestaurant(google_link: "link"){ status in
+            if (status) {
+                print("success")
+            }else{
+                print("failed")
+            }
+        }
+    }
+    
+    func testRestaurantMenuWithRatings(){
+        Restaurant.getRestaurantMenuWithRating(google_link: "link"){ menu_items in
+            for menu_item in menu_items{
+                print("{")
+                print("     \(menu_item.id!)")
+                print("     \(menu_item.name!)")
+                print("     \(menu_item.category!)")
+                print("}")
             }
         }
     }

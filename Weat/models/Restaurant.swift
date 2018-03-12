@@ -75,9 +75,9 @@ class Restaurant {
         }
     }
     
-    /*
+    /* TESTED
      * Get menu for a restaurant, this function is for menu ONLY, for menu with friends ratings/comments, use "getRestaurantMenuWithRating()"
-     * The result is a array of Menu_item
+     * The result is a array of Menu_item with "rating" property equals to "nil"
      * Parameter: google_link, String
      * Access token is automatically obtained from local statics
      */
@@ -101,10 +101,56 @@ class Restaurant {
                         item.id = i["id"].intValue
                         item.category = category.stringValue
                         item.name = i["name"].stringValue
-                        // Will implement rating later
-                        item.rating = nil
+                        // Does not do anything with the rating
                         menu_items.append(item)
+                        completion(menu_items)
                     }
+                }
+            case .failure(let error):
+                print(error)
+                completion(menu_items)
+            }
+        }
+    }
+    
+    /*
+     * Get menu for a restaurant along with the ratings, the ratings contains the (name of) author
+     * The result is a array of Menu_item with ratings(might be null if no one has a rating for this item)
+     * The ratings are from the user's friends ONLY
+     * Access token is automatically obtained
+     */
+    static func getRestaurantMenuWithRating(google_link:String, completion: @escaping (([Menu_item]))->()){
+        let url = "\(String(WeatAPIUrl))/restaurants/detail"
+        let params = [
+            "access_token": "test2", //FBSDKAccessToken.current().tokenString!,
+            "google_link": google_link
+        ]
+        var menu_items = [Menu_item]()
+        Alamofire.request(url, method:.get, parameters:params).validate().responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                // Debug option
+                print(json)
+                for menu_item in json["restaurant"]["menu_items"].arrayValue{
+                    let category = menu_item["category"]
+                    let item = Menu_item()
+                    item.id = menu_item["id"].intValue
+                    item.category = category.stringValue
+                    item.name = menu_item["name"].stringValue
+                    // Will implement rating later
+                    for rating in menu_item["ratings"].arrayValue{
+                        let r = Rating()
+                        r.author = rating["user"]["name"].stringValue
+                        r.food_rating = rating["food_rating"].intValue
+                        r.id = rating["id"].intValue
+                        r.rating_text = rating["rating_text"].stringValue
+                        r.restaurant_id = json["restaurant"]["id"].intValue
+                        r.menu_item_id = json["menu_item_id"].intValue
+                        r.service_rating = nil
+                        item.rating.append(r)
+                    }
+                    menu_items.append(item)
                 }
             case .failure(let error):
                 print(error)
@@ -113,7 +159,7 @@ class Restaurant {
         }
     }
     
-    /*
+    /* TESTED
      * Get rating for a restaurant, this function is for ratings ONLY
      * The result is a array of Rating
      * Parameter: google_link, String

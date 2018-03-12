@@ -39,6 +39,9 @@ class User: Decodable{
     }
     
     // Change user profile
+    /*
+     * Will rewrite to make this function static
+     */
     func updateUserInfo(completion: @escaping (Bool) -> ()){
         let url = "\(String(WeatAPIUrl))/user/profile"
         let headers = [
@@ -67,6 +70,9 @@ class User: Decodable{
         }
     }
     
+    /*
+     * Will rewrite to make this function static
+     */
     //Delete User account from the database   ----- not tested
     func deleteUser(completion: @escaping (Bool) -> ()){
         let url = "\(String(WeatAPIUrl))/user"
@@ -88,6 +94,6 @@ class User: Decodable{
             completion(status)
         }
     }
-    
+
 }
 

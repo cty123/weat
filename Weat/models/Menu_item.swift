@@ -10,6 +10,6 @@ import Foundation
 class Menu_item{
     var name:String?
     var category: String?
-    var rating:Rating?
+    var rating = [Rating]()
     var id: Int?
 }
