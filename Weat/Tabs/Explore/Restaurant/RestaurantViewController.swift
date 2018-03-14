@@ -75,7 +75,7 @@ class RestaurantViewController: UIViewController {
         // use restaurant to fill in details
         if(restaurant != nil) {
             // get ratings
-            Restaurant.getRestaurantRating(google_link: (restaurant?.google_link)!, completion: { (ratings: [Rating]) in
+            Restaurant.getRestaurantRating(google_link: (restaurant?.google_link)!, restaurant_name: (restaurant?.name)!, completion: { (ratings: [Rating]) in
                 self.ratings = ratings
                 // reload tableview
             })
