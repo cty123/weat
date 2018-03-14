@@ -3,13 +3,14 @@ import Alamofire
 import SwiftyJSON
 import FBSDKCoreKit
 
-class User: Decodable{
+class User{
     var id: Int?
     var name: String?
     var email: String?
     var phone: String?
     var location: String?
     var privacy: Int?
+    var favorites = [Restaurant]()
     
     // Get User info
     static func getUserInfo(profile_id:String, completion: @escaping (User) -> ()){
@@ -30,7 +31,12 @@ class User: Decodable{
                 user.id = json["user"]["id"].int
                 user.privacy = json["user"]["privacy"].int
                 user.phone = json["user"]["phone"].string
-                print(user)
+                for favorite in json["favorites"].arrayValue{
+                    let r = Restaurant()
+                    r.google_link = favorite["restaurant"]["google_link"].stringValue
+                    r.name = favorite["restaurant"]["name"].stringValue
+                    user.favorites.append(r)
+                }
             case .failure(let error):
                 print(error)
             }

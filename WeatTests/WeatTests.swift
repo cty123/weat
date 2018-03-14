@@ -30,23 +30,12 @@ class WeatTests: XCTestCase {
         //testDeleteFavorite()
     }
     
-    func testRestaurantMenu(){
-        Restaurant.getRestaurantMenu(google_link: "link"){ menu_items in
-            for menu_item in menu_items{
-                print("{")
-                print("     \(menu_item.id!)")
-                print("     \(menu_item.name!)")
-                print("     \(menu_item.category!)")
-                print("}")
-            }
-        }
-    }
-    
     func testRestaurantRating(){
-        Restaurant.getRestaurantRating(google_link: "link"){ ratings in
-            for rating in ratings{
-                print("{\n\(rating.id!)\n\(rating.food_rating!)\n\(rating.service_rating!)\n\(rating.rating_text!)\n\(rating.time!)\n}")
-            }
+        let r = Restaurant()
+        r.google_link = "link"
+        r.name = "restaurant"
+        r.updateRestaurantRating(){status in
+            if(status){print(r)}
         }
     }
     
@@ -70,15 +59,21 @@ class WeatTests: XCTestCase {
         }
     }
     
-    func testRestaurantMenuWithRatings(){
-        Restaurant.getRestaurantMenuWithRating(google_link: "link"){ menu_items in
-            for menu_item in menu_items{
-                print("{")
-                print("     \(menu_item.id!)")
-                print("     \(menu_item.name!)")
-                print("     \(menu_item.category!)")
-                print("}")
-            }
+    func testRestaurantMenuWithRating(){
+        let r = Restaurant()
+        r.google_link = "link"
+        r.name = "restaurant"
+        r.updateRestaurantMenuWithRating(){status in
+            if(status){print(r)}
+        }
+    }
+    
+    func testUpdateRestaurant(){
+        let r = Restaurant()
+        r.google_link = "link"
+        r.name = "restaurant"
+        r.updateRestaurant(){_ in
+            print(r)
         }
     }
     

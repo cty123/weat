@@ -10,7 +10,6 @@ import Foundation
 class Rating {
     /*
      * This class stores ratings for both menu items and restaurants
-     * No static method in this class
      */
     
     var id: Int?
@@ -23,4 +22,6 @@ class Rating {
     var rating_text: String?
     var menu_item_id: Int?
     var time: Date?
+    
+    
 }
