@@ -21,6 +21,7 @@ class Restaurant {
     var google_link: String?
     var phone: String?
     var open_now: String?
+    var ratings = [Rating]()
     
     static func getRestaurantInfo(google_link: String, completion: @escaping (Restaurant) -> ()){
         let restaurant = Restaurant()
@@ -102,11 +103,12 @@ class Restaurant {
      * Parameter: google_link, String
      * Access token is automatically obtained from local statics
      */
-    static func getRestaurantMenu(google_link: String,completion: @escaping (([Menu_item]))->()){
+    static func getRestaurantMenu(google_link: String, restaurant_name:String, completion: @escaping (([Menu_item]))->()){
         let url = "\(String(WeatAPIUrl))/restaurants/menu"
         let params = [
             "access_token": FBSDKAccessToken.current().tokenString!,
-            "google_link": google_link
+            "google_link": google_link,
+            "restaurant_name": restaurant_name
         ]
         var menu_items = [Menu_item]()
         Alamofire.request(url, method:.get, parameters:params).validate().responseJSON { response in
@@ -140,11 +142,12 @@ class Restaurant {
      * The ratings are from the user's friends ONLY
      * Access token is automatically obtained
      */
-    static func getRestaurantMenuWithRating(google_link:String, completion: @escaping (([Menu_item]))->()){
+    static func getRestaurantMenuWithRating(google_link:String, restaurant_name: String, completion: @escaping (([Menu_item]))->()){
         let url = "\(String(WeatAPIUrl))/restaurants/detail"
         let params = [
             "access_token": "test2", //FBSDKAccessToken.current().tokenString!,
-            "google_link": google_link
+            "google_link": google_link,
+            "restaurant_name": restaurant_name
         ]
         var menu_items = [Menu_item]()
         Alamofire.request(url, method:.get, parameters:params).validate().responseJSON { response in
@@ -186,11 +189,12 @@ class Restaurant {
      * Parameter: google_link, String
      * Access token is automatically obtained from local statics
      */
-    static func getRestaurantRating(google_link: String,completion: @escaping (([Rating]))->()){
+    static func getRestaurantRating(google_link: String, restaurant_name: String,completion: @escaping (([Rating]))->()){
         let url = "\(String(WeatAPIUrl))/restaurants/comments"
         let params = [
             "access_token": FBSDKAccessToken.current().tokenString!,
-            "google_link": google_link
+            "google_link": google_link,
+            "restaurant_name": restaurant_name
         ]
         var ratings = [Rating]()
         Alamofire.request(url, method:.get, parameters:params).validate().responseJSON { response in
@@ -206,6 +210,7 @@ class Restaurant {
                     rating.food_rating = r["food_rating"].intValue
                     rating.service_rating = r["service_rating"].intValue
                     rating.rating_text = r["rating_text"].stringValue
+                    // Format the date string
                     let str = r["createdAt"].stringValue
                     let trimmedIsoString = str.replacingOccurrences(of: "\\.\\d+", with: "", options: .regularExpression)
                     rating.time = ISO8601DateFormatter().date(from: trimmedIsoString)

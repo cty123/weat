@@ -8,6 +8,11 @@
 
 import Foundation
 class Rating {
+    /*
+     * This class stores ratings for both menu items and restaurants
+     * No static method in this class
+     */
+    
     var id: Int?
     // The writer/author of this rating
     var author: String?
