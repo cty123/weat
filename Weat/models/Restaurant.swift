@@ -137,7 +137,7 @@ class Restaurant {
         }
     }
     
-    /* TESTED - DEPRECATED this function might have unknown race condition
+    /* TESTED
      * Get menu for a restaurant along with the ratings, the ratings contains the (name of) author
      * The result is a array of Menu_item with ratings(might be null if no one has a rating for this item)
      * The ratings are from the user's friends ONLY
@@ -146,7 +146,7 @@ class Restaurant {
     func updateRestaurantMenuWithRating(completion: @escaping (Bool)->()){
         let url = "\(String(WeatAPIUrl))/restaurants/menu"
         let params = [
-            "access_token": "test2", //FBSDKAccessToken.current().tokenString!,
+            "access_token": FBSDKAccessToken.current().tokenString!,
             "google_link": self.google_link!,
             "restaurant_name": self.name!
         ]
@@ -190,7 +190,7 @@ class Restaurant {
         }
     }
     
-    /* TESTED - DEPRECATED this function might have unknown race condition
+    /* TESTED
      * Update rating for an existing restaurant object, this function is for ratings ONLY
      * The result is a array of Rating
      * Parameter: google_link, String
@@ -244,7 +244,7 @@ class Restaurant {
     func updateRestaurant(completion: @escaping (Bool)->()){
         let url = "\(String(WeatAPIUrl))/restaurants/detail"
         let params = [
-            "access_token": "test2", //FBSDKAccessToken.current().tokenString!,
+            "access_token": FBSDKAccessToken.current().tokenString!,
             "google_link": self.google_link!,
             "restaurant_name": self.name!
         ]
