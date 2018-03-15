@@ -21,7 +21,11 @@ class Restaurant {
     var google_link: String?
     var phone: String?
     var open_now: String?
-    var ratings = [Rating]()
+    /* Restaurant rating is composed of 2 parts, 1. Comments from friends.
+     * 2. Ratings datas like food_good_all, food_good_friend, from condensed_rating form
+     *
+     */
+    var comments = [Comment]()
     var menu = [Menu_item]()
     
     static func getRestaurantInfo(google_link: String, completion: @escaping (Restaurant) -> ()){
@@ -190,7 +194,7 @@ class Restaurant {
         }
     }
     
-    /* TESTED
+    /* TESTED This function is NOT FINISHED
      * Update rating for an existing restaurant object, this function is for ratings ONLY
      * The result is a array of Rating
      * Parameter: google_link, String
@@ -224,7 +228,7 @@ class Restaurant {
                     // This is null because this is a rating for a restaurant not for a menu item
                     rating.menu_item_id = nil
                     rating.author = r["user"]["name"].stringValue
-                    self.ratings.append(rating)
+                    //self.ratings.append(rating)
                     status = true
                     completion(status)
                 }
@@ -234,8 +238,48 @@ class Restaurant {
             }
         }
     }
-    
     /*
+     * Get comments for the restaurant
+     * The restaurant has an array of comments, (For now) those comments are from friends ONLY
+     * This function returns a boolean variable that indicated the status of this function true = success, false = failed
+     * The updated comments will be stored at restaurant.comments
+     */
+    func updateRestaurantComments(completion:@escaping(Bool)->()){
+        let url = "\(String(WeatAPIUrl))/restaurants/comments"
+        let params = [
+            "access_token": FBSDKAccessToken.current().tokenString!,
+            "google_link": self.google_link!,
+            "restaurant_name": self.name!
+        ]
+        var status = false
+        Alamofire.request(url, method:.get, parameters:params).validate().responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                // Debug option
+                print(json)
+                for r in json["restaurant"]["ratings"].arrayValue{
+                    let comment = Comment()
+                    comment.id = r["id"].intValue
+                    comment.restaurant_id = r["restaurant_id"].intValue
+                    comment.rating = r["food_rating"].intValue
+                    // Format the date string
+                    let str = r["createdAt"].stringValue
+                    let trimmedIsoString = str.replacingOccurrences(of: "\\.\\d+", with: "", options: .regularExpression)
+                    comment.time = ISO8601DateFormatter().date(from: trimmedIsoString)
+                    // This is null because this is a rating for a restaurant not for a menu item
+                    comment.author = r["user"]["name"].stringValue
+                    self.comments.append(comment)
+                    status = true
+                }
+            case .failure(let error):
+                print(error)
+            }
+            completion(status)
+        }
+    }
+    
+    /* This function is NOT FINISHED
     * This function is used to obtain the COMPLETE details of a restaurant, including menu, menu item rating and restaurant ratings
     * This function is a integration of all restaurant functions
     * The first parameter is a google_link string, the second parameter is the name of the restaurant
@@ -298,7 +342,7 @@ class Restaurant {
                     rating.menu_item_id = nil
                     // Null for now will implement later
                     rating.author = r["user"]["name"].stringValue
-                    self.ratings.append(rating)
+                    //self.ratings.append(rating)
                 }
                 status = true
             case .failure(let error):

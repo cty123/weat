@@ -77,6 +77,15 @@ class WeatTests: XCTestCase {
         }
     }
     
+    func testUpdateRestaurantComments(){
+        let r = Restaurant()
+        r.google_link = "link"
+        r.name = "kfc"
+        r.updateRestaurantComments(){_ in
+            print(r.name)
+        }
+    }
+    
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measure {
