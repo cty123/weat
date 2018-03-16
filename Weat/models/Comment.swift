@@ -1,0 +1,20 @@
+//
+//  Comment.swift
+//  Weat
+//
+//  Created by ctydw on 3/14/18.
+//  Copyright © 2018 Weat. All rights reserved.
+//
+
+/*
+ * This class is a datatype to store restaurant comments from friends
+ */
+import Foundation
+class Comment{
+    var id: Int?
+    var restaurant_id: Int? 
+    var comment_text: String?
+    var author: String?
+    var rating: Int?
+    var time: Date?
+}

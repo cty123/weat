@@ -60,26 +60,31 @@ class WeatTests: XCTestCase {
     }
     
     func testRestaurantMenuWithRating(){
+        print("----Testing menu with rating----")
         let r = Restaurant()
-        r.google_link = "link"
-        r.name = "restaurant"
+        r.google_link = "kfc_link"
+        r.name = "kfc"
         r.updateRestaurantMenuWithRating(){status in
-            if(status){print(r)}
+            if(status){
+                //print(r.menu[0].rating[0].author!)
+            }
+            print("----End of menu with rating----")
         }
     }
     
     func testUpdateRestaurant(){
         let r = Restaurant()
-        r.google_link = "link"
-        r.name = "restaurant"
+        r.google_link = "kfc_link"
+        r.name = "kfc"
         r.updateRestaurant(){_ in
+            print("Testing update restaurant")
             print(r)
         }
     }
     
     func testUpdateRestaurantComments(){
         let r = Restaurant()
-        r.google_link = "link"
+        r.google_link = "kfc_link"
         r.name = "kfc"
         r.updateRestaurantComments(){_ in
             print(r.name)

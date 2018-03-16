@@ -102,46 +102,7 @@ class Restaurant {
         }
     }
     
-    /* TESTED - DEPRECATED use "updateRestaurant()" instead
-     * Get menu for a restaurant, this function is for menu ONLY, for menu with friends ratings/comments, use "getRestaurantMenuWithRating()"
-     * The result is a array of Menu_item with "rating" property equals to "nil"
-     * Parameter: google_link, String
-     * Access token is automatically obtained from local statics
-     */
-    static func getRestaurantMenu(google_link: String, restaurant_name:String, completion: @escaping (([Menu_item]))->()){
-        let url = "\(String(WeatAPIUrl))/restaurants/menu"
-        let params = [
-            "access_token": FBSDKAccessToken.current().tokenString!,
-            "google_link": google_link,
-            "restaurant_name": restaurant_name
-        ]
-        var menu_items = [Menu_item]()
-        Alamofire.request(url, method:.get, parameters:params).validate().responseJSON { response in
-            switch response.result {
-            case .success(let value):
-                let json = JSON(value)
-                // Debug option
-                print(json)
-                for menu_item in json["menu_items"].arrayValue{
-                    let category = menu_item["name"]
-                    for i in menu_item["items"].arrayValue{
-                        let item = Menu_item()
-                        item.id = i["id"].intValue
-                        item.category = category.stringValue
-                        item.name = i["name"].stringValue
-                        // Does not do anything with the rating
-                        menu_items.append(item)
-                    }
-                }
-                completion(menu_items)
-            case .failure(let error):
-                print(error)
-                completion(menu_items)
-            }
-        }
-    }
-    
-    /* TESTED
+    /* TESTED Finished
      * Get menu for a restaurant along with the ratings, the ratings contains the (name of) author
      * The result is a array of Menu_item with ratings(might be null if no one has a rating for this item)
      * The ratings are from the user's friends ONLY
@@ -194,7 +155,7 @@ class Restaurant {
         }
     }
     
-    /* TESTED This function is NOT FINISHED
+    /* This function is NOT FINISHED
      * Update rating for an existing restaurant object, this function is for ratings ONLY
      * The result is a array of Rating
      * Parameter: google_link, String
@@ -238,7 +199,8 @@ class Restaurant {
             }
         }
     }
-    /*
+    
+    /* TESTED Finished
      * Get comments for the restaurant
      * The restaurant has an array of comments, (For now) those comments are from friends ONLY
      * This function returns a boolean variable that indicated the status of this function true = success, false = failed
@@ -247,7 +209,7 @@ class Restaurant {
     func updateRestaurantComments(completion:@escaping(Bool)->()){
         let url = "\(String(WeatAPIUrl))/restaurants/comments"
         let params = [
-            "access_token": FBSDKAccessToken.current().tokenString!,
+            "access_token": "testtoken", //FBSDKAccessToken.current().tokenString!,
             "google_link": self.google_link!,
             "restaurant_name": self.name!
         ]
@@ -258,11 +220,12 @@ class Restaurant {
                 let json = JSON(value)
                 // Debug option
                 print(json)
-                for r in json["restaurant"]["ratings"].arrayValue{
+                for r in json["comments"].arrayValue{
                     let comment = Comment()
                     comment.id = r["id"].intValue
                     comment.restaurant_id = r["restaurant_id"].intValue
                     comment.rating = r["food_rating"].intValue
+                    comment.comment_text = r["rating_text"].stringValue
                     // Format the date string
                     let str = r["createdAt"].stringValue
                     let trimmedIsoString = str.replacingOccurrences(of: "\\.\\d+", with: "", options: .regularExpression)
@@ -270,8 +233,8 @@ class Restaurant {
                     // This is null because this is a rating for a restaurant not for a menu item
                     comment.author = r["user"]["name"].stringValue
                     self.comments.append(comment)
-                    status = true
                 }
+                status = true
             case .failure(let error):
                 print(error)
             }
@@ -288,7 +251,7 @@ class Restaurant {
     func updateRestaurant(completion: @escaping (Bool)->()){
         let url = "\(String(WeatAPIUrl))/restaurants/detail"
         let params = [
-            "access_token": FBSDKAccessToken.current().tokenString!,
+            "access_token": "testtoken", //FBSDKAccessToken.current().tokenString!,
             "google_link": self.google_link!,
             "restaurant_name": self.name!
         ]
@@ -299,6 +262,8 @@ class Restaurant {
                 let json = JSON(value)
                 // Debug option
                 print(json)
+                // Status message
+                let status_message:String = json["message"].stringValue
                 self.name = json["restaurant"]["name"].string
                 for menu_item in json["restaurant"]["menu_items"].arrayValue{
                     let category = menu_item["category"]
@@ -327,22 +292,19 @@ class Restaurant {
                     self.menu.append(item)
                 }
                 // Loop through the restaurant ratings
-                for r in json["restaurant"]["ratings"].arrayValue{
-                    let rating = Rating()
-                    rating.id = r["id"].intValue
-                    rating.restaurant_id = r["restaurant_id"].intValue
-                    rating.food_rating = r["food_rating"].intValue
-                    rating.service_rating = r["service_rating"].intValue
-                    rating.rating_text = r["rating_text"].stringValue
+                for r in json["comments"].arrayValue{
+                    let comment = Comment()
+                    comment.id = r["id"].intValue
+                    comment.restaurant_id = r["restaurant_id"].intValue
+                    comment.rating = r["food_rating"].intValue
+                    comment.comment_text = r["rating_text"].stringValue
                     // Format the date string
                     let str = r["createdAt"].stringValue
                     let trimmedIsoString = str.replacingOccurrences(of: "\\.\\d+", with: "", options: .regularExpression)
-                    rating.time = ISO8601DateFormatter().date(from: trimmedIsoString)
+                    comment.time = ISO8601DateFormatter().date(from: trimmedIsoString)
                     // This is null because this is a rating for a restaurant not for a menu item
-                    rating.menu_item_id = nil
-                    // Null for now will implement later
-                    rating.author = r["user"]["name"].stringValue
-                    //self.ratings.append(rating)
+                    comment.author = r["user"]["name"].stringValue
+                    self.comments.append(comment)
                 }
                 status = true
             case .failure(let error):
