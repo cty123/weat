@@ -9,6 +9,11 @@
 import XCTest
 @testable import Weat
 
+/*
+ * This class will be used to test Restaurant class
+ * Tests for other classes will be created in separate classes
+ */
+
 class WeatTests: XCTestCase {
     
     override func setUp() {
@@ -21,15 +26,9 @@ class WeatTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        //testRestaurantMenu()
-        //testRestaurantRating()
-        //testPostFavorite()
-        //testDeleteFavorite()
-    }
-    
+    /*
+     * This function will be implemented to test UpdateRestaurantRating()
+     */
     func testRestaurantRating(){
         let r = Restaurant()
         r.google_link = "link"
@@ -39,6 +38,7 @@ class WeatTests: XCTestCase {
         }
     }
     
+    // This test will be moved to TestFavorite class
     func testPostFavorite(){
         Favorite.addFavoriteRestaurant(google_link: "link"){ status in
             if (status) {
@@ -49,6 +49,7 @@ class WeatTests: XCTestCase {
         }
     }
     
+    // This test will be moved to TestFavorite class
     func testDeleteFavorite(){
         Favorite.deleteFavoriteRestaurant(google_link: "link"){ status in
             if (status) {
@@ -59,6 +60,11 @@ class WeatTests: XCTestCase {
         }
     }
     
+    /*
+     * This function will be implemented to test updateRestaurantMenuWithRating()
+     * When this function is executed, the menu with ratings(comments) will be pulled from the server
+     * and stored inside the menu arraylist
+     */
     func testRestaurantMenuWithRating(){
         print("----Testing menu with rating----")
         let r = Restaurant()
@@ -72,22 +78,43 @@ class WeatTests: XCTestCase {
         }
     }
     
+    /*
+     * This function will be implemented to test updateRestaurant()
+     * When this function is executed, all the infomation about the restaurant will be pulled and stored in self
+     */
     func testUpdateRestaurant(){
         let r = Restaurant()
         r.google_link = "kfc_link"
         r.name = "kfc"
-        r.updateRestaurant(){_ in
-            print("Testing update restaurant")
-            print(r)
+        r.updateRestaurant(){s1 in
+            //print("Testing update restaurant")
+            r.updateRestaurantRating(){s2 in
+                print(r.rating.food_count_all)
+            }
         }
     }
     
+    /*
+     * This function will be implemented to test updateRestaurantComments()
+     */
     func testUpdateRestaurantComments(){
         let r = Restaurant()
         r.google_link = "kfc_link"
         r.name = "kfc"
         r.updateRestaurantComments(){_ in
             print(r.name)
+        }
+    }
+    
+    /*
+     * This function will be implemented to test updateRestaurantRating()
+     */
+    func testUpdateRestaurantRating(){
+        let r = Restaurant()
+        r.google_link = "kfc_link"
+        r.name = "kfc"
+        r.updateRestaurantRating(){_ in
+            print(r.rating.food_bad_friends)
         }
     }
     

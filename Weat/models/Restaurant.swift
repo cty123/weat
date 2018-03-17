@@ -21,6 +21,13 @@ class Restaurant {
     var google_link: String?
     var phone: String?
     var open_now: String?
+    
+    //Rating is initialized to be 0
+    var rating = (food_good_all: 0, food_bad_all:0, food_count_all: 0,
+                  service_good_all: 0, service_bad_all:0, service_count_all: 0,
+                  food_good_friends: 0, food_bad_friends:0, food_count_friends: 0,
+                  service_good_friends: 0, service_bad_friends:0, service_count_friends: 0)
+    
     /* Restaurant rating is composed of 2 parts, 1. Comments from friends.
      * 2. Ratings datas like food_good_all, food_good_friend, from condensed_rating form
      *
@@ -162,7 +169,7 @@ class Restaurant {
      * Access token is automatically obtained from local statics
      */
     func updateRestaurantRating(completion: @escaping (Bool)->()){
-        let url = "\(String(WeatAPIUrl))/restaurants/comments"
+        let url = "\(String(WeatAPIUrl))/rating"
         let params = [
             "access_token": FBSDKAccessToken.current().tokenString!,
             "google_link": self.google_link!,
@@ -175,28 +182,25 @@ class Restaurant {
                 let json = JSON(value)
                 // Debug option
                 print(json)
-                for r in json["restaurant"]["ratings"].arrayValue{
-                    let rating = Rating()
-                    rating.id = r["id"].intValue
-                    rating.restaurant_id = r["restaurant_id"].intValue
-                    rating.food_rating = r["food_rating"].intValue
-                    rating.service_rating = r["service_rating"].intValue
-                    rating.rating_text = r["rating_text"].stringValue
-                    // Format the date string
-                    let str = r["createdAt"].stringValue
-                    let trimmedIsoString = str.replacingOccurrences(of: "\\.\\d+", with: "", options: .regularExpression)
-                    rating.time = ISO8601DateFormatter().date(from: trimmedIsoString)
-                    // This is null because this is a rating for a restaurant not for a menu item
-                    rating.menu_item_id = nil
-                    rating.author = r["user"]["name"].stringValue
-                    //self.ratings.append(rating)
-                    status = true
-                    completion(status)
-                }
+                // Start to parse json
+                self.rating.food_good_all = json["data"]["food_good_all"].intValue
+                self.rating.food_bad_all = json["data"]["food_bad_all"].intValue
+                self.rating.food_count_all = json["data"]["food_count_all"].intValue
+                self.rating.service_good_all = json["data"]["service_good_all"].intValue
+                self.rating.service_bad_all = json["data"]["service_bad_all"].intValue
+                self.rating.service_count_all = json["data"]["service_count_all"].intValue
+                self.rating.food_good_friends = json["data"]["food_good_friends"].intValue
+                self.rating.food_bad_friends = json["data"]["food_bad_friends"].intValue
+                self.rating.food_count_friends = json["data"]["food_count_friends"].intValue
+                self.rating.service_good_friends = json["data"]["service_good_friends"].intValue
+                self.rating.service_bad_friends = json["data"]["service_bad_friends"].intValue
+                self.rating.service_count_friends = json["data"]["service_count_friends"].intValue
+                // Set up status
+                status = true
             case .failure(let error):
                 print(error)
-                completion(status)
             }
+            completion(status)
         }
     }
     
@@ -242,9 +246,9 @@ class Restaurant {
         }
     }
     
-    /* This function is NOT FINISHED
+    /* Tested
     * This function is used to obtain the COMPLETE details of a restaurant, including menu, menu item rating and restaurant ratings
-    * This function is a integration of all restaurant functions
+    * This function is a integration of all restaurant functions EXCEPT FOR pull condensed rating, you need to call updateRating separately
     * The first parameter is a google_link string, the second parameter is the name of the restaurant
     * The returned value is an array of restaurants
     */
@@ -262,8 +266,9 @@ class Restaurant {
                 let json = JSON(value)
                 // Debug option
                 print(json)
-                // Status message
+                // Status message -- Will add a status module that determines if the request has succeeded
                 let status_message:String = json["message"].stringValue
+                // Start parsing json --- updating menu
                 self.name = json["restaurant"]["name"].string
                 for menu_item in json["restaurant"]["menu_items"].arrayValue{
                     let category = menu_item["category"]
@@ -291,7 +296,7 @@ class Restaurant {
                     }
                     self.menu.append(item)
                 }
-                // Loop through the restaurant ratings
+                // Loop through the restaurant ratings --- Updating ratings
                 for r in json["comments"].arrayValue{
                     let comment = Comment()
                     comment.id = r["id"].intValue
@@ -306,6 +311,7 @@ class Restaurant {
                     comment.author = r["user"]["name"].stringValue
                     self.comments.append(comment)
                 }
+                // Set status
                 status = true
             case .failure(let error):
                 print(error)
