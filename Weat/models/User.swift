@@ -24,7 +24,6 @@ class User{
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
-                print(json)
                 user.name = json["user"]["name"].string
                 user.location = json["user"]["location"].string
                 user.email = json["user"]["email"].string

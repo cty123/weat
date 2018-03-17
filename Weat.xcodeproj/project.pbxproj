@@ -57,6 +57,7 @@
 		E0192DD92054C3F0005C5DDF /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0192DD82054C3F0005C5DDF /* Rating.swift */; };
 		E0192DDB2054C4BB005C5DDF /* Menu_item.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0192DDA2054C4BB005C5DDF /* Menu_item.swift */; };
 		E02143A0205A0E63005BA160 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = E021439F205A0E63005BA160 /* Comment.swift */; };
+		E054FE16205D9B63000D0BD0 /* UserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E054FE15205D9B63000D0BD0 /* UserTest.swift */; };
 		E07690F92056194000C43765 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07690F82056194000C43765 /* Favorite.swift */; };
 		E0BD5DC2203BA9EB00602FD2 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0BD5DC1203BA9EB00602FD2 /* Friend.swift */; };
 		E0E572AC2033CB3B00E7822B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E572AB2033CB3A00E7822B /* AppDelegate.swift */; };
@@ -133,6 +134,7 @@
 		E0192DD82054C3F0005C5DDF /* Rating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
 		E0192DDA2054C4BB005C5DDF /* Menu_item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu_item.swift; sourceTree = "<group>"; };
 		E021439F205A0E63005BA160 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		E054FE15205D9B63000D0BD0 /* UserTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTest.swift; sourceTree = "<group>"; };
 		E07690F82056194000C43765 /* Favorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
 		E0BD5DC1203BA9EB00602FD2 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		E0E572A82033CB3A00E7822B /* Weat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -361,6 +363,7 @@
 			children = (
 				E0E572C02033CB3B00E7822B /* WeatTests.swift */,
 				E0E572C22033CB3B00E7822B /* Info.plist */,
+				E054FE15205D9B63000D0BD0 /* UserTest.swift */,
 			);
 			path = WeatTests;
 			sourceTree = "<group>";
@@ -668,6 +671,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E054FE16205D9B63000D0BD0 /* UserTest.swift in Sources */,
 				E0E572C12033CB3B00E7822B /* WeatTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

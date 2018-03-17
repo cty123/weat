@@ -26,6 +26,7 @@ class WeatTests: XCTestCase {
         super.tearDown()
     }
     
+    
     /*
      * This function will be implemented to test UpdateRestaurantRating()
      */
@@ -83,15 +84,6 @@ class WeatTests: XCTestCase {
      * When this function is executed, all the infomation about the restaurant will be pulled and stored in self
      */
     func testUpdateRestaurant(){
-        let r = Restaurant()
-        r.google_link = "kfc_link"
-        r.name = "kfc"
-        r.updateRestaurant(){s1 in
-            //print("Testing update restaurant")
-            r.updateRestaurantRating(){s2 in
-                print(r.rating.food_count_all)
-            }
-        }
     }
     
     /*
