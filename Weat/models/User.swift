@@ -11,6 +11,7 @@ class User{
     var location: String?
     var privacy: Int?
     var favorites = [Restaurant]()
+    var recommendations = [Recommendation]()
     
     // Get User info
     static func getUserInfo(profile_id:String, completion: @escaping (User) -> ()){
@@ -30,11 +31,28 @@ class User{
                 user.id = json["user"]["id"].int
                 user.privacy = json["user"]["privacy"].int
                 user.phone = json["user"]["phone"].string
+                // Get favorite
                 for favorite in json["favorites"].arrayValue{
                     let r = Restaurant()
                     r.google_link = favorite["restaurant"]["google_link"].stringValue
                     r.name = favorite["restaurant"]["name"].stringValue
                     user.favorites.append(r)
+                }
+                
+                // Get recommendation
+                for r in json["recommendations"].arrayValue{
+                    let recommendation = Recommendation()
+                    recommendation.friend_id = r["friend"]["id"].intValue
+                    recommendation.friend_name = r["friend"]["name"].stringValue
+                    recommendation.restaurant_id = r["restaurant_id"].intValue
+                    recommendation.restaurant_name = r["restaurant"]["name"].stringValue
+                    recommendation.recommended_menu_item_id = r["menu_item"]["id"].intValue
+                    recommendation.recommended_menu_item_name = r["menu_item"]["name"].stringValue
+                    // Format the date string
+                    let str = r["createdAt"].stringValue
+                    let trimmedIsoString = str.replacingOccurrences(of: "\\.\\d+", with: "", options: .regularExpression)
+                    recommendation.time = ISO8601DateFormatter().date(from: trimmedIsoString)
+                    user.recommendations.append(recommendation)
                 }
             case .failure(let error):
                 print(error)

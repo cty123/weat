@@ -63,6 +63,7 @@
 		E02143A0205A0E63005BA160 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = E021439F205A0E63005BA160 /* Comment.swift */; };
 		E054FE16205D9B63000D0BD0 /* UserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E054FE15205D9B63000D0BD0 /* UserTest.swift */; };
 		E06D9A95205EE3EA00D77FDC /* FriendTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06D9A94205EE3EA00D77FDC /* FriendTest.swift */; };
+		E06D9A9B205F1C5600D77FDC /* Recommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06D9A9A205F1C5600D77FDC /* Recommendation.swift */; };
 		E07690F92056194000C43765 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07690F82056194000C43765 /* Favorite.swift */; };
 		E0BD5DC2203BA9EB00602FD2 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0BD5DC1203BA9EB00602FD2 /* Friend.swift */; };
 		E0E572AC2033CB3B00E7822B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E572AB2033CB3A00E7822B /* AppDelegate.swift */; };
@@ -145,6 +146,7 @@
 		E021439F205A0E63005BA160 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		E054FE15205D9B63000D0BD0 /* UserTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTest.swift; sourceTree = "<group>"; };
 		E06D9A94205EE3EA00D77FDC /* FriendTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTest.swift; sourceTree = "<group>"; };
+		E06D9A9A205F1C5600D77FDC /* Recommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recommendation.swift; sourceTree = "<group>"; };
 		E07690F82056194000C43765 /* Favorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
 		E0BD5DC1203BA9EB00602FD2 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		E0E572A82033CB3A00E7822B /* Weat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -395,6 +397,7 @@
 				E0192DDA2054C4BB005C5DDF /* Menu_item.swift */,
 				E07690F82056194000C43765 /* Favorite.swift */,
 				E021439F205A0E63005BA160 /* Comment.swift */,
+				E06D9A9A205F1C5600D77FDC /* Recommendation.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -664,6 +667,7 @@
 				A85E99382040252500A95558 /* FacebookFriendsViewController.swift in Sources */,
 				E0E572CC2033CBF100E7822B /* LoadController.swift in Sources */,
 				A8C2ADF320583F3E009255DC /* RecommendToFriendsViewController.swift in Sources */,
+				E06D9A9B205F1C5600D77FDC /* Recommendation.swift in Sources */,
 				14503F5720375362007165CF /* FeedElement.swift in Sources */,
 				E02143A0205A0E63005BA160 /* Comment.swift in Sources */,
 				E0E572D12033CD8E00E7822B /* User.swift in Sources */,
