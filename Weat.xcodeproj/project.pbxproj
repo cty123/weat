@@ -54,6 +54,10 @@
 		A85E993D2040501400A95558 /* EditProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A85E993B2040501400A95558 /* EditProfileViewController.xib */; };
 		A8AE7FCA203F9D5B007C9506 /* FriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8AE7FC8203F9D5B007C9506 /* FriendViewController.swift */; };
 		A8AE7FCB203F9D5B007C9506 /* FriendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8AE7FC9203F9D5B007C9506 /* FriendViewController.xib */; };
+		A8C2ADEF20582F9A009255DC /* PostRatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C2ADED20582F9A009255DC /* PostRatingViewController.swift */; };
+		A8C2ADF020582F9A009255DC /* PostRatingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8C2ADEE20582F9A009255DC /* PostRatingViewController.xib */; };
+		A8C2ADF320583F3E009255DC /* RecommendToFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C2ADF120583F3E009255DC /* RecommendToFriendsViewController.swift */; };
+		A8C2ADF420583F3E009255DC /* RecommendToFriendsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8C2ADF220583F3E009255DC /* RecommendToFriendsViewController.xib */; };
 		E0192DD92054C3F0005C5DDF /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0192DD82054C3F0005C5DDF /* Rating.swift */; };
 		E0192DDB2054C4BB005C5DDF /* Menu_item.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0192DDA2054C4BB005C5DDF /* Menu_item.swift */; };
 		E07690F92056194000C43765 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07690F82056194000C43765 /* Favorite.swift */; };
@@ -129,6 +133,10 @@
 		A85E993B2040501400A95558 /* EditProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditProfileViewController.xib; sourceTree = "<group>"; };
 		A8AE7FC8203F9D5B007C9506 /* FriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendViewController.swift; sourceTree = "<group>"; };
 		A8AE7FC9203F9D5B007C9506 /* FriendViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendViewController.xib; sourceTree = "<group>"; };
+		A8C2ADED20582F9A009255DC /* PostRatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PostRatingViewController.swift; path = Weat/PostRatingViewController.swift; sourceTree = SOURCE_ROOT; };
+		A8C2ADEE20582F9A009255DC /* PostRatingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = PostRatingViewController.xib; path = Weat/PostRatingViewController.xib; sourceTree = SOURCE_ROOT; };
+		A8C2ADF120583F3E009255DC /* RecommendToFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendToFriendsViewController.swift; sourceTree = "<group>"; };
+		A8C2ADF220583F3E009255DC /* RecommendToFriendsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecommendToFriendsViewController.xib; sourceTree = "<group>"; };
 		DADA406A0D7663C50B998E12 /* Pods-WeatTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WeatTests/Pods-WeatTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E0192DD82054C3F0005C5DDF /* Rating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
 		E0192DDA2054C4BB005C5DDF /* Menu_item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu_item.swift; sourceTree = "<group>"; };
@@ -344,9 +352,13 @@
 				148BE60F2056D9FB0065FC28 /* Shared */,
 				E0E572B42033CB3B00E7822B /* LaunchScreen.storyboard */,
 				E0E572AB2033CB3A00E7822B /* AppDelegate.swift */,
+				E0E572CB2033CBF100E7822B /* LoadController.swift */,
 				E0E572AD2033CB3B00E7822B /* LoginController.swift */,
 				E0E572AF2033CB3B00E7822B /* Main.storyboard */,
-				E0E572CB2033CBF100E7822B /* LoadController.swift */,
+				A8C2ADED20582F9A009255DC /* PostRatingViewController.swift */,
+				A8C2ADEE20582F9A009255DC /* PostRatingViewController.xib */,
+				A8C2ADF120583F3E009255DC /* RecommendToFriendsViewController.swift */,
+				A8C2ADF220583F3E009255DC /* RecommendToFriendsViewController.xib */,
 				E0E572B22033CB3B00E7822B /* Assets.xcassets */,
 				E0E572B72033CB3B00E7822B /* Info.plist */,
 				E0E572CD2033CCEC00E7822B /* models */,
@@ -471,6 +483,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A8AE7FCB203F9D5B007C9506 /* FriendViewController.xib in Resources */,
+				A8C2ADF020582F9A009255DC /* PostRatingViewController.xib in Resources */,
 				A85E9935204008EA00A95558 /* FriendRequestsViewController.xib in Resources */,
 				14179564203D2CC300611D6F /* Checkin.storyboard in Resources */,
 				A85E99392040252500A95558 /* FacebookFriendsViewController.xib in Resources */,
@@ -489,6 +502,7 @@
 				84EE681A203A3F9800A11D41 /* Profile.storyboard in Resources */,
 				148BE60E2056D9C40065FC28 /* MenuViewController.xib in Resources */,
 				84EE6833203A41FC00A11D41 /* RestaurantTableViewCell.xib in Resources */,
+				A8C2ADF420583F3E009255DC /* RecommendToFriendsViewController.xib in Resources */,
 				E0E572B12033CB3B00E7822B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -644,6 +658,7 @@
 				14FA4ECD203DFD8700B20E09 /* TemporaryRestaurant.swift in Sources */,
 				A85E99382040252500A95558 /* FacebookFriendsViewController.swift in Sources */,
 				E0E572CC2033CBF100E7822B /* LoadController.swift in Sources */,
+				A8C2ADF320583F3E009255DC /* RecommendToFriendsViewController.swift in Sources */,
 				14503F5720375362007165CF /* FeedElement.swift in Sources */,
 				E0E572D12033CD8E00E7822B /* User.swift in Sources */,
 				14179574203D3DD600611D6F /* MapViewController.swift in Sources */,
@@ -653,6 +668,7 @@
 				A85E992C2040063800A95558 /* FriendRequestTableViewCell.swift in Sources */,
 				1417955D203D2B2F00611D6F /* ExploreViewController.swift in Sources */,
 				14179568203D2DDE00611D6F /* GroupsViewController.swift in Sources */,
+				A8C2ADEF20582F9A009255DC /* PostRatingViewController.swift in Sources */,
 				84EE682E203A41CC00A11D41 /* FriendTableViewCell.swift in Sources */,
 				148BE6122056DA300065FC28 /* RecommendViewController.swift in Sources */,
 				1463088F203F9BBC00241DE3 /* Restaurant.swift in Sources */,
