@@ -50,12 +50,43 @@ class RestaurantViewController: UIViewController {
     
     @IBAction func recommendButtonPress(_ sender: Any) {
         // go to recommend to friend view
-        let recommendViewController = RecommendViewController(nibName: "RecommendViewController", bundle: nil)
-        self.present(recommendViewController, animated: true, completion: nil)
+        let vc = RecommendToFriendsViewController(nibName: "RecommendToFriendsViewController", bundle: nil)
+        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func favoriteButtonPress(_ sender: Any) {
-        // save restaurant as favorite and do something on front end
+        Favorite.addFavoriteRestaurant(google_link: (self.restaurant?.google_link)!){ status in
+            
+            // delare strings TODO: figure out error messages
+            var title: String
+            var message: String
+            
+            if (status) {
+                // show message
+                title = "Success"
+                message = "Added \(String(describing: self.restaurant!.name!)) as a favorite!"
+            
+            }else{
+                // TODO: change this message bc it's not yser friend
+                title = "An error occured"
+                message = "Unable to add \(String(describing: self.restaurant!.name!)) as a favorite"
+            }
+            
+            // present message
+            let alert = UIAlertController(title: title,
+                                          message: message,
+                                          preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "Done",
+                                          style: .default,
+                                          handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            
+        }
+        
+        
+        
+        
     }
     
     @IBAction func menuButtonPress(_ sender: Any) {

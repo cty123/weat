@@ -83,8 +83,12 @@ class EditProfileViewController: UIViewController {
         user.privacy = 0
         user.updateUserInfo() { status in
             if status {
+                
+
                 print ("success")
             } else {
+                
+
                 print ("faiure")
             }
         }

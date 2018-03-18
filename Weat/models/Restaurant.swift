@@ -213,7 +213,7 @@ class Restaurant {
     func updateRestaurantComments(completion:@escaping(Bool)->()){
         let url = "\(String(WeatAPIUrl))/restaurants/comments"
         let params = [
-            "access_token": "testtoken", //FBSDKAccessToken.current().tokenString!,
+            "access_token": FBSDKAccessToken.current().tokenString!,
             "google_link": self.google_link!,
             "restaurant_name": self.name!
         ]
@@ -255,7 +255,7 @@ class Restaurant {
     func updateRestaurant(completion: @escaping (Bool)->()){
         let url = "\(String(WeatAPIUrl))/restaurants/detail"
         let params = [
-            "access_token": "testtoken", //FBSDKAccessToken.current().tokenString!,
+            "access_token": FBSDKAccessToken.current().tokenString!,
             "google_link": self.google_link!,
             "restaurant_name": self.name!
         ]

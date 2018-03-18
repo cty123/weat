@@ -56,6 +56,8 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
         FBSDKGraphRequest(graphPath: self.facebookLink, parameters: ["fields": "name, location, picture.type(large)"]).start(completionHandler: { (connection, result, error) -> Void in
             if (error == nil){
                 
+                
+
                 print(result as Any)
                 
                 // get json
@@ -76,6 +78,8 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 
                 
             } else {
+                
+
                 print(error as Any)
             }
         })
@@ -100,13 +104,19 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
         switch self.segmentedControl.selectedSegmentIndex {
         case 0:
             // feed, TODO: set page size
+            
+
             print("FEED")
         case 1:
             // friends, TODO: user.friends.size
+            
+
             print("FRIENDS")
             return self.friends.count
         case 2:
             // favorites, TODO: user.favorites.size
+            
+
             print("FAVORITES")
         default:
             // should never happend
