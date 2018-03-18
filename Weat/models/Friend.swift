@@ -17,6 +17,7 @@ class Friend {
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
+                let message = json["message"]
                 for friend in json["friends"].arrayValue{
                     let tmpUser = User()
                     tmpUser.id = friend["joinFriend"]["id"].intValue
@@ -49,8 +50,8 @@ class Friend {
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
+                let message = json["message"]
                 status = true
-                print(json)
             case .failure(let error):
                 print(error)
             }
@@ -69,7 +70,6 @@ class Friend {
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
-                print(json)
                 for friend in json["pending_friends"].arrayValue{
                     let tmpUser = User()
                     tmpUser.id = friend["joinUser"]["id"].intValue
@@ -105,8 +105,8 @@ class Friend {
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
+                let message = json["message"]
                 status = true
-                print(json)
             case .failure(let error):
                 print(error)
             }
@@ -158,8 +158,8 @@ class Friend {
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
+                let message = json["message"]
                 status = true
-                print(json)
             case .failure(let error):
                 print(error)
             }

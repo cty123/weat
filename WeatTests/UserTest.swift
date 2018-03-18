@@ -78,11 +78,11 @@ class UserTest: XCTestCase {
         testGroup.enter()
         var flag = false
         User.getUserInfo(profile_id: UserDefaults.standard.string(forKey: "id")!){ user in
-            user.name = "Testing"
+            user.email = "test@test.com"
             user.updateUserInfo(){status in
                 if status{
                     User.getUserInfo(profile_id: UserDefaults.standard.string(forKey: "id")!){ u in
-                        assert(u.name == "Testing")
+                        assert(u.email == "test@test.com")
                         flag = true
                         testGroup.leave()
                     }
@@ -94,4 +94,6 @@ class UserTest: XCTestCase {
             print("----- End of testGetUserInfo1 -----")
         }
     }
+    
+    
 }
