@@ -9,6 +9,11 @@
 import XCTest
 @testable import Weat
 
+/*
+ * This class will be used to test Restaurant class
+ * Tests for other classes will be created in separate classes
+ */
+
 class WeatTests: XCTestCase {
     
     override func setUp() {
@@ -21,35 +26,20 @@ class WeatTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        //testRestaurantMenu()
-        //testRestaurantRating()
-        //testPostFavorite()
-        //testDeleteFavorite()
-    }
     
-    func testRestaurantMenu(){
-        Restaurant.getRestaurantMenu(google_link: "link"){ menu_items in
-            for menu_item in menu_items{
-                print("{")
-                print("     \(menu_item.id!)")
-                print("     \(menu_item.name!)")
-                print("     \(menu_item.category!)")
-                print("}")
-            }
-        }
-    }
-    
+    /*
+     * This function will be implemented to test UpdateRestaurantRating()
+     */
     func testRestaurantRating(){
-        Restaurant.getRestaurantRating(google_link: "link"){ ratings in
-            for rating in ratings{
-                print("{\n\(rating.id!)\n\(rating.food_rating!)\n\(rating.service_rating!)\n\(rating.rating_text!)\n\(rating.time!)\n}")
-            }
+        let r = Restaurant()
+        r.google_link = "link"
+        r.name = "restaurant"
+        r.updateRestaurantRating(){status in
+            if(status){print(r)}
         }
     }
     
+    // This test will be moved to TestFavorite class
     func testPostFavorite(){
         Favorite.addFavoriteRestaurant(google_link: "link"){ status in
             if (status) {
@@ -60,6 +50,7 @@ class WeatTests: XCTestCase {
         }
     }
     
+    // This test will be moved to TestFavorite class
     func testDeleteFavorite(){
         Favorite.deleteFavoriteRestaurant(google_link: "link"){ status in
             if (status) {
@@ -70,15 +61,52 @@ class WeatTests: XCTestCase {
         }
     }
     
-    func testRestaurantMenuWithRatings(){
-        Restaurant.getRestaurantMenuWithRating(google_link: "link"){ menu_items in
-            for menu_item in menu_items{
-                print("{")
-                print("     \(menu_item.id!)")
-                print("     \(menu_item.name!)")
-                print("     \(menu_item.category!)")
-                print("}")
+    /*
+     * This function will be implemented to test updateRestaurantMenuWithRating()
+     * When this function is executed, the menu with ratings(comments) will be pulled from the server
+     * and stored inside the menu arraylist
+     */
+    func testRestaurantMenuWithRating(){
+        print("----Testing menu with rating----")
+        let r = Restaurant()
+        r.google_link = "kfc_link"
+        r.name = "kfc"
+        r.updateRestaurantMenuWithRating(){status in
+            if(status){
+                //print(r.menu[0].rating[0].author!)
             }
+            print("----End of menu with rating----")
+        }
+    }
+    
+    /*
+     * This function will be implemented to test updateRestaurant()
+     * When this function is executed, all the infomation about the restaurant will be pulled and stored in self
+     */
+    func testUpdateRestaurant(){
+    }
+    
+    /*
+     * This function will be implemented to test updateRestaurantComments()
+     */
+    func testUpdateRestaurantComments(){
+        let r = Restaurant()
+        r.google_link = "kfc_link"
+        r.name = "kfc"
+        r.updateRestaurantComments(){_ in
+            print(r.name)
+        }
+    }
+    
+    /*
+     * This function will be implemented to test updateRestaurantRating()
+     */
+    func testUpdateRestaurantRating(){
+        let r = Restaurant()
+        r.google_link = "kfc_link"
+        r.name = "kfc"
+        r.updateRestaurantRating(){_ in
+            print(r.rating.food_bad_friends)
         }
     }
     
@@ -88,5 +116,4 @@ class WeatTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
-    
 }

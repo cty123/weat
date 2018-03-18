@@ -60,7 +60,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Load in friend feed
         Feed.getFeed(feed_type: "/friends", completion: {
             (feed: Feed?) in
