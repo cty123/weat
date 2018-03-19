@@ -114,13 +114,22 @@ class Friend {
         }
     }
     
-    // Search friend
+    /*
+    * Search for a user or users for a given criteria
+    * The page and limit can be set to nil when you want to use the default value
+    */
     static func searchFriend(search_criteria:String, page: Int?, limit: Int?, completion:@escaping(([User]))->()){
         let url = "\(String(WeatAPIUrl))/user/friends/search"
-        let params = [
+        var params = [
             "access_token": FBSDKAccessToken.current().tokenString!,
             "search_criteria": search_criteria,
         ]
+        if page != nil {
+            params["page"] = String(describing: page)
+        }
+        if limit != nil {
+            params["limit"] = String(describing: limit)
+        }
         var users = [User]()
         Alamofire.request(url, method:.get, parameters:params).validate().responseJSON { response in
             switch response.result {
@@ -143,7 +152,10 @@ class Friend {
         }
     }
     
-    // Add facebook friend          ---- not tested
+    /*
+     *  Add facebook friends who are also the user of Weat
+     *  facebook_link can contain multiple facebook links separated by ','
+     */
     static func addFacebookFriends(facebook_links:String, completion:@escaping (Bool)->()){
         let url = "\(String(WeatAPIUrl))/user/friends/search"
         let headers = [

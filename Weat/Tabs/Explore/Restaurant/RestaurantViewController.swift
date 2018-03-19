@@ -75,7 +75,7 @@ class RestaurantViewController: UIViewController {
         // use restaurant to fill in details
         if(restaurant != nil) {
             // get ratings
-            restaurant?.updateRestaurant(){status in
+            restaurant?.getRestaurant(){status in
                 
             }
             
