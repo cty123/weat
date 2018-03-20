@@ -38,33 +38,53 @@ class UserTest: XCTestCase {
         let testGroup = DispatchGroup()
         testGroup.enter()
             var flag = false
-            User.getUserInfo(profile_id: "1"){user in
-                print("----- Start of testGetUserInfo1 -----")
-                testUser1 = user
-                let id = testUser1.id
-                let name = testUser1.name
-                let email = testUser1.email
-                let phone = testUser1.phone
-                let location = testUser1.location
-                let privacy = testUser1.privacy
-                XCTAssertTrue(id == 1)
-                XCTAssertTrue(name == "testUser")
-                XCTAssertTrue(email == "test@test.com")
-                XCTAssertTrue(phone == "1234567899")
-                XCTAssertTrue(location == "Purdue")
-                XCTAssertTrue(privacy == 0)
-                print(id!)
-                print(name!)
-                print(email!)
-                print(phone!)
-                print(location!)
-                print(privacy!)
-                flag = true
+            User.getUserInfo(profile_id: "1"){result in
+                switch result {
+                    case .success(let user):
+                        print("----- Start of testGetUserInfo1 -----")
+                        testUser1 = user
+                        let id = testUser1.id
+                        let name = testUser1.name
+                        let email = testUser1.email
+                        let phone = testUser1.phone
+                        let location = testUser1.location
+                        let privacy = testUser1.privacy
+                        XCTAssertTrue(id == 1)
+                        XCTAssertTrue(name == "testUser")
+                        XCTAssertTrue(email == "test@test.com")
+                        XCTAssertTrue(phone == "1234567899")
+                        XCTAssertTrue(location == "Purdue")
+                        XCTAssertTrue(privacy == 0)
+                        print(id!)
+                        print(name!)
+                        print(email!)
+                        print(phone!)
+                        print(location!)
+                        print(privacy!)
+                        flag = true
+                    case .failure(_):
+                        XCTAssertTrue(false)
+                }
                 testGroup.leave()
             }
         testGroup.notify(queue: .main){
             XCTAssertTrue(flag)
             print("----- End of testGetUserInfo1 -----")
+        }
+    }
+    
+    /*
+    * This function will pass no credential to the server, if successful, the returned user will contain all nil infomation
+    * This one is supposed to enter .failure
+    */
+    func testGetUserInfo2(){
+        User.getUserInfo(profile_id: "21312"){result in
+            switch result {
+            case .success(_):
+                XCTAssertTrue(false)
+            case .failure(_):
+                XCTAssertTrue(true)
+            }
         }
     }
     
@@ -77,16 +97,26 @@ class UserTest: XCTestCase {
         let testGroup = DispatchGroup()
         testGroup.enter()
         var flag = false
-        User.getUserInfo(profile_id: UserDefaults.standard.string(forKey: "id")!){ user in
-            user.email = "test@test.com"
-            user.updateUserInfo(){status in
-                if status{
-                    User.getUserInfo(profile_id: UserDefaults.standard.string(forKey: "id")!){ u in
-                        assert(u.email == "test@test.com")
-                        flag = true
-                        testGroup.leave()
+        User.getUserInfo(profile_id: UserDefaults.standard.string(forKey: "id")!){ result in
+            switch result{
+            case .success(let user):
+                user.email = "test@test.com"
+                user.updateUserInfo(){status in
+                    if status{
+                        User.getUserInfo(profile_id: UserDefaults.standard.string(forKey: "id")!){ result in
+                            switch result{
+                            case .success(let u):
+                                assert(u.email == "test@test.com")
+                                flag = true
+                                testGroup.leave()
+                            case .failure(_):
+                                XCTAssertTrue(false)
+                            }
+                        }
                     }
                 }
+            case .failure(_):
+                XCTAssertTrue(false)
             }
         }
         testGroup.notify(queue: .main){

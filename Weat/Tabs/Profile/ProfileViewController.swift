@@ -58,12 +58,19 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         super.viewWillAppear(animated)
         
         // Set profile text
-        let user = User()
         let id = UserDefaults.standard.string(forKey: "id")
         
-        User.getUserInfo(profile_id: id!){user in
-            self.labelName.text = user.name
-            self.labelLocation.text = user.location
+        User.getUserInfo(profile_id: id!){result in
+            switch result {
+                case .success(let user):
+                    self.labelName.text = user.name
+                    self.labelLocation.text = user.location
+                case .failure(let error):
+                    print(error)
+                    /*
+                        * Handle error here
+                        */
+            }
         }
         
         
@@ -74,19 +81,26 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         restaurantOrangeDot.image = UIImage(named: "OrangeDot") // Only really do this when we have a notification
         
         // Get friend requests
-        Friend.pullFriendRequest(completion: {
-            (requests: [User]) in
-            self.friendRequestCountLabel.text = "\(requests.count)"
-            
-            // Set global friend requests variable
-            profileVars.friendRequests = requests
-            
-            if(requests.count > 0) {
-                self.friendOrangeDot.image = UIImage(named: "OrangeDot")
-            } else {
-                self.friendOrangeDot.image = nil
+        Friend.pullFriendRequest(){ result in
+            switch result{
+            case .success(let requests):
+                self.friendRequestCountLabel.text = "\(requests.count)"
+                
+                // Set global friend requests variable
+                profileVars.friendRequests = requests
+                
+                if(requests.count > 0) {
+                    self.friendOrangeDot.image = UIImage(named: "OrangeDot")
+                } else {
+                    self.friendOrangeDot.image = nil
+                }
+            case .failure(let error):
+                print(error)
+                /*
+                    * Handle error here
+                    */
             }
-        })
+        }
     }
     
     override func viewDidLoad() {
@@ -94,17 +108,14 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         
         // get friends
         let id = String(describing: UserDefaults.standard.integer(forKey: "id"))
-        Friend.getFriends(profile_id: id, completion: {
-            (users: [User]?) in
-            
-            // TODO: fix this
-            if (users != nil) {
-                self.friends = users!
-            } else {
+        Friend.getFriends(profile_id: id){ result in
+            switch result {
+            case .success(let users):
+                self.friends = users
+            case .failure(_):
                 print("error getting friends")
             }
-            
-        })
+        }
         
         
         

@@ -26,14 +26,21 @@ class EditProfileViewController: UIViewController {
         super.viewDidLoad()
         
         // populate fields
-        let user = User()
         let id = UserDefaults.standard.string(forKey: "id")
 
-        User.getUserInfo(profile_id: id!){user in
-            self.textFieldName.text = user.name
-            self.textFieldEmail.text = user.email
-            self.textFieldPhone.text = user.phone
-            self.textFieldLocation.text = user.location
+        User.getUserInfo(profile_id: id!){result in
+            switch result {
+                case .success(let user):
+                    self.textFieldName.text = user.name
+                    self.textFieldEmail.text = user.email
+                    self.textFieldPhone.text = user.phone
+                    self.textFieldLocation.text = user.location
+                case .failure(let error):
+                    /*
+                        * Handle error here
+                        */
+                    print(error)
+            }
         }
         
         /*

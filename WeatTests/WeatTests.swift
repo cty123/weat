@@ -34,7 +34,7 @@ class WeatTests: XCTestCase {
         let r = Restaurant()
         r.google_link = "link"
         r.name = "restaurant"
-        r.updateRestaurantRating(){status in
+        r.getRestaurantRating(){status in
             if(status){print(r)}
         }
     }
@@ -71,7 +71,7 @@ class WeatTests: XCTestCase {
         let r = Restaurant()
         r.google_link = "kfc_link"
         r.name = "kfc"
-        r.updateRestaurantMenuWithRating(){status in
+        r.getRestaurantMenuWithRating(){status in
             if(status){
                 //print(r.menu[0].rating[0].author!)
             }
@@ -93,7 +93,7 @@ class WeatTests: XCTestCase {
         let r = Restaurant()
         r.google_link = "kfc_link"
         r.name = "kfc"
-        r.updateRestaurantComments(){_ in
+        r.getRestaurantComments(){_ in
             print(r.name)
         }
     }
@@ -105,7 +105,7 @@ class WeatTests: XCTestCase {
         let r = Restaurant()
         r.google_link = "kfc_link"
         r.name = "kfc"
-        r.updateRestaurantRating(){_ in
+        r.getRestaurantRating(){_ in
             print(r.rating.food_bad_friends)
         }
     }
