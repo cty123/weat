@@ -41,7 +41,7 @@ class WeatTests: XCTestCase {
     
     // This test will be moved to TestFavorite class
     func testPostFavorite(){
-        Favorite.addFavoriteRestaurant(google_link: "link"){ status in
+        Favorite.addFavoriteRestaurant(google_link: "link", restaurant_name: "restaurant") { (status) in
             if (status) {
                 print("success")
             }else{

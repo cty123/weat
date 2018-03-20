@@ -20,6 +20,7 @@ class RestaurantViewController: UIViewController {
     @IBOutlet weak var tagsLabel: UILabel!
     @IBOutlet weak var headerImage: UIImageView!
     @IBOutlet weak var navigationBar: UINavigationBar!
+    @IBOutlet weak var favoriteLabel: UILabel!
     
     @IBOutlet weak var recommendButton: UIButton!
     @IBOutlet weak var favoriteButton: UIButton!
@@ -55,7 +56,27 @@ class RestaurantViewController: UIViewController {
     }
     
     @IBAction func favoriteButtonPress(_ sender: Any) {
-        // save restaurant as favorite and do something on front end
+        if((restaurant?.is_favorite)!) {
+            Favorite.deleteFavoriteRestaurant(google_link: (restaurant?.google_link)!){ status in
+                if (status) {
+                    self.favoriteLabel.text = "Favorite"
+                    self.restaurant?.is_favorite = false
+                    // TODO: remove star from top left corner
+                } else{
+                    print("RestaurantViewController: delete favorite failed (Weat error 1)")
+                }
+            }
+        }  else {
+            Favorite.addFavoriteRestaurant(google_link: (restaurant?.google_link)!, restaurant_name: (restaurant?.name)!){ status in
+                if (status) {
+                    self.favoriteLabel.text = "Remove Favorite"
+                    self.restaurant?.is_favorite = true
+                    // TODO: add star to top left corner
+                } else{
+                    print("RestaurantViewController: delete favorite failed (Weat error 2)")
+                }
+            }
+        }
     }
     
     @IBAction func menuButtonPress(_ sender: Any) {
@@ -87,6 +108,11 @@ class RestaurantViewController: UIViewController {
             headerImage.image = restaurant?.image
             hoursLabel.text = restaurant?.open_now
             
+            if((restaurant?.is_favorite)!) {
+                favoriteLabel.text = "Remove Favorite"
+            } else {
+                favoriteLabel.text = "Favorite"
+            }
             
             // Weat things
             // service rating
@@ -96,15 +122,15 @@ class RestaurantViewController: UIViewController {
             // tags text
             
         }
+        //self.favoriteButton.addFullWidthBottomBorderWithColor(color: UIColor.lightGray, width: 0.4)
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
         self.recommendButton.addFullWidthBottomBorderWithColor(color: UIColor.lightGray, width: 0.4)
         self.recordVisitButton.addFullWidthBottomBorderWithColor(color: UIColor.lightGray, width: 0.4)
         self.recommendButton.addRightBorderWithColor(color: UIColor.lightGray, width: 0.4)
         self.favoriteButton.addRightBorderWithColor(color: UIColor.lightGray, width: 0.4)
-        //self.favoriteButton.addFullWidthBottomBorderWithColor(color: UIColor.lightGray, width: 0.4)
-    }
-    override func viewDidLoad() {
-        super.viewDidLoad()
     }
 
     override func didReceiveMemoryWarning() {

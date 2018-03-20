@@ -36,6 +36,7 @@ class Restaurant {
     var comments = [Comment]()
     var menu = [Menu_item]()
     
+    /* Get google restaurant info */
     static func getRestaurantInfo(google_link: String, completion: @escaping (Restaurant) -> ()){
         let restaurant = Restaurant()
         restaurant.google_link = google_link
@@ -214,7 +215,7 @@ class Restaurant {
     func getRestaurantComments(completion:@escaping(Bool)->()){
         let url = "\(String(WeatAPIUrl))/restaurants/comments"
         let params = [
-            "access_token": "testtoken", //FBSDKAccessToken.current().tokenString!,
+            "access_token": FBSDKAccessToken.current().tokenString!,
             "google_link": self.google_link!,
             "restaurant_name": self.name!
         ]
@@ -256,7 +257,7 @@ class Restaurant {
     func getRestaurant(completion: @escaping (Bool)->()){
         let url = "\(String(WeatAPIUrl))/restaurants/detail"
         let params = [
-            "access_token": "testtoken", //FBSDKAccessToken.current().tokenString!,
+            "access_token": FBSDKAccessToken.current().tokenString!,
             "google_link": self.google_link!,
             "restaurant_name": self.name!
         ]
@@ -266,11 +267,13 @@ class Restaurant {
             case .success(let value):
                 let json = JSON(value)
                 // Debug option
+                print("getRestaurant json:")
                 print(json)
                 // Status message -- Will add a status module that determines if the request has succeeded
                 let status_message:String = json["message"].stringValue
                 // Start parsing json --- updating menu
                 self.name = json["restaurant"]["name"].string
+                self.is_favorite = json["favorite"].bool
                 for menu_item in json["restaurant"]["menu_items"].arrayValue{
                     let category = menu_item["category"]
                     let item = Menu_item()
