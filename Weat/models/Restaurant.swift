@@ -251,8 +251,6 @@ class Restaurant {
     /* Tested
     * This function is used to obtain the COMPLETE details of a restaurant, including menu, menu item rating and restaurant ratings
     * This function is a integration of all restaurant functions EXCEPT FOR pull condensed rating, you need to call updateRating separately
-    * The first parameter is a google_link string, the second parameter is the name of the restaurant
-    * The returned value is an array of restaurants
     */
     func getRestaurant(completion: @escaping (Bool)->()){
         let url = "\(String(WeatAPIUrl))/restaurants/detail"
@@ -275,10 +273,9 @@ class Restaurant {
                 self.name = json["restaurant"]["name"].string
                 self.is_favorite = json["favorite"].bool
                 for menu_item in json["restaurant"]["menu_items"].arrayValue{
-                    let category = menu_item["category"]
                     let item = Menu_item()
                     item.id = menu_item["id"].intValue
-                    item.category = category.stringValue
+                    item.category = menu_item["category"].stringValue
                     item.name = menu_item["name"].stringValue
                     // Loop through ratings for menu items to fill the menu for the restaurant
                     for rating in menu_item["ratings"].arrayValue{

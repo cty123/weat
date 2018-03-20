@@ -82,6 +82,7 @@ class RestaurantViewController: UIViewController {
     @IBAction func menuButtonPress(_ sender: Any) {
         // go to menu view
         let menuViewController = MenuViewController(nibName: "MenuViewController", bundle: nil)
+        menuViewController.menu = restaurant?.menu
         self.present(menuViewController, animated: true, completion: nil)
     }
     
@@ -95,11 +96,6 @@ class RestaurantViewController: UIViewController {
         
         // use restaurant to fill in details
         if(restaurant != nil) {
-            // get ratings
-            restaurant?.getRestaurant(){status in
-                
-            }
-            
             // Google things
             // TODO: error check
             restaurantNameLabel.text = restaurant?.name
