@@ -83,7 +83,13 @@ class WeatTests: XCTestCase {
      * This function will be implemented to test updateRestaurant()
      * When this function is executed, all the infomation about the restaurant will be pulled and stored in self
      */
-    func testUpdateRestaurant(){
+    func testGetRestaurant(){
+        let r = Restaurant()
+        r.google_link = "kfc_link"
+        r.name = "kfc"
+        r.getRestaurant(){status in
+           print(r)
+        }
     }
     
     /*

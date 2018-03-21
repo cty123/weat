@@ -75,7 +75,7 @@ class Friend {
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
-                let message = json[]
+                let message = json["message"]
                 if message == "OK" {
                     for friend in json["pending_friends"].arrayValue{
                         let tmpUser = User()
