@@ -27,16 +27,17 @@ class FacebookFriendsViewController: UIViewController, UITableViewDataSource, UI
         self.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(action))
         
         // get requests
-        Friend.pullFriendRequest(completion: {
-            (users: [User]?) in
-            
-            // TODO: fix this
-            if (users != nil) {
-                self.facebookFriends = users!
-            } else {
+        Friend.pullFriendRequest(){ result in
+            switch result {
+            case .success(let users):
+                self.facebookFriends = users
+            case .failure(_):
                 print("error getting friend requests")
+                /*
+                    * Handle error here
+                    */
             }
-        })
+        }
         
         self.tableView.dataSource = self
         self.tableView.delegate = self

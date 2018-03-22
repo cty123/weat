@@ -20,6 +20,7 @@ class RestaurantViewController: UIViewController {
     @IBOutlet weak var tagsLabel: UILabel!
     @IBOutlet weak var headerImage: UIImageView!
     @IBOutlet weak var navigationBar: UINavigationBar!
+    @IBOutlet weak var favoriteLabel: UILabel!
     
     @IBOutlet weak var recommendButton: UIButton!
     @IBOutlet weak var favoriteButton: UIButton!
@@ -92,6 +93,7 @@ class RestaurantViewController: UIViewController {
     @IBAction func menuButtonPress(_ sender: Any) {
         // go to menu view
         let menuViewController = MenuViewController(nibName: "MenuViewController", bundle: nil)
+        menuViewController.menu = restaurant?.menu
         self.present(menuViewController, animated: true, completion: nil)
     }
     
@@ -105,11 +107,6 @@ class RestaurantViewController: UIViewController {
         
         // use restaurant to fill in details
         if(restaurant != nil) {
-            // get ratings
-            restaurant?.updateRestaurant(){status in
-                
-            }
-            
             // Google things
             // TODO: error check
             restaurantNameLabel.text = restaurant?.name
@@ -118,6 +115,11 @@ class RestaurantViewController: UIViewController {
             headerImage.image = restaurant?.image
             hoursLabel.text = restaurant?.open_now
             
+            if((restaurant?.is_favorite)!) {
+                favoriteLabel.text = "Remove Favorite"
+            } else {
+                favoriteLabel.text = "Favorite"
+            }
             
             // Weat things
             // service rating
@@ -127,15 +129,15 @@ class RestaurantViewController: UIViewController {
             // tags text
             
         }
+        //self.favoriteButton.addFullWidthBottomBorderWithColor(color: UIColor.lightGray, width: 0.4)
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
         self.recommendButton.addFullWidthBottomBorderWithColor(color: UIColor.lightGray, width: 0.4)
         self.recordVisitButton.addFullWidthBottomBorderWithColor(color: UIColor.lightGray, width: 0.4)
         self.recommendButton.addRightBorderWithColor(color: UIColor.lightGray, width: 0.4)
         self.favoriteButton.addRightBorderWithColor(color: UIColor.lightGray, width: 0.4)
-        //self.favoriteButton.addFullWidthBottomBorderWithColor(color: UIColor.lightGray, width: 0.4)
-    }
-    override func viewDidLoad() {
-        super.viewDidLoad()
     }
 
     override func didReceiveMemoryWarning() {

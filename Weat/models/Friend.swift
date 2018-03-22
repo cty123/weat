@@ -6,7 +6,7 @@ import FBSDKCoreKit
 class Friend {
 
     //Get friends of this user
-    static func getFriends(profile_id:String, completion: @escaping (([User])) -> ()){
+    static func getFriends(profile_id:String, completion: @escaping (Result<([User])>) -> ()){
         let url = "\(String(WeatAPIUrl))/user/friends"
         let params = [
             "access_token": FBSDKAccessToken.current().tokenString!,
@@ -18,20 +18,26 @@ class Friend {
             case .success(let value):
                 let json = JSON(value)
                 let message = json["message"]
-                for friend in json["friends"].arrayValue{
-                    let tmpUser = User()
-                    tmpUser.id = friend["joinFriend"]["id"].intValue
-                    tmpUser.name = friend["joinFriend"]["name"].stringValue
-                    tmpUser.email = friend["joinFriend"]["email"].stringValue
-                    tmpUser.phone = friend["joinFriend"]["phone"].stringValue
-                    tmpUser.location = friend["joinFriend"]["location"].stringValue
-                    tmpUser.privacy = friend["joinFriend"]["privacy"].intValue
-                    users.append(tmpUser)
+                // Check if the request is successful
+                if message == "OK" {
+                    for friend in json["friends"].arrayValue{
+                        let tmpUser = User()
+                        tmpUser.id = friend["joinFriend"]["id"].intValue
+                        tmpUser.name = friend["joinFriend"]["name"].stringValue
+                        tmpUser.email = friend["joinFriend"]["email"].stringValue
+                        tmpUser.phone = friend["joinFriend"]["phone"].stringValue
+                        tmpUser.location = friend["joinFriend"]["location"].stringValue
+                        tmpUser.privacy = friend["joinFriend"]["privacy"].intValue
+                        users.append(tmpUser)
+                    }
+                    completion(.success(users))
+                }else{
+                    completion(.failure(AFError.invalidURL(url: url)))
                 }
             case .failure(let error):
                 print(error)
+                completion(.failure(error))
             }
-            completion(users)
         }
     }
     
@@ -45,22 +51,21 @@ class Friend {
             "access_token": FBSDKAccessToken.current().tokenString!,
             "friend_id": friend_id
         ]
-        var status = false
         Alamofire.request(url, method:.post, parameters: params, encoding:URLEncoding.httpBody, headers: headers).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
                 let message = json["message"]
-                status = true
+                completion(message == "Friend request sent")
             case .failure(let error):
                 print(error)
+                completion(false)
             }
-            completion(status)
         }
     }
     
     // pull friend request
-    static func pullFriendRequest(completion:@escaping(([User]))->()){
+    static func pullFriendRequest(completion:@escaping(Result<([User])>)->()){
         let url = "\(String(WeatAPIUrl))/user/friends/pending"
         let params = [
             "access_token": FBSDKAccessToken.current().tokenString!
@@ -70,20 +75,26 @@ class Friend {
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
-                for friend in json["pending_friends"].arrayValue{
-                    let tmpUser = User()
-                    tmpUser.id = friend["joinUser"]["id"].intValue
-                    tmpUser.name = friend["joinUser"]["name"].stringValue
-                    tmpUser.email = friend["joinUser"]["email"].stringValue
-                    tmpUser.phone = friend["joinUser"]["phone"].stringValue
-                    tmpUser.location = friend["joinUser"]["location"].stringValue
-                    tmpUser.privacy = friend["joinUser"]["privacy"].intValue
-                    users.append(tmpUser)
+                let message = json["message"]
+                if message == "OK" {
+                    for friend in json["pending_friends"].arrayValue{
+                        let tmpUser = User()
+                        tmpUser.id = friend["joinUser"]["id"].intValue
+                        tmpUser.name = friend["joinUser"]["name"].stringValue
+                        tmpUser.email = friend["joinUser"]["email"].stringValue
+                        tmpUser.phone = friend["joinUser"]["phone"].stringValue
+                        tmpUser.location = friend["joinUser"]["location"].stringValue
+                        tmpUser.privacy = friend["joinUser"]["privacy"].intValue
+                        users.append(tmpUser)
+                    }
+                    completion(.success(users))
+                }else {
+                    completion(.failure(AFError.invalidURL(url: url)))
                 }
             case .failure(let error):
                 print(error)
+                completion(.failure(error))
             }
-            completion(users)
         }
     }
     /**
@@ -114,13 +125,22 @@ class Friend {
         }
     }
     
-    // Search friend
+    /*
+    * Search for a user or users for a given criteria
+    * The page and limit can be set to nil when you want to use the default value
+    */
     static func searchFriend(search_criteria:String, page: Int?, limit: Int?, completion:@escaping(([User]))->()){
         let url = "\(String(WeatAPIUrl))/user/friends/search"
-        let params = [
+        var params = [
             "access_token": FBSDKAccessToken.current().tokenString!,
             "search_criteria": search_criteria,
         ]
+        if page != nil {
+            params["page"] = String(describing: page)
+        }
+        if limit != nil {
+            params["limit"] = String(describing: limit)
+        }
         var users = [User]()
         Alamofire.request(url, method:.get, parameters:params).validate().responseJSON { response in
             switch response.result {
@@ -143,7 +163,10 @@ class Friend {
         }
     }
     
-    // Add facebook friend          ---- not tested
+    /*
+     *  Add facebook friends who are also the user of Weat
+     *  facebook_link can contain multiple facebook links separated by ','
+     */
     static func addFacebookFriends(facebook_links:String, completion:@escaping (Bool)->()){
         let url = "\(String(WeatAPIUrl))/user/friends/search"
         let headers = [

@@ -21,6 +21,7 @@ class Restaurant {
     var google_link: String?
     var phone: String?
     var open_now: String?
+    var is_favorite: Bool?
     
     //Rating is initialized to be 0
     var rating = (food_good_all: 0, food_bad_all:0, food_count_all: 0,
@@ -35,6 +36,7 @@ class Restaurant {
     var comments = [Comment]()
     var menu = [Menu_item]()
     
+    /* Get google restaurant info */
     static func getRestaurantInfo(google_link: String, completion: @escaping (Restaurant) -> ()){
         let restaurant = Restaurant()
         restaurant.google_link = google_link
@@ -115,7 +117,7 @@ class Restaurant {
      * The ratings are from the user's friends ONLY
      * Access token is automatically obtained
      */
-    func updateRestaurantMenuWithRating(completion: @escaping (Bool)->()){
+    func getRestaurantMenuWithRating(completion: @escaping (Bool)->()){
         let url = "\(String(WeatAPIUrl))/restaurants/menu"
         let params = [
             "access_token": FBSDKAccessToken.current().tokenString!,
@@ -162,13 +164,13 @@ class Restaurant {
         }
     }
     
-    /* This function is NOT FINISHED
-     * Update rating for an existing restaurant object, this function is for ratings ONLY
+    /*
+     * Pull rating for an existing restaurant object, this function is for ratings ONLY
      * The result is a array of Rating
      * Parameter: google_link, String
      * Access token is automatically obtained from local statics
      */
-    func updateRestaurantRating(completion: @escaping (Bool)->()){
+    func getRestaurantRating(completion: @escaping (Bool)->()){
         let url = "\(String(WeatAPIUrl))/rating"
         let params = [
             "access_token": FBSDKAccessToken.current().tokenString!,
@@ -210,7 +212,7 @@ class Restaurant {
      * This function returns a boolean variable that indicated the status of this function true = success, false = failed
      * The updated comments will be stored at restaurant.comments
      */
-    func updateRestaurantComments(completion:@escaping(Bool)->()){
+    func getRestaurantComments(completion:@escaping(Bool)->()){
         let url = "\(String(WeatAPIUrl))/restaurants/comments"
         let params = [
             "access_token": FBSDKAccessToken.current().tokenString!,
@@ -249,10 +251,8 @@ class Restaurant {
     /* Tested
     * This function is used to obtain the COMPLETE details of a restaurant, including menu, menu item rating and restaurant ratings
     * This function is a integration of all restaurant functions EXCEPT FOR pull condensed rating, you need to call updateRating separately
-    * The first parameter is a google_link string, the second parameter is the name of the restaurant
-    * The returned value is an array of restaurants
     */
-    func updateRestaurant(completion: @escaping (Bool)->()){
+    func getRestaurant(completion: @escaping (Bool)->()){
         let url = "\(String(WeatAPIUrl))/restaurants/detail"
         let params = [
             "access_token": FBSDKAccessToken.current().tokenString!,
@@ -265,16 +265,17 @@ class Restaurant {
             case .success(let value):
                 let json = JSON(value)
                 // Debug option
+                print("getRestaurant json:")
                 print(json)
                 // Status message -- Will add a status module that determines if the request has succeeded
                 let status_message:String = json["message"].stringValue
                 // Start parsing json --- updating menu
                 self.name = json["restaurant"]["name"].string
+                self.is_favorite = json["favorite"].bool
                 for menu_item in json["restaurant"]["menu_items"].arrayValue{
-                    let category = menu_item["category"]
                     let item = Menu_item()
                     item.id = menu_item["id"].intValue
-                    item.category = category.stringValue
+                    item.category = menu_item["category"].stringValue
                     item.name = menu_item["name"].stringValue
                     // Loop through ratings for menu items to fill the menu for the restaurant
                     for rating in menu_item["ratings"].arrayValue{
@@ -311,6 +312,7 @@ class Restaurant {
                     comment.author = r["user"]["name"].stringValue
                     self.comments.append(comment)
                 }
+                // Check if the restaurant is the user's favorite
                 // Set status
                 status = true
             case .failure(let error):

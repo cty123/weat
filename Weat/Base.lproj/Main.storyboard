@@ -56,15 +56,28 @@
                                     <action selector="loginToFacebook:" destination="UES-Zn-mJ5" eventType="touchUpInside" id="96n-5l-B4n"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xwv-i1-L0w" userLabel="Error">
+                                <rect key="frame" x="40" y="69" width="240" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Fdo-g0-FWN"/>
+                                    <constraint firstAttribute="width" constant="240" id="bFE-LB-LTV"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Z2h-WD-BIR" firstAttribute="centerY" secondItem="GJt-9A-GML" secondAttribute="centerY" id="F05-qK-bQ9"/>
                             <constraint firstItem="Z2h-WD-BIR" firstAttribute="centerX" secondItem="GJt-9A-GML" secondAttribute="centerX" id="eXC-6Q-xG1"/>
+                            <constraint firstItem="xwv-i1-L0w" firstAttribute="centerX" secondItem="GJt-9A-GML" secondAttribute="centerX" id="fZg-Oy-em1"/>
+                            <constraint firstItem="xwv-i1-L0w" firstAttribute="top" secondItem="GJt-9A-GML" secondAttribute="top" constant="49" id="vXw-5e-Frn"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="GJt-9A-GML"/>
                     </view>
                     <connections>
+                        <outlet property="errorlabel" destination="xwv-i1-L0w" id="Vi0-Cy-pas"/>
                         <outlet property="loginbtn" destination="Z2h-WD-BIR" id="JoX-Vv-gN8"/>
                         <segue destination="vVZ-Rz-GoO" kind="show" identifier="finishLogin" id="rf3-X4-aDO"/>
                     </connections>

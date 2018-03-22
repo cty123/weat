@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RestaurantViewController" customModule="Weat" customModuleProvider="target">
             <connections>
                 <outlet property="favoriteButton" destination="KRe-M8-bK5" id="tAd-7t-Qk1"/>
+                <outlet property="favoriteLabel" destination="G21-o8-ekg" id="2uQ-ut-Y1W"/>
                 <outlet property="foodRatingLabel" destination="LyN-SK-sdz" id="Me8-GO-tHA"/>
                 <outlet property="headerImage" destination="fZP-ZP-FCD" id="UNS-dJ-a8V"/>
                 <outlet property="hoursLabel" destination="C4g-0F-AHJ" id="729-RG-dL6"/>

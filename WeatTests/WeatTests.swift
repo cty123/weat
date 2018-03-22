@@ -34,14 +34,14 @@ class WeatTests: XCTestCase {
         let r = Restaurant()
         r.google_link = "link"
         r.name = "restaurant"
-        r.updateRestaurantRating(){status in
+        r.getRestaurantRating(){status in
             if(status){print(r)}
         }
     }
     
     // This test will be moved to TestFavorite class
     func testPostFavorite(){
-        Favorite.addFavoriteRestaurant(google_link: "link"){ status in
+        Favorite.addFavoriteRestaurant(google_link: "link", restaurant_name: "restaurant") { (status) in
             if (status) {
                 print("success")
             }else{
@@ -71,7 +71,7 @@ class WeatTests: XCTestCase {
         let r = Restaurant()
         r.google_link = "kfc_link"
         r.name = "kfc"
-        r.updateRestaurantMenuWithRating(){status in
+        r.getRestaurantMenuWithRating(){status in
             if(status){
                 //print(r.menu[0].rating[0].author!)
             }
@@ -83,7 +83,13 @@ class WeatTests: XCTestCase {
      * This function will be implemented to test updateRestaurant()
      * When this function is executed, all the infomation about the restaurant will be pulled and stored in self
      */
-    func testUpdateRestaurant(){
+    func testGetRestaurant(){
+        let r = Restaurant()
+        r.google_link = "kfc_link"
+        r.name = "kfc"
+        r.getRestaurant(){status in
+           print(r)
+        }
     }
     
     /*
@@ -93,7 +99,7 @@ class WeatTests: XCTestCase {
         let r = Restaurant()
         r.google_link = "kfc_link"
         r.name = "kfc"
-        r.updateRestaurantComments(){_ in
+        r.getRestaurantComments(){_ in
             print(r.name)
         }
     }
@@ -105,7 +111,7 @@ class WeatTests: XCTestCase {
         let r = Restaurant()
         r.google_link = "kfc_link"
         r.name = "kfc"
-        r.updateRestaurantRating(){_ in
+        r.getRestaurantRating(){_ in
             print(r.rating.food_bad_friends)
         }
     }

@@ -17,14 +17,16 @@ class FriendTest: XCTestCase {
      * Initialize settings, make sure that the database contains the following records
      * Make sure you have the following record in your database !!! Otherwise this test WILL NOT work
      * In "users" table, make sure you have
-     * id    name        email           phone       location    facebook_link   token       privacy     deleted     createdAt    updatedAt
-     *  x    testUser   test@test.com    1234567899  Purdue      test_link       test_token    0           0         dont care     dont care
-     *  x    test2   test2@test2.com    1234567899  Purdue   test2_link      test2_token   0           0         dont care     dont care
-     *  x    test3   test3@test3.com    1234567899  Purdue   test3_link      test3_token   0           0         dont care     dont care
+     * id    name        email           phone       location          facebook_link    token       privacy     deleted     createdAt    updatedAt
+     *  1    test1   test1@test1.com      test1      test1_location   test1_link       test1_token    0           0         dont care     dont care
+     *  2    test2   test2@test2.com      test2      test2_location   test2_link       test2_token    1           0         dont care     dont care
+     *  3    YOUR ACCOUNT
+     *  4    test3   test3@test3.com      test3      test3_location   test3_link       test3_token    0           0         dont care     dont care
      * In "relationship" table, make sure you have
      * id   friendId    createdAt   updatedAt   accepted    userId
-     *  x   2               x           x       1           FBSDK token id
-     *  x   FBSDK token id  x           x       1           2
+     *  x   1               x           x       1           FBSDK token id
+     *  x   FBSDK token id  x           x       1           1
+     *  x   FBSDK token id  x           x       0           4
      */
     override func setUp() {
         super.setUp()
@@ -40,68 +42,62 @@ class FriendTest: XCTestCase {
     * Test getting the friend of the user
     */
     func testGetFriends(){
-        let testGroup = DispatchGroup()
-        var flag = false
-        testGroup.enter()
-        Friend.getFriends(profile_id: UserDefaults.standard.string(forKey: "id")!){ friends in
-            XCTAssertTrue(friends[0].name == "test2")
-            flag = true
-            testGroup.leave()
+        let exp = expectation(description: "testGetFriends")
+        Friend.getFriends(profile_id: UserDefaults.standard.string(forKey: "id")!){ result in
+            switch result{
+            case .success(let friends):
+                if (friends[0].name == "test1"){
+                    XCTAssert(true)
+                }else{
+                    XCTAssert(false)
+                }
+                exp.fulfill()
+            case .failure(_):
+                XCTAssert(false)
+            }
         }
-        testGroup.notify(queue: .main){
-            XCTAssertTrue(flag)
-        }
+        wait(for: [exp], timeout: 10.0)
     }
     
     /*
     * Test if a user can send friend request to others
     */
     func testSendFriendRequest(){
-        let testGroup = DispatchGroup()
-        var flag = false
-        testGroup.enter()
-        Friend.sendFriendRequest(friend_id: "1"){status in
-            XCTAssertTrue(status)
-            flag = true
-            testGroup.leave()
+        let exp = expectation(description: "testSendFriendRequest")
+        Friend.sendFriendRequest(friend_id: "2"){status in
+            XCTAssert(status)
+            exp.fulfill()
         }
-        testGroup.notify(queue: .main){
-            XCTAssertTrue(flag)
-        }
+        wait(for: [exp], timeout: 10.0)
     }
     
     /*
     * Test if the user can pull friend requests from others
     */
     func testPullFriendRequest(){
-        let testGroup = DispatchGroup()
-        var flag = false
-        testGroup.enter()
-        Friend.pullFriendRequest(){requests in
-            XCTAssertTrue(requests[0].name == "test3")
-            flag = true
-            testGroup.leave()
+        let exp = expectation(description: "testPullFriendRequest")
+        Friend.pullFriendRequest(){result in
+            switch result{
+            case .success(let requests):
+                XCTAssert(requests[0].name == "test2")
+            case .failure(_):
+                XCTAssert(false)
+            }
+            exp.fulfill()
         }
-        testGroup.notify(queue: .main){
-            XCTAssertTrue(flag)
-        }
+        wait(for: [exp], timeout: 10.0)
     }
     
     /*
     * Test if the user can accept a friend request
     */
     func testSetFriendRequests(){
-        let testGroup = DispatchGroup()
-        var flag = false
-        testGroup.enter()
+        let exp = expectation(description: "testSetFriendRequests")
         Friend.setFriendRequest(friend_id: 4, acceptance: 1){ status in
-            XCTAssertTrue(status)
-            flag = true
-            testGroup.leave()
+            XCTAssert(status)
+            exp.fulfill()
         }
-        testGroup.notify(queue: .main){
-            XCTAssertTrue(flag)
-        }
+        wait(for: [exp], timeout: 10.0)
     }
     
     /*
@@ -111,13 +107,13 @@ class FriendTest: XCTestCase {
         let testGroup = DispatchGroup()
         var flag = false
         testGroup.enter()
-        Friend.searchFriend(search_criteria: "testUser", page: nil, limit: nil){ users in
-            XCTAssertTrue(users[0].name == "testUser")
+        Friend.searchFriend(search_criteria: "test1", page: 10, limit: 20){ users in
+            XCTAssert(users[0].name == "test1")
             flag = true
             testGroup.leave()
         }
         testGroup.notify(queue: .main){
-            XCTAssertTrue(flag)
+            XCTAssert(flag)
         }
     }
     

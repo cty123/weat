@@ -159,9 +159,15 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         // get restaurant details at index path clicked
         let cell = tableView.cellForRow(at: indexPath) as! RestaurantTableViewCell
         let restaurantViewController = RestaurantViewController(nibName: "RestaurantViewController", bundle: nil)
-        restaurantViewController.restaurant = cell.restaurant
-        restaurantViewController.back_string = "List"
-        self.present(restaurantViewController, animated: true, completion: nil)
+        cell.restaurant.getRestaurant { status in
+            if(!status) {
+                print("getRestaurant error in listViewController")
+            } else {
+                restaurantViewController.restaurant = cell.restaurant
+                restaurantViewController.back_string = "List"
+                self.present(restaurantViewController, animated: true, completion: nil)
+            }
+        }
     }
 }
 

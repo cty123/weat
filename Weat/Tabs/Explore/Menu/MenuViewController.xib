@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MenuViewController" customModule="Weat" customModuleProvider="target">
             <connections>
+                <outlet property="tableView" destination="R3p-QB-4uE" id="eGu-Ho-LDD"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -32,14 +33,23 @@
                         </navigationItem>
                     </items>
                 </navigationBar>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="R3p-QB-4uE">
+                    <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </tableView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="R3p-QB-4uE" firstAttribute="leading" secondItem="WEO-jC-tib" secondAttribute="leading" id="9LE-3N-2FW"/>
+                <constraint firstItem="R3p-QB-4uE" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="Adq-Es-0cE"/>
                 <constraint firstItem="WEO-jC-tib" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Gx8-8W-sjl"/>
+                <constraint firstItem="R3p-QB-4uE" firstAttribute="top" secondItem="WEO-jC-tib" secondAttribute="bottom" id="KCg-cI-mkQ"/>
                 <constraint firstItem="WEO-jC-tib" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="UOL-aw-BWy"/>
+                <constraint firstItem="R3p-QB-4uE" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="k5l-hr-k5E"/>
                 <constraint firstAttribute="trailing" secondItem="WEO-jC-tib" secondAttribute="trailing" id="t2T-ma-Byj"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="34.5" y="54.5"/>
         </view>
     </objects>
 </document>
