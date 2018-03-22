@@ -40,9 +40,10 @@ class FriendTest: XCTestCase {
     
     /*
     * Test getting the friend of the user
+    * This test should succeed and return a list of friends of the user
     */
-    func testGetFriends(){
-        let exp = expectation(description: "testGetFriends")
+    func testGetFriends1(){
+        let exp = expectation(description: "testGetFriends1")
         Friend.getFriends(profile_id: UserDefaults.standard.string(forKey: "id")!){ result in
             switch result{
             case .success(let friends):
@@ -55,6 +56,44 @@ class FriendTest: XCTestCase {
             case .failure(_):
                 XCTAssert(false)
             }
+        }
+        wait(for: [exp], timeout: 10.0)
+    }
+    
+    /*
+    * Test getting the friend of the user
+    * This test should fail because the user is trying to pull some one else's friends
+     * Result: getFirends call return false, the test cases shou be true
+    */
+    func testGetFriends2(){
+        let exp = expectation(description: "testGetFriends2")
+        Friend.getFriends(profile_id: "1"){ result in
+            switch result{
+            case .success(_):
+                XCTAssert(false)
+            case .failure(_):
+                XCTAssert(true)
+            }
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 10.0)
+    }
+    
+    /*
+     * Test getting the friend of the user
+     * This test should fail because the user is trying pull non existing user's friends
+     * Result: getFirends call return false, the test cases shou be true
+     */
+    func testGetFriends3(){
+        let exp = expectation(description: "testGetFriends3")
+        Friend.getFriends(profile_id: "1"){ result in
+            switch result{
+            case .success(_):
+                XCTAssert(false)
+            case .failure(_):
+                XCTAssert(true)
+            }
+            exp.fulfill()
         }
         wait(for: [exp], timeout: 10.0)
     }
