@@ -189,4 +189,34 @@ class Friend {
             completion(status)
         }
     }
+    
+    static func getUserByFacebookLink(facebook_link:String, completion: @escaping (Result<User>)->()){
+        let url = "\(String(WeatAPIUrl))/user/friends/facebook_link"
+        let params = [
+            "access_token": FBSDKAccessToken.current().tokenString!,
+            "facebook_link": facebook_link
+        ]
+        Alamofire.request(url, method:.get, parameters:params).validate().responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                let message = json["message"]
+                if message == "OK"{
+                    let user = User()
+                    user.name = json["user"]["name"].stringValue
+                    user.location = json["user"]["location"].stringValue
+                    user.email = json["user"]["email"].stringValue
+                    user.id = json["user"]["id"].intValue
+                    user.privacy = json["user"]["privacy"].intValue
+                    user.phone = json["user"]["phone"].stringValue
+                    completion(.success(user))
+                }else{
+                    completion(.failure(AFError.invalidURL(url: url)))
+                }
+            case .failure(let error):
+                print(error)
+                completion(.failure(error))
+            }
+        }
+    }
 }
