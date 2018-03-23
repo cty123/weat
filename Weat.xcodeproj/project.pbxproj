@@ -58,6 +58,7 @@
 		A8C2ADF020582F9A009255DC /* PostRatingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8C2ADEE20582F9A009255DC /* PostRatingViewController.xib */; };
 		A8C2ADF320583F3E009255DC /* RecommendToFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C2ADF120583F3E009255DC /* RecommendToFriendsViewController.swift */; };
 		A8C2ADF420583F3E009255DC /* RecommendToFriendsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8C2ADF220583F3E009255DC /* RecommendToFriendsViewController.xib */; };
+		E0142F8E20629B20008F1AEC /* FavoriteTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0142F8D20629B20008F1AEC /* FavoriteTest.swift */; };
 		E0192DD92054C3F0005C5DDF /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0192DD82054C3F0005C5DDF /* Rating.swift */; };
 		E0192DDB2054C4BB005C5DDF /* Menu_item.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0192DDA2054C4BB005C5DDF /* Menu_item.swift */; };
 		E02143A0205A0E63005BA160 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = E021439F205A0E63005BA160 /* Comment.swift */; };
@@ -72,7 +73,6 @@
 		E0E572B12033CB3B00E7822B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0E572AF2033CB3B00E7822B /* Main.storyboard */; };
 		E0E572B32033CB3B00E7822B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E0E572B22033CB3B00E7822B /* Assets.xcassets */; };
 		E0E572B62033CB3B00E7822B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0E572B42033CB3B00E7822B /* LaunchScreen.storyboard */; };
-		E0E572C12033CB3B00E7822B /* WeatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E572C02033CB3B00E7822B /* WeatTests.swift */; };
 		E0E572CC2033CBF100E7822B /* LoadController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E572CB2033CBF100E7822B /* LoadController.swift */; };
 		E0E572D12033CD8E00E7822B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E572D02033CD8E00E7822B /* User.swift */; };
 /* End PBXBuildFile section */
@@ -142,6 +142,7 @@
 		A8C2ADF120583F3E009255DC /* RecommendToFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendToFriendsViewController.swift; sourceTree = "<group>"; };
 		A8C2ADF220583F3E009255DC /* RecommendToFriendsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecommendToFriendsViewController.xib; sourceTree = "<group>"; };
 		DADA406A0D7663C50B998E12 /* Pods-WeatTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WeatTests/Pods-WeatTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E0142F8D20629B20008F1AEC /* FavoriteTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTest.swift; sourceTree = "<group>"; };
 		E0192DD82054C3F0005C5DDF /* Rating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
 		E0192DDA2054C4BB005C5DDF /* Menu_item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu_item.swift; sourceTree = "<group>"; };
 		E021439F205A0E63005BA160 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
@@ -159,7 +160,6 @@
 		E0E572B52033CB3B00E7822B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E0E572B72033CB3B00E7822B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E0E572BC2033CB3B00E7822B /* WeatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E0E572C02033CB3B00E7822B /* WeatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatTests.swift; sourceTree = "<group>"; };
 		E0E572C22033CB3B00E7822B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E0E572CB2033CBF100E7822B /* LoadController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadController.swift; sourceTree = "<group>"; };
 		E0E572D02033CD8E00E7822B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -379,11 +379,11 @@
 		E0E572BF2033CB3B00E7822B /* WeatTests */ = {
 			isa = PBXGroup;
 			children = (
-				E0E572C02033CB3B00E7822B /* WeatTests.swift */,
 				E0E572C22033CB3B00E7822B /* Info.plist */,
 				E054FE15205D9B63000D0BD0 /* UserTest.swift */,
 				E06D9A94205EE3EA00D77FDC /* FriendTest.swift */,
 				E025E058206213FF00070A67 /* RestaurantTest.swift */,
+				E0142F8D20629B20008F1AEC /* FavoriteTest.swift */,
 			);
 			path = WeatTests;
 			sourceTree = "<group>";
@@ -699,7 +699,7 @@
 				E025E059206213FF00070A67 /* RestaurantTest.swift in Sources */,
 				E054FE16205D9B63000D0BD0 /* UserTest.swift in Sources */,
 				E06D9A95205EE3EA00D77FDC /* FriendTest.swift in Sources */,
-				E0E572C12033CB3B00E7822B /* WeatTests.swift in Sources */,
+				E0142F8E20629B20008F1AEC /* FavoriteTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

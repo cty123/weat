@@ -15,6 +15,7 @@ class Comment{
     var restaurant_id: Int? 
     var comment_text: String?
     var author: String?
-    var rating: Int?
+    var food_rating: Int?
+    var service_rating: Int?
     var time: Date?
 }

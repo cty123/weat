@@ -124,42 +124,46 @@ class Restaurant {
             "google_link": self.google_link!,
             "restaurant_name": self.name!
         ]
-        var status = false
         Alamofire.request(url, method:.get, parameters:params).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
+                let message = json["message"].stringValue
                 // Debug option
                 print(json)
-                for menu_item in json["restaurant"]["menu_items"].arrayValue{
-                    let category = menu_item["category"]
-                    let item = Menu_item()
-                    item.id = menu_item["id"].intValue
-                    item.category = category.stringValue
-                    item.name = menu_item["name"].stringValue
-                    // Will implement rating later
-                    for rating in menu_item["ratings"].arrayValue{
-                        let r = Rating()
-                        r.author = rating["user"]["name"].stringValue
-                        r.food_rating = rating["food_rating"].intValue
-                        r.id = rating["id"].intValue
-                        r.rating_text = rating["rating_text"].stringValue
-                        r.restaurant_id = json["restaurant"]["id"].intValue
-                        r.menu_item_id = rating["menu_item_id"].intValue
-                        r.service_rating = nil
-                        // Format the date string
-                        let str = rating["createdAt"].stringValue
-                        let trimmedIsoString = str.replacingOccurrences(of: "\\.\\d+", with: "", options: .regularExpression)
-                        r.time = ISO8601DateFormatter().date(from: trimmedIsoString)
-                        item.rating.append(r)
+                if (message == "OK"){
+                    self.name = json["restaurant"]["name"].stringValue;
+                    for menu_item in json["restaurant"]["menu_items"].arrayValue{
+                        let category = menu_item["category"]
+                        let item = Menu_item()
+                        item.id = menu_item["id"].intValue
+                        item.category = category.stringValue
+                        item.name = menu_item["name"].stringValue
+                        // Will implement rating later
+                        for rating in menu_item["ratings"].arrayValue{
+                            let r = Rating()
+                            r.author = rating["user"]["name"].stringValue
+                            r.food_rating = rating["food_rating"].intValue
+                            r.id = rating["id"].intValue
+                            r.rating_text = rating["rating_text"].stringValue
+                            r.restaurant_id = json["restaurant"]["id"].intValue
+                            r.menu_item_id = rating["menu_item_id"].intValue
+                            r.service_rating = nil
+                            // Format the date string
+                            let str = rating["createdAt"].stringValue
+                            let trimmedIsoString = str.replacingOccurrences(of: "\\.\\d+", with: "", options: .regularExpression)
+                            r.time = ISO8601DateFormatter().date(from: trimmedIsoString)
+                            item.rating.append(r)
+                        }
+                        self.menu.append(item)
                     }
-                    self.menu.append(item)
+                    completion(true)
+                }else{
+                    completion(false)
                 }
-                status = true
-                completion(status)
             case .failure(let error):
                 print(error)
-                completion(status)
+                completion(false)
             }
         }
     }
@@ -177,32 +181,35 @@ class Restaurant {
             "google_link": self.google_link!,
             "restaurant_name": self.name!
         ]
-        var status = false
         Alamofire.request(url, method:.get, parameters:params).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
+                let message = json["message"].stringValue
                 // Debug option
                 print(json)
-                // Start to parse json
-                self.rating.food_good_all = json["data"]["food_good_all"].intValue
-                self.rating.food_bad_all = json["data"]["food_bad_all"].intValue
-                self.rating.food_count_all = json["data"]["food_count_all"].intValue
-                self.rating.service_good_all = json["data"]["service_good_all"].intValue
-                self.rating.service_bad_all = json["data"]["service_bad_all"].intValue
-                self.rating.service_count_all = json["data"]["service_count_all"].intValue
-                self.rating.food_good_friends = json["data"]["food_good_friends"].intValue
-                self.rating.food_bad_friends = json["data"]["food_bad_friends"].intValue
-                self.rating.food_count_friends = json["data"]["food_count_friends"].intValue
-                self.rating.service_good_friends = json["data"]["service_good_friends"].intValue
-                self.rating.service_bad_friends = json["data"]["service_bad_friends"].intValue
-                self.rating.service_count_friends = json["data"]["service_count_friends"].intValue
-                // Set up status
-                status = true
+                if message == "OK" {
+                    // Start to parse json
+                    self.rating.food_good_all = json["data"]["food_good_all"].intValue
+                    self.rating.food_bad_all = json["data"]["food_bad_all"].intValue
+                    self.rating.food_count_all = json["data"]["food_count_all"].intValue
+                    self.rating.service_good_all = json["data"]["service_good_all"].intValue
+                    self.rating.service_bad_all = json["data"]["service_bad_all"].intValue
+                    self.rating.service_count_all = json["data"]["service_count_all"].intValue
+                    self.rating.food_good_friends = json["data"]["food_good_friends"].intValue
+                    self.rating.food_bad_friends = json["data"]["food_bad_friends"].intValue
+                    self.rating.food_count_friends = json["data"]["food_count_friends"].intValue
+                    self.rating.service_good_friends = json["data"]["service_good_friends"].intValue
+                    self.rating.service_bad_friends = json["data"]["service_bad_friends"].intValue
+                    self.rating.service_count_friends = json["data"]["service_count_friends"].intValue
+                    completion(true)
+                }else{
+                    completion(false)
+                }
             case .failure(let error):
                 print(error)
+                completion(false)
             }
-            completion(status)
         }
     }
     
@@ -219,32 +226,37 @@ class Restaurant {
             "google_link": self.google_link!,
             "restaurant_name": self.name!
         ]
-        var status = false
         Alamofire.request(url, method:.get, parameters:params).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
+                let messge = json["message"].stringValue
                 // Debug option
                 print(json)
-                for r in json["comments"].arrayValue{
-                    let comment = Comment()
-                    comment.id = r["id"].intValue
-                    comment.restaurant_id = r["restaurant_id"].intValue
-                    comment.rating = r["food_rating"].intValue
-                    comment.comment_text = r["rating_text"].stringValue
-                    // Format the date string
-                    let str = r["createdAt"].stringValue
-                    let trimmedIsoString = str.replacingOccurrences(of: "\\.\\d+", with: "", options: .regularExpression)
-                    comment.time = ISO8601DateFormatter().date(from: trimmedIsoString)
-                    // This is null because this is a rating for a restaurant not for a menu item
-                    comment.author = r["user"]["name"].stringValue
-                    self.comments.append(comment)
+                if messge == "OK" {
+                    for r in json["comments"].arrayValue{
+                        let comment = Comment()
+                        comment.id = r["id"].intValue
+                        comment.restaurant_id = r["restaurant_id"].intValue
+                        comment.food_rating = r["food_rating"].intValue
+                        comment.service_rating = r["service_rating"].intValue
+                        comment.comment_text = r["rating_text"].stringValue
+                        // Format the date string
+                        let str = r["createdAt"].stringValue
+                        let trimmedIsoString = str.replacingOccurrences(of: "\\.\\d+", with: "", options: .regularExpression)
+                        comment.time = ISO8601DateFormatter().date(from: trimmedIsoString)
+                        // This is null because this is a rating for a restaurant not for a menu item
+                        comment.author = r["user"]["name"].stringValue
+                        self.comments.append(comment)
+                    }
+                    completion(true)
+                }else{
+                    completion(false)
                 }
-                status = true
             case .failure(let error):
                 print(error)
+                completion(false)
             }
-            completion(status)
         }
     }
     
@@ -259,7 +271,6 @@ class Restaurant {
             "google_link": self.google_link!,
             "restaurant_name": self.name!
         ]
-        var status = false
         Alamofire.request(url, method:.get, parameters:params).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
@@ -268,57 +279,65 @@ class Restaurant {
                 print("getRestaurant json:")
                 print(json)
                 // Status message -- Will add a status module that determines if the request has succeeded
-                let status_message:String = json["message"].stringValue
-                // Start parsing json --- updating menu
-                self.name = json["restaurant"]["name"].string
-                self.is_favorite = json["favorite"].bool
-                for menu_item in json["restaurant"]["menu_items"].arrayValue{
-                    let item = Menu_item()
-                    item.id = menu_item["id"].intValue
-                    item.category = menu_item["category"].stringValue
-                    item.name = menu_item["name"].stringValue
-                    // Loop through ratings for menu items to fill the menu for the restaurant
-                    for rating in menu_item["ratings"].arrayValue{
-                        // Load ratings
-                        let r = Rating()
-                        r.author = rating["user"]["name"].stringValue
-                        r.food_rating = rating["food_rating"].intValue
-                        r.id = rating["id"].intValue
-                        r.rating_text = rating["rating_text"].stringValue
-                        r.restaurant_id = json["restaurant"]["id"].intValue
-                        r.menu_item_id = json["menu_item_id"].intValue
-                        r.service_rating = nil
-                        // Format the date string
-                        let str = rating["createdAt"].stringValue
-                        let trimmedIsoString = str.replacingOccurrences(of: "\\.\\d+", with: "", options: .regularExpression)
-                        r.time = ISO8601DateFormatter().date(from: trimmedIsoString)
-                        // Add this rating to menu item
-                        item.rating.append(r)
+                let message = json["message"].stringValue
+                if message == "OK" {
+                    // Start parsing json --- updating menu
+                    self.name = json["restaurant"]["name"].string
+                    self.is_favorite = json["favorite"].bool
+                    for menu_item in json["restaurant"]["menu_items"].arrayValue{
+                        let item = Menu_item()
+                        item.id = menu_item["id"].intValue
+                        item.category = menu_item["category"].stringValue
+                        item.name = menu_item["name"].stringValue
+                        // Loop through ratings for menu items to fill the menu for the restaurant
+                        for rating in menu_item["ratings"].arrayValue{
+                            // Load ratings
+                            let r = Rating()
+                            r.author = rating["user"]["name"].stringValue
+                            r.food_rating = rating["food_rating"].intValue
+                            r.id = rating["id"].intValue
+                            r.rating_text = rating["rating_text"].stringValue
+                            r.restaurant_id = json["restaurant"]["id"].intValue
+                            r.menu_item_id = json["menu_item_id"].intValue
+                            r.service_rating = nil
+                            // Format the date string
+                            let str = rating["createdAt"].stringValue
+                            let trimmedIsoString = str.replacingOccurrences(of: "\\.\\d+", with: "", options: .regularExpression)
+                            r.time = ISO8601DateFormatter().date(from: trimmedIsoString)
+                            // Add this rating to menu item
+                            item.rating.append(r)
+                        }
+                        self.menu.append(item)
                     }
-                    self.menu.append(item)
+                    // Loop through the restaurant ratings --- Updating ratings
+                    for r in json["comments"].arrayValue{
+                        let comment = Comment()
+                        comment.id = r["id"].intValue
+                        comment.restaurant_id = r["restaurant_id"].intValue
+                        comment.food_rating = r["food_rating"].intValue
+                        comment.service_rating = r["service_rating"].intValue
+                        comment.comment_text = r["rating_text"].stringValue
+                        // Format the date string
+                        let str = r["createdAt"].stringValue
+                        let trimmedIsoString = str.replacingOccurrences(of: "\\.\\d+", with: "", options: .regularExpression)
+                        comment.time = ISO8601DateFormatter().date(from: trimmedIsoString)
+                        // This is null because this is a rating for a restaurant not for a menu item
+                        comment.author = r["user"]["name"].stringValue
+                        self.comments.append(comment)
+                    }
+                    completion(true)
+                }else{
+                    completion(false)
                 }
-                // Loop through the restaurant ratings --- Updating ratings
-                for r in json["comments"].arrayValue{
-                    let comment = Comment()
-                    comment.id = r["id"].intValue
-                    comment.restaurant_id = r["restaurant_id"].intValue
-                    comment.rating = r["food_rating"].intValue
-                    comment.comment_text = r["rating_text"].stringValue
-                    // Format the date string
-                    let str = r["createdAt"].stringValue
-                    let trimmedIsoString = str.replacingOccurrences(of: "\\.\\d+", with: "", options: .regularExpression)
-                    comment.time = ISO8601DateFormatter().date(from: trimmedIsoString)
-                    // This is null because this is a rating for a restaurant not for a menu item
-                    comment.author = r["user"]["name"].stringValue
-                    self.comments.append(comment)
-                }
-                // Check if the restaurant is the user's favorite
-                // Set status
-                status = true
             case .failure(let error):
                 print(error)
+                completion(false)
             }
-            completion(status)
         }
+    }
+    
+    func testGetRestaurant(){
+        //let sem = dispatch_semaphore_create(1)
+        
     }
 }
