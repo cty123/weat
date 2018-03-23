@@ -56,7 +56,7 @@ class RestaurantViewController: UIViewController {
     }
     
     @IBAction func favoriteButtonPress(_ sender: Any) {
-        Favorite.addFavoriteRestaurant(google_link: (self.restaurant?.google_link)!){ status in
+        Favorite.addFavoriteRestaurant(google_link: (self.restaurant?.google_link)!, restaurant_name: (self.restaurant?.name)!){ status in
             
             // delare strings TODO: figure out error messages
             var title: String
