@@ -132,6 +132,7 @@ class Restaurant {
                 // Debug option
                 print(json)
                 if (message == "OK"){
+                    self.name = json["restaurant"]["name"].stringValue;
                     for menu_item in json["restaurant"]["menu_items"].arrayValue{
                         let category = menu_item["category"]
                         let item = Menu_item()
@@ -237,7 +238,8 @@ class Restaurant {
                         let comment = Comment()
                         comment.id = r["id"].intValue
                         comment.restaurant_id = r["restaurant_id"].intValue
-                        comment.rating = r["food_rating"].intValue
+                        comment.food_rating = r["food_rating"].intValue
+                        comment.service_rating = r["service_rating"].intValue
                         comment.comment_text = r["rating_text"].stringValue
                         // Format the date string
                         let str = r["createdAt"].stringValue
@@ -278,7 +280,7 @@ class Restaurant {
                 print(json)
                 // Status message -- Will add a status module that determines if the request has succeeded
                 let message = json["message"].stringValue
-                if message == "OK"{
+                if message == "OK" {
                     // Start parsing json --- updating menu
                     self.name = json["restaurant"]["name"].string
                     self.is_favorite = json["favorite"].bool
@@ -312,7 +314,8 @@ class Restaurant {
                         let comment = Comment()
                         comment.id = r["id"].intValue
                         comment.restaurant_id = r["restaurant_id"].intValue
-                        comment.rating = r["food_rating"].intValue
+                        comment.food_rating = r["food_rating"].intValue
+                        comment.service_rating = r["service_rating"].intValue
                         comment.comment_text = r["rating_text"].stringValue
                         // Format the date string
                         let str = r["createdAt"].stringValue
