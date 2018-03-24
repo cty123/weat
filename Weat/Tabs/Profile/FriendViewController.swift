@@ -52,10 +52,12 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.dataSource = self
         tableView.reloadData()
         
-        // populate profile
+        /// populate profile
+        
+        // 1. profile picture
         FBSDKGraphRequest(graphPath: self.facebookLink, parameters: ["fields": "name, location, picture.type(large)"]).start(completionHandler: { (connection, result, error) -> Void in
             if (error == nil){
-                
+
                 print(result as Any)
                 
                 // get json
@@ -68,19 +70,13 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     self.imageViewProfilePic.image = UIImage(data: data)!
                 }
                 
-                // name
-                self.labelName.text = json["name"].string!
-                
-                // location
-                // ?
-                
-                
             } else {
                 print(error as Any)
             }
         })
         
-        self.labelName.text = self.facebookLink
+        // 2. name
+        // self.labelName.text = self.facebookLink
 
         
     }
@@ -100,13 +96,19 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
         switch self.segmentedControl.selectedSegmentIndex {
         case 0:
             // feed, TODO: set page size
+            
+
             print("FEED")
         case 1:
             // friends, TODO: user.friends.size
+            
+
             print("FRIENDS")
             return self.friends.count
         case 2:
             // favorites, TODO: user.favorites.size
+            
+
             print("FAVORITES")
         default:
             // should never happend

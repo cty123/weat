@@ -51,32 +51,43 @@ class RestaurantViewController: UIViewController {
     
     @IBAction func recommendButtonPress(_ sender: Any) {
         // go to recommend to friend view
-        let recommendViewController = RecommendViewController(nibName: "RecommendViewController", bundle: nil)
-        self.present(recommendViewController, animated: true, completion: nil)
+        let vc = RecommendToFriendsViewController(nibName: "RecommendToFriendsViewController", bundle: nil)
+        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func favoriteButtonPress(_ sender: Any) {
-        if((restaurant?.is_favorite)!) {
-            Favorite.deleteFavoriteRestaurant(google_link: (restaurant?.google_link)!){ status in
-                if (status) {
-                    self.favoriteLabel.text = "Favorite"
-                    self.restaurant?.is_favorite = false
-                    // TODO: remove star from top left corner
-                } else{
-                    print("RestaurantViewController: delete favorite failed (Weat error 1)")
-                }
+        Favorite.addFavoriteRestaurant(google_link: (self.restaurant?.google_link)!, restaurant_name: (self.restaurant?.name)!){ status in
+            
+            // delare strings TODO: figure out error messages
+            var title: String
+            var message: String
+            
+            if (status) {
+                // show message
+                title = "Success"
+                message = "Added \(String(describing: self.restaurant!.name!)) as a favorite!"
+            
+            }else{
+                // TODO: change this message bc it's not yser friend
+                title = "An error occured"
+                message = "Unable to add \(String(describing: self.restaurant!.name!)) as a favorite"
             }
-        }  else {
-            Favorite.addFavoriteRestaurant(google_link: (restaurant?.google_link)!, restaurant_name: (restaurant?.name)!){ status in
-                if (status) {
-                    self.favoriteLabel.text = "Remove Favorite"
-                    self.restaurant?.is_favorite = true
-                    // TODO: add star to top left corner
-                } else{
-                    print("RestaurantViewController: delete favorite failed (Weat error 2)")
-                }
-            }
+            
+            // present message
+            let alert = UIAlertController(title: title,
+                                          message: message,
+                                          preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "Done",
+                                          style: .default,
+                                          handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            
         }
+        
+        
+        
+        
     }
     
     @IBAction func menuButtonPress(_ sender: Any) {
