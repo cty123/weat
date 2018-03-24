@@ -12,6 +12,7 @@ class User{
     var privacy: Int?
     var favorites = [Restaurant]()
     var recommendations = [Recommendation]()
+    var facebook_link: String?
     
     // Get User info
     static func getUserInfo(profile_id:String, completion: @escaping ((Result<User>) -> ())){
@@ -35,6 +36,7 @@ class User{
                     user.id = json["user"]["id"].int
                     user.privacy = json["user"]["privacy"].int
                     user.phone = json["user"]["phone"].string
+                    user.facebook_link = json["user"]["facebook_link"].stringValue
                     // Get favorite
                     for favorite in json["favorites"].arrayValue{
                         let r = Restaurant()

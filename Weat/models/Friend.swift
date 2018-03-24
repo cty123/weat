@@ -28,6 +28,7 @@ class Friend {
                         tmpUser.phone = friend["joinFriend"]["phone"].stringValue
                         tmpUser.location = friend["joinFriend"]["location"].stringValue
                         tmpUser.privacy = friend["joinFriend"]["privacy"].intValue
+                        tmpUser.facebook_link = friend["joinFriend"]["facebook_link"].stringValue
                         users.append(tmpUser)
                     }
                     completion(.success(users))
@@ -85,6 +86,7 @@ class Friend {
                         tmpUser.phone = friend["joinUser"]["phone"].stringValue
                         tmpUser.location = friend["joinUser"]["location"].stringValue
                         tmpUser.privacy = friend["joinUser"]["privacy"].intValue
+                        tmpUser.facebook_link = friend["joinUser"]["facebook_link"].stringValue
                         users.append(tmpUser)
                     }
                     completion(.success(users))
@@ -154,6 +156,7 @@ class Friend {
                     tmpUser.phone = friend["phone"].stringValue
                     tmpUser.location = friend["location"].stringValue
                     tmpUser.privacy = friend["privacy"].intValue
+                    tmpUser.facebook_link = friend["facebook_link"].stringValue
                     users.append(tmpUser)
                 }
             case .failure(let error):
@@ -162,6 +165,7 @@ class Friend {
             completion(users)
         }
     }
+    
     
     /*
      *  Add facebook friends who are also the user of Weat
