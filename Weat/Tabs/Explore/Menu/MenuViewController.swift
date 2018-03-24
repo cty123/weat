@@ -39,7 +39,6 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var count: Int = 0
         count = (menu?.count)!
-        print(count)
         return count
     }
     

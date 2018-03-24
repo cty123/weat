@@ -33,7 +33,6 @@
 		14D809E120464A2900517E6E /* RestaurantViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14D809DF20464A2900517E6E /* RestaurantViewController.xib */; };
 		14EA36EC2061B301002AA9F0 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EA36EA2061B300002AA9F0 /* MenuTableViewCell.swift */; };
 		14EA36ED2061B301002AA9F0 /* MenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14EA36EB2061B300002AA9F0 /* MenuTableViewCell.xib */; };
-		14FA4ECD203DFD8700B20E09 /* TemporaryRestaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FA4ECB203DFD8700B20E09 /* TemporaryRestaurant.swift */; };
 		4437886DF57BB2316786CBE5 /* Pods_WeatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E26D6587C8052AB156A919CB /* Pods_WeatTests.framework */; };
 		75413D9749AD3790AD1E90AF /* Pods_Weat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B72BB2C83393A9A9E49E7C9 /* Pods_Weat.framework */; };
 		84EE681A203A3F9800A11D41 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84EE6819203A3F9800A11D41 /* Profile.storyboard */; };
@@ -116,7 +115,6 @@
 		14D809DF20464A2900517E6E /* RestaurantViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RestaurantViewController.xib; sourceTree = "<group>"; };
 		14EA36EA2061B300002AA9F0 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		14EA36EB2061B300002AA9F0 /* MenuTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuTableViewCell.xib; sourceTree = "<group>"; };
-		14FA4ECB203DFD8700B20E09 /* TemporaryRestaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemporaryRestaurant.swift; sourceTree = "<group>"; };
 		3F5C277665A3A4B2373A20A9 /* Pods-Weat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weat.release.xcconfig"; path = "Pods/Target Support Files/Pods-Weat/Pods-Weat.release.xcconfig"; sourceTree = "<group>"; };
 		46C16D6C64B50763370D8D5E /* Pods-WeatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WeatTests/Pods-WeatTests.release.xcconfig"; sourceTree = "<group>"; };
 		6D9F042A53AB494B0EA93C11 /* Pods-Weat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Weat/Pods-Weat.debug.xcconfig"; sourceTree = "<group>"; };
@@ -205,7 +203,6 @@
 		14125B3A2044F6E700B612CE /* Restaurant */ = {
 			isa = PBXGroup;
 			children = (
-				14FA4ECB203DFD8700B20E09 /* TemporaryRestaurant.swift */,
 				14D809DE20464A2900517E6E /* RestaurantViewController.swift */,
 				14D809DF20464A2900517E6E /* RestaurantViewController.xib */,
 			);
@@ -674,7 +671,6 @@
 				E0192DD92054C3F0005C5DDF /* Rating.swift in Sources */,
 				E07690F92056194000C43765 /* Favorite.swift in Sources */,
 				142E6E1C20426EE7009E1A8B /* ExploreLocation.swift in Sources */,
-				14FA4ECD203DFD8700B20E09 /* TemporaryRestaurant.swift in Sources */,
 				A85E99382040252500A95558 /* FacebookFriendsViewController.swift in Sources */,
 				E0E572CC2033CBF100E7822B /* LoadController.swift in Sources */,
 				A8C2ADF320583F3E009255DC /* RecommendToFriendsViewController.swift in Sources */,
