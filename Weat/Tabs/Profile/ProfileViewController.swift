@@ -109,18 +109,19 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         
         // get friends
         let id = String(describing: UserDefaults.standard.integer(forKey: "id"))
-        Friend.getFriends(profile_id: id, completion: {
-            (users: [User]?) in
-            
-            // TODO: fix this
-            if (users != nil) {
-                self.friends = users!
-            } else {
-                
-
+        
+        Friend.getFriends(profile_id: id){ result in
+            switch result{
+            case .success(let friends):
+                self.friends = friends
+            case .failure(_):
+                print("File \(#file)")
+                print("Line \(#line)")
                 print("error getting friends")
+
             }
         }
+    
         
         // init segmented control
         self.segmentedControl.setup(segmentNames: segments, color: UIColor.orange)
