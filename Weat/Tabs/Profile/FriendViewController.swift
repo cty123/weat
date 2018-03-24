@@ -52,11 +52,11 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.dataSource = self
         tableView.reloadData()
         
-        // populate profile
+        /// populate profile
+        
+        // 1. profile picture
         FBSDKGraphRequest(graphPath: self.facebookLink, parameters: ["fields": "name, location, picture.type(large)"]).start(completionHandler: { (connection, result, error) -> Void in
             if (error == nil){
-                
-                
 
                 print(result as Any)
                 
@@ -70,21 +70,13 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     self.imageViewProfilePic.image = UIImage(data: data)!
                 }
                 
-                // name
-                self.labelName.text = json["name"].string!
-                
-                // location
-                // ?
-                
-                
             } else {
-                
-
                 print(error as Any)
             }
         })
         
-        self.labelName.text = self.facebookLink
+        // 2. name
+        // self.labelName.text = self.facebookLink
 
         
     }

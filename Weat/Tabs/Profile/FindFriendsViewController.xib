@@ -12,9 +12,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FindFriendsViewController" customModule="Weat" customModuleProvider="target">
             <connections>
-                <outlet property="facebookFriendsButton" destination="kgy-GW-H2t" id="d41-GP-Sx5"/>
-                <outlet property="facebookFriendsCount" destination="ZzN-Nv-TAI" id="6JR-qa-O9M"/>
                 <outlet property="navigationBar" destination="agp-K2-ZMi" id="TFM-jd-ich"/>
+                <outlet property="segmentedControl" destination="uHk-mD-sPC" id="YFR-TP-2fI"/>
                 <outlet property="tableView" destination="bfh-dc-CBL" id="KqR-5e-uXB"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -24,65 +23,48 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kgy-GW-H2t">
-                    <rect key="frame" x="0.0" y="69" width="375" height="30"/>
-                    <state key="normal" title="Facebook"/>
-                    <connections>
-                        <action selector="facebookFriendsButton:" destination="-1" eventType="touchUpInside" id="2BG-Dq-l6g"/>
-                    </connections>
-                </button>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bfh-dc-CBL">
-                    <rect key="frame" x="0.0" y="155" width="375" height="512"/>
+                    <rect key="frame" x="0.0" y="148" width="375" height="519"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Facebook Friends" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YZk-3b-2o2">
-                    <rect key="frame" x="16" y="69" width="250" height="21"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="250" id="WxA-76-XWy"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="5" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZzN-Nv-TAI">
-                    <rect key="frame" x="298" y="69" width="61" height="21"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="85" id="rJn-Rp-NXB"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="agp-K2-ZMi">
                     <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                     <items>
                         <navigationItem title="Find Friends" id="JyL-Yi-z9P"/>
                     </items>
                 </navigationBar>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="uHk-mD-sPC">
+                    <rect key="frame" x="0.0" y="64" width="375" height="29"/>
+                    <segments>
+                        <segment title="First"/>
+                        <segment title="Second"/>
+                    </segments>
+                    <connections>
+                        <action selector="segmentChanged:" destination="-1" eventType="valueChanged" id="9oR-6n-wFd"/>
+                    </connections>
+                </segmentedControl>
                 <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="iDl-aK-xnN">
-                    <rect key="frame" x="0.0" y="99" width="375" height="56"/>
+                    <rect key="frame" x="0.0" y="92" width="375" height="56"/>
                     <textInputTraits key="textInputTraits"/>
                 </searchBar>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="bfh-dc-CBL" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="2SS-Jv-dLC"/>
-                <constraint firstItem="ZzN-Nv-TAI" firstAttribute="top" secondItem="agp-K2-ZMi" secondAttribute="bottom" constant="5" id="5Je-9j-uht"/>
+                <constraint firstItem="uHk-mD-sPC" firstAttribute="top" secondItem="agp-K2-ZMi" secondAttribute="bottom" id="5cX-D3-Uod"/>
                 <constraint firstItem="iDl-aK-xnN" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="CZe-4z-CSN"/>
+                <constraint firstItem="iDl-aK-xnN" firstAttribute="top" secondItem="uHk-mD-sPC" secondAttribute="bottom" id="M0O-Br-30v"/>
                 <constraint firstItem="bfh-dc-CBL" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="NLf-hJ-EG0"/>
-                <constraint firstItem="kgy-GW-H2t" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="QAh-vp-TJp"/>
-                <constraint firstItem="YZk-3b-2o2" firstAttribute="top" secondItem="agp-K2-ZMi" secondAttribute="bottom" constant="5" id="Ra0-Ua-p9p"/>
+                <constraint firstItem="uHk-mD-sPC" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="P71-dM-aEo"/>
+                <constraint firstItem="iDl-aK-xnN" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="QTT-Xy-fFp"/>
                 <constraint firstItem="agp-K2-ZMi" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="X2X-Rl-Yac"/>
                 <constraint firstItem="agp-K2-ZMi" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Xet-gm-hQR"/>
-                <constraint firstItem="iDl-aK-xnN" firstAttribute="top" secondItem="kgy-GW-H2t" secondAttribute="bottom" id="a5F-Xc-JjU"/>
                 <constraint firstItem="bfh-dc-CBL" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="aGe-gf-Xgz"/>
                 <constraint firstItem="bfh-dc-CBL" firstAttribute="top" secondItem="iDl-aK-xnN" secondAttribute="bottom" id="bQE-ei-WOs"/>
+                <constraint firstItem="uHk-mD-sPC" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="cMX-O5-NoX"/>
                 <constraint firstItem="agp-K2-ZMi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="e1S-et-qWA"/>
-                <constraint firstItem="kgy-GW-H2t" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="elW-WG-7qG"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ZzN-Nv-TAI" secondAttribute="trailing" constant="16" id="fLX-Cc-WFv"/>
                 <constraint firstItem="iDl-aK-xnN" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="h79-j7-Htm"/>
-                <constraint firstItem="kgy-GW-H2t" firstAttribute="top" secondItem="agp-K2-ZMi" secondAttribute="bottom" constant="5" id="iq2-wy-yS4"/>
-                <constraint firstItem="YZk-3b-2o2" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="kYC-ji-XFr"/>
+                <constraint firstItem="iDl-aK-xnN" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="yaS-UJ-cum"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="54.5" y="54.5"/>
