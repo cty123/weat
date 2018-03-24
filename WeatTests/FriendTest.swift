@@ -156,4 +156,18 @@ class FriendTest: XCTestCase {
         }
     }
     
+    func testGetUserByFacebookLink(){
+        let exp = expectation(description: "testGetUserByFacebookLink")
+        Friend.getUserByFacebookLink(facebook_link: "test1_link"){ result in
+            switch result{
+                case .success(let user):
+                    XCTAssert(user.name == "test1")
+                case .failure(_):
+                    XCTAssert(false)
+            }
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 10.0)
+    }
+    
 }

@@ -114,7 +114,7 @@ class User{
             "Content-Type": "application/x-www-form-urlencoded"
         ]
         let params = [
-            "access_token": "test"//FBSDKAccessToken.current().tokenString!
+            "access_token": FBSDKAccessToken.current().tokenString!
         ]
         Alamofire.request(url, method:.delete, parameters: params, encoding:URLEncoding.httpBody, headers: headers).validate().responseJSON { response in
             switch response.result {
