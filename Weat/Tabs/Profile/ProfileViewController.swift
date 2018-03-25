@@ -49,9 +49,10 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     var friends: [User] = []                // array of friends
     var personalFeed: Feed? = nil           // feed
     var showArchivedFeedItems = false       // toggle to allow user to see archived feed items
+    var favorites: [Favorite] = []
     
     // segmented control segments
-    let segments = ["Feed", "Friends", /*"Favorites"*/] // what do we actually want here?
+    let segments = ["Feed", "Friends", "Favorites"]
     
     // update name location (TODO: remove this)
     override func viewWillAppear(_ animated: Bool) {
@@ -108,16 +109,19 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         
         // get friends
         let id = String(describing: UserDefaults.standard.integer(forKey: "id"))
+        
         Friend.getFriends(profile_id: id){ result in
-            switch result {
-            case .success(let users):
-                self.friends = users
+            switch result{
+            case .success(let friends):
+                self.friends = friends
             case .failure(_):
+                print("File \(#file)")
+                print("Line \(#line)")
                 print("error getting friends")
+
             }
         }
-        
-        
+    
         
         // init segmented control
         self.segmentedControl.setup(segmentNames: segments, color: UIColor.orange)
@@ -135,6 +139,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "name, location, picture.type(large)"]).start(completionHandler: { (connection, result, error) -> Void in
             if (error == nil){
                 
+                
+
                 print(result as Any)
                 
                 // get json
@@ -159,6 +165,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 
                 
             } else {
+                
+
                 print(error as Any)
             }
         })
@@ -175,7 +183,9 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             Feed.getFeed(feed_type: "/friends", completion: {
                 (feed: Feed?) in
                 guard let new_feed = feed else {
-                    print("error, file: \(#file), function: \(#function), line: \(#line)")
+                    
+
+print("error, file: \(#file), function: \(#function), line: \(#line)")
                     return
                 }
                 self.personalFeed = new_feed
@@ -284,6 +294,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         if (editingStyle == .delete) {
             // self.personalFeed?.unarchivedData.remove(at: indexPath.row)
             // TODO: archive here not just remove for show
+            
+
             print("deleted this cell i guess \(indexPath.row)")
             tableView.reloadData()
         }

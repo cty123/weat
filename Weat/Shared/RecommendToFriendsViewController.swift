@@ -11,6 +11,21 @@ import UIKit
 class RecommendToFriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var navigationBar: UINavigationBar!
+    
+    @IBAction func pressCancel(_ sender: UIBarButtonItem) {
+        // exit vc
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func pressRecommend(_ sender: UIBarButtonItem) {
+        // recommend to all selected users
+        // TODO
+        
+        // exit vc
+        self.dismiss(animated: true, completion: nil)
+
+    }
     
     // vars
     // var friends: [Users]
@@ -18,7 +33,13 @@ class RecommendToFriendsViewController: UIViewController, UITableViewDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        // add cancel button
+        self.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(pressCancel))
+        
+        // add recommend button
+        self.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(title: "Recommend", style: .plain, target: self, action: #selector(pressRecommend))
+        
         // initialize cellSelected (all to false)_
         for _ in SimpleData.Users {
             cellSelected.append(false)
@@ -29,6 +50,8 @@ class RecommendToFriendsViewController: UIViewController, UITableViewDelegate, U
         self.tableView.dataSource = self
         self.tableView.reloadData()
     }
+    
+    
     
 
     // tableview stuff
