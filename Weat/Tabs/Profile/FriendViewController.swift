@@ -28,8 +28,7 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     // init with this view
-    var weatID: String = ""                 //
-    var facebookLink: String = ""            //
+    var user: User?
     var friends: [User] = []            // array of friend
     
     
@@ -55,7 +54,7 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
         /// populate profile
         
         // 1. profile picture
-        FBSDKGraphRequest(graphPath: self.facebookLink, parameters: ["fields": "name, location, picture.type(large)"]).start(completionHandler: { (connection, result, error) -> Void in
+        FBSDKGraphRequest(graphPath: self.user?.facebook_link, parameters: ["fields": "name, location, picture.type(large)"]).start(completionHandler: { (connection, result, error) -> Void in
             if (error == nil){
 
                 print(result as Any)
@@ -155,8 +154,7 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // open next view controller
         let friendViewController = FriendViewController(nibName: "FriendViewController", bundle: nil)
-        friendViewController.facebookLink = "1493264010796475"
-        friendViewController.weatID = String(describing: friends[indexPath.row].id)
+        friendViewController.user = friends[indexPath.row]
         self.present(friendViewController, animated: true, completion: nil)
         
         // unselect row
