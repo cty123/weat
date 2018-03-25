@@ -43,17 +43,20 @@ class Rating {
         let headers = [
             "Content-Type": "application/x-www-form-urlencoded"
         ]
-        var status = false
         Alamofire.request(url, method:.post, parameters: params, encoding:URLEncoding.httpBody, headers: headers).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
-                status = true
-                print(json)
+                let message = json["message"].stringValue
+                if message == "Rating updated"{
+                    completion(true)
+                }else{
+                    completion(false)
+                }
             case .failure(let error):
                 print(error)
+                completion(false)
             }
-            completion(status)
         }
     }
     
@@ -76,17 +79,21 @@ class Rating {
         let headers = [
             "Content-Type": "application/x-www-form-urlencoded"
         ]
-        var status = false
         Alamofire.request(url, method:.post, parameters: params, encoding:URLEncoding.httpBody, headers: headers).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
-                status = true
+                let message = json["message"].stringValue
+                if message == "Rating updated"{
+                    completion(true)
+                }else{
+                    completion(false)
+                }
                 print(json)
             case .failure(let error):
                 print(error)
+                completion(false)
             }
-            completion(status)
         }
     }
 }
