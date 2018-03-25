@@ -162,6 +162,7 @@ extension MapViewController: CLLocationManagerDelegate {
                         let marker = GMSMarker(position: position)
                         marker.title = restaurant.name
                         marker.map = self.mapView
+                        marker.snippet = restaurant.google_link
                     })
                 }
             case .failure(let error):
@@ -238,5 +239,21 @@ extension MapViewController: GMSMapViewDelegate {
     func didTapMyLocationButton(for mapView: GMSMapView) -> Bool {
         locationManager.startUpdatingLocation()
         return false
+    }
+    
+    func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
+        let restaurantViewController = RestaurantViewController(nibName: "RestaurantViewController", bundle: nil)
+        Restaurant.getRestaurantInfo(google_link: marker.snippet!, completion: { (restaurant: Restaurant) in
+            restaurant.getRestaurant { status in
+                if(!status) {
+                    print("getRestaurant error in listViewController")
+                } else {
+                    restaurantViewController.restaurant = restaurant
+                    restaurantViewController.back_string = "Map"
+                    self.present(restaurantViewController, animated: true, completion: nil)
+                }
+            }
+        })
+       
     }
 }
