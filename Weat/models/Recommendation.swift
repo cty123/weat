@@ -24,7 +24,7 @@ class Recommendation{
      * NOTE: friend_ids can be multiple friend ids separated by ',' like 1,3,4,5.
     */
     static func sendRecommendation(google_link:String, menu_item_id: Int, restaurant_name:String, friend_ids:String, completion:@escaping(Bool)->()){
-        let url = "\(String(WeatAPIUrl))/favorites"
+        let url = "\(String(WeatAPIUrl))/recommendation"
         let params = [
             "access_token": FBSDKAccessToken.current().tokenString!,
             "google_link": google_link,
@@ -35,18 +35,20 @@ class Recommendation{
         let headers = [
             "Content-Type": "application/x-www-form-urlencoded"
         ]
-        var status = false
         Alamofire.request(url, method:.post, parameters: params, encoding:URLEncoding.httpBody, headers: headers).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
-                status = true
                 let message = json["message"]
-                print(json)
+                if message == "Recommendations sent" {
+                    completion(true)
+                }else{
+                    completion(false)
+                }
             case .failure(let error):
                 print(error)
+                completion(false)
             }
-            completion(status)
         }
     }
 }
