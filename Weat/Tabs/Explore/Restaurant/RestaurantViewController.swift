@@ -103,8 +103,6 @@ class RestaurantViewController: UIViewController {
             back_string = "Back"
         }
         
-        
-        
         // use restaurant to fill in details
         if(restaurant != nil) {
             // Google things

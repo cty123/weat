@@ -10,22 +10,25 @@ import UIKit
 import FBSDKCoreKit
 import SwiftyJSON
 
-class FindFriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class FindFriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var facebookFriendsCount: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     // vars
     var segments = ["Weat", "Facebook"]
+    
+    // segment 1 vars
+    var weatFriends: [User] = []
 
-    // segement 1 vars
+    // segement 2 vars
     var facebookLinks: [String] = []                        // facebook ids from graph api
     var facebookUsers: [User] = []                          // array of Weat.User objects based on facebook id
     
-    // segment 2 vars
-    var weatFriends: [User] = []
+
     
     // action for closing button
     @IBAction func action(_ sender: UIBarButtonItem) {
@@ -51,6 +54,7 @@ class FindFriendsViewController: UIViewController, UITableViewDelegate, UITableV
         self.setFriends()
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.searchBar.delegate = self
         self.segmentedControl.setup(segmentNames: segments, color: UIColor.orange)
         self.tableView.reloadData()
         
@@ -179,7 +183,24 @@ class FindFriendsViewController: UIViewController, UITableViewDelegate, UITableV
         default:
             break
         }
-        
-
+    
+    }
+    
+    // search bar stuff
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        // search every time they change text(?)
+            let testGroup = DispatchGroup()
+            // var flag = false
+            testGroup.enter()
+            Friend.searchFriend(search_criteria: searchText, page: nil, limit: nil){ users in
+                // XCTAssert(users[0].name == "test1")
+                // flag = true
+                self.weatFriends = users
+                self.tableView.reloadData()
+                testGroup.leave()
+            }
+            testGroup.notify(queue: .main){
+                // XCTAssert(flag)
+            }
     }
 }
