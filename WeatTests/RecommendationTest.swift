@@ -74,17 +74,35 @@ public class RecommendationTest: XCTestCase {
     }
     
     /*
-     * Try to pull recommendation from other users
+     * Try to pull recommendation from other users who does not allow others to see his/her info
+     * Request should be denied
      */
-    
     func testGetRecommendation4(){
         let exp = expectation(description: "testGetRecommendation4")
         User.getUserInfo(profile_id: "2"){result in
             switch result {
+            case .success(_):
+                XCTAssert(false)
+            case .failure(_):
+                XCTAssert(true)
+            }
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 10.0)
+    }
+    
+    /*
+     * Try to pull a Recommendation sent from the same user about the same restaurant but with different menu_item
+     */
+    func testGetRecommendation5(){
+        let exp = expectation(description: "testGetRecommendation5")
+        User.getUserInfo(profile_id: "3"){result in
+            switch result {
             case .success(let user):
                 // Get the first(only) recommendation of the user
-                let r = user.recommendations[0]
+                let r = user.recommendations[3]
                 XCTAssert(r.recommended_menu_item_name == "McNuggets")
+                XCTAssert(r.recommended_menu_item_id == 2)
             case .failure(_):
                 XCTAssert(false)
             }
@@ -93,12 +111,24 @@ public class RecommendationTest: XCTestCase {
         wait(for: [exp], timeout: 10.0)
     }
     
-    func testGetRecommendation5(){
-        
-    }
-    
+    /*
+     * Try to pull recommendation of other user who set privacy to be allowing others to view his/her info
+     */
     func testGetRecommendation6(){
-        
+        let exp = expectation(description: "testGetRecommendation6")
+        User.getUserInfo(profile_id: "1"){result in
+            switch result {
+            case .success(let user):
+                // Get the first(only) recommendation of the user
+                let r = user.recommendations[0]
+                XCTAssert(r.recommended_menu_item_name == "McNuggets")
+                XCTAssert(r.recommended_menu_item_id == 2)
+            case .failure(_):
+                XCTAssert(false)
+            }
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 10.0)
     }
     
     /*
