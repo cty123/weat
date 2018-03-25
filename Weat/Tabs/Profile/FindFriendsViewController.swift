@@ -167,23 +167,22 @@ class FindFriendsViewController: UIViewController, UITableViewDelegate, UITableV
         // unselect row
         tableView.deselectRow(at: indexPath, animated: true)
         
+        // create vc
+        let vc = FriendViewController(nibName: "FriendViewController", bundle: nil)
+
         // action on cell press
         switch self.segmentedControl.selectedSegmentIndex {
         case 0:  // Weat
-            break
+            vc.facebookLink = self.weatFriends[indexPath.row].facebook_link!
         case 1: // Facebook
-            
-            // open friend view controller
-            let vc = FriendViewController(nibName: "FriendViewController", bundle: nil)
             vc.facebookLink = self.facebookLinks[indexPath.row]
-            self.present(vc, animated: true, completion: nil)
-            
         case 2: // Contacts
             break
         default:
             break
         }
-    
+        
+        self.present(vc, animated: true, completion: nil)
     }
     
     // search bar stuff

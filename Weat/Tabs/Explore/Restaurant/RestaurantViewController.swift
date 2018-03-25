@@ -113,11 +113,13 @@ class RestaurantViewController: UIViewController {
             headerImage.image = restaurant?.image
             hoursLabel.text = restaurant?.open_now
             
+            /*
             if((restaurant?.is_favorite)!) {
                 favoriteLabel.text = "Remove Favorite"
             } else {
                 favoriteLabel.text = "Favorite"
             }
+            */
             
             // Weat things
             // service rating

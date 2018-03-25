@@ -20,7 +20,30 @@ class RecommendToFriendsViewController: UIViewController, UITableViewDelegate, U
     
     @IBAction func pressRecommend(_ sender: UIBarButtonItem) {
         // recommend to all selected users
-        // TODO
+        let googleLink = self.restaurant.google_link!
+        let menuItemID = 0 // TODO: menuItemsID
+        let restaurantName = restaurant.name!
+        var friendIDs: String = ""
+        
+        
+        // cycle through friends to get their friend ids
+        var i = 0
+        for friend in self.friends {
+            if (cellSelected[i]) {
+                // if cell selected, add friend id with a comma
+                friendIDs = friendIDs + "\(friends[i].id!),"
+            }
+            
+            // increment i
+            i = i + 1
+        }
+        
+        Recommendation.sendRecommendation(google_link: googleLink, menu_item_id: menuItemID, restaurant_name: restaurantName, friend_ids: friendIDs){status in
+            if status {
+            }else {
+                // This request should not fail
+            }
+        }
         
         // exit vc
         self.dismiss(animated: true, completion: nil)
@@ -28,8 +51,9 @@ class RecommendToFriendsViewController: UIViewController, UITableViewDelegate, U
     }
     
     // vars
-    // var friends: [Users]
+    var friends: [User] = []
     var cellSelected: [Bool] = []
+    var restaurant: Restaurant = Restaurant()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,8 +68,21 @@ class RecommendToFriendsViewController: UIViewController, UITableViewDelegate, U
         for _ in SimpleData.Users {
             cellSelected.append(false)
         }
+        
+        // get friends
+        Friend.getFriends(profile_id: UserDefaults.standard.string(forKey: "id")!){ result in
+            switch result{
+            case .success(let friends):
+                self.friends = friends
+            case .failure(_):
+                print("File: \(#file)")
+                print("Line: \(#line)")
+                print("failed to get [Weat.Friend]")
+
+            }
+        }
     
-        // reload tableview data
+        // tableview data
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.reloadData()
@@ -60,9 +97,7 @@ class RecommendToFriendsViewController: UIViewController, UITableViewDelegate, U
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // return self.pendingRequests.count
-        // TODO: actual data
-        return SimpleData.Users.count
+        return self.friends.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -83,7 +118,7 @@ class RecommendToFriendsViewController: UIViewController, UITableViewDelegate, U
         }
         
         // set label to name
-        cell.labelName.text = SimpleData.Users[indexPath.row]
+        cell.labelName.text = self.friends[indexPath.row].name
         return cell
     }
     

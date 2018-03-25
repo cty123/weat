@@ -75,11 +75,24 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         })
         
-        // 2. name
-        // self.labelName.text = self.facebookLink
-
-        
+        // 2. name/location
+        Friend.getUserByFacebookLink(facebook_link: self.facebookLink){ result in
+            switch result{
+            case .success(let user):
+                self.labelName.text = user.name
+                self.labelLocation.text = user.location
+                print("File: \(#file)")
+                print("Line: \(#line)")
+                print("got Weat.User from facebook_id")
+            case .failure(_):
+                print("File: \(#file)")
+                print("Line: \(#line)")
+                print("failed to get Weat.User from facebook_id")
+            }
+        }
     }
+    
+    
     
     // when the segment is changed
     @IBAction func segmentChanged(_ sender: Any) {
