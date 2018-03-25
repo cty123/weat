@@ -127,12 +127,13 @@ class UserTest: XCTestCase {
                             switch result{
                             case .success(let u):
                                 XCTAssert(u.email == "test@test.com")
-                                exp.fulfill()
                             case .failure(_):
                                 XCTAssert(false)
-                                exp.fulfill()
                             }
+                            exp.fulfill()
                         }
+                    }else{
+                        XCTAssert(false)
                     }
                 }
             case .failure(_):

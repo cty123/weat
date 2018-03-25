@@ -93,7 +93,7 @@ class User{
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
-                let message = json["message"]
+                let message = json["message"].stringValue
                 if message == "Updated user" {
                     completion(true)
                 }else{
