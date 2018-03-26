@@ -5,6 +5,32 @@ import FBSDKCoreKit
 
 class Friend {
 
+    static func getStatus(id: String, completion: @escaping (Result<Int>) -> ()){
+        let url = "\(String(WeatAPIUrl))/user/friends/status"
+        let params = [
+            "access_token": FBSDKAccessToken.current().tokenString!,
+            "id": id
+        ]
+        Alamofire.request(url, method:.get, parameters:params).validate().responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                print(json)
+                let message = json["message"]
+                // Check if the request is successful
+                if message == "OK" {
+                    let status = json["status"].intValue
+                    completion(.success(status))
+                }else{
+                    completion(.failure(AFError.invalidURL(url: url)))
+                }
+            case .failure(let error):
+                print(error)
+                completion(.failure(error))
+            }
+        }
+    }
+    
     //Get friends of this user
     static func getFriends(profile_id:String, completion: @escaping (Result<([User])>) -> ()){
         let url = "\(String(WeatAPIUrl))/user/friends"
@@ -215,6 +241,31 @@ class Friend {
                     user.phone = json["user"]["phone"].stringValue
                     user.facebook_link = facebook_link
                     completion(.success(user))
+                }else{
+                    completion(.failure(AFError.invalidURL(url: url)))
+                }
+            case .failure(let error):
+                print(error)
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    static func remove(id: String, completion: @escaping (Result<Bool>)->()){
+        let url = "\(String(WeatAPIUrl))/user/friends/unfriend"
+        let params = [
+            "access_token": FBSDKAccessToken.current().tokenString!,
+            "id": id
+        ]
+        Alamofire.request(url, method:.get, parameters:params).validate().responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                let message = json["message"]
+                if message == "OK"{
+                    // do this once adam does back end stuff
+                    //if(
+                    completion(.success(true))
                 }else{
                     completion(.failure(AFError.invalidURL(url: url)))
                 }
