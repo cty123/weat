@@ -75,6 +75,7 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
         })
         
         // 2. name/location
+        /*
         Friend.getUserByFacebookLink(facebook_link: self.facebookLink){ result in
             switch result{
             case .success(let user):
@@ -89,6 +90,7 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 print("failed to get Weat.User from facebook_id")
             }
         }
+        */
     }
     
     

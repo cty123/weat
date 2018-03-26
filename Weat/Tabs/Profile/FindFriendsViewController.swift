@@ -137,9 +137,25 @@ class FindFriendsViewController: UIViewController, UITableViewDelegate, UITableV
         // action on cell press
         switch self.segmentedControl.selectedSegmentIndex {
         case 0:  // Weat
-            vc.facebookLink = self.weatFriends[indexPath.row].facebook_link!
+            // vc.facebookLink = self.weatFriends[indexPath.row].facebook_link!
+            break
         case 1: // Facebook
-            vc.facebookLink = self.facebookLinks[indexPath.row]
+            let vc = FriendViewController(nibName: "FriendViewController", bundle: nil)
+            Friend.getUserByFacebookLink(facebook_link: facebookLinks[indexPath.row]){ result in
+                switch result{
+                case .success(let user):
+                    vc.user = user
+                    // open friend view controller
+                    self.present(vc, animated: true, completion: nil)
+                    print("File: \(#file)")
+                    print("Line: \(#line)")
+                    print("got Weat.User from facebook_id")
+                case .failure(_):
+                    print("File: \(#file)")
+                    print("Line: \(#line)")
+                    print("failed to get Weat.User from facebook_id")
+                }
+            }
         case 2: // Contacts
             break
         default:
