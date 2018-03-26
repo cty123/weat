@@ -53,6 +53,7 @@ class User{
                         recommendation.restaurant_name = r["restaurant"]["name"].stringValue
                         recommendation.recommended_menu_item_id = r["menu_item"]["id"].intValue
                         recommendation.recommended_menu_item_name = r["menu_item"]["name"].stringValue
+                        recommendation.google_link = r["restaurant"]["google_link"].stringValue
                         // Format the date string
                         let str = r["createdAt"].stringValue
                         let trimmedIsoString = str.replacingOccurrences(of: "\\.\\d+", with: "", options: .regularExpression)
