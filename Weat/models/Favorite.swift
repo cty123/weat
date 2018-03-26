@@ -46,11 +46,12 @@ class Favorite{
      * This function requires the google link of the restaurant the user wants to delete
      * The returned value is a boolean variable that indicates whether the favorite is deleted or not
      */
-    static func deleteFavoriteRestaurant(google_link: String, completion: @escaping(Bool)->()){
+    static func deleteFavoriteRestaurant(google_link: String, restaurant_name:String,completion: @escaping(Bool)->()){
         let url = "\(String(WeatAPIUrl))/favorites"
         let params = [
             "access_token": FBSDKAccessToken.current().tokenString!,
-            "google_link": google_link
+            "google_link": google_link,
+            "restaurant_name": restaurant_name
         ]
         let headers = [
             "Content-Type": "application/x-www-form-urlencoded"
