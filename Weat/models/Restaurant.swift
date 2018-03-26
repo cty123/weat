@@ -27,7 +27,7 @@ class Restaurant {
     var rating = (food_good_all: 0, food_bad_all:0, food_count_all: 0,
                   service_good_all: 0, service_bad_all:0, service_count_all: 0,
                   food_good_friends: 0, food_bad_friends:0, food_count_friends: 0,
-                  service_good_friends: 0, service_bad_friends:0, service_count_friends: 0)
+                  service_good_friends: 0, service_bad_friends:0, service_count_friends: 0, ratings_exist: false)
     
     /* Restaurant rating is composed of 2 parts, 1. Comments from friends.
      * 2. Ratings datas like food_good_all, food_good_friend, from condensed_rating form
@@ -190,6 +190,7 @@ class Restaurant {
                 print(json)
                 if message == "OK" {
                     // Start to parse json
+                    self.rating.ratings_exist = json["ratings_exist"].boolValue
                     self.rating.food_good_all = json["data"]["food_good_all"].intValue
                     self.rating.food_bad_all = json["data"]["food_bad_all"].intValue
                     self.rating.food_count_all = json["data"]["food_count_all"].intValue
@@ -283,7 +284,7 @@ class Restaurant {
                 if message == "OK" {
                     // Start parsing json --- updating menu
                     self.name = json["restaurant"]["name"].string
-                    self.is_favorite = json["favorite"].bool
+                    self.is_favorite = json["is_favorite"].bool
                     for menu_item in json["restaurant"]["menu_items"].arrayValue{
                         let item = Menu_item()
                         item.id = menu_item["id"].intValue
