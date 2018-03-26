@@ -9,7 +9,7 @@
 import UIKit
 import GooglePlaces
 
-class RestaurantViewController: UIViewController {
+class RestaurantViewController: UIViewController { // UITableViewDelegate, UITableViewDataSource
 
     @IBOutlet weak var restaurantNameLabel: UILabel!
     @IBOutlet weak var foodRatingLabel: UILabel!
