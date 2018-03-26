@@ -89,6 +89,7 @@ class RecommendedRestaurantsViewController: UIViewController, UITableViewDelegat
             if(status){
                 // create vc
                 let vc = RestaurantViewController(nibName: "RestaurantViewController", bundle: nil)
+                vc.restaurant = r
                 self.present(vc, animated: true, completion: nil)
             }else{
                 // don't create vc

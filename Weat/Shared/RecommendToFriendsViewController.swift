@@ -33,7 +33,7 @@ class RecommendToFriendsViewController: UIViewController, UITableViewDelegate, U
                 // if cell selected, add friend id with a comma
                 friendIDs = friendIDs + "\(friends[i].id!),"
             }
-            
+
             // increment i
             i = i + 1
         }
