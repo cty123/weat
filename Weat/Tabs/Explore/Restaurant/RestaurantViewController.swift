@@ -60,37 +60,64 @@ class RestaurantViewController: UIViewController {
     }
     
     @IBAction func favoriteButtonPress(_ sender: Any) {
-        Favorite.addFavoriteRestaurant(google_link: (self.restaurant?.google_link)!, restaurant_name: (self.restaurant?.name)!){ status in
-            
-            // delare strings TODO: figure out error messages
-            var title: String
-            var message: String
-            
-            if (status) {
-                // show message
-                title = "Success"
-                message = "Added \(String(describing: self.restaurant!.name!)) as a favorite!"
-            
-            }else{
-                // TODO: change this message bc it's not yser friend
-                title = "An error occured"
-                message = "Unable to add \(String(describing: self.restaurant!.name!)) as a favorite"
+        if((restaurant?.is_favorite)!) {
+            Favorite.deleteFavoriteRestaurant(google_link: (self.restaurant?.google_link)!, restaurant_name: (self.restaurant?.name)!){ status in
+                
+                // delare strings TODO: figure out error messages
+                var title: String
+                var message: String
+                
+                if (status) {
+                    // show message
+                    title = "Success"
+                    message = "Deleted \(String(describing: self.restaurant!.name!)) from favorites!"
+                    self.favoriteLabel.text = "Favorite"
+                    self.restaurant?.is_favorite = false
+                    
+                }else{
+                    // TODO: change this message bc it's not yser friend
+                    title = "Error"
+                    message = "Unable to remove \(String(describing: self.restaurant!.name!)) from favorites"
+                }
+                
+                // present message
+                let alert = UIAlertController(title: title,
+                                              message: message,
+                                              preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "Done",
+                                              style: .default,
+                                              handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                
             }
-            
-            // present message
-            let alert = UIAlertController(title: title,
-                                          message: message,
-                                          preferredStyle: .alert)
-            
-            alert.addAction(UIAlertAction(title: "Done",
-                                          style: .default,
-                                          handler: nil))
-            self.present(alert, animated: true, completion: nil)
-            
         }
-        
-        
-        
+        else {
+            Favorite.addFavoriteRestaurant(google_link: (self.restaurant?.google_link)!, restaurant_name: (self.restaurant?.name)!){ status in
+                
+                // delare strings TODO: figure out error messages
+                var title: String
+                var message: String
+                
+                if (status) {
+                    // show message
+                    title = "Success"
+                    message = "Added \(String(describing: self.restaurant!.name!)) as a favorite!"
+                    self.favoriteLabel.text = "Remove Favorite"
+                    self.restaurant?.is_favorite = true
+                
+                } else {
+                    // TODO: change this message bc it's not yser friend
+                    title = "Error"
+                    message = "Unable to add \(String(describing: self.restaurant!.name!)) as a favorite"
+                }
+                
+                // present message
+                let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Done", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
         
     }
     
@@ -118,13 +145,11 @@ class RestaurantViewController: UIViewController {
             headerImage.image = restaurant?.image
             hoursLabel.text = restaurant?.open_now
             
-            /*
             if((restaurant?.is_favorite)!) {
                 favoriteLabel.text = "Remove Favorite"
             } else {
                 favoriteLabel.text = "Favorite"
             }
-            */
             
             // Weat things
             // service rating
