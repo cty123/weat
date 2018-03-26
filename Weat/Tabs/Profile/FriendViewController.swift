@@ -29,18 +29,29 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     @IBAction func friendButtonPress(_ sender: UIButton) {
         let friend_id: String = "\((user?.id)!)"
-        Friend.sendFriendRequest(friend_id: friend_id) { (status) in
-            if(!status) {
-                print("File: \(#file)")
-                print("Line: \(#line)")
-                print("Failed to send friend request.")
+        switch(friend_status!) {
+        case -1,2:
+            Friend.sendFriendRequest(friend_id: friend_id) { (status) in
+                if(!status) {
+                    print("File: \(#file)")
+                    print("Line: \(#line)")
+                    print("Failed to send friend request.")
+                }
             }
+        case 0,1:
+            // waiting on adam to do stuff on back end
+            // Friend.remove()
+            break
+        default:
+            break
+            
         }
+        
     }
     // init with this view
     var user: User?
     var friends: [User] = []            // array of friend
-    
+    var friend_status: Int?
     
     // segmented control segments
     let segments = ["Feed", "Friends", /*"Favorites"*/]
@@ -61,9 +72,39 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.dataSource = self
         tableView.reloadData()
         
-        /// populate profile
+        /*---- populate profile ----*/
         
-        // 1. profile picture
+        // User details
+        self.labelName.text = user?.name!
+        self.labelLocation.text = user?.location!
+        
+        // Add/remove friend text
+        let user_id = "\((user?.id)!)"
+        Friend.getStatus(id: user_id) { (result) in
+            switch result{
+            case .success(let status):
+                switch status{
+                // Pending
+                case 0:
+                    self.buttonAddFriend.setTitle("Remove Request", for: UIControlState.normal)
+                case 1:
+                    self.buttonAddFriend.setTitle("Remove Friend", for: UIControlState.normal)
+                case 2:
+                    // Friend denied... not sure what to show
+                    break
+                default:
+                    break
+                }
+                self.friend_status = status
+            case .failure(_):
+                print("File: \(#file)")
+                print("Line: \(#line)")
+                print("Failed to obtain relationship status")
+            }
+        }
+        
+        // Todo: make below a global func
+        // Facebook profile picture
         FBSDKGraphRequest(graphPath: (self.user?.facebook_link)!, parameters: ["fields": "name, location, picture.type(large)"]).start(completionHandler: { (connection, result, error) -> Void in
             if (error == nil){
 
@@ -87,8 +128,6 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         })
         
-        self.labelName.text = user?.name!
-        self.labelLocation.text = user?.location!
 
         
     }

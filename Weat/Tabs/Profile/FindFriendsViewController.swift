@@ -19,7 +19,7 @@ class FindFriendsViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var searchBar: UISearchBar!
     
     // vars
-    var segments = ["Weat", "Facebook"]
+    var segments = ["Search", "Facebook Friends"]
     
     // segment 1 vars
     var weatFriends: [User] = []
@@ -137,10 +137,10 @@ class FindFriendsViewController: UIViewController, UITableViewDelegate, UITableV
         // action on cell press
         switch self.segmentedControl.selectedSegmentIndex {
         case 0:  // Weat
-            // vc.facebookLink = self.weatFriends[indexPath.row].facebook_link!
+            vc.user = self.weatFriends[indexPath.row]
+            self.present(vc, animated: true, completion: nil)
             break
         case 1: // Facebook
-            let vc = FriendViewController(nibName: "FriendViewController", bundle: nil)
             Friend.getUserByFacebookLink(facebook_link: facebookLinks[indexPath.row]){ result in
                 switch result{
                 case .success(let user):
@@ -149,7 +149,7 @@ class FindFriendsViewController: UIViewController, UITableViewDelegate, UITableV
                     self.present(vc, animated: true, completion: nil)
                     print("File: \(#file)")
                     print("Line: \(#line)")
-                    print("got Weat.User from facebook_id")
+                    print("got Weat.User from facebook_id \(self.facebookLinks[indexPath.row])")
                 case .failure(_):
                     print("File: \(#file)")
                     print("Line: \(#line)")
@@ -161,8 +161,6 @@ class FindFriendsViewController: UIViewController, UITableViewDelegate, UITableV
         default:
             break
         }
-        
-        self.present(vc, animated: true, completion: nil)
     }
     
     // search bar stuff
