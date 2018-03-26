@@ -94,6 +94,9 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="GZV-Ww-gx8"/>
                                 </constraints>
+                                <connections>
+                                    <action selector="pressRecommendedRestaurants:" destination="Q6K-cU-UXP" eventType="touchUpInside" id="5zZ-7o-DKz"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recommended restaurants" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LWY-6u-ewp" userLabel="Recommended rest text">
                                 <rect key="frame" x="16" y="229" width="207" height="21"/>

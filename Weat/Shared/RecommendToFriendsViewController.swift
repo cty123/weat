@@ -38,10 +38,18 @@ class RecommendToFriendsViewController: UIViewController, UITableViewDelegate, U
             i = i + 1
         }
         
+        // get rid of the extra comma (lazy!)
+        friendIDs.dropLast()
+        
         Recommendation.sendRecommendation(google_link: googleLink, menu_item_id: menuItemID, restaurant_name: restaurantName, friend_ids: friendIDs){status in
             if status {
+                print("File: \(#file)")
+                print("Line: \(#line)")
+                print("successful recommendation")
             }else {
-                // This request should not fail
+                print("File: \(#file)")
+                print("Line: \(#line)")
+                print("unsuccessful recommendation")
             }
         }
         
@@ -74,6 +82,7 @@ class RecommendToFriendsViewController: UIViewController, UITableViewDelegate, U
             switch result{
             case .success(let friends):
                 self.friends = friends
+                self.tableView.reloadData()
             case .failure(_):
                 print("File: \(#file)")
                 print("Line: \(#line)")
