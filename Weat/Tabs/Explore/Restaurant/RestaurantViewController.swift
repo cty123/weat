@@ -35,6 +35,9 @@ class RestaurantViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func recordVisitPress(_ sender: UIButton) {
+        // perform segue to checkin
+    }
     
     @IBAction func callButtonPress(_ sender: Any) {
         // call restaurant using its phone number
@@ -89,6 +92,7 @@ class RestaurantViewController: UIViewController {
         
         
     }
+    
     
     @IBAction func menuButtonPress(_ sender: Any) {
         // go to menu view

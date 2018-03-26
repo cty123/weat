@@ -13,6 +13,24 @@ import XCTest
 public class RestaurantTest: XCTestCase{
     
     /*
+     * This class is used to test API functions in restaurant class
+     * Testing data *restaraurants* table
+     *------------------------------------------------------------------------------
+     * id       name           google_link                  createdAt    updatedAt
+        1        kfc            kfc_link                          x            x
+        2    Hotel Fusion     ChIJ0SMraI-AhYAREeJAvm2_yGM         x            x
+        3    test_restaurant    test_link                         x            x
+     * Menu item table
+     *------------------------------------------------------------------------------
+     * id    restaurant_id            name        category    createdAt    updatedAt
+        1         1               Fried chicken    Fried          x            x
+        2         1                 McNuggets      Nuggets        x            x
+        3         3                    sth          sth           x            x
+     *
+     *-------------------------------------------------------------------------------
+     */
+    
+    /*
      * This function will be implemented to test UpdateRestaurantRating()
      * Pull restaurant rating with TRUE name and TRUE google_link
      * Result: should pull the rating of restaurant
@@ -274,36 +292,4 @@ public class RestaurantTest: XCTestCase{
         wait(for: [exp], timeout: 10.0)
     }
 
-    func testUpdateRestaurantComments1(){
-        let exp = expectation(description: "testUpdateRestaurantComments1")
-        let r = Restaurant()
-        r.google_link = "kfc_link"
-        r.name = "kfc"
-        r.getRestaurantComments(){status in
-            if(status){
-                XCTAssert(status)
-            }
-            exp.fulfill()
-        }
-        wait(for: [exp], timeout: 10.0)
-    }
-    
-    /*
-     * This function will be implemented to test updateRestaurantRating()
-     */
-    func testUpdateRestaurantRating1(){
-        let exp = expectation(description: "testUpdateRestaurantRating1")
-        let r = Restaurant()
-        r.google_link = "kfc_link"
-        r.name = "kfc"
-        r.getRestaurantRating(){status in
-            if(status){
-                XCTAssert(status)
-            }
-            exp.fulfill()
-        }
-        wait(for: [exp], timeout: 10.0)
-    }
-    
-    
 }

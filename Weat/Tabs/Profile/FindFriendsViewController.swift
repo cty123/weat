@@ -26,7 +26,7 @@ class FindFriendsViewController: UIViewController, UITableViewDelegate, UITableV
 
     // segement 2 vars
     var facebookLinks: [String] = []                        // facebook ids from graph api
-    var facebookUsers: [User] = []                          // array of Weat.User objects based on facebook id
+    var facebookNames: [String] = []                        // array of names from facebook graph api
     
 
     
@@ -68,54 +68,18 @@ class FindFriendsViewController: UIViewController, UITableViewDelegate, UITableV
                 // if successful
                 
                 let json = JSON(result ?? JSON.null)
-                let friends = json["friends", "data"]
-                print(friends)
-                
-                // shitty iteration of friends to get IDs
-                var i = 0
-                while (true) {
-                    // get individual json
-                    let temp = JSON(friends[i])
-                    
-                    // check for null
-                    if (temp == JSON.null) {
-                        break
-                    }
-                    
-                    // if not null, set id array and append
-                    self.facebookLinks.append(temp["id"].stringValue)
-                    let link = temp["id"].stringValue
-                    
-                    // get user info from database
-                    Friend.getUserByFacebookLink(facebook_link: link){ result in
-                        switch result{
-                        case .success(let user):
-                            self.facebookUsers.append(user)
-                            self.tableView.reloadData()
-                            print("File: \(#file)")
-                            print("Line: \(#line)")
-                            print("got Weat.User from facebook_id")
-                        case .failure(_):
-                            print("File: \(#file)")
-                            print("Line: \(#line)")
-                            print("failed to get Weat.User from facebook_id")
-                        }
-                    }
-                    
-                    // increment i
-                    i = i + 1
+                for friend in json["friends"]["data"] {
+                    self.facebookLinks.append(friend.1["id"].string!)
+                    self.facebookNames.append(friend.1["name"].string!)
                 }
-                
+                self.tableView.reloadData()
             } else {
                 // if unsucessful
                 print("File: \(#file)")
                 print("Line: \(#line)")
-                print(error)
+                print(error!)
             }
-            
         })
-        
-        
     }
         
     // tableview stuff
@@ -129,7 +93,7 @@ class FindFriendsViewController: UIViewController, UITableViewDelegate, UITableV
         case 0:  // Weat
             return self.weatFriends.count
         case 1: // Facebook
-            return self.facebookUsers.count
+            return self.facebookNames.count
         case 2: // Contacts
             break
         default:
@@ -153,7 +117,7 @@ class FindFriendsViewController: UIViewController, UITableViewDelegate, UITableV
         case 0:  // Weat
             cell.labelName.text = self.weatFriends[indexPath.row].name
         case 1: // Facebook
-            cell.labelName.text = self.facebookUsers[indexPath.row].name
+            cell.labelName.text = self.facebookNames[indexPath.row]
         case 2: // Contacts
             break
         default:

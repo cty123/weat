@@ -30,7 +30,7 @@
 		14D809E020464A2900517E6E /* RestaurantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D809DE20464A2900517E6E /* RestaurantViewController.swift */; };
 		14D809E120464A2900517E6E /* RestaurantViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14D809DF20464A2900517E6E /* RestaurantViewController.xib */; };
 		14EA36EC2061B301002AA9F0 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EA36EA2061B300002AA9F0 /* MenuTableViewCell.swift */; };
-		14FA4ECD203DFD8700B20E09 /* TemporaryRestaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FA4ECB203DFD8700B20E09 /* TemporaryRestaurant.swift */; };
+		14EA36ED2061B301002AA9F0 /* MenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14EA36EB2061B300002AA9F0 /* MenuTableViewCell.xib */; };
 		4437886DF57BB2316786CBE5 /* Pods_WeatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E26D6587C8052AB156A919CB /* Pods_WeatTests.framework */; };
 		75413D9749AD3790AD1E90AF /* Pods_Weat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B72BB2C83393A9A9E49E7C9 /* Pods_Weat.framework */; };
 		84EE681A203A3F9800A11D41 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84EE6819203A3F9800A11D41 /* Profile.storyboard */; };
@@ -63,10 +63,12 @@
 		E02143A0205A0E63005BA160 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = E021439F205A0E63005BA160 /* Comment.swift */; };
 		E025E059206213FF00070A67 /* RestaurantTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E025E058206213FF00070A67 /* RestaurantTest.swift */; };
 		E054FE16205D9B63000D0BD0 /* UserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E054FE15205D9B63000D0BD0 /* UserTest.swift */; };
+		E05548A120681C700032B4F1 /* FeedTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E05548A020681C700032B4F1 /* FeedTest.swift */; };
 		E06D9A95205EE3EA00D77FDC /* FriendTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06D9A94205EE3EA00D77FDC /* FriendTest.swift */; };
 		E06D9A9B205F1C5600D77FDC /* Recommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06D9A9A205F1C5600D77FDC /* Recommendation.swift */; };
 		E07690F92056194000C43765 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07690F82056194000C43765 /* Favorite.swift */; };
 		E08B2B9A2067185B00534A43 /* RecommendationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08B2B992067185B00534A43 /* RecommendationTest.swift */; };
+		E0A0DEE920677F2E00523C42 /* RatingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A0DEE820677F2E00523C42 /* RatingTest.swift */; };
 		E0BD5DC2203BA9EB00602FD2 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0BD5DC1203BA9EB00602FD2 /* Friend.swift */; };
 		E0E572AC2033CB3B00E7822B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E572AB2033CB3A00E7822B /* AppDelegate.swift */; };
 		E0E572AE2033CB3B00E7822B /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E572AD2033CB3B00E7822B /* LoginController.swift */; };
@@ -112,7 +114,6 @@
 		14D809DF20464A2900517E6E /* RestaurantViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RestaurantViewController.xib; sourceTree = "<group>"; };
 		14EA36EA2061B300002AA9F0 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		14EA36EB2061B300002AA9F0 /* MenuTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuTableViewCell.xib; sourceTree = "<group>"; };
-		14FA4ECB203DFD8700B20E09 /* TemporaryRestaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemporaryRestaurant.swift; sourceTree = "<group>"; };
 		3F5C277665A3A4B2373A20A9 /* Pods-Weat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weat.release.xcconfig"; path = "Pods/Target Support Files/Pods-Weat/Pods-Weat.release.xcconfig"; sourceTree = "<group>"; };
 		46C16D6C64B50763370D8D5E /* Pods-WeatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WeatTests/Pods-WeatTests.release.xcconfig"; sourceTree = "<group>"; };
 		6D9F042A53AB494B0EA93C11 /* Pods-Weat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Weat/Pods-Weat.debug.xcconfig"; sourceTree = "<group>"; };
@@ -148,10 +149,12 @@
 		E021439F205A0E63005BA160 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		E025E058206213FF00070A67 /* RestaurantTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantTest.swift; sourceTree = "<group>"; };
 		E054FE15205D9B63000D0BD0 /* UserTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTest.swift; sourceTree = "<group>"; };
+		E05548A020681C700032B4F1 /* FeedTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTest.swift; sourceTree = "<group>"; };
 		E06D9A94205EE3EA00D77FDC /* FriendTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTest.swift; sourceTree = "<group>"; };
 		E06D9A9A205F1C5600D77FDC /* Recommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recommendation.swift; sourceTree = "<group>"; };
 		E07690F82056194000C43765 /* Favorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
 		E08B2B992067185B00534A43 /* RecommendationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationTest.swift; sourceTree = "<group>"; };
+		E0A0DEE820677F2E00523C42 /* RatingTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingTest.swift; sourceTree = "<group>"; };
 		E0BD5DC1203BA9EB00602FD2 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		E0E572A82033CB3A00E7822B /* Weat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0E572AB2033CB3A00E7822B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -202,7 +205,6 @@
 		14125B3A2044F6E700B612CE /* Restaurant */ = {
 			isa = PBXGroup;
 			children = (
-				14FA4ECB203DFD8700B20E09 /* TemporaryRestaurant.swift */,
 				14D809DE20464A2900517E6E /* RestaurantViewController.swift */,
 				14D809DF20464A2900517E6E /* RestaurantViewController.xib */,
 			);
@@ -394,6 +396,8 @@
 				E025E058206213FF00070A67 /* RestaurantTest.swift */,
 				E0142F8D20629B20008F1AEC /* FavoriteTest.swift */,
 				E08B2B992067185B00534A43 /* RecommendationTest.swift */,
+				E0A0DEE820677F2E00523C42 /* RatingTest.swift */,
+				E05548A020681C700032B4F1 /* FeedTest.swift */,
 			);
 			path = WeatTests;
 			sourceTree = "<group>";
@@ -677,7 +681,7 @@
 				E0192DD92054C3F0005C5DDF /* Rating.swift in Sources */,
 				E07690F92056194000C43765 /* Favorite.swift in Sources */,
 				142E6E1C20426EE7009E1A8B /* ExploreLocation.swift in Sources */,
-				14FA4ECD203DFD8700B20E09 /* TemporaryRestaurant.swift in Sources */,
+				A85E99382040252500A95558 /* FacebookFriendsViewController.swift in Sources */,
 				E0E572CC2033CBF100E7822B /* LoadController.swift in Sources */,
 				A8C2ADF320583F3E009255DC /* RecommendToFriendsViewController.swift in Sources */,
 				E06D9A9B205F1C5600D77FDC /* Recommendation.swift in Sources */,
@@ -706,6 +710,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0A0DEE920677F2E00523C42 /* RatingTest.swift in Sources */,
+				E05548A120681C700032B4F1 /* FeedTest.swift in Sources */,
 				E025E059206213FF00070A67 /* RestaurantTest.swift in Sources */,
 				E054FE16205D9B63000D0BD0 /* UserTest.swift in Sources */,
 				E06D9A95205EE3EA00D77FDC /* FriendTest.swift in Sources */,

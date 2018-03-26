@@ -137,7 +137,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             cell.labelName.text = "\(String(describing: feed_obj.actor_name))"
             cell.labelRestaurant.text = "\(String(describing: feed_obj.restaurant_name))"
-            cell.labelRating.text = "Dummy Rating"
+            cell.labelRating.text = "\(String(describing: feed_obj.feed_text))"
             return cell
             
         case 1: // friends feed
@@ -145,14 +145,14 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             cell.labelName.text = "\(String(describing: feed_obj.actor_name))"
             cell.labelRestaurant.text = "\(String(describing: feed_obj.restaurant_name))"
-            cell.labelRating.text = "Dummy Rating"
+            cell.labelRating.text = "\(String(describing: feed_obj.feed_text))"
             return cell
             
         case 2: // your feed
             let feed_obj = your_feed.data[indexPath.row]
             cell.labelName.text = "\(String(describing: UserDefaults.standard.string(forKey: "name")!))"
             cell.labelRestaurant.text = "\(String(describing: feed_obj.restaurant_name))"
-            cell.labelRating.text = "Dummy Rating"
+            cell.labelRating.text = "\(String(describing: feed_obj.feed_text))"
             return cell
             
         default: // should never happen

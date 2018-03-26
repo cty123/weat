@@ -99,7 +99,6 @@ public class RecommendationTest: XCTestCase {
         User.getUserInfo(profile_id: "3"){result in
             switch result {
             case .success(let user):
-                // Get the first(only) recommendation of the user
                 let r = user.recommendations[3]
                 XCTAssert(r.recommended_menu_item_name == "McNuggets")
                 XCTAssert(r.recommended_menu_item_id == 2)

@@ -279,8 +279,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         if (self.segmentedControl.selectedSegmentIndex == 1) {
             let friendViewController = FriendViewController(nibName: "FriendViewController", bundle: nil)
             // todo facebook id
-            friendViewController.facebookLink = "1493264010796475"
-            friendViewController.weatID = String(describing: friends[indexPath.row].id)
+            //friendViewController.facebookLink = "1493264010796475"
+            //friendViewController.weatID = String(describing: friends[indexPath.row].id)
             self.present(friendViewController, animated: true, completion: nil)
         }
         
