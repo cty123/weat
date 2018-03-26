@@ -283,7 +283,7 @@ class Restaurant {
                 if message == "OK" {
                     // Start parsing json --- updating menu
                     self.name = json["restaurant"]["name"].string
-                    self.is_favorite = json["favorite"].bool
+                    self.is_favorite = json["is_favorite"].bool
                     for menu_item in json["restaurant"]["menu_items"].arrayValue{
                         let item = Menu_item()
                         item.id = menu_item["id"].intValue

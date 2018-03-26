@@ -22,7 +22,7 @@ class RecommendToFriendsViewController: UIViewController, UITableViewDelegate, U
         // recommend to all selected users
         let googleLink = self.restaurant.google_link!
         let menuItemID = 0 // TODO: menuItemsID
-        let restaurantName = restaurant.name!
+        let restaurantName = self.restaurant.name!
         var friendIDs: String = ""
         
         

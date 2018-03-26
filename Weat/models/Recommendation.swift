@@ -18,6 +18,7 @@ class Recommendation{
     var recommended_menu_item_name: String?
     var recommended_menu_item_id: Int?
     var time: Date?
+    var google_link: String?
     
     /*
     * This function is used to send recommendations to friends

@@ -30,7 +30,8 @@ class RecommendedRestaurantsViewController: UIViewController, UITableViewDelegat
         self.tableView.dataSource = self
         self.tableView.reloadData()
         
-        User.getUserInfo(profile_id: "3"){result in
+        let id = UserDefaults.standard.string(forKey: "id")!
+        User.getUserInfo(profile_id: id){result in
             switch result {
             case .success(let user):
                 self.recommnedations = user.recommendations
@@ -41,6 +42,8 @@ class RecommendedRestaurantsViewController: UIViewController, UITableViewDelegat
                 print("failed to get user")
             }
         }
+        
+        self.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(action))
     }
 
     override func didReceiveMemoryWarning() {
@@ -67,8 +70,8 @@ class RecommendedRestaurantsViewController: UIViewController, UITableViewDelegat
         // setup cell
         let cell = Bundle.main.loadNibNamed("RestaurantTableViewCell", owner: self, options: nil)?.first as! RestaurantTableViewCell
         let recommendation = self.recommnedations[indexPath.row]
-        cell.labelName.text = "\(recommendation.friend_name) recommends \(recommendation.recommended_menu_item_name)"
-        cell.labelDetail.text = "from \(recommendation.restaurant_name)"
+        cell.labelName.text = "\(recommendation.friend_name) recommends \(recommendation.restaurant_name)"
+        cell.labelDetail.text = "\(recommendation.recommended_menu_item_name)"
         return cell
     }
     
@@ -76,14 +79,24 @@ class RecommendedRestaurantsViewController: UIViewController, UITableViewDelegat
         // unselect row
         tableView.deselectRow(at: indexPath, animated: true)
         
-        /*
-        // create vc
-        let vc = FriendViewController(nibName: "FriendViewController", bundle: nil)
-        vc.facebookLink = self.weatFriends[indexPath.row].facebook_link!
-        self.present(vc, animated: true, completion: nil)
-        */
+        // get restaurant
+        let recommendation = recommnedations[indexPath.row]
         
- 
+        let r = Restaurant()
+        r.google_link = recommendation.google_link
+        r.name = recommendation.restaurant_name
+        r.getRestaurant() { status in
+            if(status){
+                // create vc
+                let vc = RestaurantViewController(nibName: "RestaurantViewController", bundle: nil)
+                self.present(vc, animated: true, completion: nil)
+            }else{
+                // don't create vc
+                print("File \(#file)")
+                print("Line \(#line)")
+                print("failed to get restaruant")
+            }
+        }
     }
     
 }
