@@ -55,6 +55,7 @@ class RestaurantViewController: UIViewController {
     @IBAction func recommendButtonPress(_ sender: Any) {
         // go to recommend to friend view
         let vc = RecommendToFriendsViewController(nibName: "RecommendToFriendsViewController", bundle: nil)
+        vc.restaurant = self.restaurant!
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -117,11 +118,13 @@ class RestaurantViewController: UIViewController {
             headerImage.image = restaurant?.image
             hoursLabel.text = restaurant?.open_now
             
+            /*
             if((restaurant?.is_favorite)!) {
                 favoriteLabel.text = "Remove Favorite"
             } else {
                 favoriteLabel.text = "Favorite"
             }
+            */
             
             // Weat things
             // service rating
