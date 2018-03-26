@@ -93,6 +93,8 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
     }
     
+    
+    
     // when the segment is changed
     @IBAction func segmentChanged(_ sender: Any) {
         tableView.reloadData()

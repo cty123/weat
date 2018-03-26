@@ -44,6 +44,12 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         self.present(findFriendsViewController, animated: true, completion: nil)
     }
     
+    @IBAction func pressRecommendedRestaurants(_ sender: Any) {
+        let vc = RecommendedRestaurantsViewController(nibName: "RecommendedRestaurantsViewController", bundle: nil)
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    
     // vars
     var friendLinks: [String] = []          // array of friends' facebook user_id
     var friends: [User] = []                // array of friends
@@ -183,9 +189,6 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             Feed.getFeed(feed_type: "/friends", completion: {
                 (feed: Feed?) in
                 guard let new_feed = feed else {
-                    
-
-print("error, file: \(#file), function: \(#function), line: \(#line)")
                     return
                 }
                 self.personalFeed = new_feed

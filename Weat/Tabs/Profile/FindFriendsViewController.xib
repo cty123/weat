@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FindFriendsViewController" customModule="Weat" customModuleProvider="target">
             <connections>
                 <outlet property="navigationBar" destination="agp-K2-ZMi" id="TFM-jd-ich"/>
+                <outlet property="searchBar" destination="iDl-aK-xnN" id="DXs-yP-XNg"/>
                 <outlet property="segmentedControl" destination="uHk-mD-sPC" id="YFR-TP-2fI"/>
                 <outlet property="tableView" destination="bfh-dc-CBL" id="KqR-5e-uXB"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
