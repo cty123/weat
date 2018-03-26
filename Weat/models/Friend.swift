@@ -15,7 +15,6 @@ class Friend {
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
-                print(json)
                 let message = json["message"]
                 // Check if the request is successful
                 if message == "OK" {
