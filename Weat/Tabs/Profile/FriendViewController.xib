@@ -73,6 +73,9 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A8N-8G-4xf">
                     <rect key="frame" x="124" y="138" width="235" height="30"/>
                     <state key="normal" title="add friend/remove friend"/>
+                    <connections>
+                        <action selector="friendButtonPress:" destination="-1" eventType="touchUpInside" id="H0x-uM-hqF"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

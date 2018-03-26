@@ -213,6 +213,7 @@ class Friend {
                     user.id = json["user"]["id"].intValue
                     user.privacy = json["user"]["privacy"].intValue
                     user.phone = json["user"]["phone"].stringValue
+                    user.facebook_link = facebook_link
                     completion(.success(user))
                 }else{
                     completion(.failure(AFError.invalidURL(url: url)))

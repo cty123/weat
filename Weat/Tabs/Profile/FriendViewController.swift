@@ -27,6 +27,16 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.dismiss(animated: true, completion: nil)
     }
 
+    @IBAction func friendButtonPress(_ sender: UIButton) {
+        let friend_id: String = "\((user?.id)!)"
+        Friend.sendFriendRequest(friend_id: friend_id) { (status) in
+            if(!status) {
+                print("File: \(#file)")
+                print("Line: \(#line)")
+                print("Failed to send friend request.")
+            }
+        }
+    }
     // init with this view
     var user: User?
     var friends: [User] = []            // array of friend
@@ -54,7 +64,7 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
         /// populate profile
         
         // 1. profile picture
-        FBSDKGraphRequest(graphPath: self.user?.facebook_link, parameters: ["fields": "name, location, picture.type(large)"]).start(completionHandler: { (connection, result, error) -> Void in
+        FBSDKGraphRequest(graphPath: (self.user?.facebook_link)!, parameters: ["fields": "name, location, picture.type(large)"]).start(completionHandler: { (connection, result, error) -> Void in
             if (error == nil){
 
                 print(result as Any)
@@ -67,6 +77,9 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 let url = URL(string: urlString)
                 if let data = try? Data(contentsOf: url!) {
                     self.imageViewProfilePic.image = UIImage(data: data)!
+                    self.imageViewProfilePic.layer.cornerRadius = self.imageViewProfilePic.frame.size.height / 2;
+                    self.imageViewProfilePic.layer.masksToBounds = true;
+                    self.imageViewProfilePic.layer.borderWidth = 0;
                 }
                 
             } else {
@@ -74,8 +87,8 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         })
         
-        // 2. name
-        // self.labelName.text = self.facebookLink
+        self.labelName.text = user?.name!
+        self.labelLocation.text = user?.location!
 
         
     }
