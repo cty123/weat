@@ -63,6 +63,12 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     @IBAction func favoriteButtonPress(_ sender: Any) {
+        
+        // if not set, assume false
+        if (restaurant?.is_favorite == nil) {
+            restaurant?.is_favorite = false
+        }
+        
         if((restaurant?.is_favorite)!) {
             Favorite.deleteFavoriteRestaurant(google_link: (self.restaurant?.google_link)!, restaurant_name: (self.restaurant?.name)!){ status in
                 
@@ -148,8 +154,12 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
             headerImage.image = restaurant?.image
             hoursLabel.text = restaurant?.open_now
             
-            if((restaurant?.is_favorite)!) {
-                favoriteLabel.text = "Remove Favorite"
+            if let is_favorite = restaurant?.is_favorite {
+                if (is_favorite) {
+                    favoriteLabel.text = "Remove Favorite"
+                } else {
+                    favoriteLabel.text = "Favorite"
+                }
             } else {
                 favoriteLabel.text = "Favorite"
             }
