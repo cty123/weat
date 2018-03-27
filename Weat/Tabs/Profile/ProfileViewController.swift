@@ -55,7 +55,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     var friends: [User] = []                // array of friends
     var personalFeed: Feed? = nil           // feed
     var showArchivedFeedItems = false       // toggle to allow user to see archived feed items
-    var favorites: [Favorite] = []
+    var favorites: [Restaurant] = []
     
     // segmented control segments
     let segments = ["Feed", "Friends", "Favorites"]
@@ -198,6 +198,21 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 self.tableView.reloadData()
             })
             break
+            
+        case 2:
+            //
+            let id = UserDefaults.standard.string(forKey: "id")!
+            User.getUserInfo(profile_id: id){result in
+                switch result {
+                case .success(let user):
+                    self.favorites = user.favorites
+                    self.tableView.reloadData()
+                case .failure(_):
+                    print("File: \(#file)")
+                    print("Line: \(#line)")
+                    print("failed to get user favorites")
+                }
+            }
         default:
             break
         }
@@ -233,8 +248,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         case 1:
             return self.friends.count
         case 2:
-            // favorites, TODO: user.favorites.size
-            break
+            return self.favorites.count
         default:
             // should never happend
             break
@@ -291,8 +305,9 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             
         case 2: // favorites
             let cell = Bundle.main.loadNibNamed("RestaurantTableViewCell", owner: self, options: nil)?.first as! RestaurantTableViewCell
-            cell.labelName.text = "\(String(describing: SimpleData.Restaurants[indexPath.row]))"
-            cell.labelDetail.text = "\(arc4random_uniform(101))% of people recommend"
+            let restaurant = favorites[indexPath.row]
+            cell.labelName.text = restaurant.name
+            cell.labelDetail.text = ""
             return cell
             
         default: // should never happend
@@ -310,14 +325,41 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             self.present(friendViewController, animated: true, completion: nil)
         }
         
+        // favorites: open next view controller
+        if (self.segmentedControl.selectedSegmentIndex == 2) {
+            let vc = RestaurantViewController(nibName: "RestaurantViewController", bundle: nil)
+            let restaurant = self.favorites[indexPath.row]
+            Restaurant.getRestaurantInfo(google_link: restaurant.google_link!, completion: { (restaurant: Restaurant) in
+                restaurant.getRestaurant { status in
+                    if(!status) {
+                        print("File: \(#file)")
+                        print("Line: \(#line)")
+                        print("failed to get restaruant details")
+                    } else {
+                        let vc = RestaurantViewController(nibName: "RestaurantViewController", bundle: nil)
+                        vc.restaurant = restaurant
+                        vc.back_string = "Back"
+                        self.present(vc, animated: true, completion: nil)
+                    }
+                }
+            })
+        }
+        
         // unselect row
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
     /// delete stuff
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // disable ability to archive an archived item
-        return !self.showArchivedFeedItems
+    
+        // only for Feed
+        if (self.segmentedControl.selectedSegmentIndex == 0) {
+            // disable ability to archive an archived item
+            return !self.showArchivedFeedItems
+        }
+        
+        // for Favorites, Friends
+        return false
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
