@@ -203,7 +203,22 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 self.tableView.reloadData()
             })
             break
+        case 1:
+            let id = String(describing: UserDefaults.standard.integer(forKey: "id"))
             
+            Friend.getFriends(profile_id: id){ result in
+                switch result{
+                case .success(let friends):
+                    self.friends = friends
+                    self.tableView.reloadData()
+                case .failure(_):
+                    print("File \(#file)")
+                    print("Line \(#line)")
+                    print("error getting friends")
+                    
+                }
+            }
+            break
         case 2:
             //
             let id = UserDefaults.standard.string(forKey: "id")!
