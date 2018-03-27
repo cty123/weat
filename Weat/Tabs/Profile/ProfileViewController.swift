@@ -335,12 +335,13 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             } else {
                 
                 
-                
-                let id = String(personalFeed!.data[indexPath.row].feed_id)
+                let id = String(personalFeed!.dataUnarchived[indexPath.row].feed_id)
                 Feed.archiveFeedItem(feed_id: id, completion: { status in
                     if (status) {
                         print("Archive was succesful")
+                        print(self.personalFeed?.dataUnarchived[indexPath.row].feed_text)
                         self.personalFeed?.dataUnarchived.remove(at: indexPath.row)
+                        print(indexPath.row)
                         self.tableView.reloadData()
                     } else {
                         print("File: \(#file)")
