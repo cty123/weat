@@ -12,6 +12,8 @@
 import Foundation
 class Comment{
     var id: Int?
+    var authorID: Int?
+    var author_FB_link: String?
     var restaurant_id: Int? 
     var comment_text: String?
     var author: String?

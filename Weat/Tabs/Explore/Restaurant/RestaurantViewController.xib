@@ -24,6 +24,7 @@
                 <outlet property="recordVisitButton" destination="Bg3-Ik-m9B" id="nQM-Ei-zT6"/>
                 <outlet property="restaurantNameLabel" destination="FsH-BY-8Ti" id="1Zb-zI-tjQ"/>
                 <outlet property="serviceRatingLabel" destination="bNz-g4-dHi" id="z8S-Lv-epW"/>
+                <outlet property="tableView" destination="hz6-sX-BnQ" id="9PY-jY-qTa"/>
                 <outlet property="tagsLabel" destination="74b-Yx-X7e" id="aXs-0j-XhR"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -166,7 +167,7 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Friends" translatesAutoresizingMaskIntoConstraints="NO" id="lr3-Dp-cfU" userLabel="Favorite Image">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favorite" translatesAutoresizingMaskIntoConstraints="NO" id="lr3-Dp-cfU" userLabel="Favorite Image">
                     <rect key="frame" x="47" y="390" width="15" height="15"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="15" id="GC5-iV-UF1"/>
@@ -179,7 +180,7 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Friends" translatesAutoresizingMaskIntoConstraints="NO" id="1tT-0T-ROz" userLabel="Menu Image">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu" translatesAutoresizingMaskIntoConstraints="NO" id="1tT-0T-ROz" userLabel="Menu Image">
                     <rect key="frame" x="243" y="390" width="15" height="15"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="15" id="BRc-sb-TKh"/>
@@ -272,5 +273,7 @@
         <image name="Checkin" width="30" height="30"/>
         <image name="Friends" width="30" height="30"/>
         <image name="Phone" width="30" height="30"/>
+        <image name="favorite" width="30" height="30"/>
+        <image name="menu" width="30" height="30"/>
     </resources>
 </document>
