@@ -39,7 +39,9 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     @IBAction func recordVisitPress(_ sender: UIButton) {
-        // perform segue to checkin
+        let postRatingViewController = PostRatingViewController(nibName: "PostRatingViewController", bundle: nil)
+        postRatingViewController.restaurant = restaurant
+        self.present(postRatingViewController, animated: true, completion: nil)
     }
     
     @IBAction func callButtonPress(_ sender: Any) {
