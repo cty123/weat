@@ -70,8 +70,8 @@ class RecommendedRestaurantsViewController: UIViewController, UITableViewDelegat
         // setup cell
         let cell = Bundle.main.loadNibNamed("RestaurantTableViewCell", owner: self, options: nil)?.first as! RestaurantTableViewCell
         let recommendation = self.recommnedations[indexPath.row]
-        cell.labelName.text = "\(recommendation.friend_name) recommends \(recommendation.restaurant_name)"
-        cell.labelDetail.text = "\(recommendation.recommended_menu_item_name)"
+        cell.labelName.text = "\(String(describing: recommendation.friend_name!)) recommends \(String(describing: recommendation.restaurant_name!))"
+        cell.labelDetail.text = "\(String(describing: recommendation.recommended_menu_item_name!))"
         return cell
     }
     
