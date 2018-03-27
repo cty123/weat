@@ -18,6 +18,9 @@ class PostRatingViewController: UIViewController {
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     
+    // local vars
+    var restaurant: Restaurant?
+    
     // make sliders stop at fixed points
     @IBAction func changedFood(_ sender: UISlider) {
         sender.setValue(Float(lroundf(sliderFood.value)), animated: true)
@@ -29,8 +32,38 @@ class PostRatingViewController: UIViewController {
     
     // submit ratings
     @IBAction func postRating(_ sender: Any) {
-        // TODO: post here
+        let food_rating = Int(self.sliderFood.value)
+        let service_rating = Int(self.sliderService.value)
+        let rating_text = self.textField.text!
+        var title = ""
+        var message = ""
+        
+        Rating.postRestaurantRating(google_link: (restaurant?.google_link)!, restaurant_name: (restaurant?.name)!, food_rating: food_rating, service_rating: service_rating, rating_text: rating_text){ status in
+            if (status){
+                title = "Success"
+                message = "Posted rating for \((self.restaurant?.name)!)"
+            } else {
+                title = "Error"
+                message = "Unable to post rating."
+                print("Error \(#file)")
+                print("Error \(#line)")
+                print("Unable to post rating.")
+            }
+            let alert = UIAlertController(title: title,
+                                          message: message,
+                                          preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "Done",
+                                          style: .default,
+                                          handler: {_ in
+                                            CATransaction.setCompletionBlock({
+                                                self.dismiss(animated: true, completion: nil)
+                                            })
+                                        }))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
+ 
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,11 +86,11 @@ class PostRatingViewController: UIViewController {
         self.button.setup(title: "Submit", color: UIColor.orange)
         
         // init label to name (TODO)
-        self.labelName.text = "Restaurant Name"
+        self.labelName.text = (restaurant?.name)!
         self.labelName.textAlignment = .center
         
         // init textfield, TODO: reword this
-        self.textField.placeholder = "leave a brief message (optional)"
+        self.textField.placeholder = "leave a brief message"
     }
     
 

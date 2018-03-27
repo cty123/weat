@@ -39,7 +39,9 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     @IBAction func recordVisitPress(_ sender: UIButton) {
-        // perform segue to checkin
+        let postRatingViewController = PostRatingViewController(nibName: "PostRatingViewController", bundle: nil)
+        postRatingViewController.restaurant = restaurant
+        self.present(postRatingViewController, animated: true, completion: nil)
     }
     
     @IBAction func callButtonPress(_ sender: Any) {
@@ -243,7 +245,7 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
                 // get json
                 let json = JSON(result!)
                 // profile picture
-                let urlString: String = json["picture","data","url"].string!
+                let urlString: String = json["picture","data","url"].stringValue
                 let url = URL(string: urlString)
                 if let data = try? Data(contentsOf: url!) {
                     cell.profileImage.image = UIImage(data: data)!

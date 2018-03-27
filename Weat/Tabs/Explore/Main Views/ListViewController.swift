@@ -84,8 +84,12 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                 } else {
                     for obj in json["results"] {
                         Restaurant.getRestaurantInfo(google_link: obj.1["place_id"].string!, completion: { (restaurant: Restaurant) in
-                            self.restaurants.append(restaurant)
-                            self.tableView.reloadData()
+                            restaurant.getRestaurantRating(completion: { (status) in
+                                if(status) {
+                                    self.restaurants.append(restaurant)
+                                    self.tableView.reloadData()
+                                }
+                            })
                         })
                     }
                     // Google Places only allows 20 results per query, but includes a 'next page' token if there are more results (up to 60 results, so 3 pages)
@@ -146,7 +150,21 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         cell.labelName.text = "\(String(describing: list_obj.name!))"
         cell.imageViewPic.image = list_obj.image!
-        cell.labelDetail.text = "Rating holder"
+        
+        // ratings calculation
+        var food_rating: Float = 0.0
+        var service_rating: Float = 0.0
+        
+        if(list_obj.rating.food_count_all > 0) {
+            food_rating = (Float(list_obj.rating.food_good_all) / Float(list_obj.rating.food_count_all)) * 100
+        }
+        if(list_obj.rating.service_count_all > 0) {
+            service_rating = (Float(list_obj.rating.service_good_all) / Float(list_obj.rating.service_count_all)) * 100
+        }
+        
+        let overall_rating = Int((service_rating + food_rating) / 2.0)
+        
+        cell.labelDetail.text = "\(overall_rating)% of users recommend"
         cell.restaurant = list_obj
         return cell
         
@@ -163,9 +181,14 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             if(!status) {
                 print("getRestaurant error in listViewController")
             } else {
-                restaurantViewController.restaurant = cell.restaurant
-                restaurantViewController.back_string = "List"
-                self.present(restaurantViewController, animated: true, completion: nil)
+                cell.restaurant.getRestaurantRating(completion: { (rating_status) in
+                    if(!rating_status){
+                        print("getRestaurantRating error in listViewController")
+                    }
+                    restaurantViewController.restaurant = cell.restaurant
+                    restaurantViewController.back_string = "List"
+                    self.present(restaurantViewController, animated: true, completion: nil)
+                })
             }
         }
     }
@@ -219,9 +242,20 @@ extension ListViewController: GMSAutocompleteResultsViewControllerDelegate {
         if(isRestaurant) {
             let restaurantViewController = RestaurantViewController(nibName: "RestaurantViewController", bundle: nil)
             Restaurant.getRestaurantInfo(google_link: place.placeID, completion: { (restaurant: Restaurant) in
-                restaurantViewController.restaurant = restaurant
-                restaurantViewController.back_string = "List"
-                self.present(restaurantViewController, animated: true, completion: nil)
+                restaurant.getRestaurant { status in
+                    if(!status) {
+                        print("getRestaurant error in listViewController")
+                    } else {
+                        restaurant.getRestaurantRating(completion: { (rating_status) in
+                            if(!rating_status){
+                                print("getRestaurantRating error in listViewController")
+                            }
+                            restaurantViewController.restaurant = restaurant
+                            restaurantViewController.back_string = "List"
+                            self.present(restaurantViewController, animated: true, completion: nil)
+                        })
+                    }
+                }
             })
         } else {
             getNearby(lat: exploreLocations.latitude!, lng: exploreLocations.longitude!)

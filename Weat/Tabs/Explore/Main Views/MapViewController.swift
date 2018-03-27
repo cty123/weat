@@ -248,9 +248,14 @@ extension MapViewController: GMSMapViewDelegate {
                 if(!status) {
                     print("getRestaurant error in listViewController")
                 } else {
-                    restaurantViewController.restaurant = restaurant
-                    restaurantViewController.back_string = "Map"
-                    self.present(restaurantViewController, animated: true, completion: nil)
+                    restaurant.getRestaurantRating(completion: { (rating_status) in
+                        if(!rating_status){
+                            print("getRestaurantRating error in mapViewController")
+                        }
+                        restaurantViewController.restaurant = restaurant
+                        restaurantViewController.back_string = "Map"
+                        self.present(restaurantViewController, animated: true, completion: nil)
+                    })
                 }
             }
         })
