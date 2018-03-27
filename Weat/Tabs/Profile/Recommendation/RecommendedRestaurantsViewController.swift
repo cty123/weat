@@ -82,14 +82,37 @@ class RecommendedRestaurantsViewController: UIViewController, UITableViewDelegat
         // get restaurant
         let recommendation = recommnedations[indexPath.row]
         
+        /*
         let r = Restaurant()
         r.google_link = recommendation.google_link
         r.name = recommendation.restaurant_name
+        */
+        
+        
+        Restaurant.getRestaurantInfo(google_link: recommendation.google_link!, completion: { (restaurant: Restaurant) in
+            restaurant.getRestaurant { status in
+                if(!status) {
+                    print("getRestaurant error in listViewController")
+                } else {
+                    let vc = RestaurantViewController(nibName: "RestaurantViewController", bundle: nil)
+                    vc.restaurant = restaurant
+                    vc.back_string = "Back"
+                    self.present(vc, animated: true, completion: nil)
+                }
+            }
+        })
+        
+        
+        
+        /*
         r.getRestaurant() { status in
             if(status){
                 // create vc
+                Restaurant.getRestaurantInfo(google_link: r.google_link, completion: { (restaurant: Restaurant) in
+ 
+                })
+                
                 let vc = RestaurantViewController(nibName: "RestaurantViewController", bundle: nil)
-                vc.restaurant = r
                 self.present(vc, animated: true, completion: nil)
             }else{
                 // don't create vc
@@ -98,6 +121,7 @@ class RecommendedRestaurantsViewController: UIViewController, UITableViewDelegat
                 print("failed to get restaruant")
             }
         }
+        */
     }
     
 }
