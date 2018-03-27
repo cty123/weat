@@ -16,7 +16,8 @@ class Rating {
     var id: Int?
     // The writer/author of this rating
     var author: String?
-    
+    var authorID: Int?
+    var author_FB_link: String?
     var restaurant_id: Int?
     var food_rating: Int?
     var service_rating: Int?

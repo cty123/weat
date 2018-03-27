@@ -29,8 +29,10 @@
 		14A7E86520362A5600F8655C /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A7E86420362A5600F8655C /* Feed.swift */; };
 		14D809E020464A2900517E6E /* RestaurantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D809DE20464A2900517E6E /* RestaurantViewController.swift */; };
 		14D809E120464A2900517E6E /* RestaurantViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14D809DF20464A2900517E6E /* RestaurantViewController.xib */; };
-		14EA36EC2061B301002AA9F0 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EA36EA2061B300002AA9F0 /* MenuTableViewCell.swift */; };
-		14EA36ED2061B301002AA9F0 /* MenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14EA36EB2061B300002AA9F0 /* MenuTableViewCell.xib */; };
+		14E424B72068B0E7000F2057 /* MenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14E424B62068B0E7000F2057 /* MenuTableViewCell.xib */; };
+		14E424B92068B0F3000F2057 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E424B82068B0F3000F2057 /* MenuTableViewCell.swift */; };
+		14E424BC206961D8000F2057 /* RatingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E424BA206961D8000F2057 /* RatingTableViewCell.swift */; };
+		14E424BD206961D8000F2057 /* RatingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14E424BB206961D8000F2057 /* RatingTableViewCell.xib */; };
 		4437886DF57BB2316786CBE5 /* Pods_WeatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E26D6587C8052AB156A919CB /* Pods_WeatTests.framework */; };
 		75413D9749AD3790AD1E90AF /* Pods_Weat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B72BB2C83393A9A9E49E7C9 /* Pods_Weat.framework */; };
 		84EE681A203A3F9800A11D41 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84EE6819203A3F9800A11D41 /* Profile.storyboard */; };
@@ -112,8 +114,10 @@
 		14A7E86420362A5600F8655C /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		14D809DE20464A2900517E6E /* RestaurantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantViewController.swift; sourceTree = "<group>"; };
 		14D809DF20464A2900517E6E /* RestaurantViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RestaurantViewController.xib; sourceTree = "<group>"; };
-		14EA36EA2061B300002AA9F0 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
-		14EA36EB2061B300002AA9F0 /* MenuTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuTableViewCell.xib; sourceTree = "<group>"; };
+		14E424B62068B0E7000F2057 /* MenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuTableViewCell.xib; sourceTree = "<group>"; };
+		14E424B82068B0F3000F2057 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
+		14E424BA206961D8000F2057 /* RatingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingTableViewCell.swift; sourceTree = "<group>"; };
+		14E424BB206961D8000F2057 /* RatingTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RatingTableViewCell.xib; sourceTree = "<group>"; };
 		3F5C277665A3A4B2373A20A9 /* Pods-Weat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weat.release.xcconfig"; path = "Pods/Target Support Files/Pods-Weat/Pods-Weat.release.xcconfig"; sourceTree = "<group>"; };
 		46C16D6C64B50763370D8D5E /* Pods-WeatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WeatTests/Pods-WeatTests.release.xcconfig"; sourceTree = "<group>"; };
 		6D9F042A53AB494B0EA93C11 /* Pods-Weat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Weat/Pods-Weat.debug.xcconfig"; sourceTree = "<group>"; };
@@ -207,6 +211,8 @@
 			children = (
 				14D809DE20464A2900517E6E /* RestaurantViewController.swift */,
 				14D809DF20464A2900517E6E /* RestaurantViewController.xib */,
+				14E424BA206961D8000F2057 /* RatingTableViewCell.swift */,
+				14E424BB206961D8000F2057 /* RatingTableViewCell.xib */,
 			);
 			path = Restaurant;
 			sourceTree = "<group>";
@@ -278,9 +284,9 @@
 			isa = PBXGroup;
 			children = (
 				148BE60B2056D9C40065FC28 /* MenuViewController.swift */,
+				14E424B82068B0F3000F2057 /* MenuTableViewCell.swift */,
+				14E424B62068B0E7000F2057 /* MenuTableViewCell.xib */,
 				148BE60C2056D9C40065FC28 /* MenuViewController.xib */,
-				14EA36EA2061B300002AA9F0 /* MenuTableViewCell.swift */,
-				14EA36EB2061B300002AA9F0 /* MenuTableViewCell.xib */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -516,10 +522,12 @@
 				145F83E620436F5400FAFEAF /* FindFriendsViewController.xib in Resources */,
 				E0E572B62033CB3B00E7822B /* LaunchScreen.storyboard in Resources */,
 				84EE682F203A41CC00A11D41 /* FriendTableViewCell.xib in Resources */,
+				14E424B72068B0E7000F2057 /* MenuTableViewCell.xib in Resources */,
 				140924C9203D241E00D6F8C8 /* Feed.storyboard in Resources */,
 				84EE682B203A41BF00A11D41 /* FeedTableViewCell.xib in Resources */,
 				1417955F203D2B3B00611D6F /* Explore.storyboard in Resources */,
 				14D809E120464A2900517E6E /* RestaurantViewController.xib in Resources */,
+				14E424BD206961D8000F2057 /* RatingTableViewCell.xib in Resources */,
 				E0E572B32033CB3B00E7822B /* Assets.xcassets in Resources */,
 				A85E992D2040063800A95558 /* FriendRequestTableViewCell.xib in Resources */,
 				1417956A203D2DE800611D6F /* Groups.storyboard in Resources */,
@@ -665,7 +673,6 @@
 			files = (
 				E0192DDB2054C4BB005C5DDF /* Menu_item.swift in Sources */,
 				14D809E020464A2900517E6E /* RestaurantViewController.swift in Sources */,
-				14EA36EC2061B301002AA9F0 /* MenuTableViewCell.swift in Sources */,
 				A8EC30012068653700A6DB92 /* RecommendedRestaurantsViewController.swift in Sources */,
 				14125B392044E61A00B612CE /* GlobalProfileVars.swift in Sources */,
 				14A7E86520362A5600F8655C /* Feed.swift in Sources */,
@@ -676,12 +683,12 @@
 				A8AE7FCA203F9D5B007C9506 /* FriendViewController.swift in Sources */,
 				84EE6832203A41FC00A11D41 /* RestaurantTableViewCell.swift in Sources */,
 				E0BD5DC2203BA9EB00602FD2 /* Friend.swift in Sources */,
+				14E424BC206961D8000F2057 /* RatingTableViewCell.swift in Sources */,
 				84EE6837203A430D00A11D41 /* SimpleData.swift in Sources */,
 				140924C7203D241300D6F8C8 /* FeedViewController.swift in Sources */,
 				E0192DD92054C3F0005C5DDF /* Rating.swift in Sources */,
 				E07690F92056194000C43765 /* Favorite.swift in Sources */,
 				142E6E1C20426EE7009E1A8B /* ExploreLocation.swift in Sources */,
-				A85E99382040252500A95558 /* FacebookFriendsViewController.swift in Sources */,
 				E0E572CC2033CBF100E7822B /* LoadController.swift in Sources */,
 				A8C2ADF320583F3E009255DC /* RecommendToFriendsViewController.swift in Sources */,
 				E06D9A9B205F1C5600D77FDC /* Recommendation.swift in Sources */,
@@ -700,6 +707,7 @@
 				1463088F203F9BBC00241DE3 /* Restaurant.swift in Sources */,
 				84EE6835203A42EE00A11D41 /* Extensions.swift in Sources */,
 				148BE60D2056D9C40065FC28 /* MenuViewController.swift in Sources */,
+				14E424B92068B0F3000F2057 /* MenuTableViewCell.swift in Sources */,
 				14179572203D341400611D6F /* ListViewController.swift in Sources */,
 				E0E572AC2033CB3B00E7822B /* AppDelegate.swift in Sources */,
 				A85E993C2040501400A95558 /* EditProfileViewController.swift in Sources */,

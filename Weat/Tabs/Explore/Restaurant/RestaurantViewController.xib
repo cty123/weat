@@ -24,6 +24,7 @@
                 <outlet property="recordVisitButton" destination="Bg3-Ik-m9B" id="nQM-Ei-zT6"/>
                 <outlet property="restaurantNameLabel" destination="FsH-BY-8Ti" id="1Zb-zI-tjQ"/>
                 <outlet property="serviceRatingLabel" destination="bNz-g4-dHi" id="z8S-Lv-epW"/>
+                <outlet property="tableView" destination="hz6-sX-BnQ" id="9PY-jY-qTa"/>
                 <outlet property="tagsLabel" destination="74b-Yx-X7e" id="aXs-0j-XhR"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -166,7 +167,7 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Friends" translatesAutoresizingMaskIntoConstraints="NO" id="lr3-Dp-cfU" userLabel="Favorite Image">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favorite" translatesAutoresizingMaskIntoConstraints="NO" id="lr3-Dp-cfU" userLabel="Favorite Image">
                     <rect key="frame" x="47" y="390" width="15" height="15"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="15" id="GC5-iV-UF1"/>
@@ -179,7 +180,7 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Friends" translatesAutoresizingMaskIntoConstraints="NO" id="1tT-0T-ROz" userLabel="Menu Image">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu" translatesAutoresizingMaskIntoConstraints="NO" id="1tT-0T-ROz" userLabel="Menu Image">
                     <rect key="frame" x="243" y="390" width="15" height="15"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="15" id="BRc-sb-TKh"/>
@@ -199,6 +200,10 @@
                         </navigationItem>
                     </items>
                 </navigationBar>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hz6-sX-BnQ">
+                    <rect key="frame" x="0.0" y="424" width="375" height="243"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </tableView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -206,6 +211,7 @@
                 <constraint firstItem="Tdb-Iq-6Os" firstAttribute="centerY" secondItem="3Zx-cV-nwG" secondAttribute="centerY" id="1NC-39-qzz"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="sL1-ib-wFU" secondAttribute="trailing" id="1YY-VG-qoy"/>
                 <constraint firstItem="d2V-WQ-M13" firstAttribute="centerY" secondItem="3Zx-cV-nwG" secondAttribute="centerY" id="1kK-c9-9T0"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="hz6-sX-BnQ" secondAttribute="trailing" id="2pO-Zy-Jdf"/>
                 <constraint firstItem="bNz-g4-dHi" firstAttribute="top" secondItem="LyN-SK-sdz" secondAttribute="bottom" constant="6" id="3cS-gT-7pa"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="rcB-65-j6K" secondAttribute="trailing" constant="16" id="4lO-RC-aDJ"/>
                 <constraint firstItem="74b-Yx-X7e" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="4rB-jp-9Wb"/>
@@ -227,6 +233,7 @@
                 <constraint firstItem="gSH-g1-fF8" firstAttribute="leading" secondItem="bQX-Cu-uUW" secondAttribute="trailing" constant="8" id="P0S-bM-fd1"/>
                 <constraint firstItem="OaI-KC-eWy" firstAttribute="centerY" secondItem="P35-6Y-Ymr" secondAttribute="centerY" id="PR5-Wl-Gg5"/>
                 <constraint firstItem="G21-o8-ekg" firstAttribute="centerY" secondItem="KRe-M8-bK5" secondAttribute="centerY" id="Sob-ls-eQt"/>
+                <constraint firstItem="hz6-sX-BnQ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="UeZ-ut-m3C"/>
                 <constraint firstItem="KRe-M8-bK5" firstAttribute="top" secondItem="3Zx-cV-nwG" secondAttribute="bottom" id="X0r-Wx-VhG"/>
                 <constraint firstItem="OaI-KC-eWy" firstAttribute="leading" secondItem="1tT-0T-ROz" secondAttribute="trailing" constant="8" id="XC9-mQ-qwu"/>
                 <constraint firstItem="G21-o8-ekg" firstAttribute="centerX" secondItem="KRe-M8-bK5" secondAttribute="centerX" id="XDV-lM-jX9"/>
@@ -234,6 +241,7 @@
                 <constraint firstItem="Bg3-Ik-m9B" firstAttribute="top" secondItem="sL1-ib-wFU" secondAttribute="bottom" constant="21" id="ZPf-f9-VUu"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="leading" secondItem="KRe-M8-bK5" secondAttribute="leading" id="aba-UZ-LVX"/>
                 <constraint firstItem="Bg3-Ik-m9B" firstAttribute="leading" secondItem="3Zx-cV-nwG" secondAttribute="trailing" id="ahX-lD-Eve"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="hz6-sX-BnQ" secondAttribute="bottom" id="bHY-hD-ei2"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="leading" secondItem="3Zx-cV-nwG" secondAttribute="leading" id="cFH-Cd-pLW"/>
                 <constraint firstItem="P35-6Y-Ymr" firstAttribute="leading" secondItem="KRe-M8-bK5" secondAttribute="trailing" id="dIS-yi-NVg"/>
                 <constraint firstItem="lr3-Dp-cfU" firstAttribute="centerY" secondItem="KRe-M8-bK5" secondAttribute="centerY" id="dWQ-DI-6f2"/>
@@ -242,6 +250,7 @@
                 <constraint firstItem="fZP-ZP-FCD" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="evc-br-iZ3"/>
                 <constraint firstItem="sL1-ib-wFU" firstAttribute="leading" secondItem="c5r-Hj-nvq" secondAttribute="trailing" constant="-33" id="gUU-bj-8cY"/>
                 <constraint firstItem="d2V-WQ-M13" firstAttribute="centerX" secondItem="3Zx-cV-nwG" secondAttribute="centerX" id="iIL-69-bOs"/>
+                <constraint firstItem="hz6-sX-BnQ" firstAttribute="top" secondItem="P35-6Y-Ymr" secondAttribute="bottom" constant="8" id="iz8-2a-tt4"/>
                 <constraint firstItem="d2V-WQ-M13" firstAttribute="leading" secondItem="Tdb-Iq-6Os" secondAttribute="trailing" constant="8" id="nGC-Et-aY6"/>
                 <constraint firstItem="c5r-Hj-nvq" firstAttribute="centerY" secondItem="sL1-ib-wFU" secondAttribute="centerY" constant="-1" id="nK1-zM-Tgq"/>
                 <constraint firstItem="sL1-ib-wFU" firstAttribute="top" secondItem="fZP-ZP-FCD" secondAttribute="bottom" constant="75" id="oMz-dm-PHN"/>
@@ -264,5 +273,7 @@
         <image name="Checkin" width="30" height="30"/>
         <image name="Friends" width="30" height="30"/>
         <image name="Phone" width="30" height="30"/>
+        <image name="favorite" width="30" height="30"/>
+        <image name="menu" width="30" height="30"/>
     </resources>
 </document>

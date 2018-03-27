@@ -8,8 +8,10 @@
 
 import UIKit
 import GooglePlaces
+import FBSDKCoreKit
+import SwiftyJSON
 
-class RestaurantViewController: UIViewController {
+class RestaurantViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var restaurantNameLabel: UILabel!
     @IBOutlet weak var foodRatingLabel: UILabel!
@@ -27,9 +29,10 @@ class RestaurantViewController: UIViewController {
     @IBOutlet weak var recordVisitButton: UIButton!
     @IBOutlet weak var menuButton: UIButton!
     
+    @IBOutlet weak var tableView: UITableView!
+    
     var restaurant: Restaurant?
     var back_string: String?
-    var ratings: [Rating]?
     
     @IBAction func dismiss(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
@@ -60,37 +63,64 @@ class RestaurantViewController: UIViewController {
     }
     
     @IBAction func favoriteButtonPress(_ sender: Any) {
-        Favorite.addFavoriteRestaurant(google_link: (self.restaurant?.google_link)!, restaurant_name: (self.restaurant?.name)!){ status in
-            
-            // delare strings TODO: figure out error messages
-            var title: String
-            var message: String
-            
-            if (status) {
-                // show message
-                title = "Success"
-                message = "Added \(String(describing: self.restaurant!.name!)) as a favorite!"
-            
-            }else{
-                // TODO: change this message bc it's not yser friend
-                title = "An error occured"
-                message = "Unable to add \(String(describing: self.restaurant!.name!)) as a favorite"
+        if((restaurant?.is_favorite)!) {
+            Favorite.deleteFavoriteRestaurant(google_link: (self.restaurant?.google_link)!, restaurant_name: (self.restaurant?.name)!){ status in
+                
+                // delare strings TODO: figure out error messages
+                var title: String
+                var message: String
+                
+                if (status) {
+                    // show message
+                    title = "Success"
+                    message = "Deleted \(String(describing: self.restaurant!.name!)) from favorites!"
+                    self.favoriteLabel.text = "Favorite"
+                    self.restaurant?.is_favorite = false
+                    
+                }else{
+                    // TODO: change this message bc it's not yser friend
+                    title = "Error"
+                    message = "Unable to remove \(String(describing: self.restaurant!.name!)) from favorites"
+                }
+                
+                // present message
+                let alert = UIAlertController(title: title,
+                                              message: message,
+                                              preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "Done",
+                                              style: .default,
+                                              handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                
             }
-            
-            // present message
-            let alert = UIAlertController(title: title,
-                                          message: message,
-                                          preferredStyle: .alert)
-            
-            alert.addAction(UIAlertAction(title: "Done",
-                                          style: .default,
-                                          handler: nil))
-            self.present(alert, animated: true, completion: nil)
-            
         }
-        
-        
-        
+        else {
+            Favorite.addFavoriteRestaurant(google_link: (self.restaurant?.google_link)!, restaurant_name: (self.restaurant?.name)!){ status in
+                
+                // delare strings TODO: figure out error messages
+                var title: String
+                var message: String
+                
+                if (status) {
+                    // show message
+                    title = "Success"
+                    message = "Added \(String(describing: self.restaurant!.name!)) as a favorite!"
+                    self.favoriteLabel.text = "Remove Favorite"
+                    self.restaurant?.is_favorite = true
+                
+                } else {
+                    // TODO: change this message bc it's not yser friend
+                    title = "Error"
+                    message = "Unable to add \(String(describing: self.restaurant!.name!)) as a favorite"
+                }
+                
+                // present message
+                let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Done", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
         
     }
     
@@ -118,13 +148,11 @@ class RestaurantViewController: UIViewController {
             headerImage.image = restaurant?.image
             hoursLabel.text = restaurant?.open_now
             
-            /*
             if((restaurant?.is_favorite)!) {
                 favoriteLabel.text = "Remove Favorite"
             } else {
                 favoriteLabel.text = "Favorite"
             }
-            */
             
             // Weat things
             // service rating
@@ -143,6 +171,10 @@ class RestaurantViewController: UIViewController {
         self.recordVisitButton.addFullWidthBottomBorderWithColor(color: UIColor.lightGray, width: 0.4)
         self.recommendButton.addRightBorderWithColor(color: UIColor.lightGray, width: 0.4)
         self.favoriteButton.addRightBorderWithColor(color: UIColor.lightGray, width: 0.4)
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -151,14 +183,74 @@ class RestaurantViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // tableview stuff
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
-    */
-
+    
+    /******* RATINGS TABLE *******/
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // feed = 0
+        let count: Int = (restaurant?.comments.count)!
+        
+        return count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 175
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = Bundle.main.loadNibNamed("RatingTableViewCell", owner: self, options: nil)?.first as! RatingTableViewCell
+        
+        cell.labelName.text = restaurant?.comments[indexPath.row].author
+        cell.dateLabel.text = restaurant?.comments[indexPath.row].time?.toString(dateFormat: "MMM d, yyyy, h:mm a")
+        cell.ratingText.text = restaurant?.comments[indexPath.row].comment_text
+        cell.rating = restaurant?.comments[indexPath.row]
+        
+        // Set rating pictures
+        switch((restaurant?.comments[indexPath.row].food_rating)!){
+        case -1:
+            cell.foodRatingImage.image = UIImage(named: "thumbs-down")
+        case 1:
+            cell.foodRatingImage.image = UIImage(named: "thumbs-up")
+        default:
+            cell.foodRatingImage.image = UIImage(named: "so-so")
+        }
+        switch((restaurant?.comments[indexPath.row].service_rating)!){
+        case -1:
+            cell.serviceRatingImage.image = UIImage(named: "thumbs-down")
+        case 0:
+            cell.serviceRatingImage.image = UIImage(named: "thumbs-up")
+        default:
+            cell.serviceRatingImage.image = UIImage(named: "so-so")
+        }
+        
+        // Set profile picture
+        FBSDKGraphRequest(graphPath: (cell.rating?.author_FB_link)!, parameters: ["fields": "name, location, picture.type(small)"]).start(completionHandler: { (connection, result, error) -> Void in
+            if (error == nil){
+                // get json
+                let json = JSON(result!)
+                // profile picture
+                let urlString: String = json["picture","data","url"].string!
+                let url = URL(string: urlString)
+                if let data = try? Data(contentsOf: url!) {
+                    cell.profileImage.image = UIImage(data: data)!
+                    cell.profileImage.layer.cornerRadius = cell.profileImage.frame.size.height / 2;
+                    cell.profileImage.layer.masksToBounds = true;
+                    cell.profileImage.layer.borderWidth = 0;
+                }
+                
+            } else {
+                print(error as Any)
+            }
+        })
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // keeps a row from being permenantly selected
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }

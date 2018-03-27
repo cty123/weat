@@ -50,7 +50,7 @@ public class FavoriteTest: XCTestCase{
     
     func testDeleteFavorite1(){
         let exp = expectation(description: "testDeleteFavorite1")
-        Favorite.deleteFavoriteRestaurant(restaurant_name: "kfc",google_link: "kfc_link"){ status in
+        Favorite.deleteFavoriteRestaurant(google_link: "kfc_link", restaurant_name: "kfc"){ status in
             if (status) {
                 print("success")
             }else{

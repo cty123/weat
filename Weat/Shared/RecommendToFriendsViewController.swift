@@ -38,8 +38,12 @@ class RecommendToFriendsViewController: UIViewController, UITableViewDelegate, U
             i = i + 1
         }
         
-        // get rid of the extra comma (lazy!)
-        friendIDs.dropLast()
+        // get rid of the extra comma
+        if (friendIDs.count > 0) {
+            friendIDs.removeLast()
+        } else {
+            return
+        }
         
         Recommendation.sendRecommendation(google_link: googleLink, menu_item_id: menuItemID, restaurant_name: restaurantName, friend_ids: friendIDs){status in
             if status {

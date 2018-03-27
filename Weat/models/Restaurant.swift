@@ -143,6 +143,8 @@ class Restaurant {
                         for rating in menu_item["ratings"].arrayValue{
                             let r = Rating()
                             r.author = rating["user"]["name"].stringValue
+                            r.author_FB_link = rating["user"]["facebook_link"].stringValue
+                            r.authorID = rating["user_id"].intValue
                             r.food_rating = rating["food_rating"].intValue
                             r.id = rating["id"].intValue
                             r.rating_text = rating["rating_text"].stringValue
@@ -238,6 +240,8 @@ class Restaurant {
                     for r in json["comments"].arrayValue{
                         let comment = Comment()
                         comment.id = r["id"].intValue
+                        comment.author_FB_link = r["user"]["facebook_link"].stringValue
+                        comment.authorID = r["user_id"].intValue
                         comment.restaurant_id = r["restaurant_id"].intValue
                         comment.food_rating = r["food_rating"].intValue
                         comment.service_rating = r["service_rating"].intValue
@@ -295,6 +299,8 @@ class Restaurant {
                             // Load ratings
                             let r = Rating()
                             r.author = rating["user"]["name"].stringValue
+                            r.author_FB_link = rating["user"]["facebook_link"].stringValue
+                            r.authorID = rating["user_id"].intValue
                             r.food_rating = rating["food_rating"].intValue
                             r.id = rating["id"].intValue
                             r.rating_text = rating["rating_text"].stringValue
@@ -310,10 +316,13 @@ class Restaurant {
                         }
                         self.menu.append(item)
                     }
+                    // Purge old comments
+                    self.comments.removeAll()
                     // Loop through the restaurant ratings --- Updating ratings
                     for r in json["comments"].arrayValue{
                         let comment = Comment()
                         comment.id = r["id"].intValue
+                        comment.author_FB_link = r["user"]["facebook_link"].stringValue
                         comment.restaurant_id = r["restaurant_id"].intValue
                         comment.food_rating = r["food_rating"].intValue
                         comment.service_rating = r["service_rating"].intValue
@@ -324,6 +333,7 @@ class Restaurant {
                         comment.time = ISO8601DateFormatter().date(from: trimmedIsoString)
                         // This is null because this is a rating for a restaurant not for a menu item
                         comment.author = r["user"]["name"].stringValue
+                        comment.authorID = r["user_id"].intValue
                         self.comments.append(comment)
                     }
                     completion(true)
