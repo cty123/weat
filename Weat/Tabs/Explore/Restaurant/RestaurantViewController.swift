@@ -157,7 +157,7 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
             hoursLabel.text = restaurant?.open_now
             
             // jordan's bug fix
-            favoriteLabel.text = "Remove Favorite"
+            favoriteLabel.text = "Add Favorite"
             if let is_favorite = restaurant?.is_favorite {
                 if (is_favorite) {
                     favoriteLabel.text = "Remove Favorite"
