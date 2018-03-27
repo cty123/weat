@@ -24,8 +24,9 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var friendRequestLabel: UILabel!
     @IBOutlet weak var friendRequestCountLabel: UILabel!
     @IBOutlet weak var notificationsLabel: UILabel!
-    @IBOutlet weak var restaurantOrangeDot: UIImageView!
     @IBOutlet weak var friendOrangeDot: UIImageView!
+    @IBOutlet weak var recommendLabel: UILabel!
+    @IBOutlet weak var recommendOrangeDot: UIImageView!
     
     
     @IBAction func viewFriendRequests(_ sender: Any) {
@@ -63,7 +64,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     // update name location (TODO: remove this)
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        self.recommendLabel.text = "0"
         // update showArchivedFeedItems
         let showArchived = UserDefaults.standard.bool(forKey: "showArchived")
         self.showArchivedFeedItems = showArchived
@@ -75,6 +76,10 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 case .success(let user):
                     self.labelName.text = user.name
                     self.labelLocation.text = user.location
+                    self.recommendLabel.text = "\(user.recommendations.count)"
+                    if(user.recommendations.count > 0) {
+                        self.recommendOrangeDot.image = UIImage(named: "OrangeDot")
+                    }
                 case .failure(let error):
                     print(error)
                     /*
@@ -88,7 +93,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         self.notificationsLabel.font = UIFont.boldSystemFont(ofSize: 17.0)
         self.buttonViewFriendRequests.addFullWidthBottomBorderWithColor(color: UIColor.lightGray, width: 0.4)
         
-        restaurantOrangeDot.image = UIImage(named: "OrangeDot") // Only really do this when we have a notification
+        
         
         // Get friend requests
         Friend.pullFriendRequest(){ result in
