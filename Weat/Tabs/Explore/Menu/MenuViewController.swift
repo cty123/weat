@@ -58,6 +58,8 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // keeps a row from being permenantly selected
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        // open menu item rating view
     }
     
 }

@@ -14,10 +14,25 @@ import SwiftyJSON
 class CheckinViewController: UIViewController {
     @IBOutlet weak var restaurantLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var noButton: UIButton!
+    @IBOutlet weak var yesButton: UIButton!
     
     var locationManager = CLLocationManager()
     var restaurants: [Restaurant] = []
     var locationIterations = 0
+    var selectedRestaurant: Restaurant?
+    
+    @IBAction func noPress(_ sender: UIButton) {
+        locationManager.startUpdatingLocation()
+        self.activityIndicator.startAnimating()
+    }
+    
+    @IBAction func yesPress(_ sender: UIButton) {
+        // move to rating view
+        let postRatingViewController = PostRatingViewController(nibName: "PostRatingViewController", bundle: nil)
+        postRatingViewController.restaurant = selectedRestaurant
+        self.present(postRatingViewController, animated: true, completion: nil)
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
@@ -76,7 +91,12 @@ class CheckinViewController: UIViewController {
                         Restaurant.getRestaurantInfo(google_link: obj.1["place_id"].string!, completion: { (restaurant: Restaurant) in
                             self.restaurants.append(restaurant)
                             if(i == 0) {
+                                self.selectedRestaurant = restaurant
                                 self.restaurantLabel.text = restaurant.name
+                                self.noButton.isEnabled = true
+                                self.noButton.setTitle("No", for: UIControlState.normal)
+                                self.noButton.isEnabled = true
+                                self.yesButton.setTitle("Yes", for: UIControlState.normal)
                                 self.activityIndicator.stopAnimating()
                             }
                             i += 1

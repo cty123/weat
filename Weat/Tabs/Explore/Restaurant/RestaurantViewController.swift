@@ -148,6 +148,25 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
             headerImage.image = restaurant?.image
             hoursLabel.text = restaurant?.open_now
             
+            // rating calculations
+            var food_rating: Int = 0
+            var service_rating: Int = 0
+            print(restaurant!)
+            if( (restaurant?.rating.food_count_all)! > 0) {
+                let rating = Float((restaurant?.rating.food_good_all)!) / Float((restaurant?.rating.food_count_all)!) * 100
+                food_rating = Int(rating)
+                foodRatingLabel.text = "\(food_rating)% of people like the food"
+            } else {
+                foodRatingLabel.text = ""
+            }
+            if( (restaurant?.rating.service_count_all)! > 0) {
+                let rating = Float((restaurant?.rating.service_good_all)!) / Float((restaurant?.rating.service_count_all)!) * 100
+                service_rating = Int(rating)
+                serviceRatingLabel.text = "\(service_rating)% of people like the service"
+            } else {
+                serviceRatingLabel.text = ""
+            }
+            
             if((restaurant?.is_favorite)!) {
                 favoriteLabel.text = "Remove Favorite"
             } else {
@@ -233,7 +252,7 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
                 // get json
                 let json = JSON(result!)
                 // profile picture
-                let urlString: String = json["picture","data","url"].string!
+                let urlString: String = json["picture","data","url"].stringValue
                 let url = URL(string: urlString)
                 if let data = try? Data(contentsOf: url!) {
                     cell.profileImage.image = UIImage(data: data)!

@@ -29,6 +29,33 @@
                             </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h3e-ME-bVS" userLabel="Restaurant">
                                 <rect key="frame" x="97" y="337" width="181" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="OmA-8K-6qj"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3U3-C2-fgR" userLabel="No">
+                                <rect key="frame" x="104" y="366" width="70" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="vrC-PM-YA2"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="noPress:" destination="GPA-2w-dxL" eventType="touchUpInside" id="gwv-uc-ceE"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c0Y-qY-3hS" userLabel="Yes">
+                                <rect key="frame" x="200" y="366" width="71" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="71" id="UXq-6f-Qhf"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="yesPress:" destination="GPA-2w-dxL" eventType="touchUpInside" id="7ir-qX-PAE"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="44h-Oj-gma" userLabel="Center">
+                                <rect key="frame" x="187" y="361" width="0.0" height="40"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -36,12 +63,17 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="c0Y-qY-3hS" firstAttribute="top" secondItem="h3e-ME-bVS" secondAttribute="bottom" constant="8" id="04G-EV-50i"/>
                             <constraint firstItem="Zm1-w7-abr" firstAttribute="centerY" secondItem="7Ml-Xj-JIv" secondAttribute="centerY" id="7g2-hN-qzc"/>
+                            <constraint firstItem="c0Y-qY-3hS" firstAttribute="leading" secondItem="44h-Oj-gma" secondAttribute="trailing" constant="13" id="BHx-7p-OV3"/>
                             <constraint firstItem="h3e-ME-bVS" firstAttribute="centerX" secondItem="7Ml-Xj-JIv" secondAttribute="centerX" id="Lim-9a-HWy"/>
                             <constraint firstItem="Zm1-w7-abr" firstAttribute="top" secondItem="7Ul-Xp-Azb" secondAttribute="bottom" constant="8.5" id="MZL-pP-wSD"/>
                             <constraint firstItem="7Ul-Xp-Azb" firstAttribute="centerX" secondItem="7Ml-Xj-JIv" secondAttribute="centerX" id="NjU-rT-G4c"/>
+                            <constraint firstItem="44h-Oj-gma" firstAttribute="centerX" secondItem="Zm1-w7-abr" secondAttribute="centerX" id="RZX-kT-HM7"/>
+                            <constraint firstItem="3U3-C2-fgR" firstAttribute="top" secondItem="h3e-ME-bVS" secondAttribute="bottom" constant="8" id="hHa-o4-USL"/>
                             <constraint firstItem="Zm1-w7-abr" firstAttribute="centerX" secondItem="7Ml-Xj-JIv" secondAttribute="centerX" id="hQe-Am-hn4"/>
                             <constraint firstItem="h3e-ME-bVS" firstAttribute="top" secondItem="Zm1-w7-abr" secondAttribute="bottom" constant="7.5" id="q7M-O5-vuR"/>
+                            <constraint firstItem="44h-Oj-gma" firstAttribute="leading" secondItem="3U3-C2-fgR" secondAttribute="trailing" constant="13" id="yeD-9t-2ME"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7Ml-Xj-JIv"/>
                     </view>
@@ -51,7 +83,9 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="activityIndicator" destination="7Ul-Xp-Azb" id="4zc-Qn-cbd"/>
+                        <outlet property="noButton" destination="3U3-C2-fgR" id="g7J-M3-ffg"/>
                         <outlet property="restaurantLabel" destination="h3e-ME-bVS" id="iYf-Np-ZTC"/>
+                        <outlet property="yesButton" destination="c0Y-qY-3hS" id="L62-KV-T3N"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pAw-uK-g21" userLabel="First Responder" sceneMemberID="firstResponder"/>
