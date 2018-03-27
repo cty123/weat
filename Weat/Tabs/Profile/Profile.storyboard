@@ -208,7 +208,8 @@
                         <outlet property="labelLocation" destination="uoQ-VD-783" id="jFx-kP-ePm"/>
                         <outlet property="labelName" destination="gWg-LE-nt6" id="gMB-hO-5o7"/>
                         <outlet property="notificationsLabel" destination="wjB-HY-yg5" id="j31-Ia-aMT"/>
-                        <outlet property="restaurantOrangeDot" destination="CLR-Ug-KSz" id="OrN-ql-oiM"/>
+                        <outlet property="recommendLabel" destination="yf4-e0-6XY" id="zEL-32-r6O"/>
+                        <outlet property="recommendOrangeDot" destination="CLR-Ug-KSz" id="KQy-J5-z09"/>
                         <outlet property="segmentedControl" destination="64m-1N-U0h" id="38r-Bp-ejl"/>
                         <outlet property="tableView" destination="unb-Fi-Rcp" id="YUG-YG-dNB"/>
                     </connections>
