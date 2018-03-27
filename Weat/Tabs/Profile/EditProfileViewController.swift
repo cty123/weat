@@ -15,15 +15,25 @@ class EditProfileViewController: UIViewController {
     @IBOutlet weak var textFieldEmail: UITextField!
     @IBOutlet weak var textFieldPhone: UITextField!
     @IBOutlet weak var textFieldLocation: UITextField!
+    @IBOutlet weak var switchShowArchived: UISwitch!
     
     // action for closing button
     @IBAction func action(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
+        UserDefaults.standard.set(self.switchShowArchived.isOn , forKey: "showArchived")
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let showArchived = UserDefaults.standard.object(forKey: "showArchived"){
+            // if the key exists
+            self.switchShowArchived.isOn = showArchived as! Bool
+        } else {
+            UserDefaults.standard.set(false, forKey: "showArchived")
+            self.switchShowArchived.isOn = false
+        }
         
         // populate fields
         let id = UserDefaults.standard.string(forKey: "id")
@@ -36,23 +46,13 @@ class EditProfileViewController: UIViewController {
                     self.textFieldPhone.text = user.phone
                     self.textFieldLocation.text = user.location
                 case .failure(let error):
-                    /*
-                        * Handle error here
-                        */
+                    print("File: \(#file)")
+                    print("Line: \(#line)")
                     print(error)
             }
         }
         
-        /*
-        self.textFieldName.text = user.name
-        self.textFieldEmail.text = user.email
-        self.textFieldPhone.text = user.phone
-        self.textFieldLocation.text = user.location
-        */
- 
         self.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(action))
-
-
     }
     
     override func viewWillDisappear(_ animated: Bool) {

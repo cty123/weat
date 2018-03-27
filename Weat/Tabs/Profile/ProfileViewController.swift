@@ -64,9 +64,12 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        // update showArchivedFeedItems
+        let showArchived = UserDefaults.standard.bool(forKey: "showArchived")
+        self.showArchivedFeedItems = showArchived
+        
         // Set profile text
         let id = UserDefaults.standard.string(forKey: "id")
-        
         User.getUserInfo(profile_id: id!){result in
             switch result {
                 case .success(let user):
@@ -185,22 +188,21 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         // TODO: pull to refresh instead
         switch self.segmentedControl.selectedSegmentIndex {
         case 0: // feed
-            /*
-            Feed.getFeed(feed_type: "/friends", completion: {
+            Feed.getFeed(feed_type: "", completion: {
                 (feed: Feed?) in
                 guard let new_feed = feed else {
+                    print("error")
                     return
                 }
                 self.personalFeed = new_feed
+                self.tableView.reloadData()
             })
-            */
             break
         default:
             break
         }
         
-        tableView.reloadData()
-
+        self.tableView.reloadData()
         
     }
     
@@ -213,12 +215,21 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         // feed = 0
         switch self.segmentedControl.selectedSegmentIndex {
         case 0:
-            if (self.showArchivedFeedItems) {
-                // return self.personalFeed?.data.count
+            // check if feed is valid
+            if let ret = self.personalFeed {
+                // if feed not nil, check if showArchived
+                if (self.showArchivedFeedItems) {
+                    // return all data
+                    return ret.data.count
+                } else {
+                    // return unarchived data
+                    return ret.dataUnarchived.count
+                }
             } else {
-                // return self.personalFeed?.unarchivedData.count
+                // if feed nil, return 0
+                return 0
             }
-            return 10
+            
         case 1:
             return self.friends.count
         case 2:
@@ -240,21 +251,37 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // TODO: images
-        switch self.segmentedControl.selectedSegmentIndex {
+        
+        
+        
+        // check
+        var feed_obj: FeedElement
+        if let check = self.personalFeed {
             
-        case 0: // feed
-            let cell = Bundle.main.loadNibNamed("FeedTableViewCell", owner: self, options: nil)?.first as! FeedTableViewCell
-            cell.labelName.text = "\(String(describing: SimpleData.Users[indexPath.row]))"
-            cell.labelRestaurant.text = "Dummy Restaurant"
-            
-            if (self.showArchivedFeedItems) {
-                cell.labelName.text = self.personalFeed?.data[indexPath.row].actor_name
-                cell.labelName.text = self.personalFeed?.data[indexPath.row].restaurant_name
-            } else {
-                cell.labelName.text = self.personalFeed?.dataUnarchived[indexPath.row].actor_name
-                cell.labelName.text = self.personalFeed?.dataUnarchived[indexPath.row].restaurant_name
+            if (check.data.count == 0) {
+                // lazy check
+                return UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: nil)
             }
             
+            if (self.showArchivedFeedItems) {
+                feed_obj = check.data[indexPath.row]
+            } else {
+                feed_obj = check.dataUnarchived[indexPath.row]
+            }
+        } else {
+            // this might cause a crash, hopefully not
+            feed_obj = FeedElement(feed_obj: "")
+        }
+        
+
+
+        let cell = Bundle.main.loadNibNamed("FeedTableViewCell", owner: self, options: nil)?.first as! FeedTableViewCell
+
+        switch self.segmentedControl.selectedSegmentIndex {
+        case 0: // feed
+            cell.labelName.text = UserDefaults.standard.string(forKey: "name")
+            cell.labelRestaurant.text = feed_obj.restaurant_name
+            cell.labelRating.text = feed_obj.feed_text
             return cell
             
         case 1: // friends
@@ -289,17 +316,40 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     
     /// delete stuff
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
+        // disable ability to archive an archived item
+        return !self.showArchivedFeedItems
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
-            // self.personalFeed?.unarchivedData.remove(at: indexPath.row)
-            // TODO: archive here not just remove for show
-            
 
-            print("deleted this cell i guess \(indexPath.row)")
-            tableView.reloadData()
+            if (self.showArchivedFeedItems) {
+                // handle backend
+                let id = personalFeed?.data[indexPath.row].feed_id
+
+                
+                
+                // handle frontend
+                
+                self.personalFeed?.data.remove(at: indexPath.row)
+            } else {
+                
+                
+                
+                let id = String(personalFeed!.data[indexPath.row].feed_id)
+                Feed.archiveFeedItem(feed_id: id, completion: { status in
+                    if (status) {
+                        print("Archive was succesful")
+                        self.personalFeed?.dataUnarchived.remove(at: indexPath.row)
+                        self.tableView.reloadData()
+                    } else {
+                        print("File: \(#file)")
+                        print("Line: \(#line)")
+                        print("Archive failed")
+                    }
+                })
+            }
+
         }
     }
     

@@ -34,7 +34,7 @@ class FeedElement: Decodable{
         receiver_name = (feed_obj["friend"]["name"].string != nil ? feed_obj["friend"]["name"].string! : "")
         receiver_id = (feed_obj["friend"]["id"].int != nil ? feed_obj["friend"]["id"].int! : -1)
         
-        archived = (feed_obj["archived"].bool != nil ? feed_obj["archived"].bool! : true)
+        archived = (feed_obj["archived"].bool != nil ? feed_obj["archived"].bool! : false)
         
     }
 }

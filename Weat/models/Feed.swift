@@ -34,5 +34,30 @@ class Feed {
         }
 
     }
+    
+    // archive a feed item
+    static func archiveFeedItem(feed_id: String, completion: @escaping(Bool)->()){
+        let url = "\(String(WeatAPIUrl))/feed"
+        let headers = [
+            "Content-Type": "application/x-www-form-urlencoded"
+        ]
+        let params = [
+            "access_token": FBSDKAccessToken.current().tokenString!,
+            "user_id": String(describing: UserDefaults.standard.integer(forKey: "id")),
+            "feed_id": feed_id
+        ]
+        Alamofire.request(url, method: .delete, parameters: params, encoding:URLEncoding.httpBody, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                let message = json["message"]
+                completion(message == "Feed item archived")
+            case .failure(let error):
+                print(error)
+                completion(false)
+            }
+        }
+    }
+    
 }
 

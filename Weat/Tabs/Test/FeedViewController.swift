@@ -95,14 +95,14 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         var count: Int = 5
         switch self.seg.selectedSegmentIndex {
         case 0:
-            // global feed, TODO: set page size
-            count = global_feed.data.count
+            // global feed
+            count = global_feed.dataUnarchived.count
         case 1:
             // friends feed
-            count = friends_feed.data.count
+            count = friends_feed.dataUnarchived.count
         case 2:
             // your feed
-            count = your_feed.data.count
+            count = your_feed.dataUnarchived.count
         default:
             // should never happen
             break
@@ -133,7 +133,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
              var receiver_name: String
              var receiver_id: Int*/
         case 0: // global feed
-            let feed_obj = global_feed.data[indexPath.row]
+            let feed_obj = global_feed.dataUnarchived[indexPath.row]
             
             cell.labelName.text = "\(String(describing: feed_obj.actor_name))"
             cell.labelRestaurant.text = "\(String(describing: feed_obj.restaurant_name))"
@@ -141,7 +141,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             return cell
             
         case 1: // friends feed
-            let feed_obj = friends_feed.data[indexPath.row]
+            let feed_obj = friends_feed.dataUnarchived[indexPath.row]
             
             cell.labelName.text = "\(String(describing: feed_obj.actor_name))"
             cell.labelRestaurant.text = "\(String(describing: feed_obj.restaurant_name))"
@@ -149,7 +149,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             return cell
             
         case 2: // your feed
-            let feed_obj = your_feed.data[indexPath.row]
+            let feed_obj = your_feed.dataUnarchived[indexPath.row]
             cell.labelName.text = "\(String(describing: UserDefaults.standard.string(forKey: "name")!))"
             cell.labelRestaurant.text = "\(String(describing: feed_obj.restaurant_name))"
             cell.labelRating.text = "\(String(describing: feed_obj.feed_text))"
@@ -165,15 +165,5 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         // keeps a row from being permenantly selected
         tableView.deselectRow(at: indexPath, animated: true)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

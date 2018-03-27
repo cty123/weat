@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EditProfileViewController" customModule="Weat" customModuleProvider="target">
             <connections>
                 <outlet property="navigationBar" destination="3u0-b1-ZQs" id="Nu1-8Q-OYO"/>
+                <outlet property="switchShowArchived" destination="dDu-YT-apR" id="3n7-vb-lId"/>
                 <outlet property="textFieldEmail" destination="bzo-OR-DXw" id="zqc-ej-TK1"/>
                 <outlet property="textFieldLocation" destination="KEG-y1-dqz" id="veD-GX-wFs"/>
                 <outlet property="textFieldName" destination="PCg-5C-Zys" id="8j6-tZ-PXP"/>
@@ -97,6 +98,18 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Archived Feed Items" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rj1-9p-s5T">
+                    <rect key="frame" x="16" y="238" width="203" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="rsi-VJ-ELU"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dDu-YT-apR">
+                    <rect key="frame" x="310" y="233" width="51" height="31"/>
+                </switch>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -113,7 +126,9 @@
                 <constraint firstItem="3u0-b1-ZQs" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="MtA-Bj-Rad"/>
                 <constraint firstItem="KEG-y1-dqz" firstAttribute="leading" secondItem="4YC-V3-GOY" secondAttribute="trailing" constant="8" id="ODm-uH-HbN"/>
                 <constraint firstItem="HJc-z7-glp" firstAttribute="top" secondItem="8NA-ex-LJT" secondAttribute="bottom" constant="17" id="OwH-e5-qsC"/>
+                <constraint firstItem="Rj1-9p-s5T" firstAttribute="top" secondItem="4YC-V3-GOY" secondAttribute="bottom" constant="17" id="VT8-72-la9"/>
                 <constraint firstItem="6ec-fx-6Qd" firstAttribute="width" secondItem="KEG-y1-dqz" secondAttribute="width" id="WpA-aZ-6ap"/>
+                <constraint firstItem="Rj1-9p-s5T" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="Wpj-Eu-CaE"/>
                 <constraint firstItem="KEG-y1-dqz" firstAttribute="leading" secondItem="4YC-V3-GOY" secondAttribute="trailing" constant="8" id="Xib-Te-pZV"/>
                 <constraint firstItem="4YC-V3-GOY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="cSK-C3-YFb"/>
                 <constraint firstItem="4YC-V3-GOY" firstAttribute="top" secondItem="HJc-z7-glp" secondAttribute="bottom" constant="17" id="eXs-cT-CsK"/>
@@ -121,6 +136,8 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="KEG-y1-dqz" secondAttribute="trailing" constant="16" id="j6H-yc-dpb"/>
                 <constraint firstItem="3u0-b1-ZQs" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="lGt-3e-eUG"/>
                 <constraint firstItem="KEG-y1-dqz" firstAttribute="top" secondItem="6ec-fx-6Qd" secondAttribute="bottom" constant="8" id="nzL-qH-Mha"/>
+                <constraint firstItem="dDu-YT-apR" firstAttribute="top" secondItem="KEG-y1-dqz" secondAttribute="bottom" constant="8" id="rZr-4I-gS2"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="dDu-YT-apR" secondAttribute="trailing" constant="16" id="s4t-LV-iPU"/>
                 <constraint firstItem="bzo-OR-DXw" firstAttribute="top" secondItem="PCg-5C-Zys" secondAttribute="bottom" constant="9" id="tyy-gV-05y"/>
                 <constraint firstItem="HJc-z7-glp" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="14" id="uX4-jm-NTT"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="bzo-OR-DXw" secondAttribute="trailing" constant="16" id="vkS-0M-aAi"/>
