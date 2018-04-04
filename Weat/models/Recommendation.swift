@@ -40,7 +40,7 @@ class Recommendation{
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
-                let message = json["message"]
+                let message = json["message"].stringValue
                 if message == "Recommendations sent" {
                     completion(true)
                 }else{
