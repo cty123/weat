@@ -12,6 +12,18 @@ import XCTest
 
 public class FeedTest: XCTestCase {
     
+    /*
+     * Testing data base
+     -------------------------relationships--------------------------
+     id    friendId    createdAt    updatedAt    accepted    userId
+     1    3    2018-01-01 00:00:00    2018-01-01 00:00:00    1    1
+     2    1    2018-01-01 00:00:00    2018-01-01 00:00:00    1    3
+     3    3    2018-03-25 18:26:27    2018-03-27 03:06:05    0    2
+     ----------------------------feeds-------------------------------
+     id    user_id    restaurant_id    friend_id    archived    feed_text    menu_item_id    createdAt    updatedAt
+     1    3    1    1    1    was recommended    1    2018-01-01 00:00:00    2018-01-01 00:00:00
+     */
+    
     func testFeedRecommendation(){
         let exp = expectation(description: "testFeedRecommendation")
         Feed.getFeed(feed_type: ""){ feed in

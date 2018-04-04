@@ -12,8 +12,17 @@ import XCTest
 
 public class RatingTest:XCTestCase {
     
-    func testPostMenuRating1(){
-        let exp = expectation(description: "testPostMenuRating1")
+    /*
+     * Testing databse
+     ------------------------------ratings-------------------------------
+     id    user_id    restaurant_id    food_rating    service_rating    rating_text    menu_item_id    createdAt    updatedAt
+     1    1    1    1    1    So good    NULL    2018-01-01 00:00:00    2018-01-01 00:00:00
+     2    1    1    1    NULL    This chicken is so good    1    2018-01-01 00:00:00    2018-01-01 00:00:00
+     */
+    
+    
+    func testPostRestaurantRating1(){
+        let exp = expectation(description: "testPostRestaurantRating1")
         Rating.postRestaurantRating(google_link: "test_link", restaurant_name: "test_restaurant", food_rating: 1, service_rating: 1, rating_text: "TestRating1"){ status in
             if (status){
                 let r = Restaurant();
@@ -34,8 +43,8 @@ public class RatingTest:XCTestCase {
         wait(for: [exp], timeout: 10.0)
     }
     
-    func testPostMenuRating2(){
-        let exp = expectation(description: "testPostMenuRating2")
+    func testPostRestaurantRating2(){
+        let exp = expectation(description: "testPostRestaurantRating2")
         Rating.postRestaurantRating(google_link: "test_link", restaurant_name: "test_restaurant", food_rating: 0, service_rating: 0, rating_text: "TestRating2"){ status in
             if (status){
                 let r = Restaurant()
@@ -56,8 +65,8 @@ public class RatingTest:XCTestCase {
         wait(for: [exp], timeout: 10.0)
     }
     
-    func testPostMenuRating3(){
-        let exp = expectation(description: "testPostMenuRating3")
+    func testPostRestaurantRating3(){
+        let exp = expectation(description: "testPostRestaurantRating3")
         let r = Restaurant()
         r.name = "test_restaurant"
         r.google_link = "test_link"
