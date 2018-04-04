@@ -15,7 +15,7 @@ class Friend {
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
-                let message = json["message"]
+                let message = json["message"].stringValue
                 // Check if the request is successful
                 if message == "OK" {
                     let status = json["status"].intValue
@@ -42,7 +42,7 @@ class Friend {
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
-                let message = json["message"]
+                let message = json["message"].stringValue
                 // Check if the request is successful
                 if message == "OK" {
                     for friend in json["friends"].arrayValue{
@@ -81,7 +81,7 @@ class Friend {
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
-                let message = json["message"]
+                let message = json["message"].stringValue
                 completion(message == "Friend request sent")
             case .failure(let error):
                 print(error)
@@ -101,7 +101,7 @@ class Friend {
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
-                let message = json["message"]
+                let message = json["message"].stringValue
                 if message == "OK" {
                     for friend in json["pending_friends"].arrayValue{
                         let tmpUser = User()
@@ -143,7 +143,7 @@ class Friend {
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
-                let message = json["message"]
+                let message = json["message"].stringValue
                 status = true
             case .failure(let error):
                 print(error)
@@ -210,7 +210,7 @@ class Friend {
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
-                let message = json["message"]
+                let message = json["message"].stringValue
                 status = true
             case .failure(let error):
                 print(error)
@@ -229,7 +229,7 @@ class Friend {
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
-                let message = json["message"]
+                let message = json["message"].stringValue
                 if message == "OK"{
                     let user = User()
                     user.name = json["user"]["name"].stringValue
