@@ -16,7 +16,7 @@ public class Group{
     var icon_id: Int?
     
     // Get all the groups the user is in
-    static func getAll(completion: @escaping(Result<[Group]>)->()){
+    static func getAll(completion: @escaping(Result<([Group])>)->()){
         let url = "\(String(WeatAPIUrl))/groups"
         let params = [
             "access_token": FBSDKAccessToken.current().tokenString!,
@@ -52,7 +52,7 @@ public class Group{
         let params = [
             "access_token": FBSDKAccessToken.current().tokenString!,
             "group_name": group_name,
-            "icon_id": String(icon_id),
+            "group_icon_id": String(icon_id),
         ]
         let headers = [
             "Content-Type": "application/x-www-form-urlencoded"

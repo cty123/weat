@@ -38,7 +38,12 @@ class PostRatingViewController: UIViewController {
         var title = ""
         var message = ""
         
-        Rating.postRestaurantRating(google_link: (restaurant?.google_link)!, restaurant_name: (restaurant?.name)!, food_rating: food_rating, service_rating: service_rating, rating_text: rating_text){ status in
+        /*
+         * Need to know the latitude and longitude of the restaurant
+         */
+        let latitude = 0.0
+        let longitude = 0.0
+        Rating.postRestaurantRating(latitude: latitude, longitude: longitude, google_link: (restaurant?.google_link)!, restaurant_name: (restaurant?.name)!, food_rating: food_rating, service_rating: service_rating, rating_text: rating_text){ status in
             if (status){
                 title = "Success"
                 message = "Posted rating for \((self.restaurant?.name)!)"

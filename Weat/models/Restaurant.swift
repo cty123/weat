@@ -111,12 +111,7 @@ class Restaurant {
         }
     }
     
-    /* TESTED Finished
-     * Get menu for a restaurant along with the ratings, the ratings contains the (name of) author
-     * The result is a array of Menu_item with ratings(might be null if no one has a rating for this item)
-     * The ratings are from the user's friends ONLY
-     * Access token is automatically obtained
-     */
+    // Get restaurant menu with ratings ----------- Will be rewritten as new backend api is implemented
     func getRestaurantMenuWithRating(completion: @escaping (Bool)->()){
         let url = "\(String(WeatAPIUrl))/restaurants/menu"
         let params = [
@@ -181,15 +176,15 @@ class Restaurant {
         let params = [
             "access_token": FBSDKAccessToken.current().tokenString!,
             "google_link": self.google_link!,
-            "restaurant_name": self.name!
+            "restaurant_name": self.name!,
+            "latitude": String(self.latitude!),
+            "longitude": String(self.longitude!)
         ]
         Alamofire.request(url, method:.get, parameters:params).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
                 let message = json["message"].stringValue
-                // Debug option
-                print(json)
                 if message == "OK" {
                     // Start to parse json
                     self.rating.ratings_exist = json["ratings_exist"].boolValue
@@ -227,7 +222,9 @@ class Restaurant {
         let params = [
             "access_token": FBSDKAccessToken.current().tokenString!,
             "google_link": self.google_link!,
-            "restaurant_name": self.name!
+            "restaurant_name": self.name!,
+            "latitude": String(self.latitude!),
+            "longitude": String(self.longitude!)
         ]
         Alamofire.request(url, method:.get, parameters:params).validate().responseJSON { response in
             switch response.result {
@@ -274,7 +271,9 @@ class Restaurant {
         let params = [
             "access_token": FBSDKAccessToken.current().tokenString!,
             "google_link": self.google_link!,
-            "restaurant_name": self.name!
+            "restaurant_name": self.name!,
+            "latitude": String(self.latitude!),
+            "longitude": String(self.longitude!)
         ]
         Alamofire.request(url, method:.get, parameters:params).validate().responseJSON { response in
             switch response.result {
@@ -348,7 +347,6 @@ class Restaurant {
     }
     
     func testGetRestaurant(){
-        //let sem = dispatch_semaphore_create(1)
         
     }
 }

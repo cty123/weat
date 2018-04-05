@@ -20,7 +20,7 @@ public class RatingTest:XCTestCase {
      2    1    1    1    NULL    This chicken is so good    1    2018-01-01 00:00:00    2018-01-01 00:00:00
      */
     
-    
+    /*
     func testPostRestaurantRating1(){
         let exp = expectation(description: "testPostRestaurantRating1")
         Rating.postRestaurantRating(google_link: "test_link", restaurant_name: "test_restaurant", food_rating: 1, service_rating: 1, rating_text: "TestRating1"){ status in
@@ -119,5 +119,5 @@ public class RatingTest:XCTestCase {
         }
         wait(for: [exp], timeout: 10.0)
     }
-    
+    */
 }

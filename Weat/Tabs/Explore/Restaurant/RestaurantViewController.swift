@@ -72,7 +72,7 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
         }
         
         if((restaurant?.is_favorite)!) {
-            Favorite.deleteFavoriteRestaurant(google_link: (self.restaurant?.google_link)!, restaurant_name: (self.restaurant?.name)!){ status in
+            Favorite.deleteFavoriteRestaurant(latitude: (restaurant?.latitude)!, longitude: (restaurant?.longitude)!, google_link: (self.restaurant?.google_link)!, restaurant_name: (self.restaurant?.name)!){ status in
                 
                 // delare strings TODO: figure out error messages
                 var title: String
@@ -104,7 +104,7 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
             }
         }
         else {
-            Favorite.addFavoriteRestaurant(google_link: (self.restaurant?.google_link)!, restaurant_name: (self.restaurant?.name)!){ status in
+            Favorite.addFavoriteRestaurant(latitude: (restaurant?.latitude)!, longitude: (restaurant?.longitude)!, google_link: (self.restaurant?.google_link)!, restaurant_name: (self.restaurant?.name)!){ status in
                 
                 // delare strings TODO: figure out error messages
                 var title: String

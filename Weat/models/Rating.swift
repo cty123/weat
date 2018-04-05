@@ -31,7 +31,7 @@ class Rating {
      * Requires: google_link, restaurant_name, food_rating, service_rating, rating_text
      * Returns a boolean variable that indicates if it has successfully posted
      */
-    static func postRestaurantRating(google_link: String, restaurant_name: String, food_rating:Int, service_rating:Int, rating_text:String, completion: @escaping(Bool)->()){
+    static func postRestaurantRating(latitude:Double, longitude:Double, google_link: String, restaurant_name: String, food_rating:Int, service_rating:Int, rating_text:String, completion: @escaping(Bool)->()){
         let url = "\(String(WeatAPIUrl))/rating"
         let params = [
             "access_token": FBSDKAccessToken.current().tokenString!,
@@ -40,6 +40,8 @@ class Rating {
             "food_rating": String(food_rating),
             "service_rating": String(service_rating),
             "rating_text": rating_text,
+            "latitude": String(latitude),
+            "longitude": String(longitude)
         ]
         let headers = [
             "Content-Type": "application/x-www-form-urlencoded"
@@ -67,7 +69,7 @@ class Rating {
      * Requires: google_link, restaurant_name, menu_item_id, food_rating, rating_text
      * Returns a boolean variable that indicates if it has successfully posted
      */
-    static func postMenuItemRating(google_link: String, restaurant_name: String, menu_item_id: Int, food_rating: Int, rating_text:String, completion:@escaping(Bool)->()){
+    static func postMenuItemRating(latitude:Double, longitude:Double, google_link: String, restaurant_name: String, menu_item_id: Int, food_rating: Int, rating_text:String, completion:@escaping(Bool)->()){
         let url = "\(String(WeatAPIUrl))/rating"
         let params = [
             "access_token": FBSDKAccessToken.current().tokenString!,
@@ -76,6 +78,8 @@ class Rating {
             "menu_item_id": String(menu_item_id),
             "food_rating": String(food_rating),
             "rating_text": rating_text,
+            "latitude": String(latitude),
+            "longitude": String(longitude)
             ]
         let headers = [
             "Content-Type": "application/x-www-form-urlencoded"

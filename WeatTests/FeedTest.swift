@@ -54,7 +54,7 @@ public class FeedTest: XCTestCase {
         }
         wait(for: [exp], timeout: 10.0)
     }
-    
+    /*
     func testPostRating(){
         let exp = expectation(description: "testPostRating")
         Rating.postRestaurantRating(google_link: "kfc_link", restaurant_name: "kfc", food_rating: 1, service_rating: 1, rating_text: "testing"){ status in
@@ -87,4 +87,5 @@ public class FeedTest: XCTestCase {
         }
         wait(for: [exp], timeout: 10.0)
     }
+ */
 }
