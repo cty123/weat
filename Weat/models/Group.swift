@@ -221,6 +221,7 @@ public class Group{
         let url = "\(String(WeatAPIUrl))/groups/members"
         let params = [
             "access_token": FBSDKAccessToken.current().tokenString!,
+            "group_id": String(group_id)
             ]
         var users = [User]()
         Alamofire.request(url, method:.get, parameters:params).validate().responseJSON { response in
@@ -229,7 +230,7 @@ public class Group{
                 let json = JSON(value)
                 let message = json["message"].stringValue
                 if message == "OK" {
-                    for user in json["groups"].arrayValue{
+                    for user in json["members"].arrayValue{
                         let u = User()
                         u.id = user["user"]["id"].intValue
                         u.name = user["user"]["name"].stringValue

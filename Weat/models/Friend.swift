@@ -138,17 +138,20 @@ class Friend {
             "acceptance": String(acceptance),
             "friend_id": String(friend_id)
         ]
-        var status = false
         Alamofire.request(url, method:.post, parameters: params, encoding:URLEncoding.httpBody, headers: headers).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
                 let message = json["message"].stringValue
-                status = true
+                if message == "Friend request sent" {
+                    completion(true)
+                }else{
+                    completion(false)
+                }
             case .failure(let error):
                 print(error)
+                completion(false)
             }
-            completion(status)
         }
     }
     
@@ -205,17 +208,20 @@ class Friend {
             "access_token": FBSDKAccessToken.current().tokenString!,
             "facebook_links": facebook_links
         ]
-        var status = false
         Alamofire.request(url, method:.post, parameters: params, encoding:URLEncoding.httpBody, headers: headers).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
                 let message = json["message"].stringValue
-                status = true
+                if message == "Friends added"{
+                    completion(true)
+                }else{
+                    completion(false)
+                }
             case .failure(let error):
                 print(error)
+                completion(false)
             }
-            completion(status)
         }
     }
     
@@ -251,19 +257,17 @@ class Friend {
     }
     
     static func remove(id: String, completion: @escaping (Result<Bool>)->()){
-        let url = "\(String(WeatAPIUrl))/user/friends/unfriend"
+        let url = "\(String(WeatAPIUrl))/user/friends"
         let params = [
             "access_token": FBSDKAccessToken.current().tokenString!,
-            "id": id
+            "friend_id": id
         ]
-        Alamofire.request(url, method:.get, parameters:params).validate().responseJSON { response in
+        Alamofire.request(url, method:.delete, parameters:params).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
                 let message = json["message"].stringValue
-                if message == "OK"{
-                    // do this once adam does back end stuff
-                    //if(
+                if message == "Friend deleted"{
                     completion(.success(true))
                 }else{
                     completion(.failure(AFError.invalidURL(url: url)))
