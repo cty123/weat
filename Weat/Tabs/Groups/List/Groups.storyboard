@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="x5f-Jk-Vux">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Groups View Controller-->
+        <scene sceneID="MhZ-ZM-o9x">
+            <objects>
+                <viewController id="x5f-Jk-Vux" customClass="GroupsViewController" customModule="Weat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZFS-Ec-jSU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3vl-97-kcw">
+                                <rect key="frame" x="0.0" y="120" width="375" height="498"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vah-EY-ie7">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="Groups" id="Ofs-kJ-ioh"/>
+                                </items>
+                            </navigationBar>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="rd7-ZU-Bks">
+                                <rect key="frame" x="0.0" y="64" width="375" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="rd7-ZU-Bks" firstAttribute="top" secondItem="vah-EY-ie7" secondAttribute="bottom" id="99D-u0-6HC"/>
+                            <constraint firstItem="vah-EY-ie7" firstAttribute="trailing" secondItem="KVV-i6-aSH" secondAttribute="trailing" id="BGs-UH-LdW"/>
+                            <constraint firstItem="3vl-97-kcw" firstAttribute="top" secondItem="rd7-ZU-Bks" secondAttribute="bottom" id="Q9P-Jg-jsC"/>
+                            <constraint firstItem="3vl-97-kcw" firstAttribute="bottom" secondItem="KVV-i6-aSH" secondAttribute="bottom" id="Rub-TH-P4h"/>
+                            <constraint firstItem="3vl-97-kcw" firstAttribute="leading" secondItem="KVV-i6-aSH" secondAttribute="leading" id="YZG-wY-Ytu"/>
+                            <constraint firstItem="vah-EY-ie7" firstAttribute="top" secondItem="KVV-i6-aSH" secondAttribute="top" id="jo2-4d-fYQ"/>
+                            <constraint firstItem="3vl-97-kcw" firstAttribute="trailing" secondItem="KVV-i6-aSH" secondAttribute="trailing" id="krc-bA-qLq"/>
+                            <constraint firstItem="rd7-ZU-Bks" firstAttribute="leading" secondItem="KVV-i6-aSH" secondAttribute="leading" id="r2s-7O-AuA"/>
+                            <constraint firstItem="rd7-ZU-Bks" firstAttribute="trailing" secondItem="KVV-i6-aSH" secondAttribute="trailing" id="rdJ-sh-DK9"/>
+                            <constraint firstItem="vah-EY-ie7" firstAttribute="leading" secondItem="KVV-i6-aSH" secondAttribute="leading" id="zYA-Le-hd4"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="KVV-i6-aSH"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="Groups" id="mJg-mS-N18">
+                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
+                    </tabBarItem>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="navigationBar" destination="vah-EY-ie7" id="eth-O5-5Yi"/>
+                        <outlet property="searchBar" destination="rd7-ZU-Bks" id="p2k-O6-21q"/>
+                        <outlet property="tableView" destination="3vl-97-kcw" id="akh-Zw-Up9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="t5N-gl-ire" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-543.20000000000005" y="111.99400299850076"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Groups" width="30" height="30"/>
+    </resources>
+</document>

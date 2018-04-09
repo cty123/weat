@@ -347,7 +347,6 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         
         // favorites: open next view controller
         if (self.segmentedControl.selectedSegmentIndex == 2) {
-            let vc = RestaurantViewController(nibName: "RestaurantViewController", bundle: nil)
             let restaurant = self.favorites[indexPath.row]
             Restaurant.getRestaurantInfo(google_link: restaurant.google_link!, completion: { (restaurant: Restaurant) in
                 restaurant.getRestaurant { status in

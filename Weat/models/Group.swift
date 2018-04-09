@@ -15,6 +15,12 @@ public class Group{
     var name: String?
     var icon_id: Int?
     
+    convenience init(icon_id: Int, name: String) {
+        self.init()
+        self.icon_id = icon_id
+        self.name = name
+    }
+    
     // Get all the groups the user is in
     static func getAll(completion: @escaping(Result<([Group])>)->()){
         let url = "\(String(WeatAPIUrl))/groups"

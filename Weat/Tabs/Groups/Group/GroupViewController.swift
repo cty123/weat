@@ -1,14 +1,14 @@
 //
-//  GroupsViewController.swift
+//  GroupViewController.swift
 //  Weat
 //
-//  Created by Sean Becker on 2/20/18.
+//  Created by Jordan Barkley on 4/8/18.
 //  Copyright © 2018 Weat. All rights reserved.
 //
 
 import UIKit
 
-class GroupsViewController: UIViewController {
+class GroupViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
