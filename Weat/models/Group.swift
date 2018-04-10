@@ -222,6 +222,42 @@ public class Group{
         }
     }
     
+    // Get a list of friends that can be invited to the group
+    static func getInvite(group_id:Int, completion: @escaping (Result<[User]>)->()){
+        let url = "\(String(WeatAPIUrl))/groups/invite"
+        let params = [
+            "access_token": FBSDKAccessToken.current().tokenString!,
+            "group_id": String(group_id),
+        ]
+        var users = [User]()
+        Alamofire.request(url, method:.get, parameters:params).validate().responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                let message = json["message"].stringValue
+                if message == "OK" {
+                    for user in json["friends"].arrayValue{
+                        let u = User()
+                        u.id = user["joinFriend"]["id"].intValue
+                        u.name = user["joinFriend"]["name"].stringValue
+                        u.email = user["joinFriend"]["email"].stringValue
+                        u.phone = user["joinFriend"]["phone"].stringValue
+                        u.location = user["joinFriend"]["location"].stringValue
+                        u.facebook_link = user["joinFriend"]["facebook_link"].stringValue
+                        u.privacy = user["joinFriend"]["privacy"].intValue
+                        users.append(u)
+                    }
+                    completion(.success(users))
+                }else{
+                    completion(.failure(AFError.invalidURL(url: url)))
+                }
+            case .failure(let error):
+                print(error)
+                completion(.failure(error))
+            }
+        }
+    }
+    
     // get group members
     static func getMembers(group_id:Int, completion: @escaping(Result<[User]>)->()){
         let url = "\(String(WeatAPIUrl))/groups/members"
@@ -243,6 +279,7 @@ public class Group{
                         u.email = user["user"]["email"].stringValue
                         u.phone = user["user"]["phone"].stringValue
                         u.location = user["user"]["location"].stringValue
+                        u.facebook_link = user["user"]["facebook_link"].stringValue
                         u.privacy = user["user"]["privacy"].intValue
                         users.append(u)
                     }
@@ -256,4 +293,60 @@ public class Group{
             }
         }
     }
+    
+    // Kick a user from a group
+    static func kick(user_id:Int, group_id:Int, completion: @escaping(Bool)->()){
+        let url = "\(String(WeatAPIUrl))/groups/kick"
+        let params = [
+            "access_token": FBSDKAccessToken.current().tokenString!,
+            "group_id": String(group_id),
+            "user_id": String(user_id)
+        ]
+        let headers = [
+            "Content-Type": "application/x-www-form-urlencoded"
+        ]
+        Alamofire.request(url, method:.post, parameters: params, encoding:URLEncoding.httpBody, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                let message = json["message"].stringValue
+                if message == "Kicked user from group" {
+                    completion(true)
+                }else{
+                    completion(false)
+                }
+            case .failure(let error):
+                print(error)
+                completion(false)
+            }
+        }
+    }
+    
+    // Delete a group
+    static func destroy(group_id:Int, completion: @escaping(Bool)->()){
+        let url = "\(String(WeatAPIUrl))/groups/destroy"
+        let params = [
+            "access_token": FBSDKAccessToken.current().tokenString!,
+            "group_id": String(group_id)
+        ]
+        let headers = [
+            "Content-Type": "application/x-www-form-urlencoded"
+        ]
+        Alamofire.request(url, method:.delete, parameters: params, encoding:URLEncoding.httpBody, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                let message = json["message"].stringValue
+                if message == "Deleted group" {
+                    completion(true)
+                }else{
+                    completion(false)
+                }
+            case .failure(let error):
+                print(error)
+                completion(false)
+            }
+        }
+    }
+    
 }
