@@ -12,6 +12,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GroupViewController" customModule="Weat" customModuleProvider="target">
             <connections>
+                <outlet property="navigationBar" destination="I0N-q4-DGS" id="JaZ-NA-hna"/>
+                <outlet property="tableView" destination="WAI-09-sw7" id="Y2d-7R-bVU"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -26,6 +28,11 @@
                         <navigationItem title="&lt;group name&gt;" id="SJQ-2r-HPK"/>
                     </items>
                 </navigationBar>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WAI-09-sw7">
+                    <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </tableView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -34,6 +41,7 @@
                 <constraint firstItem="I0N-q4-DGS" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="xJ2-Q6-Il0"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="121.5" y="53.5"/>
         </view>
     </objects>
 </document>

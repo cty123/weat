@@ -57,8 +57,8 @@
 		A86A3FA8207AC2D700E54BDB /* GroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A86A3FA6207AC2D700E54BDB /* GroupViewController.xib */; };
 		A86A3FAC207AC49700E54BDB /* GroupDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86A3FAA207AC49700E54BDB /* GroupDetailsViewController.swift */; };
 		A86A3FAD207AC49700E54BDB /* GroupDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A86A3FAB207AC49700E54BDB /* GroupDetailsViewController.xib */; };
-		A86A3FB1207AD61D00E54BDB /* GroupCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86A3FAF207AD61D00E54BDB /* GroupCreateViewController.swift */; };
-		A86A3FB2207AD61D00E54BDB /* GroupCreateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A86A3FB0207AD61D00E54BDB /* GroupCreateViewController.xib */; };
+		A86A3FB5207C4DEB00E54BDB /* GroupCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86A3FB3207C4DEB00E54BDB /* GroupCreateViewController.swift */; };
+		A86A3FB6207C4DEB00E54BDB /* GroupCreateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A86A3FB4207C4DEB00E54BDB /* GroupCreateViewController.xib */; };
 		A8AE7FCA203F9D5B007C9506 /* FriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8AE7FC8203F9D5B007C9506 /* FriendViewController.swift */; };
 		A8AE7FCB203F9D5B007C9506 /* FriendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8AE7FC9203F9D5B007C9506 /* FriendViewController.xib */; };
 		A8C2ADEF20582F9A009255DC /* PostRatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C2ADED20582F9A009255DC /* PostRatingViewController.swift */; };
@@ -155,8 +155,8 @@
 		A86A3FA6207AC2D700E54BDB /* GroupViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroupViewController.xib; sourceTree = "<group>"; };
 		A86A3FAA207AC49700E54BDB /* GroupDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupDetailsViewController.swift; sourceTree = "<group>"; };
 		A86A3FAB207AC49700E54BDB /* GroupDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroupDetailsViewController.xib; sourceTree = "<group>"; };
-		A86A3FAF207AD61D00E54BDB /* GroupCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCreateViewController.swift; sourceTree = "<group>"; };
-		A86A3FB0207AD61D00E54BDB /* GroupCreateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroupCreateViewController.xib; sourceTree = "<group>"; };
+		A86A3FB3207C4DEB00E54BDB /* GroupCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCreateViewController.swift; sourceTree = "<group>"; };
+		A86A3FB4207C4DEB00E54BDB /* GroupCreateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroupCreateViewController.xib; sourceTree = "<group>"; };
 		A8AE7FC8203F9D5B007C9506 /* FriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendViewController.swift; sourceTree = "<group>"; };
 		A8AE7FC9203F9D5B007C9506 /* FriendViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendViewController.xib; sourceTree = "<group>"; };
 		A8C2ADED20582F9A009255DC /* PostRatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PostRatingViewController.swift; path = Weat/Shared/PostRatingViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -399,8 +399,8 @@
 		A86A3FAE207ACCF900E54BDB /* Create */ = {
 			isa = PBXGroup;
 			children = (
-				A86A3FAF207AD61D00E54BDB /* GroupCreateViewController.swift */,
-				A86A3FB0207AD61D00E54BDB /* GroupCreateViewController.xib */,
+				A86A3FB3207C4DEB00E54BDB /* GroupCreateViewController.swift */,
+				A86A3FB4207C4DEB00E54BDB /* GroupCreateViewController.xib */,
 			);
 			path = Create;
 			sourceTree = "<group>";
@@ -592,7 +592,7 @@
 				140924C9203D241E00D6F8C8 /* Feed.storyboard in Resources */,
 				A86A3FAD207AC49700E54BDB /* GroupDetailsViewController.xib in Resources */,
 				84EE682B203A41BF00A11D41 /* FeedTableViewCell.xib in Resources */,
-				A86A3FB2207AD61D00E54BDB /* GroupCreateViewController.xib in Resources */,
+				A86A3FB6207C4DEB00E54BDB /* GroupCreateViewController.xib in Resources */,
 				1417955F203D2B3B00611D6F /* Explore.storyboard in Resources */,
 				14D809E120464A2900517E6E /* RestaurantViewController.xib in Resources */,
 				A86A3FA8207AC2D700E54BDB /* GroupViewController.xib in Resources */,
@@ -750,7 +750,7 @@
 				146308902040707000241DE3 /* APIKeys.swift in Sources */,
 				E0E2286B2074731700660622 /* Group.swift in Sources */,
 				14179562203D2CB800611D6F /* CheckinViewController.swift in Sources */,
-				A86A3FB1207AD61D00E54BDB /* GroupCreateViewController.swift in Sources */,
+				A86A3FB5207C4DEB00E54BDB /* GroupCreateViewController.swift in Sources */,
 				E0E572AE2033CB3B00E7822B /* LoginController.swift in Sources */,
 				145F83E520436F5400FAFEAF /* FindFriendsViewController.swift in Sources */,
 				A8AE7FCA203F9D5B007C9506 /* FriendViewController.swift in Sources */,

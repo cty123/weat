@@ -28,7 +28,7 @@ class GroupsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewDidLoad()
         
         // add create group button
-        self.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(pressCreate(_:)))
+        self.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(pressCreate(_:)))
         
         // setup tableView
         self.tableView.delegate = self

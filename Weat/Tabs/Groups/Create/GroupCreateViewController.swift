@@ -24,10 +24,11 @@ class GroupCreateViewController: UIViewController, UITableViewDataSource, UITabl
         // self.dismiss(animated: true, completion: nil)
     }
     
+    
     // vars
     var friends: [User] = []
     var cellSelected: [Bool] = []
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -36,7 +37,7 @@ class GroupCreateViewController: UIViewController, UITableViewDataSource, UITabl
         self.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(pressDone))
         
         // add recommend button
-        self.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(title: "Create Group", style: .plain, target: self, action: #selector(pressCreate))
+        self.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(pressCreate))
         
         // tableview setup
         self.tableView.delegate = self
@@ -48,7 +49,7 @@ class GroupCreateViewController: UIViewController, UITableViewDataSource, UITabl
             cellSelected.append(false)
         }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -91,7 +92,5 @@ class GroupCreateViewController: UIViewController, UITableViewDataSource, UITabl
         self.cellSelected[indexPath.row] = !(self.cellSelected[indexPath.row])
         self.tableView.reloadRows(at: [indexPath], with: .automatic)
     }
-
-    
     
 }
