@@ -116,4 +116,39 @@ public class GroupTest: XCTestCase {
         }
         wait(for: [exp], timeout: 10.0)
     }
+    
+    func testKick(){
+        let exp = expectation(description: "testKick")
+        Group.kick(user_id: 1, group_id: 1){ result in
+            if result {
+                Group.getMembers(group_id: 1){ result in
+                    switch result{
+                    case .success(let users):
+                        XCTAssert(users.count==1)
+                    case .failure(_):
+                        XCTAssert(false)
+                    }
+                    exp.fulfill()
+                }
+            }else{
+                XCTAssert(false)
+            }
+        }
+        wait(for: [exp], timeout: 10.0)
+    }
+    
+    func testDestroy(){
+        let exp = expectation(description: "testDestroy")
+        Group.destroy(group_id: 1){ result in
+            if result {
+                XCTAssert(true)
+                exp.fulfill()
+            }else{
+                XCTAssert(false)
+            }
+        }
+        wait(for: [exp], timeout: 10.0)
+    }
+    
+    
 }

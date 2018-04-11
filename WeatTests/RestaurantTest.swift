@@ -38,12 +38,16 @@ public class RestaurantTest: XCTestCase{
     func testGetRestaurantRating1(){
         let exp = expectation(description: "testGetRestaurantRating1")
         let r = Restaurant()
-        r.google_link = "kfc_link"
-        r.name = "kfc_link"
+        r.google_link = "test_link"
+        r.name = "test"
+        r.latitude = 101
+        r.longitude = 21
         r.getRestaurantRating(){status in
             if(status){
-                XCTAssert(status)
+                XCTAssert(true)
                 exp.fulfill()
+            }else{
+                XCTAssert(false)
             }
         }
         wait(for: [exp], timeout: 10.0)
@@ -54,10 +58,12 @@ public class RestaurantTest: XCTestCase{
      * Result: the server will create a new restaurant with name and google_link provided
      */
     func testGetRestaurantRating2(){
-        let exp = expectation(description: "testGetRestaurantRating3")
+        let exp = expectation(description: "testGetRestaurantRating2")
         let r = Restaurant()
-        r.google_link = "testGetRestaurantRating2"
-        r.name = "kfc"
+        r.google_link = "test2_link"
+        r.name = "test2"
+        r.latitude = 72
+        r.longitude = 27
         r.getRestaurantRating(){status in
             if(status){
                 XCTAssert(status)
@@ -74,8 +80,10 @@ public class RestaurantTest: XCTestCase{
     func testGetRestaurantRating3(){
         let exp = expectation(description: "testGetRestaurantRating3")
         let r = Restaurant()
-        r.google_link = "kfc_link"
-        r.name = "testGetRestaurantRating3"
+        r.google_link = "test3_link"
+        r.name = "test3"
+        r.latitude = 198
+        r.longitude = 89
         r.getRestaurantRating(){status in
             if(status){
                 XCTAssert(status)
@@ -92,14 +100,14 @@ public class RestaurantTest: XCTestCase{
     func testGetRestaurant1(){
         let exp = expectation(description: "testGetRestaurant1")
         let r = Restaurant()
-        r.google_link = "kfc_link"
-        r.name = "kfc"
+        r.google_link = "test_link"
+        r.name = "test"
+        r.latitude = 101
+        r.longitude = 21
         r.getRestaurant(){status in
             if(status){
                 // Test if the menu is obtained
-                XCTAssertTrue(r.menu[0].name == "Fried chicken")
-                XCTAssertTrue(r.menu[0].rating[0].rating_text == "This chicken is so good")
-                XCTAssertTrue(r.menu[0].rating[0].author == "test1")
+                XCTAssertTrue(r.menu[0].name == "test_item")
                 XCTAssert(status)
             }else{
                 XCTAssert(false)
@@ -116,16 +124,18 @@ public class RestaurantTest: XCTestCase{
     func testGetRestaurant2(){
         let exp = expectation(description: "testGetRestaurant2")
         let r = Restaurant()
-        r.google_link = "kfc_link"
-        r.name = "kfc"
-        r.getRestaurant(){status in
+        r.google_link = "test_link"
+        r.name = "test"
+        r.latitude = 101
+        r.longitude = 21
+        r.getRestaurant(){ status in
             if(status){
                 // Test if the menu is obtained
-                XCTAssertTrue(r.comments[0].comment_text == "So good")
+                XCTAssertTrue(r.comments[0].comment_text == "Good")
                 XCTAssertTrue(r.comments[0].restaurant_id == 1)
                 XCTAssertTrue(r.comments[0].food_rating == 1)
                 XCTAssertTrue(r.comments[0].service_rating == 1)
-                XCTAssertTrue(r.comments[0].author == "test1")
+                XCTAssertTrue(r.comments[0].author == "testuser")
                 XCTAssert(status)
             }else{
                 XCTAssert(false)
@@ -142,14 +152,14 @@ public class RestaurantTest: XCTestCase{
     func testGetRestaurant3(){
         let exp = expectation(description: "testGetRestaurant3")
         let r = Restaurant()
-        r.google_link = "kfc_link"
-        r.name = "incorrect"
+        r.google_link = "test_link"
+        r.name = "test"
+        r.latitude = 101
+        r.longitude = 21
         r.getRestaurant(){status in
             if(status){
                 // Test if the menu is obtained
-                XCTAssertTrue(r.menu[0].name == "Fried chicken")
-                XCTAssertTrue(r.menu[0].rating[0].rating_text == "This chicken is so good")
-                XCTAssertTrue(r.menu[0].rating[0].author == "test1")
+                XCTAssertTrue(r.menu[0].name == "test_item")
                 XCTAssert(status)
             }else{
                 XCTAssert(false)
