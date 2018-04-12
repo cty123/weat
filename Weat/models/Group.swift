@@ -349,4 +349,38 @@ public class Group{
         }
     }
     
+    static func getRecommendation(group_id: Int, latitude:Double, longitude:Double, completion: @escaping (Result<[Restaurant]>)->()){
+        let url = "\(String(WeatAPIUrl))/groups/recommendations"
+        let params = [
+            "access_token": FBSDKAccessToken.current().tokenString!,
+            "group_id": String(group_id),
+            "latitude": String(latitude),
+            "longitude": String(longitude)
+        ]
+        var restaurants = [Restaurant]()
+        Alamofire.request(url, method:.get, parameters:params).validate().responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                let message = json["message"].stringValue
+                if message == "OK" {
+                    for restaurant in json["data"].arrayValue{
+                        let r = Restaurant()
+                        r.name = restaurant["restaurant"]["name"].stringValue
+                        r.google_link = restaurant["restaurant"]["google_link"].stringValue
+                        r.latitude = restaurant["restaurant"]["latitude"].doubleValue
+                        r.longitude = restaurant["restaurant"]["longitude"].doubleValue
+                        restaurants.append(r)
+                    }
+                    completion(.success(restaurants))
+                }else{
+                    completion(.failure(AFError.invalidURL(url: url)))
+                }
+            case .failure(let error):
+                print(error)
+                completion(.failure(error))
+            }
+        }
+    }
+    
 }
