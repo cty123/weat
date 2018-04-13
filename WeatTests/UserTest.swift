@@ -115,6 +115,7 @@ class UserTest: XCTestCase {
      * Test: Update the email of current user to "test@test.com"
      * Result: Should enter .success, and pass all the assertions
      */
+    /*
     func testUpdateUserInfo1(){
         let exp = expectation(description: "testUpdateUserInfo1")
         User.getUserInfo(profile_id: UserDefaults.standard.string(forKey: "id")!){ result in
@@ -171,4 +172,6 @@ class UserTest: XCTestCase {
         }
         wait(for: [exp], timeout: 10.0)
     }
+ */
 }
+ 

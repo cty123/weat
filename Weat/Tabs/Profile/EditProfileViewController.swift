@@ -88,15 +88,14 @@ class EditProfileViewController: UIViewController {
         user.phone = phone
         user.location = location
         user.privacy = 0
-        user.updateUserInfo() { status in
-            if status {
-                
-
-                print ("success")
-            } else {
-                
-
-                print ("faiure")
+        user.updateUserInfo() { result in
+            switch result{
+            case .success(_):
+                print("success")
+            case .failure(let error):
+                // Can do error handling with this error
+                print(error)
+                print("failure")
             }
         }
 

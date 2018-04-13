@@ -103,8 +103,19 @@ class FriendTest: XCTestCase {
     */
     func testSendFriendRequest(){
         let exp = expectation(description: "testSendFriendRequest")
-        Friend.sendFriendRequest(friend_id: "2"){status in
-            XCTAssert(status)
+        Friend.sendFriendRequest(friend_id: "1"){result in
+            switch result{
+                case .success(_):
+                    XCTAssert(true)
+                case .failure(let error):
+                    switch error {
+                    case RequestError.alreadySent(let msg):
+                        print(msg)
+                    default:
+                        print(error)
+                    }
+                    XCTAssert(false)
+            }
             exp.fulfill()
         }
         wait(for: [exp], timeout: 10.0)
