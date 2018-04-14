@@ -25,44 +25,53 @@ class User{
         Alamofire.request(url, method:.get, parameters:params).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
+                // Obtain JSON package
                 let json = JSON(value)
                 let message = json["message"].stringValue
-                // Check if the process is successful
-                if message == "OK"{
-                    // Parse json package
-                    user.name = json["user"]["name"].string
-                    user.location = json["user"]["location"].string
-                    user.email = json["user"]["email"].string
-                    user.id = json["user"]["id"].int
-                    user.privacy = json["user"]["privacy"].int
-                    user.phone = json["user"]["phone"].string
-                    user.facebook_link = json["user"]["facebook_link"].stringValue
-                    // Get favorite
-                    for favorite in json["favorites"].arrayValue{
-                        let r = Restaurant()
-                        r.google_link = favorite["restaurant"]["google_link"].stringValue
-                        r.name = favorite["restaurant"]["name"].stringValue
-                        user.favorites.append(r)
-                    }
-                    // Get recommendation
-                    for r in json["recommendations"].arrayValue{
-                        let recommendation = Recommendation()
-                        recommendation.friend_id = r["friend"]["id"].intValue
-                        recommendation.friend_name = r["friend"]["name"].stringValue
-                        recommendation.restaurant_id = r["restaurant_id"].intValue
-                        recommendation.restaurant_name = r["restaurant"]["name"].stringValue
-                        recommendation.recommended_menu_item_id = r["menu_item"]["id"].intValue
-                        recommendation.recommended_menu_item_name = r["menu_item"]["name"].stringValue
-                        recommendation.google_link = r["restaurant"]["google_link"].stringValue
-                        // Format the date string
-                        let str = r["createdAt"].stringValue
-                        let trimmedIsoString = str.replacingOccurrences(of: "\\.\\d+", with: "", options: .regularExpression)
-                        recommendation.time = ISO8601DateFormatter().date(from: trimmedIsoString)
-                        user.recommendations.append(recommendation)
-                    }
-                    completion(.success(user))
-                }else{
-                    // The request is not successful
+                // Check status based on the return message
+                switch message{
+                    case "OK":
+                        // Parse json package
+                        user.name = json["user"]["name"].stringValue
+                        user.location = json["user"]["location"].stringValue
+                        user.email = json["user"]["email"].stringValue
+                        user.id = json["user"]["id"].intValue
+                        user.privacy = json["user"]["privacy"].intValue
+                        user.phone = json["user"]["phone"].stringValue
+                        user.facebook_link = json["user"]["facebook_link"].stringValue
+                        // Get favorite
+                        for favorite in json["favorites"].arrayValue{
+                            let r = Restaurant()
+                            r.google_link = favorite["restaurant"]["google_link"].stringValue
+                            r.name = favorite["restaurant"]["name"].stringValue
+                            user.favorites.append(r)
+                        }
+                        // Get recommendation
+                        for r in json["recommendations"].arrayValue{
+                            let recommendation = Recommendation()
+                            recommendation.friend_id = r["friend"]["id"].intValue
+                            recommendation.friend_name = r["friend"]["name"].stringValue
+                            recommendation.restaurant_id = r["restaurant_id"].intValue
+                            recommendation.restaurant_name = r["restaurant"]["name"].stringValue
+                            recommendation.recommended_menu_item_id = r["menu_item"]["id"].intValue
+                            recommendation.recommended_menu_item_name = r["menu_item"]["name"].stringValue
+                            recommendation.google_link = r["restaurant"]["google_link"].stringValue
+                            // Format the date string
+                            let str = r["createdAt"].stringValue
+                            let trimmedIsoString = str.replacingOccurrences(of: "\\.\\d+", with: "", options: .regularExpression)
+                            recommendation.time = ISO8601DateFormatter().date(from: trimmedIsoString)
+                            user.recommendations.append(recommendation)
+                        }
+                        completion(.success(user))
+                case "No profile id given":
+                    completion(.failure(RequestError.noProfileId(msg:message)))
+                case "No access token given":
+                    completion(.failure(RequestError.noAccessToken(msg:message)))
+                case "Not allowed":
+                    completion(.failure(RequestError.notAllowed(msg:message)))
+                case "No authentication":
+                    completion(.failure(RequestError.noAuthentication(msg:message)))
+                default:
                     completion(.failure(AFError.invalidURL(url: url)))
                 }
             case .failure(let error):
@@ -76,42 +85,43 @@ class User{
     /*
      * Will rewrite to make this function static
      */
-    func updateUserInfo(completion: @escaping (Bool) -> ()){
+    func updateUserInfo(completion: @escaping (Result<Bool>) -> ()){
         let url = "\(String(WeatAPIUrl))/user/profile"
         let headers = [
             "Content-Type": "application/x-www-form-urlencoded"
         ]
         let params = [
             "access_token": FBSDKAccessToken.current().tokenString!,
-            "id" : self.id.map(String.init)!,
+            "id" : String(describing:self.id),
             "name": self.name!,
             "email" : self.email!,
             "phone": self.phone!,
             "location": self.location!,
-            "privacy": self.privacy.map(String.init)!
+            "privacy": String(describing:self.privacy)
         ]
         Alamofire.request(url, method:.post, parameters: params, encoding:URLEncoding.httpBody, headers: headers).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
                 let message = json["message"].stringValue
-                if message == "Updated user" {
-                    completion(true)
-                }else{
-                    completion(false)
+                switch message{
+                case "Updated user":
+                    completion(.success(true))
+                case "No access token given":
+                    completion(.failure(RequestError.noAccessToken(msg:message)))
+                case "No authentication":
+                    completion(.failure(RequestError.noAuthentication(msg:message)))
+                default:
+                    completion(.failure(AFError.invalidURL(url: url)))
                 }
             case .failure(let error):
-                print(error)
-                completion(false)
+                completion(.failure(error))
             }
         }
     }
     
-    /*
-     * Will rewrite to make this function static
-     */
     //Delete User account from the database   ----- not tested
-    func deleteUser(completion: @escaping (Bool) -> ()){
+    static func deleteUser(completion: @escaping (Result<Bool>) -> ()){
         let url = "\(String(WeatAPIUrl))/user"
         let headers = [
             "Content-Type": "application/x-www-form-urlencoded"
@@ -124,14 +134,18 @@ class User{
             case .success(let value):
                 let json = JSON(value)
                 let message = json["message"].stringValue
-                if message == "User has been deleted" {
-                    completion(true)
-                }else{
-                    completion(false)
+                switch message{
+                case "User has been deleted":
+                    completion(.success(true))
+                case "No access token given":
+                    completion(.failure(RequestError.noAccessToken(msg: message)))
+                case "No authentication":
+                    completion(.failure(RequestError.noAuthentication(msg: message)))
+                default:
+                    completion(.failure(AFError.invalidURL(url: url)))
                 }
             case .failure(let error):
-                print(error)
-                completion(false)
+                completion(.failure(error))
             }
         }
     }

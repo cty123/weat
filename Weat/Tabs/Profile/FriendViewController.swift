@@ -31,11 +31,20 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let friend_id: String = "\((user?.id)!)"
         switch(friend_status!) {
         case -1,2:
-            Friend.sendFriendRequest(friend_id: friend_id) { (status) in
-                if(!status) {
-                    print("File: \(#file)")
-                    print("Line: \(#line)")
-                    print("Failed to send friend request.")
+            Friend.sendFriendRequest(friend_id: friend_id) { result in
+                switch result {
+                case .success(_):
+                    print("success")
+                case .failure(let error):
+                    switch error{
+                    case RequestError.alreadySent(let msg):
+                        print(msg)
+                        // Alert the user
+                    default:
+                        print("File: \(#file)")
+                        print("Line: \(#line)")
+                        print("Failed to send friend request.")
+                    }
                 }
             }
         case 0,1:

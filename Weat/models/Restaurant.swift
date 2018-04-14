@@ -345,8 +345,4 @@ class Restaurant {
             }
         }
     }
-    
-    func testGetRestaurant(){
-        
-    }
 }

@@ -5,6 +5,9 @@ import FBSDKCoreKit
 
 class Friend {
 
+    /*
+    * Check if someone if you friend
+    */
     static func getStatus(id: String, completion: @escaping (Result<Int>) -> ()){
         let url = "\(String(WeatAPIUrl))/user/friends/status"
         let params = [
@@ -17,14 +20,20 @@ class Friend {
                 let json = JSON(value)
                 let message = json["message"].stringValue
                 // Check if the request is successful
-                if message == "OK" {
+                switch message{
+                case "OK":
                     let status = json["status"].intValue
                     completion(.success(status))
-                }else{
+                case "No access token given":
+                    completion(.failure(RequestError.noAccessToken(msg: message)))
+                case "No id given":
+                    completion(.failure(RequestError.noIdGiven(msg: message)))
+                case "No authentication":
+                    completion(.failure(RequestError.noAuthentication(msg: message)))
+                default:
                     completion(.failure(AFError.invalidURL(url: url)))
                 }
             case .failure(let error):
-                print(error)
                 completion(.failure(error))
             }
         }
@@ -43,8 +52,8 @@ class Friend {
             case .success(let value):
                 let json = JSON(value)
                 let message = json["message"].stringValue
-                // Check if the request is successful
-                if message == "OK" {
+                switch message{
+                case "OK":
                     for friend in json["friends"].arrayValue{
                         let tmpUser = User()
                         tmpUser.id = friend["joinFriend"]["id"].intValue
@@ -57,8 +66,18 @@ class Friend {
                         users.append(tmpUser)
                     }
                     completion(.success(users))
-                }else{
-                    completion(.failure(AFError.invalidURL(url: url)))
+                case "No access token given":
+                    completion(.failure(RequestError.noAccessToken(msg: message)))
+                case "No profile id given":
+                    completion(.failure(RequestError.noProfileId(msg: message)))
+                case "Not allowed":
+                    completion(.failure(RequestError.notAllowed(msg: message)))
+                case "No authentication":
+                    completion(.failure(RequestError.noAuthentication(msg: message)))
+                case "No user found":
+                    completion(.failure(RequestError.noUserFound(msg: message)))
+                default:
+                    completion(.failure(RequestError.unknownError(msg: message)))
                 }
             case .failure(let error):
                 print(error)
@@ -68,7 +87,7 @@ class Friend {
     }
     
     // send friend request
-    static func sendFriendRequest(friend_id:String, completion: @escaping(Bool)->()){
+    static func sendFriendRequest(friend_id:String, completion: @escaping(Result<Bool>)->()){
         let url = "\(String(WeatAPIUrl))/user/friends"
         let headers = [
             "Content-Type": "application/x-www-form-urlencoded"
@@ -82,10 +101,24 @@ class Friend {
             case .success(let value):
                 let json = JSON(value)
                 let message = json["message"].stringValue
-                completion(message == "Friend request sent")
+                switch message{
+                case "Friend request sent":
+                    completion(.success(true))
+                case "No access token given":
+                    completion(.failure(RequestError.noAccessToken(msg: message)))
+                case "No friend id given":
+                    completion(.failure(RequestError.noFriendId(msg: message)))
+                case "No authentication":
+                    completion(.failure(RequestError.noAuthentication(msg: message)))
+                case "User does not exist":
+                    completion(.failure(RequestError.noUserFound(msg: message)))
+                case "Already sent":
+                    completion(.failure(RequestError.alreadySent(msg: message)))
+                default:
+                    completion(.failure(RequestError.unknownError(msg: message)))
+                }
             case .failure(let error):
-                print(error)
-                completion(false)
+                completion(.failure(error))
             }
         }
     }
