@@ -22,7 +22,28 @@ class GroupsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     // vars
-    var groups: [Group] = SimpleData.Groups
+    var groups: [Group] = [] // SimpleData.Groups
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        Group.getAll(){ result in
+            switch result{
+            case .success(let gs):
+                self.groups = []
+                for g in gs {
+                    self.groups.append(g)
+                }
+                print("File: \(#file)")
+                print("Line: \(#line)")
+                print("got groups successfully")
+                self.tableView.reloadData()
+            case .failure(_):
+                print("File: \(#file)")
+                print("Line: \(#line)")
+                print("Failed to get groups")
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
