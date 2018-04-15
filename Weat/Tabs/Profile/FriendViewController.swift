@@ -38,8 +38,12 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 case .failure(let error):
                     switch error{
                     case RequestError.alreadySent(let msg):
-                        print(msg)
                         // Alert the user
+                        let alert = UIAlertController(title: "Send Request", message: msg, preferredStyle: UIAlertControllerStyle.alert)
+                        // add an action (button)
+                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                        // show the alert
+                        self.present(alert, animated: true, completion: nil)
                     default:
                         print("File: \(#file)")
                         print("Line: \(#line)")

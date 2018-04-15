@@ -19,5 +19,9 @@ enum RequestError: Error{
     case noUserFound(msg:String)
     case alreadySent(msg:String)
     case noFriendId(msg:String)
+    case noSearchCriteria(msg:String)
+    case noFacebookId(msg:String)
+    case invalidFacebookIds(msg:String)
+    case noFriendsFound(msg:String)
     case unknownError(msg:String)
 }
