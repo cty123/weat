@@ -15,7 +15,10 @@ public class GroupTest: XCTestCase {
         let exp = expectation(description: "testGetALL")
         Group.getAll(){ result in
             switch result{
-            case .success(_):
+            case .success(let groups):
+                for g in groups{
+                    
+                }
                 exp.fulfill()
             case .failure(_):
                 XCTAssert(false)

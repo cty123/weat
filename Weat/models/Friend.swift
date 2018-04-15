@@ -135,7 +135,8 @@ class Friend {
             case .success(let value):
                 let json = JSON(value)
                 let message = json["message"].stringValue
-                if message == "OK" {
+                switch message{
+                case "OK":
                     for friend in json["pending_friends"].arrayValue{
                         let tmpUser = User()
                         tmpUser.id = friend["joinUser"]["id"].intValue
@@ -148,11 +149,14 @@ class Friend {
                         users.append(tmpUser)
                     }
                     completion(.success(users))
-                }else {
-                    completion(.failure(AFError.invalidURL(url: url)))
+                case "No access token given":
+                    completion(.failure(RequestError.noAccessToken(msg: message)))
+                case "No authentication":
+                    completion(.failure(RequestError.noAuthentication(msg: message)))
+                default:
+                    completion(.failure(RequestError.unknownError(msg: message)))
                 }
             case .failure(let error):
-                print(error)
                 completion(.failure(error))
             }
         }
@@ -161,7 +165,7 @@ class Friend {
      * acceptance -- 0 pending, 1 accept, 2 deny
      */
     // Accept or reject friend request
-    static func setFriendRequest(friend_id: Int, acceptance: Int, completion: @escaping(Bool)->()){
+    static func setFriendRequest(friend_id: Int, acceptance: Int, completion: @escaping(Result<Bool>)->()){
         let url = "\(String(WeatAPIUrl))/user/friends/pending"
         let headers = [
             "Content-Type": "application/x-www-form-urlencoded"
@@ -176,14 +180,19 @@ class Friend {
             case .success(let value):
                 let json = JSON(value)
                 let message = json["message"].stringValue
-                if message == "Friend request sent" {
-                    completion(true)
-                }else{
-                    completion(false)
+                switch message{
+                case "Friend request sent":
+                    completion(.success(true))
+                case "No access token given":
+                    completion(.failure(RequestError.noAccessToken(msg: message)))
+                case "No authentication":
+                    completion(.failure(RequestError.noAuthentication(msg: message)))
+                default:
+                    completion(.failure(RequestError.unknownError(msg: message)))
                 }
             case .failure(let error):
                 print(error)
-                completion(false)
+                completion(.failure(error))
             }
         }
     }
@@ -192,7 +201,7 @@ class Friend {
     * Search for a user or users for a given criteria
     * The page and limit can be set to nil when you want to use the default value
     */
-    static func searchFriend(search_criteria:String, page: Int?, limit: Int?, completion:@escaping(([User]))->()){
+    static func searchFriend(search_criteria:String, page: Int?, limit: Int?, completion:@escaping(Result<([User])>)->()){
         let url = "\(String(WeatAPIUrl))/user/friends/search"
         var params = [
             "access_token": FBSDKAccessToken.current().tokenString!,
@@ -209,21 +218,33 @@ class Friend {
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
-                for friend in json["users"].arrayValue{
-                    let tmpUser = User()
-                    tmpUser.id = friend["id"].intValue
-                    tmpUser.name = friend["name"].stringValue
-                    tmpUser.email = friend["email"].stringValue
-                    tmpUser.phone = friend["phone"].stringValue
-                    tmpUser.location = friend["location"].stringValue
-                    tmpUser.privacy = friend["privacy"].intValue
-                    tmpUser.facebook_link = friend["facebook_link"].stringValue
-                    users.append(tmpUser)
+                let message = json["message"].stringValue
+                switch message {
+                case "OK":
+                    for friend in json["users"].arrayValue{
+                        let tmpUser = User()
+                        tmpUser.id = friend["id"].intValue
+                        tmpUser.name = friend["name"].stringValue
+                        tmpUser.email = friend["email"].stringValue
+                        tmpUser.phone = friend["phone"].stringValue
+                        tmpUser.location = friend["location"].stringValue
+                        tmpUser.privacy = friend["privacy"].intValue
+                        tmpUser.facebook_link = friend["facebook_link"].stringValue
+                        users.append(tmpUser)
+                    }
+                    completion(.success(users))
+                case "No access token given":
+                    completion(.failure(RequestError.noAccessToken(msg: message)))
+                case "No authentication":
+                    completion(.failure(RequestError.noAuthentication(msg: message)))
+                case "No search criteria given":
+                    completion(.failure(RequestError.noSearchCriteria(msg: message)))
+                default:
+                    completion(.failure(RequestError.unknownError(msg: message)))
                 }
             case .failure(let error):
-                print(error)
+                completion(.failure(error))
             }
-            completion(users)
         }
     }
     
@@ -232,8 +253,8 @@ class Friend {
      *  Add facebook friends who are also the user of Weat
      *  facebook_link can contain multiple facebook links separated by ','
      */
-    static func addFacebookFriends(facebook_links:String, completion:@escaping (Bool)->()){
-        let url = "\(String(WeatAPIUrl))/user/friends/search"
+    static func addFacebookFriends(facebook_links:String, completion:@escaping (Result<Bool>)->()){
+        let url = "\(String(WeatAPIUrl))/user/friends/facebook_friends"
         let headers = [
             "Content-Type": "application/x-www-form-urlencoded"
         ]
@@ -246,14 +267,25 @@ class Friend {
             case .success(let value):
                 let json = JSON(value)
                 let message = json["message"].stringValue
-                if message == "Friends added"{
-                    completion(true)
-                }else{
-                    completion(false)
+                switch message{
+                case "Friends added":
+                    completion(.success(true))
+                case "No access token given":
+                    completion(.failure(RequestError.noAccessToken(msg: message)))
+                case "No authentication":
+                    completion(.failure(RequestError.noAuthentication(msg: message)))
+                case "No facebook ids given":
+                    completion(.failure(RequestError.noFacebookId(msg: message)))
+                case "Invalid facebook ids parameter":
+                    completion(.failure(RequestError.invalidFacebookIds(msg: message)))
+                case "No friends found":
+                    completion(.failure(RequestError.noFriendsFound(msg:message)))
+                default:
+                    completion(.failure(RequestError.unknownError(msg: message)))
                 }
             case .failure(let error):
                 print(error)
-                completion(false)
+                completion(.failure(error))
             }
         }
     }
@@ -269,7 +301,9 @@ class Friend {
             case .success(let value):
                 let json = JSON(value)
                 let message = json["message"].stringValue
-                if message == "OK"{
+                
+                switch message {
+                case "OK":
                     let user = User()
                     user.name = json["user"]["name"].stringValue
                     user.location = json["user"]["location"].stringValue
@@ -279,8 +313,16 @@ class Friend {
                     user.phone = json["user"]["phone"].stringValue
                     user.facebook_link = facebook_link
                     completion(.success(user))
-                }else{
-                    completion(.failure(AFError.invalidURL(url: url)))
+                case "No access token given":
+                    completion(.failure(RequestError.noAccessToken(msg: message)))
+                case "No authentication":
+                    completion(.failure(RequestError.noAuthentication(msg: message)))
+                case "No facebook link is given":
+                    completion(.failure(RequestError.noFacebookId(msg: message)))
+                case "No user found":
+                    completion(.failure(RequestError.noUserFound(msg: message)))
+                default:
+                    completion(.failure(RequestError.unknownError(msg: message)))
                 }
             case .failure(let error):
                 print(error)
@@ -300,10 +342,21 @@ class Friend {
             case .success(let value):
                 let json = JSON(value)
                 let message = json["message"].stringValue
-                if message == "Friend deleted"{
+                switch message{
+                case "Friend deleted":
                     completion(.success(true))
-                }else{
-                    completion(.failure(AFError.invalidURL(url: url)))
+                case "No access token given":
+                    completion(.failure(RequestError.noAccessToken(msg: message)))
+                case "No authentication":
+                    completion(.failure(RequestError.noAuthentication(msg: message)))
+                case "No friend id given":
+                    completion(.failure(RequestError.noFriendId(msg: message)))
+                case "User does not exist":
+                    completion(.failure(RequestError.noUserFound(msg: message)))
+                case "Friend does not exist":
+                    completion(.failure(RequestError.noFriendsFound(msg: message)))
+                default:
+                    completion(.failure(RequestError.unknownError(msg: message)))
                 }
             case .failure(let error):
                 print(error)

@@ -169,11 +169,16 @@ class FindFriendsViewController: UIViewController, UITableViewDelegate, UITableV
             let testGroup = DispatchGroup()
             // var flag = false
             testGroup.enter()
-            Friend.searchFriend(search_criteria: searchText, page: nil, limit: nil){ users in
+            Friend.searchFriend(search_criteria: searchText, page: nil, limit: nil){ result in
                 // XCTAssert(users[0].name == "test1")
                 // flag = true
-                self.weatFriends = users
-                self.tableView.reloadData()
+                switch result {
+                case .success(let users):
+                    self.weatFriends = users
+                    self.tableView.reloadData()
+                case .failure(let error):
+                    print(error)
+                }
                 testGroup.leave()
             }
             testGroup.notify(queue: .main){
