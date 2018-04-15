@@ -21,7 +21,26 @@ class GroupCreateViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     @IBAction func pressCreate(_ sender: Any) {
-        // self.dismiss(animated: true, completion: nil)
+        var name: String
+        if let _ = self.textField.text {
+            name = self.textField.text!
+        } else {
+            name = ""
+        }
+        let icon = 0
+        
+        Group.create(group_name: name, icon_id: icon){ result in
+            print("File: \(#file)")
+            print("Line: \(#line)")
+            
+            if result {
+                print("created group successfully")
+            } else {
+                print("failed to create group")            }
+        }
+        
+        
+        self.dismiss(animated: true, completion: nil)
     }
     
     

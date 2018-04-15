@@ -19,6 +19,11 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func pressEdit(_ sender: Any) {
+        let vc = GroupDetailsViewController(nibName: "GroupDetailsViewController", bundle: nil)
+        self.present(vc, animated: true, completion: nil)
+    }
+    
     // vars
     var group: Group = Group()
     
@@ -27,8 +32,11 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         // add back button
         self.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(pressBack))
+        
+        // add edit button
+        self.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(pressEdit))
 
-        // Do any additional setup after loading the view.
+        // set title to group name
         self.navigationBar.topItem?.title = self.group.name
         
         // tableview setup

@@ -15,17 +15,15 @@ class GroupsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
-    // ib actions
+    // actions
     @IBAction func pressCreate(_ sender: Any) {
         let vc = GroupCreateViewController(nibName: "GroupCreateViewController", bundle: nil)
         self.present(vc, animated: true, completion: nil)
     }
-
-    // vars
-    var groups: [Group] = [] // SimpleData.Groups
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    
+    @IBAction func handleRefresh() {
+        // get groups
         Group.getAll(){ result in
             switch result{
             case .success(let gs):
@@ -37,16 +35,35 @@ class GroupsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 print("Line: \(#line)")
                 print("got groups successfully")
                 self.tableView.reloadData()
+                self.refreshControl.endRefreshing()
             case .failure(_):
                 print("File: \(#file)")
                 print("Line: \(#line)")
                 print("Failed to get groups")
+                self.refreshControl.endRefreshing()
             }
         }
+    }
+
+    // vars
+    var groups: [Group] = [] // SimpleData.Groups
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: UIControlEvents.valueChanged)
+        return refreshControl
+    }()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.handleRefresh()
+
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // add refresh contorl
+        self.tableView.addSubview(self.refreshControl)
         
         // add create group button
         self.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(pressCreate(_:)))
@@ -90,6 +107,7 @@ class GroupsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         // go to group
         let vc = GroupViewController(nibName: "GroupViewController", bundle: nil)
+        vc.group = self.groups[indexPath.row]
         self.present(vc, animated: true, completion: nil)
     }
 
