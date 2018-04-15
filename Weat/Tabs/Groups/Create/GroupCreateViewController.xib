@@ -13,7 +13,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GroupCreateViewController" customModule="Weat" customModuleProvider="target">
             <connections>
                 <outlet property="navigationBar" destination="b0J-8l-9YF" id="62f-2l-QCN"/>
-                <outlet property="tableView" destination="xMf-Rz-fJ4" id="Nin-D9-h3Z"/>
                 <outlet property="textField" destination="xu5-hQ-8rs" id="6bG-kg-XTJ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -44,23 +43,15 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xMf-Rz-fJ4">
-                    <rect key="frame" x="0.0" y="110" width="375" height="557"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                </tableView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="xu5-hQ-8rs" firstAttribute="leading" secondItem="ZN6-Mk-bqE" secondAttribute="trailing" constant="8" id="3oy-SY-wvx"/>
-                <constraint firstItem="xMf-Rz-fJ4" firstAttribute="top" secondItem="xu5-hQ-8rs" secondAttribute="bottom" constant="8" id="4rf-OS-IST"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="xu5-hQ-8rs" secondAttribute="trailing" constant="16" id="8Cd-kG-n2g"/>
-                <constraint firstItem="xMf-Rz-fJ4" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="EIt-OO-7Ie"/>
                 <constraint firstItem="b0J-8l-9YF" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="IVl-Dm-8X8"/>
                 <constraint firstItem="ZN6-Mk-bqE" firstAttribute="top" secondItem="b0J-8l-9YF" secondAttribute="bottom" constant="13" id="KWd-Z8-9bD"/>
                 <constraint firstItem="b0J-8l-9YF" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="LwA-vK-ie5"/>
-                <constraint firstItem="xMf-Rz-fJ4" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="NDf-0r-KyO"/>
                 <constraint firstItem="ZN6-Mk-bqE" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="acZ-1F-5wx"/>
-                <constraint firstItem="xMf-Rz-fJ4" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="djB-Wl-kVB"/>
                 <constraint firstItem="b0J-8l-9YF" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="eGF-Jg-wFK"/>
                 <constraint firstItem="xu5-hQ-8rs" firstAttribute="top" secondItem="b0J-8l-9YF" secondAttribute="bottom" constant="8" id="ffK-yU-kd6"/>
             </constraints>

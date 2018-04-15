@@ -44,6 +44,8 @@
 		84EE6833203A41FC00A11D41 /* RestaurantTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84EE6831203A41FC00A11D41 /* RestaurantTableViewCell.xib */; };
 		84EE6835203A42EE00A11D41 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EE6834203A42EE00A11D41 /* Extensions.swift */; };
 		84EE6837203A430D00A11D41 /* SimpleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EE6836203A430D00A11D41 /* SimpleData.swift */; };
+		A82D67422083E09500835A94 /* GroupInviteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82D67402083E09500835A94 /* GroupInviteViewController.swift */; };
+		A82D67432083E09500835A94 /* GroupInviteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A82D67412083E09500835A94 /* GroupInviteViewController.xib */; };
 		A85E9925203FDEB100A95558 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85E9924203FDEB100A95558 /* ProfileViewController.swift */; };
 		A85E992C2040063800A95558 /* FriendRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85E992A2040063800A95558 /* FriendRequestTableViewCell.swift */; };
 		A85E992D2040063800A95558 /* FriendRequestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A85E992B2040063800A95558 /* FriendRequestTableViewCell.xib */; };
@@ -143,6 +145,8 @@
 		84EE6834203A42EE00A11D41 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		84EE6836203A430D00A11D41 /* SimpleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleData.swift; sourceTree = "<group>"; };
 		8B72BB2C83393A9A9E49E7C9 /* Pods_Weat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Weat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A82D67402083E09500835A94 /* GroupInviteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupInviteViewController.swift; sourceTree = "<group>"; };
+		A82D67412083E09500835A94 /* GroupInviteViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroupInviteViewController.xib; sourceTree = "<group>"; };
 		A85E9924203FDEB100A95558 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		A85E992A2040063800A95558 /* FriendRequestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestTableViewCell.swift; sourceTree = "<group>"; };
 		A85E992B2040063800A95558 /* FriendRequestTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendRequestTableViewCell.xib; sourceTree = "<group>"; };
@@ -287,6 +291,7 @@
 				A86A3FAE207ACCF900E54BDB /* Create */,
 				A86A3FA9207AC41400E54BDB /* Details */,
 				A86A3FA4207AC22600E54BDB /* Group */,
+				A82D673F2083E07000835A94 /* Invite */,
 				A86A3FA3207AC1DF00E54BDB /* List */,
 			);
 			path = Groups;
@@ -367,6 +372,15 @@
 				84EE682D203A41CC00A11D41 /* FriendTableViewCell.xib */,
 			);
 			path = TableViewCells;
+			sourceTree = "<group>";
+		};
+		A82D673F2083E07000835A94 /* Invite */ = {
+			isa = PBXGroup;
+			children = (
+				A82D67402083E09500835A94 /* GroupInviteViewController.swift */,
+				A82D67412083E09500835A94 /* GroupInviteViewController.xib */,
+			);
+			path = Invite;
 			sourceTree = "<group>";
 		};
 		A86A3FA3207AC1DF00E54BDB /* List */ = {
@@ -599,6 +613,7 @@
 				1417955F203D2B3B00611D6F /* Explore.storyboard in Resources */,
 				14D809E120464A2900517E6E /* RestaurantViewController.xib in Resources */,
 				A86A3FA8207AC2D700E54BDB /* GroupViewController.xib in Resources */,
+				A82D67432083E09500835A94 /* GroupInviteViewController.xib in Resources */,
 				14E424BD206961D8000F2057 /* RatingTableViewCell.xib in Resources */,
 				E0E572B32033CB3B00E7822B /* Assets.xcassets in Resources */,
 				A85E992D2040063800A95558 /* FriendRequestTableViewCell.xib in Resources */,
@@ -780,6 +795,7 @@
 				A85E992C2040063800A95558 /* FriendRequestTableViewCell.swift in Sources */,
 				1417955D203D2B2F00611D6F /* ExploreViewController.swift in Sources */,
 				14179568203D2DDE00611D6F /* GroupsViewController.swift in Sources */,
+				A82D67422083E09500835A94 /* GroupInviteViewController.swift in Sources */,
 				A8C2ADEF20582F9A009255DC /* PostRatingViewController.swift in Sources */,
 				84EE682E203A41CC00A11D41 /* FriendTableViewCell.swift in Sources */,
 				A86A3FA7207AC2D700E54BDB /* GroupViewController.swift in Sources */,

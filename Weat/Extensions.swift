@@ -13,7 +13,7 @@ extension UIButton {
     func setup(title: String!, color: UIColor) {
         // set attributes
         self.setTitle(title, for: .normal)
-        self.setTitleColor(UIColor.lightText, for: .normal)
+        self.setTitleColor(UIColor.white, for: .normal)
         self.backgroundColor = color
     }
 }

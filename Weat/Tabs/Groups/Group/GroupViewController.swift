@@ -21,6 +21,7 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     @IBAction func pressEdit(_ sender: Any) {
         let vc = GroupDetailsViewController(nibName: "GroupDetailsViewController", bundle: nil)
+        vc.group = self.group
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -34,15 +35,19 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
         self.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(pressBack))
         
         // add edit button
-        self.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(pressEdit))
-
-        // set title to group name
-        self.navigationBar.topItem?.title = self.group.name
+        self.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(pressEdit))
         
         // tableview setup
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.tableView.reloadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        // set title to group name
+        self.navigationBar.topItem?.title = self.group.name
     }
 
 

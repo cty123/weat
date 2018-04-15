@@ -12,6 +12,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GroupDetailsViewController" customModule="Weat" customModuleProvider="target">
             <connections>
+                <outlet property="buttonDelete" destination="OfR-f2-K9N" id="S29-US-zTt"/>
+                <outlet property="buttonIcon" destination="aQi-fF-BqR" id="eic-0c-3CX"/>
+                <outlet property="buttonInvite" destination="W1M-Sw-BQq" id="s0M-kw-Rn9"/>
+                <outlet property="buttonLeave" destination="2i8-hf-kQA" id="v74-D1-gzg"/>
+                <outlet property="navigationBar" destination="Xor-N9-eZi" id="mbh-Q5-phn"/>
                 <outlet property="tableViewMembers" destination="G8h-Sk-IhL" id="qfO-MY-l4q"/>
                 <outlet property="textFieldGroupName" destination="NUr-jy-S4p" id="ZQp-cQ-PxS"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -36,30 +41,72 @@
                 </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Group Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wXd-65-lFP">
                     <rect key="frame" x="16" y="77" width="97" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="97" id="eWa-9m-nGv"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="G8h-Sk-IhL">
-                    <rect key="frame" x="0.0" y="110" width="375" height="557"/>
+                    <rect key="frame" x="0.0" y="262" width="375" height="405"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aQi-fF-BqR">
+                    <rect key="frame" x="16" y="110" width="343" height="30"/>
+                    <state key="normal" title="Change Group Icon"/>
+                    <connections>
+                        <action selector="pressIcon:" destination="-1" eventType="touchUpInside" id="g1z-4Y-bvH"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2i8-hf-kQA">
+                    <rect key="frame" x="16" y="186" width="343" height="30"/>
+                    <state key="normal" title="Leave Group"/>
+                    <connections>
+                        <action selector="pressLeave:" destination="-1" eventType="touchUpInside" id="HjA-HC-0R0"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OfR-f2-K9N">
+                    <rect key="frame" x="16" y="224" width="343" height="30"/>
+                    <state key="normal" title="Delete Group"/>
+                    <connections>
+                        <action selector="pressDelete:" destination="-1" eventType="touchUpInside" id="gg4-AD-j3F"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W1M-Sw-BQq">
+                    <rect key="frame" x="16" y="148" width="343" height="30"/>
+                    <state key="normal" title="Invite to Group"/>
+                    <connections>
+                        <action selector="pressInvite:" destination="-1" eventType="touchUpInside" id="uSa-mj-dfX"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="wXd-65-lFP" firstAttribute="top" secondItem="Xor-N9-eZi" secondAttribute="bottom" constant="13" id="1Z4-LI-7nb"/>
-                <constraint firstItem="Xor-N9-eZi" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="40f-1T-luW"/>
-                <constraint firstItem="wXd-65-lFP" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="5fU-0C-JyN"/>
-                <constraint firstItem="Xor-N9-eZi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Feg-jb-qAr"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="NUr-jy-S4p" secondAttribute="trailing" constant="16" id="GKf-tk-RpS"/>
-                <constraint firstItem="G8h-Sk-IhL" firstAttribute="top" secondItem="NUr-jy-S4p" secondAttribute="bottom" constant="8" id="Mno-UB-xEQ"/>
-                <constraint firstItem="NUr-jy-S4p" firstAttribute="leading" secondItem="wXd-65-lFP" secondAttribute="trailing" constant="8" id="Qp3-6Z-chc"/>
-                <constraint firstItem="NUr-jy-S4p" firstAttribute="top" secondItem="Xor-N9-eZi" secondAttribute="bottom" constant="8" id="Vk7-zf-cqx"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="wXd-65-lFP" secondAttribute="bottom" constant="569" id="cvu-ev-Elp"/>
-                <constraint firstItem="G8h-Sk-IhL" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="dF0-gC-1Y1"/>
-                <constraint firstItem="G8h-Sk-IhL" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="k6T-Jd-JsJ"/>
-                <constraint firstItem="Xor-N9-eZi" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="pw0-58-Isd"/>
-                <constraint firstItem="G8h-Sk-IhL" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="vCk-Mb-DRx"/>
+                <constraint firstItem="2i8-hf-kQA" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="0LM-a4-gGe"/>
+                <constraint firstItem="G8h-Sk-IhL" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="2YC-hS-BiC"/>
+                <constraint firstItem="wXd-65-lFP" firstAttribute="top" secondItem="Xor-N9-eZi" secondAttribute="bottom" constant="13" id="84m-uf-QGr"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="OfR-f2-K9N" secondAttribute="trailing" constant="16" id="C1x-2V-Fqx"/>
+                <constraint firstItem="Xor-N9-eZi" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="FCD-UR-4z5"/>
+                <constraint firstItem="W1M-Sw-BQq" firstAttribute="top" secondItem="aQi-fF-BqR" secondAttribute="bottom" constant="8" id="FCd-g5-MiZ"/>
+                <constraint firstItem="OfR-f2-K9N" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="GWX-zD-b6h"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="NUr-jy-S4p" secondAttribute="trailing" constant="16" id="O9i-jc-CqI"/>
+                <constraint firstItem="wXd-65-lFP" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="OcY-pc-Oee"/>
+                <constraint firstItem="Xor-N9-eZi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="QNq-Rg-UWg"/>
+                <constraint firstItem="OfR-f2-K9N" firstAttribute="top" secondItem="2i8-hf-kQA" secondAttribute="bottom" constant="8" id="QYp-Zv-heR"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="aQi-fF-BqR" secondAttribute="trailing" constant="16" id="QlK-cT-VSj"/>
+                <constraint firstItem="aQi-fF-BqR" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="S58-hd-Jv0"/>
+                <constraint firstItem="aQi-fF-BqR" firstAttribute="top" secondItem="NUr-jy-S4p" secondAttribute="bottom" constant="8" id="UPw-tX-E8A"/>
+                <constraint firstItem="NUr-jy-S4p" firstAttribute="leading" secondItem="wXd-65-lFP" secondAttribute="trailing" constant="8" id="VkI-xK-8gQ"/>
+                <constraint firstItem="W1M-Sw-BQq" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="XDN-KS-obU"/>
+                <constraint firstItem="G8h-Sk-IhL" firstAttribute="top" secondItem="OfR-f2-K9N" secondAttribute="bottom" constant="8" id="ZLh-Cu-3XT"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="W1M-Sw-BQq" secondAttribute="trailing" constant="16" id="aou-xZ-wHn"/>
+                <constraint firstItem="G8h-Sk-IhL" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="b7K-Zd-Qwh"/>
+                <constraint firstItem="Xor-N9-eZi" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="d5f-0C-rRp"/>
+                <constraint firstItem="G8h-Sk-IhL" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="mDw-KZ-jol"/>
+                <constraint firstItem="NUr-jy-S4p" firstAttribute="top" secondItem="Xor-N9-eZi" secondAttribute="bottom" constant="8" id="mYz-q2-msn"/>
+                <constraint firstItem="2i8-hf-kQA" firstAttribute="top" secondItem="W1M-Sw-BQq" secondAttribute="bottom" constant="8" id="u1L-4r-gUg"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="2i8-hf-kQA" secondAttribute="trailing" constant="16" id="xfg-1I-VXz"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="33.5" y="53.5"/>
