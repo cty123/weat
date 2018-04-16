@@ -46,6 +46,10 @@
 		84EE6837203A430D00A11D41 /* SimpleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EE6836203A430D00A11D41 /* SimpleData.swift */; };
 		A82D67422083E09500835A94 /* GroupInviteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82D67402083E09500835A94 /* GroupInviteViewController.swift */; };
 		A82D67432083E09500835A94 /* GroupInviteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A82D67412083E09500835A94 /* GroupInviteViewController.xib */; };
+		A82D6747208404A300835A94 /* GroupIconViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82D6745208404A300835A94 /* GroupIconViewController.swift */; };
+		A82D6748208404A300835A94 /* GroupIconViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A82D6746208404A300835A94 /* GroupIconViewController.xib */; };
+		A82D674B2084083A00835A94 /* GroupIconTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82D67492084083A00835A94 /* GroupIconTableViewCell.swift */; };
+		A82D674C2084083A00835A94 /* GroupIconTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A82D674A2084083A00835A94 /* GroupIconTableViewCell.xib */; };
 		A85E9925203FDEB100A95558 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85E9924203FDEB100A95558 /* ProfileViewController.swift */; };
 		A85E992C2040063800A95558 /* FriendRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85E992A2040063800A95558 /* FriendRequestTableViewCell.swift */; };
 		A85E992D2040063800A95558 /* FriendRequestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A85E992B2040063800A95558 /* FriendRequestTableViewCell.xib */; };
@@ -147,6 +151,10 @@
 		8B72BB2C83393A9A9E49E7C9 /* Pods_Weat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Weat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A82D67402083E09500835A94 /* GroupInviteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupInviteViewController.swift; sourceTree = "<group>"; };
 		A82D67412083E09500835A94 /* GroupInviteViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroupInviteViewController.xib; sourceTree = "<group>"; };
+		A82D6745208404A300835A94 /* GroupIconViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupIconViewController.swift; sourceTree = "<group>"; };
+		A82D6746208404A300835A94 /* GroupIconViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroupIconViewController.xib; sourceTree = "<group>"; };
+		A82D67492084083A00835A94 /* GroupIconTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupIconTableViewCell.swift; sourceTree = "<group>"; };
+		A82D674A2084083A00835A94 /* GroupIconTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroupIconTableViewCell.xib; sourceTree = "<group>"; };
 		A85E9924203FDEB100A95558 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		A85E992A2040063800A95558 /* FriendRequestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestTableViewCell.swift; sourceTree = "<group>"; };
 		A85E992B2040063800A95558 /* FriendRequestTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendRequestTableViewCell.xib; sourceTree = "<group>"; };
@@ -291,6 +299,7 @@
 				A86A3FAE207ACCF900E54BDB /* Create */,
 				A86A3FA9207AC41400E54BDB /* Details */,
 				A86A3FA4207AC22600E54BDB /* Group */,
+				A82D67442084046300835A94 /* Icon */,
 				A82D673F2083E07000835A94 /* Invite */,
 				A86A3FA3207AC1DF00E54BDB /* List */,
 			);
@@ -381,6 +390,17 @@
 				A82D67412083E09500835A94 /* GroupInviteViewController.xib */,
 			);
 			path = Invite;
+			sourceTree = "<group>";
+		};
+		A82D67442084046300835A94 /* Icon */ = {
+			isa = PBXGroup;
+			children = (
+				A82D6745208404A300835A94 /* GroupIconViewController.swift */,
+				A82D6746208404A300835A94 /* GroupIconViewController.xib */,
+				A82D67492084083A00835A94 /* GroupIconTableViewCell.swift */,
+				A82D674A2084083A00835A94 /* GroupIconTableViewCell.xib */,
+			);
+			path = Icon;
 			sourceTree = "<group>";
 		};
 		A86A3FA3207AC1DF00E54BDB /* List */ = {
@@ -538,8 +558,6 @@
 				E0E572B82033CB3B00E7822B /* Sources */,
 				E0E572B92033CB3B00E7822B /* Frameworks */,
 				E0E572BA2033CB3B00E7822B /* Resources */,
-				FC1C04AE3E943A6973793C79 /* [CP] Embed Pods Frameworks */,
-				F658C132AD4C090F94877027 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -602,6 +620,8 @@
 				14179564203D2CC300611D6F /* Checkin.storyboard in Resources */,
 				A85E993D2040501400A95558 /* EditProfileViewController.xib in Resources */,
 				145F83E620436F5400FAFEAF /* FindFriendsViewController.xib in Resources */,
+				A82D674C2084083A00835A94 /* GroupIconTableViewCell.xib in Resources */,
+				A82D6748208404A300835A94 /* GroupIconViewController.xib in Resources */,
 				E0E572B62033CB3B00E7822B /* LaunchScreen.storyboard in Resources */,
 				A86A3FA2207ABB5F00E54BDB /* GroupTableViewCell.xib in Resources */,
 				84EE682F203A41CC00A11D41 /* FriendTableViewCell.xib in Resources */,
@@ -648,6 +668,7 @@
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/Smile/Smile.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -656,6 +677,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Smile.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -721,36 +743,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F658C132AD4C090F94877027 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WeatTests/Pods-WeatTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FC1C04AE3E943A6973793C79 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WeatTests/Pods-WeatTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -770,6 +762,7 @@
 				E0B8842C2080F5E10096DDC4 /* Errors.swift in Sources */,
 				14179562203D2CB800611D6F /* CheckinViewController.swift in Sources */,
 				A86A3FB5207C4DEB00E54BDB /* GroupCreateViewController.swift in Sources */,
+				A82D6747208404A300835A94 /* GroupIconViewController.swift in Sources */,
 				E0E572AE2033CB3B00E7822B /* LoginController.swift in Sources */,
 				145F83E520436F5400FAFEAF /* FindFriendsViewController.swift in Sources */,
 				A8AE7FCA203F9D5B007C9506 /* FriendViewController.swift in Sources */,
@@ -783,6 +776,7 @@
 				142E6E1C20426EE7009E1A8B /* ExploreLocation.swift in Sources */,
 				E0E572CC2033CBF100E7822B /* LoadController.swift in Sources */,
 				A8C2ADF320583F3E009255DC /* RecommendToFriendsViewController.swift in Sources */,
+				A82D674B2084083A00835A94 /* GroupIconTableViewCell.swift in Sources */,
 				E06D9A9B205F1C5600D77FDC /* Recommendation.swift in Sources */,
 				14503F5720375362007165CF /* FeedElement.swift in Sources */,
 				E02143A0205A0E63005BA160 /* Comment.swift in Sources */,

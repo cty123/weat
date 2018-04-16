@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Smile
 
 class GroupsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -47,6 +48,7 @@ class GroupsViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     // vars
     var groups: [Group] = [] // SimpleData.Groups
+    var emojiList: [String] = Smile.list()
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(handleRefresh), for: UIControlEvents.valueChanged)
@@ -93,10 +95,7 @@ class GroupsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = Bundle.main.loadNibNamed("GroupTableViewCell", owner: self, options: nil)?.first as! GroupTableViewCell
         cell.labelName.text = self.groups[indexPath.row].name
-        
-        if let _ = self.groups[indexPath.row].icon_id {
-            cell.labelIconID.text = String(describing: self.groups[indexPath.row].icon_id!)
-        }
+        cell.labelIconID.text = self.emojiList[self.groups[indexPath.row].icon_id!]
         
         return cell
     }

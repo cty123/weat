@@ -48,7 +48,9 @@ class GroupDetailsViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     @IBAction func pressIcon(_ sender: Any) {
-        
+        let vc = GroupIconViewController(nibName: "GroupIconViewController", bundle: nil)
+        vc.group = self.group
+        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func pressInvite(_ sender: Any) {

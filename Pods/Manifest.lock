@@ -20,6 +20,7 @@ PODS:
     - GooglePlaces (= 2.6.0)
   - GooglePlaces (2.6.0):
     - GoogleMaps/Base (= 2.6.0)
+  - Smile (1.3.0)
   - SwiftyJSON (4.0.0)
 
 DEPENDENCIES:
@@ -29,7 +30,20 @@ DEPENDENCIES:
   - GoogleMaps
   - GooglePlacePicker
   - GooglePlaces
+  - Smile
   - SwiftyJSON
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Alamofire
+    - Bolts
+    - FBSDKCoreKit
+    - FBSDKLoginKit
+    - GoogleMaps
+    - GooglePlacePicker
+    - GooglePlaces
+    - Smile
+    - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
@@ -39,8 +53,9 @@ SPEC CHECKSUMS:
   GoogleMaps: 42f91c68b7fa2f84d5c86597b18ceb99f5414c7f
   GooglePlacePicker: e4488625effb006f59de49e14b7a603e463e4261
   GooglePlaces: f6ddf33b75cef69e888907d9947c57198ed845f3
+  Smile: 5e0094b5431fd2f4224426f2446ac4d69a8beb38
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
 
-PODFILE CHECKSUM: 5c60fefa55f0ce086475454f9b5feb8240db5f7f
+PODFILE CHECKSUM: 3ed309367a23dd92f4aa8f17fda1b1ff8ac88ca4
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.0

@@ -13,6 +13,7 @@ target 'Weat' do
   pod 'GooglePlaces'
   pod 'GooglePlacePicker'
   pod 'GoogleMaps'
+  pod 'Smile'
 
   target 'WeatTests' do
     inherit! :search_paths
