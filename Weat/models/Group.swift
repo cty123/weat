@@ -294,6 +294,35 @@ public class Group{
         }
     }
     
+    // check if user is owner
+    static func isOwner(group_id:Int, completion: @escaping(Bool)->()){
+        let url = "\(String(WeatAPIUrl))/groups/members"
+        let params = [
+            "access_token": FBSDKAccessToken.current().tokenString!,
+            "group_id": String(group_id)
+        ]
+
+        Alamofire.request(url, method:.get, parameters:params).validate().responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                let message = json["message"].stringValue
+                let owner_id = json["owner", "user", "id"].intValue
+                let user_id = UserDefaults.standard.integer(forKey: "id")
+                if (message == "OK" && (owner_id == user_id)) {
+                    completion(true)
+                } else {
+                    completion(false)
+                }
+            case .failure(let error):
+                print("File: \(#file)")
+                print("Line: \(#line)")
+                print(error)
+                completion(false)
+            }
+        }
+    }
+    
     // Kick a user from a group
     static func kick(user_id:Int, group_id:Int, completion: @escaping(Bool)->()){
         let url = "\(String(WeatAPIUrl))/groups/kick"

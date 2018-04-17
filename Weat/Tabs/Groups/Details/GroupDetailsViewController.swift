@@ -84,6 +84,25 @@ class GroupDetailsViewController: UIViewController, UITableViewDataSource, UITab
     
     @IBAction func pressDelete(_ sender: Any) {
         
+        let id = self.group.id!
+        
+        Group.destroy(group_id: id) { result in
+            print("File: \(#file)")
+            print("Line: \(#line)")
+            
+            if result {
+                print("deleted group")
+            } else {
+                print("failed to delete group")
+            }
+        }
+        
+        // dismis details vc
+        self.dismiss(animated: true, completion: nil)
+        
+        // dismiss this group vc
+        let pvc = self.presentingViewController as! GroupViewController
+        pvc.dismiss(animated: true, completion: nil)
     }
     
     
@@ -94,13 +113,23 @@ class GroupDetailsViewController: UIViewController, UITableViewDataSource, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let id = self.group.id!
+        
+        // check if user is group owner
+        Group.isOwner(group_id: id) { result in
+            
+            // make sure only the owner can delete
+            if result {
+                self.buttonDelete.isEnabled = true
+            } else {
+                self.buttonDelete.isEnabled = false
+            }
+        }
+        
         // set textfield to group name
         self.textFieldGroupName.text = self.group.name
-
-        // get group memebers
-        let id = self.group.id
         
-        Group.getMembers(group_id: id!){ result in
+        Group.getMembers(group_id: id){ result in
             print("File: \(#file)")
             print("Line: \(#line)")
             switch result{
