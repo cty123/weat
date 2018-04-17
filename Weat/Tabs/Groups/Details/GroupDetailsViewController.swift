@@ -41,8 +41,8 @@ class GroupDetailsViewController: UIViewController, UITableViewDataSource, UITab
         }
         
         // change group name (frontend)
-        let vc = self.presentingViewController as! GroupViewController
-        vc.group.name = name
+        let pvc = self.presentingViewController as! GroupViewController
+        pvc.group.name = name
         
         self.dismiss(animated: true, completion: nil)
     }
@@ -61,6 +61,25 @@ class GroupDetailsViewController: UIViewController, UITableViewDataSource, UITab
     
     @IBAction func pressLeave(_ sender: Any) {
         
+        // leave group on backend
+        let id = self.group.id!
+        Group.leave(group_id: id){result in
+            print("File: \(#file)")
+            print("Line: \(#line)")
+            if result{
+                print("left group")
+            } else {
+                print("failed to leave group")
+            }
+        }
+        
+        // dismis details vc
+        self.dismiss(animated: true, completion: nil)
+        
+        // dismiss this group vc
+        let pvc = self.presentingViewController as! GroupViewController
+        pvc.dismiss(animated: true, completion: nil)
+
     }
     
     @IBAction func pressDelete(_ sender: Any) {
