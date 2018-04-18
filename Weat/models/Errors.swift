@@ -23,5 +23,8 @@ enum RequestError: Error{
     case noFacebookId(msg:String)
     case invalidFacebookIds(msg:String)
     case noFriendsFound(msg:String)
+    case noMenuId(msg:String)
+    case noRating(msg:String)
+    case noReview(msg:String)
     case unknownError(msg:String)
 }

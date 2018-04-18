@@ -572,6 +572,8 @@
 				E0E572B82033CB3B00E7822B /* Sources */,
 				E0E572B92033CB3B00E7822B /* Frameworks */,
 				E0E572BA2033CB3B00E7822B /* Resources */,
+				9787C3A65C9BC9E844976F7E /* [CP] Embed Pods Frameworks */,
+				613DF512FF3516491D25CD9B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -720,6 +722,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Weat/Pods-Weat-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		613DF512FF3516491D25CD9B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WeatTests/Pods-WeatTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9787C3A65C9BC9E844976F7E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WeatTests/Pods-WeatTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		AB70E983D03DE2BD719E297E /* [CP] Check Pods Manifest.lock */ = {
