@@ -17,7 +17,7 @@ public class GroupTest: XCTestCase {
             switch result{
             case .success(let groups):
                 for g in groups{
-                    
+                    print(g)
                 }
                 exp.fulfill()
             case .failure(_):
@@ -45,10 +45,10 @@ public class GroupTest: XCTestCase {
         Group.leave(group_id: 1){result in
             if result{
                 XCTAssert(true)
-                exp.fulfill()
             }else{
                 XCTAssert(false)
             }
+            exp.fulfill()
         }
         wait(for: [exp], timeout: 10.0)
     }

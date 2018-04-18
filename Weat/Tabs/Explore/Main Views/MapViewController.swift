@@ -244,18 +244,24 @@ extension MapViewController: GMSMapViewDelegate {
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
         let restaurantViewController = RestaurantViewController(nibName: "RestaurantViewController", bundle: nil)
         Restaurant.getRestaurantInfo(google_link: marker.snippet!, completion: { (restaurant: Restaurant) in
-            restaurant.getRestaurant { status in
-                if(!status) {
-                    print("getRestaurant error in listViewController")
-                } else {
-                    restaurant.getRestaurantRating(completion: { (rating_status) in
-                        if(!rating_status){
+            restaurant.getRestaurant { result in
+                switch result {
+                case .success(_):
+                    restaurant.getRestaurantRating() { result in
+                        switch result {
+                        case .success(_):
+                            restaurantViewController.restaurant = restaurant
+                        case .failure(let error):
+                            restaurantViewController.restaurant = restaurant
                             print("getRestaurantRating error in mapViewController")
+                            print(error)
                         }
-                        restaurantViewController.restaurant = restaurant
                         restaurantViewController.back_string = "Map"
                         self.present(restaurantViewController, animated: true, completion: nil)
-                    })
+                    }
+                case .failure(let error):
+                    print("getRestaurant error in listViewController")
+                    print(error)
                 }
             }
         })

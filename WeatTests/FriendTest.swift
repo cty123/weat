@@ -141,6 +141,7 @@ class FriendTest: XCTestCase {
     /*
     * Test if the user can accept a friend request
     */
+    /*
     func testSetFriendRequests(){
         let exp = expectation(description: "testSetFriendRequests")
         Friend.setFriendRequest(friend_id: 4, acceptance: 1){ status in
@@ -180,5 +181,5 @@ class FriendTest: XCTestCase {
         }
         wait(for: [exp], timeout: 10.0)
     }
-    
+    */
 }

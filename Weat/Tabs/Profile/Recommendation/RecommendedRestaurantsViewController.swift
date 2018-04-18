@@ -90,14 +90,15 @@ class RecommendedRestaurantsViewController: UIViewController, UITableViewDelegat
         
         
         Restaurant.getRestaurantInfo(google_link: recommendation.google_link!, completion: { (restaurant: Restaurant) in
-            restaurant.getRestaurant { status in
-                if(!status) {
-                    print("getRestaurant error in listViewController")
-                } else {
+            restaurant.getRestaurant { result in
+                switch result {
+                case .success(_):
                     let vc = RestaurantViewController(nibName: "RestaurantViewController", bundle: nil)
                     vc.restaurant = restaurant
                     vc.back_string = "Back"
                     self.present(vc, animated: true, completion: nil)
+                case .failure(let error):
+                    print("getRestaurant error in listViewController")
                 }
             }
         })

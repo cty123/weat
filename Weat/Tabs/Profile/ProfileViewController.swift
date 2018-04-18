@@ -349,16 +349,18 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         if (self.segmentedControl.selectedSegmentIndex == 2) {
             let restaurant = self.favorites[indexPath.row]
             Restaurant.getRestaurantInfo(google_link: restaurant.google_link!, completion: { (restaurant: Restaurant) in
-                restaurant.getRestaurant { status in
-                    if(!status) {
-                        print("File: \(#file)")
-                        print("Line: \(#line)")
-                        print("failed to get restaruant details")
-                    } else {
+                restaurant.getRestaurant { result in
+                    switch result {
+                    case .success(_):
                         let vc = RestaurantViewController(nibName: "RestaurantViewController", bundle: nil)
                         vc.restaurant = restaurant
                         vc.back_string = "Back"
                         self.present(vc, animated: true, completion: nil)
+                    case .failure(let error):
+                        print("File: \(#file)")
+                        print("Line: \(#line)")
+                        print("failed to get restaruant details")
+                        print(error)
                     }
                 }
             })

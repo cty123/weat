@@ -35,6 +35,7 @@ public class RestaurantTest: XCTestCase{
      * Pull restaurant rating with TRUE name and TRUE google_link
      * Result: should pull the rating of restaurant
      */
+    /*
     func testGetRestaurantRating1(){
         let exp = expectation(description: "testGetRestaurantRating1")
         let r = Restaurant()
@@ -302,4 +303,6 @@ public class RestaurantTest: XCTestCase{
         wait(for: [exp], timeout: 10.0)
     }
 
+}
+*/
 }
