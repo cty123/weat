@@ -44,6 +44,8 @@
 		84EE6833203A41FC00A11D41 /* RestaurantTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84EE6831203A41FC00A11D41 /* RestaurantTableViewCell.xib */; };
 		84EE6835203A42EE00A11D41 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EE6834203A42EE00A11D41 /* Extensions.swift */; };
 		84EE6837203A430D00A11D41 /* SimpleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EE6836203A430D00A11D41 /* SimpleData.swift */; };
+		A81D12DC2086B188006D1F29 /* GroupArchiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A81D12DA2086B188006D1F29 /* GroupArchiveViewController.swift */; };
+		A81D12DD2086B188006D1F29 /* GroupArchiveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A81D12DB2086B188006D1F29 /* GroupArchiveViewController.xib */; };
 		A82D67422083E09500835A94 /* GroupInviteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82D67402083E09500835A94 /* GroupInviteViewController.swift */; };
 		A82D67432083E09500835A94 /* GroupInviteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A82D67412083E09500835A94 /* GroupInviteViewController.xib */; };
 		A82D6747208404A300835A94 /* GroupIconViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82D6745208404A300835A94 /* GroupIconViewController.swift */; };
@@ -149,6 +151,8 @@
 		84EE6834203A42EE00A11D41 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		84EE6836203A430D00A11D41 /* SimpleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleData.swift; sourceTree = "<group>"; };
 		8B72BB2C83393A9A9E49E7C9 /* Pods_Weat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Weat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A81D12DA2086B188006D1F29 /* GroupArchiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupArchiveViewController.swift; sourceTree = "<group>"; };
+		A81D12DB2086B188006D1F29 /* GroupArchiveViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroupArchiveViewController.xib; sourceTree = "<group>"; };
 		A82D67402083E09500835A94 /* GroupInviteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupInviteViewController.swift; sourceTree = "<group>"; };
 		A82D67412083E09500835A94 /* GroupInviteViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroupInviteViewController.xib; sourceTree = "<group>"; };
 		A82D6745208404A300835A94 /* GroupIconViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupIconViewController.swift; sourceTree = "<group>"; };
@@ -296,6 +300,7 @@
 		14179566203D2DCC00611D6F /* Groups */ = {
 			isa = PBXGroup;
 			children = (
+				A81D12D92086B102006D1F29 /* Archive */,
 				A86A3FAE207ACCF900E54BDB /* Create */,
 				A86A3FA9207AC41400E54BDB /* Details */,
 				A86A3FA4207AC22600E54BDB /* Group */,
@@ -381,6 +386,15 @@
 				84EE682D203A41CC00A11D41 /* FriendTableViewCell.xib */,
 			);
 			path = TableViewCells;
+			sourceTree = "<group>";
+		};
+		A81D12D92086B102006D1F29 /* Archive */ = {
+			isa = PBXGroup;
+			children = (
+				A81D12DA2086B188006D1F29 /* GroupArchiveViewController.swift */,
+				A81D12DB2086B188006D1F29 /* GroupArchiveViewController.xib */,
+			);
+			path = Archive;
 			sourceTree = "<group>";
 		};
 		A82D673F2083E07000835A94 /* Invite */ = {
@@ -626,6 +640,7 @@
 				A86A3FA2207ABB5F00E54BDB /* GroupTableViewCell.xib in Resources */,
 				84EE682F203A41CC00A11D41 /* FriendTableViewCell.xib in Resources */,
 				14E424B72068B0E7000F2057 /* MenuTableViewCell.xib in Resources */,
+				A81D12DD2086B188006D1F29 /* GroupArchiveViewController.xib in Resources */,
 				140924C9203D241E00D6F8C8 /* Feed.storyboard in Resources */,
 				A86A3FAD207AC49700E54BDB /* GroupDetailsViewController.xib in Resources */,
 				84EE682B203A41BF00A11D41 /* FeedTableViewCell.xib in Resources */,
@@ -761,6 +776,7 @@
 				E0E2286B2074731700660622 /* Group.swift in Sources */,
 				E0B8842C2080F5E10096DDC4 /* Errors.swift in Sources */,
 				14179562203D2CB800611D6F /* CheckinViewController.swift in Sources */,
+				A81D12DC2086B188006D1F29 /* GroupArchiveViewController.swift in Sources */,
 				A86A3FB5207C4DEB00E54BDB /* GroupCreateViewController.swift in Sources */,
 				A82D6747208404A300835A94 /* GroupIconViewController.swift in Sources */,
 				E0E572AE2033CB3B00E7822B /* LoginController.swift in Sources */,

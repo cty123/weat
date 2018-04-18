@@ -22,6 +22,10 @@ class GroupsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.present(vc, animated: true, completion: nil)
     }
     
+    @IBAction func pressRejoin(_ sender: Any) {
+        let vc = GroupArchiveViewController(nibName: "GroupArchiveViewController", bundle: nil)
+        self.present(vc, animated: true, completion: nil)
+    }
     
     @IBAction func handleRefresh() {
         // get groups
@@ -68,7 +72,10 @@ class GroupsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.tableView.addSubview(self.refreshControl)
         
         // add create group button
-        self.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(pressCreate(_:)))
+        self.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(pressCreate))
+        
+        // add rejoin group button
+        self.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .organize, target: self, action: #selector(pressRejoin))
         
         // setup tableView
         self.tableView.delegate = self
