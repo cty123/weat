@@ -154,7 +154,9 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         let list_obj = restaurants[indexPath.row]
         
         cell.labelName.text = "\(String(describing: list_obj.name!))"
-        cell.imageViewPic.image = list_obj.image!
+        if (list_obj.image != nil) {
+            cell.imageViewPic.image = list_obj.image!
+        }
         
         // ratings calculation
         var food_rating: Float = 0.0

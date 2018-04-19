@@ -30,11 +30,18 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBAction func friendButtonPress(_ sender: UIButton) {
         let friend_id: String = "\((user?.id)!)"
         switch(friend_status!) {
-        case -1,2:
+        case -1:
             Friend.sendFriendRequest(friend_id: friend_id) { result in
                 switch result {
                 case .success(_):
-                    print("success")
+                    self.buttonAddFriend.setTitle("Remove Request", for: UIControlState.normal)
+                    self.friend_status = 2
+                    // Alert the user
+                    let alert = UIAlertController(title: "Success", message: "Sent friend request", preferredStyle: UIAlertControllerStyle.alert)
+                    // add an action (button)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                    // show the alert
+                    self.present(alert, animated: true, completion: nil)
                 case .failure(let error):
                     switch error{
                     case RequestError.alreadySent(let msg):
@@ -52,12 +59,30 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 }
             }
         case 0,1:
-            // waiting on adam to do stuff on back end
-            // Friend.remove()
-            break
+            Friend.remove(id: friend_id, completion: { (result) in
+                var title: String
+                var message: String
+                switch(result) {
+                case .success:
+                    title = "Success"
+                    message = "Removed friend"
+                    self.buttonAddFriend.setTitle("Add Friend", for: UIControlState.normal)
+                    self.friend_status = -1
+                case .failure(let error):
+                    title = "Error"
+                    message = "\(error)"
+                }
+                let alert = UIAlertController(title: title,
+                                              message: message,
+                                              preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "Done",
+                                              style: .default,
+                                              handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            })
         default:
             break
-            
         }
         
     }
@@ -96,14 +121,18 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
         Friend.getStatus(id: user_id) { (result) in
             switch result{
             case .success(let status):
+                print("\(status)")
                 switch status{
                 // Pending
+                case -1:
+                    self.buttonAddFriend.setTitle("Add Friend", for: UIControlState.normal)
                 case 0:
                     self.buttonAddFriend.setTitle("Remove Request", for: UIControlState.normal)
                 case 1:
                     self.buttonAddFriend.setTitle("Remove Friend", for: UIControlState.normal)
                 case 2:
                     // Friend denied... not sure what to show
+                    self.buttonAddFriend.setTitle("User blocked you...", for: UIControlState.normal)
                     break
                 default:
                     break

@@ -6,7 +6,9 @@ import FBSDKCoreKit
 class Friend {
 
     /*
-    * Check if someone if you friend
+    * Check if someone is your friend
+    * No relationship yet: -1
+    * 0 pending, 1 accept, 2 deny
     */
     static func getStatus(id: String, completion: @escaping (Result<Int>) -> ()){
         let url = "\(String(WeatAPIUrl))/user/friends/status"
@@ -337,7 +339,7 @@ class Friend {
             "access_token": FBSDKAccessToken.current().tokenString!,
             "friend_id": id
         ]
-        Alamofire.request(url, method:.delete, parameters:params).validate().responseJSON { response in
+        Alamofire.request(url, method: .delete, parameters: params, encoding: URLEncoding.httpBody, headers: nil).validate().responseJSON { (response) in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
