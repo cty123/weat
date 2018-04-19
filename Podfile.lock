@@ -1,14 +1,14 @@
 PODS:
-  - Alamofire (4.6.0)
+  - Alamofire (4.7.2)
   - Bolts (1.9.0):
     - Bolts/AppLinks (= 1.9.0)
     - Bolts/Tasks (= 1.9.0)
   - Bolts/AppLinks (1.9.0):
     - Bolts/Tasks
   - Bolts/Tasks (1.9.0)
-  - FBSDKCoreKit (4.30.0):
+  - FBSDKCoreKit (4.32.0):
     - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.30.0):
+  - FBSDKLoginKit (4.32.0):
     - FBSDKCoreKit
   - GoogleMaps (2.6.0):
     - GoogleMaps/Maps (= 2.6.0)
@@ -33,23 +33,11 @@ DEPENDENCIES:
   - Smile
   - SwiftyJSON
 
-SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
-    - Alamofire
-    - Bolts
-    - FBSDKCoreKit
-    - FBSDKLoginKit
-    - GoogleMaps
-    - GooglePlacePicker
-    - GooglePlaces
-    - Smile
-    - SwiftyJSON
-
 SPEC CHECKSUMS:
-  Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
+  Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
-  FBSDKCoreKit: 7c4bba2877781a131ab5d54c0a78c405d4307b62
-  FBSDKLoginKit: fe7a7e82373dc5daad92e1623219e86224ab1fb1
+  FBSDKCoreKit: 55d7f2ac45d9c4b9b6119f4e43900fe84b9b7b1b
+  FBSDKLoginKit: 32ac05c2a59952c363c2e85aafa8f73ba93bcbad
   GoogleMaps: 42f91c68b7fa2f84d5c86597b18ceb99f5414c7f
   GooglePlacePicker: e4488625effb006f59de49e14b7a603e463e4261
   GooglePlaces: f6ddf33b75cef69e888907d9947c57198ed845f3
@@ -58,4 +46,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 3ed309367a23dd92f4aa8f17fda1b1ff8ac88ca4
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.4.0

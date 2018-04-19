@@ -83,14 +83,19 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                     print(error_message)
                 } else {
                     for obj in json["results"] {
-                        Restaurant.getRestaurantInfo(google_link: obj.1["place_id"].string!, completion: { (restaurant: Restaurant) in
-                            restaurant.getRestaurantRating(completion: { (status) in
-                                if(status) {
-                                    self.restaurants.append(restaurant)
-                                    self.tableView.reloadData()
+                        Restaurant.getRestaurantInfo(google_link: obj.1["place_id"].string!) { (restaurant: Restaurant) in
+                            restaurant.getRestaurantRating() { result in
+                                switch result {
+                                    case .success(_):
+                                        self.restaurants.append(restaurant)
+                                        self.tableView.reloadData()
+                                    case .failure(let error):
+                                        self.restaurants.append(restaurant)
+                                        self.tableView.reloadData()
+                                        print(error)
                                 }
-                            })
-                        })
+                            }
+                        }
                     }
                     // Google Places only allows 20 results per query, but includes a 'next page' token if there are more results (up to 60 results, so 3 pages)
                     // Below allows you to get more results.
@@ -178,17 +183,23 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cell = tableView.cellForRow(at: indexPath) as! RestaurantTableViewCell
         let restaurantViewController = RestaurantViewController(nibName: "RestaurantViewController", bundle: nil)
         cell.restaurant.getRestaurant { status in
-            if(!status) {
-                print("getRestaurant error in listViewController")
-            } else {
-                cell.restaurant.getRestaurantRating(completion: { (rating_status) in
-                    if(!rating_status){
+            switch status {
+            case .success(_):
+                cell.restaurant.getRestaurantRating() { result in
+                    switch result {
+                    case .success(_):
+                        restaurantViewController.restaurant = cell.restaurant
+                    case .failure(let error):
+                        restaurantViewController.restaurant = cell.restaurant
                         print("getRestaurantRating error in listViewController")
+                        print(error)
                     }
-                    restaurantViewController.restaurant = cell.restaurant
                     restaurantViewController.back_string = "List"
                     self.present(restaurantViewController, animated: true, completion: nil)
-                })
+                }
+            case .failure(let error):
+                print("getRestaurant error in listViewController")
+                print(error)
             }
         }
     }
@@ -242,18 +253,24 @@ extension ListViewController: GMSAutocompleteResultsViewControllerDelegate {
         if(isRestaurant) {
             let restaurantViewController = RestaurantViewController(nibName: "RestaurantViewController", bundle: nil)
             Restaurant.getRestaurantInfo(google_link: place.placeID, completion: { (restaurant: Restaurant) in
-                restaurant.getRestaurant { status in
-                    if(!status) {
-                        print("getRestaurant error in listViewController")
-                    } else {
-                        restaurant.getRestaurantRating(completion: { (rating_status) in
-                            if(!rating_status){
+                restaurant.getRestaurant { result in
+                    switch result {
+                    case .success(_):
+                        restaurant.getRestaurantRating() { result in
+                            switch result {
+                            case .success(_):
+                                restaurantViewController.restaurant = restaurant
+                            case .failure(let error):
+                                restaurantViewController.restaurant = restaurant
                                 print("getRestaurantRating error in listViewController")
+                                print(error)
                             }
-                            restaurantViewController.restaurant = restaurant
                             restaurantViewController.back_string = "List"
                             self.present(restaurantViewController, animated: true, completion: nil)
-                        })
+                        }
+                    case .failure(let error):
+                        print("getRestaurant error in listViewController")
+                        print(error)
                     }
                 }
             })

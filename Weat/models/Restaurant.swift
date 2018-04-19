@@ -112,7 +112,7 @@ class Restaurant {
     }
     
     // Get restaurant menu with ratings ----------- Will be rewritten as new backend api is implemented
-    func getRestaurantMenuWithRating(completion: @escaping (Bool)->()){
+    func getRestaurantMenuWithRating(completion: @escaping (Result<Bool>)->()){
         let url = "\(String(WeatAPIUrl))/restaurants/menu"
         let params = [
             "access_token": FBSDKAccessToken.current().tokenString!,
@@ -124,9 +124,8 @@ class Restaurant {
             case .success(let value):
                 let json = JSON(value)
                 let message = json["message"].stringValue
-                // Debug option
-                print(json)
-                if (message == "OK"){
+                switch message{
+                case "OK":
                     self.name = json["restaurant"]["name"].stringValue;
                     for menu_item in json["restaurant"]["menu_items"].arrayValue{
                         let category = menu_item["category"]
@@ -134,7 +133,6 @@ class Restaurant {
                         item.id = menu_item["id"].intValue
                         item.category = category.stringValue
                         item.name = menu_item["name"].stringValue
-                        // Will implement rating later
                         for rating in menu_item["ratings"].arrayValue{
                             let r = Rating()
                             r.author = rating["user"]["name"].stringValue
@@ -154,13 +152,22 @@ class Restaurant {
                         }
                         self.menu.append(item)
                     }
-                    completion(true)
-                }else{
-                    completion(false)
+                    completion(.success(true))
+                case "No access token given":
+                    completion(.failure(RequestError.noAccessToken(msg: message)))
+                case "No google link given":
+                    completion(.failure(RequestError.noGoogleLink(msg: message)))
+                case "No restaurant name given":
+                    completion(.failure(RequestError.noRestaurantName(msg: message)))
+                case "No location given":
+                    completion(.failure(RequestError.noLocation(msg: message)))
+                case "No authentication":
+                    completion(.failure(RequestError.noAuthentication(msg: message)))
+                default:
+                    completion(.failure(RequestError.unknownError(msg: message)))
                 }
             case .failure(let error):
-                print(error)
-                completion(false)
+                completion(.failure(error))
             }
         }
     }
@@ -171,7 +178,7 @@ class Restaurant {
      * Parameter: google_link, String
      * Access token is automatically obtained from local statics
      */
-    func getRestaurantRating(completion: @escaping (Bool)->()){
+    func getRestaurantRating(completion: @escaping (Result<Bool>)->()){
         let url = "\(String(WeatAPIUrl))/rating"
         let params = [
             "access_token": FBSDKAccessToken.current().tokenString!,
@@ -185,7 +192,8 @@ class Restaurant {
             case .success(let value):
                 let json = JSON(value)
                 let message = json["message"].stringValue
-                if message == "OK" {
+                switch message{
+                case "OK":
                     // Start to parse json
                     self.rating.ratings_exist = json["ratings_exist"].boolValue
                     self.rating.food_good_all = json["data"]["food_good_all"].intValue
@@ -200,13 +208,20 @@ class Restaurant {
                     self.rating.service_good_friends = json["data"]["service_good_friends"].intValue
                     self.rating.service_bad_friends = json["data"]["service_bad_friends"].intValue
                     self.rating.service_count_friends = json["data"]["service_count_friends"].intValue
-                    completion(true)
-                }else{
-                    completion(false)
+                    completion(.success(true))
+                case "No access token given":
+                    completion(.failure(RequestError.noAccessToken(msg: message)))
+                case "No google link given":
+                    completion(.failure(RequestError.noGoogleLink(msg: message)))
+                case "No restaurant name given":
+                    completion(.failure(RequestError.noRestaurantName(msg: message)))
+                case "No location given":
+                    completion(.failure(RequestError.noLocation(msg: message)))
+                default:
+                    completion(.failure(RequestError.unknownError(msg: message)))
                 }
             case .failure(let error):
-                print(error)
-                completion(false)
+                completion(.failure(error))
             }
         }
     }
@@ -217,7 +232,7 @@ class Restaurant {
      * This function returns a boolean variable that indicated the status of this function true = success, false = failed
      * The updated comments will be stored at restaurant.comments
      */
-    func getRestaurantComments(completion:@escaping(Bool)->()){
+    func getRestaurantComments(completion:@escaping(Result<Bool>)->()){
         let url = "\(String(WeatAPIUrl))/restaurants/comments"
         let params = [
             "access_token": FBSDKAccessToken.current().tokenString!,
@@ -230,10 +245,9 @@ class Restaurant {
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
-                let messge = json["message"].stringValue
-                // Debug option
-                print(json)
-                if messge == "OK" {
+                let message = json["message"].stringValue
+                switch message {
+                case "OK":
                     for r in json["comments"].arrayValue{
                         let comment = Comment()
                         comment.id = r["id"].intValue
@@ -251,13 +265,20 @@ class Restaurant {
                         comment.author = r["user"]["name"].stringValue
                         self.comments.append(comment)
                     }
-                    completion(true)
-                }else{
-                    completion(false)
+                    completion(.success(true))
+                case "No access token given":
+                    completion(.failure(RequestError.noAccessToken(msg: message)))
+                case "No google link given":
+                    completion(.failure(RequestError.noGoogleLink(msg: message)))
+                case "No restaurant name given":
+                    completion(.failure(RequestError.noRestaurantName(msg: message)))
+                case "No location given":
+                    completion(.failure(RequestError.noLocation(msg: message)))
+                default:
+                    completion(.failure(RequestError.unknownError(msg: message)))
                 }
             case .failure(let error):
-                print(error)
-                completion(false)
+                completion(.failure(error))
             }
         }
     }
@@ -266,7 +287,7 @@ class Restaurant {
     * This function is used to obtain the COMPLETE details of a restaurant, including menu, menu item rating and restaurant ratings
     * This function is a integration of all restaurant functions EXCEPT FOR pull condensed rating, you need to call updateRating separately
     */
-    func getRestaurant(completion: @escaping (Bool)->()){
+    func getRestaurant(completion: @escaping (Result<Bool>)->()){
         let url = "\(String(WeatAPIUrl))/restaurants/detail"
         let params = [
             "access_token": FBSDKAccessToken.current().tokenString!,
@@ -284,8 +305,8 @@ class Restaurant {
                 print(json)
                 // Status message -- Will add a status module that determines if the request has succeeded
                 let message = json["message"].stringValue
-                if message == "OK" {
-                    // Start parsing json --- updating menu
+                switch message {
+                case "OK":
                     self.name = json["restaurant"]["name"].string
                     self.is_favorite = json["is_favorite"].bool
                     for menu_item in json["restaurant"]["menu_items"].arrayValue{
@@ -335,13 +356,22 @@ class Restaurant {
                         comment.authorID = r["user_id"].intValue
                         self.comments.append(comment)
                     }
-                    completion(true)
-                }else{
-                    completion(false)
+                    completion(.success(true))
+                case "No access token given":
+                    completion(.failure(RequestError.noAccessToken(msg: message)))
+                case "No google link given":
+                    completion(.failure(RequestError.noGoogleLink(msg: message)))
+                case "No restaurant name given":
+                    completion(.failure(RequestError.noRestaurantName(msg: message)))
+                case "No location given":
+                    completion(.failure(RequestError.noLocation(msg: message)))
+                case "No authentication":
+                    completion(.failure(RequestError.noAuthentication(msg: message)))
+                default:
+                    completion(.failure(RequestError.unknownError(msg: message)))
                 }
             case .failure(let error):
-                print(error)
-                completion(false)
+                completion(.failure(error))
             }
         }
     }

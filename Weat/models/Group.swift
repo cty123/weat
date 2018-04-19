@@ -95,7 +95,7 @@ public class Group{
             case .success(let value):
                 let json = JSON(value)
                 let message = json["message"].stringValue
-                if message == "gBg left" {
+                if message == "Group left" {
                     completion(true)
                 }else{
                     completion(false)
