@@ -43,16 +43,18 @@ class PostRatingViewController: UIViewController {
          */
         let latitude = 0.0
         let longitude = 0.0
-        Rating.postRestaurantRating(latitude: latitude, longitude: longitude, google_link: (restaurant?.google_link)!, restaurant_name: (restaurant?.name)!, food_rating: food_rating, service_rating: service_rating, rating_text: rating_text){ status in
-            if (status){
+        Rating.postRestaurantRating(latitude: latitude, longitude: longitude, google_link: (restaurant?.google_link)!, restaurant_name: (restaurant?.name)!, food_rating: food_rating, service_rating: service_rating, rating_text: rating_text){ result in
+            switch result {
+            case .success(_):
                 title = "Success"
                 message = "Posted rating for \((self.restaurant?.name)!)"
-            } else {
+            case .failure(let error):
                 title = "Error"
                 message = "Unable to post rating."
                 print("Error \(#file)")
                 print("Error \(#line)")
                 print("Unable to post rating.")
+                print(error)
             }
             let alert = UIAlertController(title: title,
                                           message: message,

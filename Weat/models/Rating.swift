@@ -31,7 +31,7 @@ class Rating {
      * Requires: google_link, restaurant_name, food_rating, service_rating, rating_text
      * Returns a boolean variable that indicates if it has successfully posted
      */
-    static func postRestaurantRating(latitude:Double, longitude:Double, google_link: String, restaurant_name: String, food_rating:Int, service_rating:Int, rating_text:String, completion: @escaping(Bool)->()){
+    static func postRestaurantRating(latitude:Double, longitude:Double, google_link: String, restaurant_name: String, food_rating:Int, service_rating:Int, rating_text:String, completion: @escaping(Result<Bool>)->()){
         let url = "\(String(WeatAPIUrl))/rating"
         let params = [
             "access_token": FBSDKAccessToken.current().tokenString!,
@@ -51,14 +51,28 @@ class Rating {
             case .success(let value):
                 let json = JSON(value)
                 let message = json["message"].stringValue
-                if message == "Rating updated"{
-                    completion(true)
-                }else{
-                    completion(false)
+                switch message {
+                case "Rating updated":
+                    completion(.success(true))
+                case "No google link given":
+                    completion(.failure(RequestError.noGoogleLink(msg: message)))
+                case "No restaurant name given":
+                    completion(.failure(RequestError.noRestaurantName(msg: message)))
+                case "No menu item id given":
+                    completion(.failure(RequestError.noMenuId(msg:message)))
+                case "No rating given":
+                    completion(.failure(RequestError.noRating(msg:message)))
+                case "No location given":
+                    completion(.failure(RequestError.noLocation(msg: message)))
+                case "No review given":
+                    completion(.failure(RequestError.noReview(msg: message)))
+                case "No authentication":
+                    completion(.failure(RequestError.noAuthentication(msg: message)))
+                default:
+                    completion(.failure(RequestError.unknownError(msg: message)))
                 }
             case .failure(let error):
-                print(error)
-                completion(false)
+                completion(.failure(error))
             }
         }
     }
