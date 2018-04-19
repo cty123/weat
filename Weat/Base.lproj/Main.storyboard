@@ -44,7 +44,7 @@
         <!--Login Controller-->
         <scene sceneID="Ufc-kv-LSj">
             <objects>
-                <viewController id="UES-Zn-mJ5" customClass="LoginController" customModule="Weat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="UES-Zn-mJ5" customClass="LoginController" customModule="Weat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qgg-oq-iUw">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
