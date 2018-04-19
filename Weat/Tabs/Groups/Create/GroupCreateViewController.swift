@@ -29,13 +29,11 @@ class GroupCreateViewController: UIViewController {
         let icon = 0
         
         Group.create(group_name: name, icon_id: icon){ result in
-            print("File: \(#file)")
-            print("Line: \(#line)")
-            
-            if result {
-                print("created group successfully")
-            } else {
-                print("failed to create group")            }
+            if !result {
+                print("File: \(#file)")
+                print("Line: \(#line)")
+                print("failed to create group")
+            }
         }
         
         self.dismiss(animated: true, completion: nil)
@@ -51,15 +49,6 @@ class GroupCreateViewController: UIViewController {
         
         // add recommend button
         self.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(pressCreate))
-        
-
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
     
 }

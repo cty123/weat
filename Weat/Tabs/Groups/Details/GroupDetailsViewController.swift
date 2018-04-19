@@ -83,7 +83,6 @@ class GroupDetailsViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     @IBAction func pressDelete(_ sender: Any) {
-        
         let id = self.group.id!
         
         Group.destroy(group_id: id) { result in
@@ -105,6 +104,25 @@ class GroupDetailsViewController: UIViewController, UITableViewDataSource, UITab
         pvc.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func pressYes(index: Int) {
+        
+        let user_id = self.members[index].id!
+        let group_id = self.group.id!
+        
+        Group.kick(user_id: user_id, group_id: group_id){ result in
+            if (result) {
+                self.getGroupMembers()
+            } else {
+                print("File: \(#file)")
+                print("Line: \(#line)")
+                print("failed to kick user")
+            }
+        }
+
+        
+        
+    }
+    
     
     // vars
     var group: Group = Group()
@@ -115,6 +133,12 @@ class GroupDetailsViewController: UIViewController, UITableViewDataSource, UITab
         
         let id = self.group.id!
         
+        // setup buttons
+        self.buttonIcon.setup(title: "Change Group Icon", color: .orange)
+        self.buttonInvite.setup(title: "Invite to Group", color: .orange)
+        self.buttonLeave.setup(title: "Leave Group", color: .orange)
+        self.buttonDelete.setup(title: "Delete Group", color: .red)
+        
         // check if user is group owner
         Group.isOwner(group_id: id) { result in
             
@@ -123,12 +147,27 @@ class GroupDetailsViewController: UIViewController, UITableViewDataSource, UITab
                 self.buttonDelete.isEnabled = true
             } else {
                 self.buttonDelete.isEnabled = false
+                self.buttonDelete.backgroundColor = UIColor.gray
             }
         }
         
         // set textfield to group name
         self.textFieldGroupName.text = self.group.name
         
+        // update group members
+        self.getGroupMembers()
+
+        // add back button
+        self.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(pressDone))
+        
+        // tableview setup
+        self.tableViewMembers.delegate = self
+        self.tableViewMembers.dataSource = self
+        self.tableViewMembers.reloadData()
+    }
+    
+    func getGroupMembers() {
+        let id = self.group.id!
         Group.getMembers(group_id: id){ result in
             print("File: \(#file)")
             print("Line: \(#line)")
@@ -142,20 +181,6 @@ class GroupDetailsViewController: UIViewController, UITableViewDataSource, UITab
                 print("failed to get users")
             }
         }
-        
-        // setup buttons
-        self.buttonIcon.setup(title: "Change Group Icon", color: .orange)
-        self.buttonInvite.setup(title: "Invite to Group", color: .orange)
-        self.buttonLeave.setup(title: "Leave Group", color: .orange)
-        self.buttonDelete.setup(title: "Delete Group", color: .red)
-        
-        // add back button
-        self.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(pressDone))
-        
-        // tableview setup
-        self.tableViewMembers.delegate = self
-        self.tableViewMembers.dataSource = self
-        self.tableViewMembers.reloadData()
     }
     
     // tableview stuff
@@ -181,8 +206,25 @@ class GroupDetailsViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // unselect row
+        // deselect row        
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let title = "Kick User"
+        let message = "Are you sure you would like to kick \(self.members[indexPath.row].name!)?"
+        
+        let alert = UIAlertController(title: title,
+                                      message: message,
+                                      preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "No",
+                                      style: .default,
+                                      handler: nil))
+        
+        alert.addAction(UIAlertAction(title: "Yes",
+                                      style: .default,
+                                      handler: {alert in self.pressYes(index: indexPath.row)}))
+        
+        self.present(alert, animated: true, completion: nil)
         
     }
 }

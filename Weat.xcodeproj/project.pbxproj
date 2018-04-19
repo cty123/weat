@@ -59,8 +59,6 @@
 		A85E9935204008EA00A95558 /* FriendRequestsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A85E9933204008EA00A95558 /* FriendRequestsViewController.xib */; };
 		A85E993C2040501400A95558 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85E993A2040501400A95558 /* EditProfileViewController.swift */; };
 		A85E993D2040501400A95558 /* EditProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A85E993B2040501400A95558 /* EditProfileViewController.xib */; };
-		A86A3FA1207ABB5F00E54BDB /* GroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86A3F9F207ABB5F00E54BDB /* GroupTableViewCell.swift */; };
-		A86A3FA2207ABB5F00E54BDB /* GroupTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A86A3FA0207ABB5F00E54BDB /* GroupTableViewCell.xib */; };
 		A86A3FA7207AC2D700E54BDB /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86A3FA5207AC2D700E54BDB /* GroupViewController.swift */; };
 		A86A3FA8207AC2D700E54BDB /* GroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A86A3FA6207AC2D700E54BDB /* GroupViewController.xib */; };
 		A86A3FAC207AC49700E54BDB /* GroupDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86A3FAA207AC49700E54BDB /* GroupDetailsViewController.swift */; };
@@ -166,8 +164,6 @@
 		A85E9933204008EA00A95558 /* FriendRequestsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendRequestsViewController.xib; sourceTree = "<group>"; };
 		A85E993A2040501400A95558 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		A85E993B2040501400A95558 /* EditProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditProfileViewController.xib; sourceTree = "<group>"; };
-		A86A3F9F207ABB5F00E54BDB /* GroupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTableViewCell.swift; sourceTree = "<group>"; };
-		A86A3FA0207ABB5F00E54BDB /* GroupTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroupTableViewCell.xib; sourceTree = "<group>"; };
 		A86A3FA5207AC2D700E54BDB /* GroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
 		A86A3FA6207AC2D700E54BDB /* GroupViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroupViewController.xib; sourceTree = "<group>"; };
 		A86A3FAA207AC49700E54BDB /* GroupDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupDetailsViewController.swift; sourceTree = "<group>"; };
@@ -422,8 +418,6 @@
 			children = (
 				14179567203D2DDE00611D6F /* GroupsViewController.swift */,
 				14179569203D2DE800611D6F /* Groups.storyboard */,
-				A86A3F9F207ABB5F00E54BDB /* GroupTableViewCell.swift */,
-				A86A3FA0207ABB5F00E54BDB /* GroupTableViewCell.xib */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -637,7 +631,6 @@
 				A82D674C2084083A00835A94 /* GroupIconTableViewCell.xib in Resources */,
 				A82D6748208404A300835A94 /* GroupIconViewController.xib in Resources */,
 				E0E572B62033CB3B00E7822B /* LaunchScreen.storyboard in Resources */,
-				A86A3FA2207ABB5F00E54BDB /* GroupTableViewCell.xib in Resources */,
 				84EE682F203A41CC00A11D41 /* FriendTableViewCell.xib in Resources */,
 				14E424B72068B0E7000F2057 /* MenuTableViewCell.xib in Resources */,
 				A81D12DD2086B188006D1F29 /* GroupArchiveViewController.xib in Resources */,
@@ -770,7 +763,6 @@
 				A8EC30012068653700A6DB92 /* RecommendedRestaurantsViewController.swift in Sources */,
 				14125B392044E61A00B612CE /* GlobalProfileVars.swift in Sources */,
 				14A7E86520362A5600F8655C /* Feed.swift in Sources */,
-				A86A3FA1207ABB5F00E54BDB /* GroupTableViewCell.swift in Sources */,
 				E0E2286D207474ED00660622 /* GroupMember.swift in Sources */,
 				146308902040707000241DE3 /* APIKeys.swift in Sources */,
 				E0E2286B2074731700660622 /* Group.swift in Sources */,
