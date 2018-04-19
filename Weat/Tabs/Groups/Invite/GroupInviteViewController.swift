@@ -37,13 +37,13 @@ class GroupInviteViewController: UIViewController, UITableViewDelegate, UITableV
         // remove commas
         // friend_ids = friend_ids.dropLast()
         
-        Group.invite(group_id: self.group.id!, friend_ids: friend_ids){ result in
-            print("File: \(#file)")
-            print("Line: \(#line)")
-            
+        Group.invite(group_id: self.group.id!, friend_ids: friend_ids){ result in            
             if result {
-                print("invite success")
+                let pvc = self.presentingViewController as! GroupDetailsViewController
+                pvc.getGroupMembers()
             } else {
+                print("File: \(#file)")
+                print("Line: \(#line)")
                 print("invite failed")
             }
         }

@@ -100,10 +100,8 @@ class GroupsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = Bundle.main.loadNibNamed("GroupTableViewCell", owner: self, options: nil)?.first as! GroupTableViewCell
-        cell.labelName.text = self.groups[indexPath.row].name
-        cell.labelIconID.text = self.emojiList[self.groups[indexPath.row].icon_id!]
-        
+        let cell = UITableViewCell()
+        cell.textLabel?.text = "\(self.emojiList[self.groups[indexPath.row].icon_id!]) \(self.groups[indexPath.row].name!)"        
         return cell
     }
     

@@ -95,12 +95,8 @@ class GroupIconViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = Bundle.main.loadNibNamed("GroupTableViewCell", owner: self, options: nil)?.first as! GroupTableViewCell
-        
+        let cell = UITableViewCell()
         cell.textLabel?.text = self.emojiList[indexPath.row]
-        cell.labelName.text = ""
-        cell.labelIconID.text = ""
-        
         return cell
     }
     
