@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PostRatingViewController: UIViewController {
+class PostRatingViewController: UIViewController, UITextFieldDelegate {
 
     // outlets
     @IBOutlet weak var sliderFood: UISlider!
@@ -17,9 +17,28 @@ class PostRatingViewController: UIViewController {
     @IBOutlet weak var button: UIButton!
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var navigationBar: UINavigationBar!
     
     // local vars
     var restaurant: Restaurant?
+    
+    @IBAction func didBeginEditing(_ sender: UITextField) {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.view.frame = CGRect(x:self.view.frame.origin.x, y:self.view.frame.origin.y - 75, width:self.view.frame.size.width, height:self.view.frame.size.height);
+            
+        })
+    }
+    
+    @IBAction func didEndEditing(_ sender: UITextField) {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.view.frame = CGRect(x:self.view.frame.origin.x, y:self.view.frame.origin.y + 75, width:self.view.frame.size.width, height:self.view.frame.size.height);
+            
+        })
+    }
+    @IBAction func pressCancel(_ sender: UIBarButtonItem) {
+        // exit vc
+        self.dismiss(animated: true, completion: nil)
+    }
     
     // make sliders stop at fixed points
     @IBAction func changedFood(_ sender: UISlider) {
@@ -75,6 +94,9 @@ class PostRatingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // add cancel button
+        self.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(pressCancel))
+        
         // Weat colors
         self.sliderFood.tintColor = UIColor.orange
         self.sliderService.tintColor = UIColor.orange
@@ -98,10 +120,13 @@ class PostRatingViewController: UIViewController {
         
         // init textfield, TODO: reword this
         self.textField.placeholder = "leave a brief message"
+        self.textField.delegate = self
+        // @extension- hide keyboard when screen is tapped
+        self.hideKeyboardWhenTappedAround()
     }
     
-
-    
-    
-
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false;
+    }
 }

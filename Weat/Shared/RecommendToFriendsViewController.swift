@@ -74,7 +74,7 @@ class RecommendToFriendsViewController: UIViewController, UITableViewDelegate, U
         self.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(pressCancel))
         
         // add recommend button
-        self.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(title: "Recommend", style: .plain, target: self, action: #selector(pressRecommend))
+        self.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(pressRecommend))
         
         // initialize cellSelected (all to false)_
         for _ in SimpleData.Users {

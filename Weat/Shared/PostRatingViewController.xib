@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,6 +15,7 @@
                 <outlet property="button" destination="8Z9-X6-L2h" id="pF3-BU-gdD"/>
                 <outlet property="imageView" destination="8MY-TA-9IZ" id="erB-H8-YhW"/>
                 <outlet property="labelName" destination="YTK-Vv-tn2" id="Cn3-kg-JH9"/>
+                <outlet property="navigationBar" destination="8mn-rD-NuQ" id="7Dh-co-SYB"/>
                 <outlet property="sliderFood" destination="zf5-67-hua" id="OJJ-zD-dbb"/>
                 <outlet property="sliderService" destination="fAI-Ea-FBs" id="eMY-Qq-1pj"/>
                 <outlet property="textField" destination="6lY-bk-QJI" id="rV7-cW-qzJ"/>
@@ -60,7 +61,11 @@
                     <rect key="frame" x="16" y="401" width="343" height="30"/>
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                    <connections>
+                        <action selector="didBeginEditing:" destination="-1" eventType="editingDidBegin" id="KN2-xd-zou"/>
+                        <action selector="didEndEditing:" destination="-1" eventType="editingDidEnd" id="FNX-E0-cC7"/>
+                    </connections>
                 </textField>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8MY-TA-9IZ">
                     <rect key="frame" x="112" y="80" width="150" height="150"/>

@@ -153,13 +153,16 @@ extension MapViewController: CLLocationManagerDelegate {
                         self.restaurants.append(restaurant)
                         let position = CLLocationCoordinate2D(latitude: restaurant.latitude!, longitude: restaurant.longitude!)
                         let marker = GMSMarker(position: position)
+                        marker.title = restaurant.name
+                        marker.userData = restaurant.google_link
                         if (restaurant.name == self.currentSearchName) {
                             // drop blue pin at location
                             marker.icon = GMSMarker.markerImage(with: .blue)
+                            marker.map = self.mapView
+                            self.mapView.selectedMarker = marker
+                        } else {
+                            marker.map = self.mapView
                         }
-                        marker.title = restaurant.name
-                        marker.snippet = restaurant.google_link
-                        marker.map = self.mapView
                     })
                     // TODO: Continue search if available
                 }
@@ -242,7 +245,8 @@ extension MapViewController: GMSMapViewDelegate {
     
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
         let restaurantViewController = RestaurantViewController(nibName: "RestaurantViewController", bundle: nil)
-        Restaurant.getRestaurantInfo(google_link: marker.snippet!, completion: { (restaurant: Restaurant) in
+        let google_link = "\(marker.userData!)"
+        Restaurant.getRestaurantInfo(google_link: google_link, completion: { (restaurant: Restaurant) in
             restaurant.getRestaurant { result in
                 switch result {
                 case .success(_):

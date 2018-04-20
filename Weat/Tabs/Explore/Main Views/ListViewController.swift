@@ -145,7 +145,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         // 44 is the standard height of a row
-        return 44
+        return 60
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -156,6 +156,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.labelName.text = "\(String(describing: list_obj.name!))"
         if (list_obj.image != nil) {
             cell.imageViewPic.image = list_obj.image!
+            cell.imageViewPic.layer.cornerRadius = cell.imageViewPic.frame.size.height / 2;
+            cell.imageViewPic.layer.masksToBounds = true;
         }
         
         // ratings calculation
