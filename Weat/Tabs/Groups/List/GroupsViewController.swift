@@ -13,7 +13,6 @@ class GroupsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     // outlets
     @IBOutlet weak var navigationBar: UINavigationBar!
-    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
     // actions
@@ -31,14 +30,8 @@ class GroupsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // get groups
         Group.getAll(){ result in
             switch result{
-            case .success(let gs):
-                self.groups = []
-                for g in gs {
-                    self.groups.append(g)
-                }
-                print("File: \(#file)")
-                print("Line: \(#line)")
-                print("got groups successfully")
+            case .success(let groups):
+                self.groups = groups
                 self.tableView.reloadData()
                 self.refreshControl.endRefreshing()
             case .failure(_):

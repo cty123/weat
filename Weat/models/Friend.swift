@@ -303,7 +303,6 @@ class Friend {
             case .success(let value):
                 let json = JSON(value)
                 let message = json["message"].stringValue
-                
                 switch message {
                 case "OK":
                     let user = User()

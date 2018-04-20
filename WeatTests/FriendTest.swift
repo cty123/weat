@@ -11,8 +11,6 @@ import XCTest
 @testable import Weat
 
 class FriendTest: XCTestCase {
-    // IMPORTANT INFORMATION !!!
-    // READ DOCUMENTS BELOW BEFORE RUNNING THIS TEST !!!
     /*
      * Initialize settings, make sure that the database contains the following records
      * Make sure you have the following record in your database !!! Otherwise this test WILL NOT work
@@ -28,15 +26,6 @@ class FriendTest: XCTestCase {
      *  x   FBSDK token id  x           x       1           1
      *  x   FBSDK token id  x           x       0           4
      */
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
     
     /*
     * Test getting the friend of the user
@@ -141,11 +130,15 @@ class FriendTest: XCTestCase {
     /*
     * Test if the user can accept a friend request
     */
-    /*
     func testSetFriendRequests(){
         let exp = expectation(description: "testSetFriendRequests")
-        Friend.setFriendRequest(friend_id: 4, acceptance: 1){ status in
-            XCTAssert(status)
+        Friend.setFriendRequest(friend_id: 4, acceptance: 1){ result in
+            switch result{
+            case .success(let status):
+                 XCTAssert(status)
+            case .failure(_):
+                XCTAssert(false)
+            }
             exp.fulfill()
         }
         wait(for: [exp], timeout: 10.0)
@@ -155,17 +148,17 @@ class FriendTest: XCTestCase {
      * Test if the user can search a friend
      */
     func testSearchFriends(){
-        let testGroup = DispatchGroup()
-        var flag = false
-        testGroup.enter()
-        Friend.searchFriend(search_criteria: "test1", page: 10, limit: 20){ users in
-            XCTAssert(users[0].name == "test1")
-            flag = true
-            testGroup.leave()
+        let exp = expectation(description: "testSearchFriends")
+        Friend.searchFriend(search_criteria: "test1", page: 10, limit: 20){ result in
+            switch result {
+            case .success(let users):
+                XCTAssert(users[0].name == "test1")
+            case .failure(_):
+                XCTAssert(false)
+            }
+            exp.fulfill()
         }
-        testGroup.notify(queue: .main){
-            XCTAssert(flag)
-        }
+        wait(for: [exp], timeout: 10.0)
     }
     
     func testGetUserByFacebookLink(){
@@ -181,5 +174,4 @@ class FriendTest: XCTestCase {
         }
         wait(for: [exp], timeout: 10.0)
     }
-    */
 }

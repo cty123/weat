@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Smile
 
 class GroupArchiveViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -21,56 +22,46 @@ class GroupArchiveViewController: UIViewController, UITableViewDelegate, UITable
     
     @IBAction func pressYes(index: Int) {
         let vc = GroupViewController(nibName: "GroupViewController", bundle: nil)
-        vc.group = self.groups[index]
-        self.dismiss(animated: true, completion: nil)
+        let id = self.groups[index].id!
+        
+        Group.rejoin(group_id: id){ result in
+            if result {
+                vc.group = self.groups[index]
+                self.dismiss(animated: true, completion: nil)
+            } else {
+                print("File: \(#file)")
+                print("Line: \(#line)")
+                print("Failed to get group")
+            }
+        }
+        
     }
     
     // vars
     var groups: [Group] = []
+    var emojiList: [String] = Smile.list()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /*
         Group.getLeft(){ result in
-            print("File \(#file)")
-            print("Line \(#line)")
-
             switch result {
             case .success(let groups):
                 print(groups)
                 self.groups = groups
-                print("got lef groups")
+                print("got left groups")
                 self.tableView.reloadData()
             case .failure(_):
+                print("File \(#file)")
+                print("Line \(#line)")
                 print("failed to get left groups")
             }
         }
-        */
-        
-        Group.getAll(){ result in
-            print("File: \(#file)")
-            print("Line: \(#line)")
-            switch result{
-            case .success(let groups):
-                self.groups = []
-                self.groups = groups
-
-                print("got groups successfully")
-                self.tableView.reloadData()
-            case .failure(_):
-
-                print("Failed to get groups")
-            }
-        }
+ 
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        
         self.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(pressBack))
-        
-        
-
     }
 
 
@@ -94,7 +85,7 @@ class GroupArchiveViewController: UIViewController, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = UITableViewCell()
-        cell.textLabel?.text = self.groups[indexPath.row].name
+        cell.textLabel?.text = "\(self.emojiList[self.groups[indexPath.row].icon_id!]) \(self.groups[indexPath.row].name!)"
 
         return cell
     }
