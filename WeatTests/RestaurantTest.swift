@@ -35,7 +35,7 @@ public class RestaurantTest: XCTestCase{
      * Pull restaurant rating with TRUE name and TRUE google_link
      * Result: should pull the rating of restaurant
      */
-    /*
+    
     func testGetRestaurantRating1(){
         let exp = expectation(description: "testGetRestaurantRating1")
         let r = Restaurant()
@@ -43,13 +43,14 @@ public class RestaurantTest: XCTestCase{
         r.name = "test"
         r.latitude = 101
         r.longitude = 21
-        r.getRestaurantRating(){status in
-            if(status){
+        r.getRestaurantRating(){ result in
+            switch result{
+            case .success(_):
                 XCTAssert(true)
-                exp.fulfill()
-            }else{
+            case .failure(_):
                 XCTAssert(false)
             }
+            exp.fulfill()
         }
         wait(for: [exp], timeout: 10.0)
     }
@@ -65,11 +66,14 @@ public class RestaurantTest: XCTestCase{
         r.name = "test2"
         r.latitude = 72
         r.longitude = 27
-        r.getRestaurantRating(){status in
-            if(status){
-                XCTAssert(status)
-                exp.fulfill()
+        r.getRestaurantRating(){result in
+            switch result{
+            case .success(_):
+                XCTAssert(true)
+            case .failure(_):
+                XCTAssert(false)
             }
+            exp.fulfill()
         }
         wait(for: [exp], timeout: 10.0)
     }
@@ -85,11 +89,14 @@ public class RestaurantTest: XCTestCase{
         r.name = "test3"
         r.latitude = 198
         r.longitude = 89
-        r.getRestaurantRating(){status in
-            if(status){
-                XCTAssert(status)
-                exp.fulfill()
+        r.getRestaurantRating(){result in
+            switch result{
+            case .success(_):
+                XCTAssert(true)
+            case .failure(_):
+                XCTAssert(false)
             }
+            exp.fulfill()
         }
         wait(for: [exp], timeout: 10.0)
     }
@@ -105,12 +112,12 @@ public class RestaurantTest: XCTestCase{
         r.name = "test"
         r.latitude = 101
         r.longitude = 21
-        r.getRestaurant(){status in
-            if(status){
-                // Test if the menu is obtained
+        r.getRestaurant(){result in
+            switch result{
+            case .success(_):
                 XCTAssertTrue(r.menu[0].name == "test_item")
-                XCTAssert(status)
-            }else{
+                XCTAssert(true)
+            case .failure(_):
                 XCTAssert(false)
             }
             exp.fulfill()
@@ -129,16 +136,16 @@ public class RestaurantTest: XCTestCase{
         r.name = "test"
         r.latitude = 101
         r.longitude = 21
-        r.getRestaurant(){ status in
-            if(status){
-                // Test if the menu is obtained
+        r.getRestaurant(){ result in
+            switch result {
+            case .success(_):
                 XCTAssertTrue(r.comments[0].comment_text == "Good")
                 XCTAssertTrue(r.comments[0].restaurant_id == 1)
                 XCTAssertTrue(r.comments[0].food_rating == 1)
                 XCTAssertTrue(r.comments[0].service_rating == 1)
                 XCTAssertTrue(r.comments[0].author == "testuser")
-                XCTAssert(status)
-            }else{
+                XCTAssert(true)
+            case .failure(_):
                 XCTAssert(false)
             }
             exp.fulfill()
@@ -157,12 +164,12 @@ public class RestaurantTest: XCTestCase{
         r.name = "test"
         r.latitude = 101
         r.longitude = 21
-        r.getRestaurant(){status in
-            if(status){
-                // Test if the menu is obtained
+        r.getRestaurant(){ result in
+            switch result{
+            case .success(_):
                 XCTAssertTrue(r.menu[0].name == "test_item")
-                XCTAssert(status)
-            }else{
+                XCTAssert(true)
+            case .failure(_):
                 XCTAssert(false)
             }
             exp.fulfill()
@@ -180,14 +187,14 @@ public class RestaurantTest: XCTestCase{
         let r = Restaurant()
         r.google_link = "kfc_link"
         r.name = "kfc"
-        r.getRestaurantMenuWithRating(){status in
-            if(status){
-                // Test if the menu is obtained
+        r.getRestaurantMenuWithRating(){ result in
+            switch result {
+            case .success(_):
                 XCTAssertTrue(r.menu[0].name == "Fried chicken")
                 XCTAssertTrue(r.menu[0].rating[0].rating_text == "This chicken is so good")
                 XCTAssertTrue(r.menu[0].rating[0].author == "test1")
-                XCTAssert(status)
-            }else{
+                XCTAssert(true)
+            case .failure(_):
                 XCTAssert(false)
             }
             exp.fulfill()
@@ -205,10 +212,11 @@ public class RestaurantTest: XCTestCase{
         let r = Restaurant()
         r.google_link = "no_such_a_link"
         r.name = "no_such_a_restaurant"
-        r.getRestaurantMenuWithRating(){status in
-            if(status){
+        r.getRestaurantMenuWithRating(){result in
+            switch result{
+            case .success(_):
                 XCTAssert(true)
-            }else{
+            case .failure(_):
                 XCTAssert(false)
             }
             exp.fulfill()
@@ -227,11 +235,12 @@ public class RestaurantTest: XCTestCase{
         r.google_link = "no_such_a_link1"
         // The name is valid, because we do have kfc in our database
         r.name = "kfc"
-        r.getRestaurantMenuWithRating(){status in
-            if(!status){
-                XCTAssert(false)
-            }else{
+        r.getRestaurantMenuWithRating() { result in
+            switch result{
+            case .success(_):
                 XCTAssert(true)
+            case .failure(_):
+                XCTAssert(false)
             }
             exp.fulfill()
         }
@@ -248,14 +257,14 @@ public class RestaurantTest: XCTestCase{
         let r = Restaurant()
         r.google_link = "kfc_link"
         r.name = "no_such_a_restaurant_3"
-        r.getRestaurantMenuWithRating(){status in
-            if(status){
-                // Test if the menu is obtained
+        r.getRestaurantMenuWithRating() { result in
+            switch result{
+            case .success(_):
                 XCTAssertTrue(r.menu[0].name == "Fried chicken")
                 XCTAssertTrue(r.menu[0].rating[0].rating_text == "This chicken is so good")
                 XCTAssertTrue(r.menu[0].rating[0].author == "test1")
-                XCTAssert(status)
-            }else{
+                XCTAssert(true)
+            case .failure(_):
                 XCTAssert(false)
             }
             exp.fulfill()
@@ -271,10 +280,11 @@ public class RestaurantTest: XCTestCase{
         let r = Restaurant()
         r.name = "Hotel Fusion"
         r.google_link = "ChIJ0SMraI-AhYAREeJAvm2_yGM"
-        r.getRestaurantMenuWithRating(){status in
-            if(status){
-                XCTAssert(status)
-            }else{
+        r.getRestaurantMenuWithRating() { result in
+            switch result{
+            case .success(_):
+                XCTAssert(true)
+            case .failure(_):
                 XCTAssert(false)
             }
             exp.fulfill()
@@ -290,19 +300,16 @@ public class RestaurantTest: XCTestCase{
         let r = Restaurant()
         r.name = "kfc"
         r.google_link = "ChIJ0SMraI-AhYAREeJAvm2_yGM"
-        r.getRestaurantMenuWithRating(){status in
-            if(status){
-                // Check if the name is corrected
+        r.getRestaurantMenuWithRating() { result in
+            switch result{
+            case .success(_):
                 XCTAssertTrue(r.name == "Hotel Fusion")
                 XCTAssert(true)
-            }else{
+            case .failure(_):
                 XCTAssert(false)
             }
             exp.fulfill()
         }
         wait(for: [exp], timeout: 10.0)
     }
-
-}
-*/
 }
