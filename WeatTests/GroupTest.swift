@@ -43,7 +43,7 @@ public class GroupTest: XCTestCase {
     
     func testCreate2() {
         let exp = expectation(description: "testCreate2")
-        Group.create(group_name: "TestCreate1", icon_id: 2){ result in
+        Group.create(group_name: "TestCreate2", icon_id: 2){ result in
             if result{
                 XCTAssert(true)
             }else{
@@ -113,6 +113,16 @@ public class GroupTest: XCTestCase {
         let exp = expectation(description: "testEdit1")
         Group.edit(group_id: 1, group_name: "yoyoyo", group_icon_id: 6){ result in
             if result {
+                Group.getAll(){ result in
+                    switch result{
+                    case .success(let groups):
+                        XCTAssert(groups[0].name == "yoyoyo")
+                        XCTAssert(groups[0].icon_id == 6)
+                    case .failure(_):
+                        XCTAssert(false)
+                    }
+                    exp.fulfill()
+                }
                 XCTAssert(true)
             }else{
                 XCTAssert(false)
@@ -126,11 +136,20 @@ public class GroupTest: XCTestCase {
         let exp = expectation(description: "testEdit2")
         Group.edit(group_id: 1, group_name: "haha", group_icon_id: 1){ result in
             if result {
+                Group.getAll(){ result in
+                    switch result{
+                    case .success(let groups):
+                        XCTAssert(groups[0].name == "haha")
+                        XCTAssert(groups[0].icon_id == 1)
+                    case .failure(_):
+                        XCTAssert(false)
+                    }
+                    exp.fulfill()
+                }
                 XCTAssert(true)
             }else{
                 XCTAssert(false)
             }
-            exp.fulfill()
         }
         wait(for: [exp], timeout: 10.0)
     }
@@ -177,6 +196,7 @@ public class GroupTest: XCTestCase {
                 print(error)
                 XCTAssert(false)
             }
+            exp.fulfill()
         }
         wait(for: [exp], timeout: 10.0)
     }
@@ -203,7 +223,8 @@ public class GroupTest: XCTestCase {
             switch result {
             case .success(_):
                 XCTAssert(true)
-            case .failure(_):
+            case .failure(let error):
+                print(error)
                 XCTAssert(false)
             }
             exp.fulfill()
@@ -224,8 +245,6 @@ public class GroupTest: XCTestCase {
         }
         wait(for: [exp], timeout: 10.0)
     }
-    
-    // User story 9 --- Get menu
     
     // Extra
     func testKick(){
