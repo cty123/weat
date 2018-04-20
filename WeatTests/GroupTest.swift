@@ -246,6 +246,23 @@ public class GroupTest: XCTestCase {
         wait(for: [exp], timeout: 10.0)
     }
     
+    // Recommendation
+    func testRecommendation1(){
+        let exp = expectation(description: "testRecommendation1")
+        Group.getRecommendation(group_id: 1, latitude: 40.427, longitude: -86.9196){ result in
+            switch result{
+            case .success(let restaurants):
+                print(restaurants)
+                XCTAssert(true)
+            case .failure(let error):
+                print(error)
+                XCTAssert(false)
+            }
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 10.0)
+    }
+    
     // Extra
     func testKick(){
         let exp = expectation(description: "testKick")
