@@ -338,7 +338,10 @@ class Friend {
             "access_token": FBSDKAccessToken.current().tokenString!,
             "friend_id": id
         ]
-        Alamofire.request(url, method: .delete, parameters: params, encoding: URLEncoding.httpBody, headers: nil).validate().responseJSON { (response) in
+        let headers = [
+            "Content-Type": "application/x-www-form-urlencoded"
+        ]
+        Alamofire.request(url, method:.delete, parameters: params, encoding:URLEncoding.httpBody, headers: headers).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)

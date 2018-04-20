@@ -23,7 +23,7 @@ class MapViewController: UIViewController, UISearchBarDelegate {
     var zoomLevel: Float = 16.0
     var searchActive : Bool = false
     var restaurants: [Restaurant] = []
-    
+    var currentSearchName: String?
     // An array to hold the list of likely places.
     var likelyPlaces: [GMSPlace] = []
     
@@ -141,7 +141,7 @@ extension MapViewController: CLLocationManagerDelegate {
     }
     
     func dropPins(lat: Double, lng: Double) {
-        
+        restaurants = []
         let url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(String(describing: lat)),\(String(describing: lng))&rankby=distance&type=restaurant&key=\(String(describing: kPlacesWebAPIKey))"
         print("\(url)")
         Alamofire.request(url, method:.get, parameters:nil).validate().responseJSON { response in
@@ -153,9 +153,13 @@ extension MapViewController: CLLocationManagerDelegate {
                         self.restaurants.append(restaurant)
                         let position = CLLocationCoordinate2D(latitude: restaurant.latitude!, longitude: restaurant.longitude!)
                         let marker = GMSMarker(position: position)
+                        if (restaurant.name == self.currentSearchName) {
+                            // drop blue pin at location
+                            marker.icon = GMSMarker.markerImage(with: .blue)
+                        }
                         marker.title = restaurant.name
-                        marker.map = self.mapView
                         marker.snippet = restaurant.google_link
+                        marker.map = self.mapView
                     })
                     // TODO: Continue search if available
                 }
@@ -195,6 +199,7 @@ extension MapViewController: GMSAutocompleteResultsViewControllerDelegate {
                            didAutocompleteWith place: GMSPlace) {
         searchController?.isActive = false
         locationManager.stopUpdatingLocation()
+        currentSearchName = place.name
         moveTo(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
         exploreLocations.latitude = place.coordinate.latitude
         exploreLocations.longitude = place.coordinate.longitude
