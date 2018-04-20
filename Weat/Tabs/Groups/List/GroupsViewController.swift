@@ -31,14 +31,8 @@ class GroupsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // get groups
         Group.getAll(){ result in
             switch result{
-            case .success(let gs):
-                self.groups = []
-                for g in gs {
-                    self.groups.append(g)
-                }
-                print("File: \(#file)")
-                print("Line: \(#line)")
-                print("got groups successfully")
+            case .success(let groups):
+                self.groups = groups
                 self.tableView.reloadData()
                 self.refreshControl.endRefreshing()
             case .failure(_):
@@ -100,10 +94,8 @@ class GroupsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = Bundle.main.loadNibNamed("GroupTableViewCell", owner: self, options: nil)?.first as! GroupTableViewCell
-        cell.labelName.text = self.groups[indexPath.row].name
-        cell.labelIconID.text = self.emojiList[self.groups[indexPath.row].icon_id!]
-        
+        let cell = UITableViewCell()
+        cell.textLabel?.text = "\(self.emojiList[self.groups[indexPath.row].icon_id!]) \(self.groups[indexPath.row].name!)"        
         return cell
     }
     

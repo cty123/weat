@@ -13,7 +13,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GroupInviteViewController" customModule="Weat" customModuleProvider="target">
             <connections>
                 <outlet property="navigationBar" destination="okD-B1-4x5" id="1LN-yb-3ur"/>
-                <outlet property="searchBar" destination="qjy-yl-XXP" id="vI1-Ha-1Vp"/>
                 <outlet property="tableView" destination="Tgh-Cg-9ZS" id="Fmd-qK-sbl"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -23,10 +22,6 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="qjy-yl-XXP">
-                    <rect key="frame" x="0.0" y="64" width="375" height="56"/>
-                    <textInputTraits key="textInputTraits"/>
-                </searchBar>
                 <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="okD-B1-4x5">
                     <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                     <items>
@@ -34,7 +29,7 @@
                     </items>
                 </navigationBar>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tgh-Cg-9ZS">
-                    <rect key="frame" x="0.0" y="120" width="375" height="547"/>
+                    <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
             </subviews>
@@ -42,14 +37,11 @@
             <constraints>
                 <constraint firstItem="okD-B1-4x5" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="6lq-Vk-2Z5"/>
                 <constraint firstItem="okD-B1-4x5" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="9Zp-kz-WZZ"/>
-                <constraint firstItem="qjy-yl-XXP" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="AVN-l7-EM9"/>
                 <constraint firstItem="Tgh-Cg-9ZS" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="CCf-vs-Tng"/>
-                <constraint firstItem="qjy-yl-XXP" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="I7k-IK-LuC"/>
-                <constraint firstItem="Tgh-Cg-9ZS" firstAttribute="top" secondItem="qjy-yl-XXP" secondAttribute="bottom" id="O2p-qo-dyk"/>
                 <constraint firstItem="Tgh-Cg-9ZS" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="Wcj-b0-pVJ"/>
-                <constraint firstItem="qjy-yl-XXP" firstAttribute="top" secondItem="okD-B1-4x5" secondAttribute="bottom" id="bny-S4-4i9"/>
                 <constraint firstItem="Tgh-Cg-9ZS" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="eHc-lz-YuT"/>
                 <constraint firstItem="okD-B1-4x5" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="uQh-Up-Mxj"/>
+                <constraint firstItem="Tgh-Cg-9ZS" firstAttribute="top" secondItem="okD-B1-4x5" secondAttribute="bottom" id="y2q-Q1-6hO"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="33.5" y="53.5"/>
