@@ -77,10 +77,11 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
                 print(restaurants)
                 self.recommendations = restaurants
                 self.tableView.reloadData()
-            case .failure(_):
+            case .failure(let error):
                 print("File: \(#file)")
                 print("Line: \(#line)")
                 print("failed to get restaurant recommendations")
+                print(error)
             }
         }
     }
@@ -109,6 +110,12 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // deselect row
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        // go to restaurant view
+        let vc = RestaurantViewController(nibName: "RestaurantViewController", bundle: nil)
+        vc.restaurant = recommendations[indexPath.row]
+        self.present(vc, animated: true, completion: nil)
+        
     }
 
 }
