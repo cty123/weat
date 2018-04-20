@@ -13,7 +13,6 @@ class GroupsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     // outlets
     @IBOutlet weak var navigationBar: UINavigationBar!
-    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
     // actions

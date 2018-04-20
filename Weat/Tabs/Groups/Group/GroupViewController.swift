@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import CoreLocation
 
-class GroupViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class GroupViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate {
 
     // outlets
     @IBOutlet weak var navigationBar: UINavigationBar!
@@ -27,7 +28,9 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     // vars
     var group: Group = Group()
-    
+    let locationManager = CLLocationManager()
+    var recommendations: [Restaurant] = []
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,6 +44,16 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.tableView.reloadData()
+        
+        // locaiton manager setup
+        self.locationManager.delegate = self;
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager.requestAlwaysAuthorization()
+        self.locationManager.startUpdatingLocation()
+        
+        // get recommendations
+        self.getRecommendation()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,6 +61,28 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         // set title to group name
         self.navigationBar.topItem?.title = self.group.name
+    }
+    
+    func getRecommendation() {
+        // update recommendation
+        let id = self.group.id!
+        let location = self.locationManager.location!.coordinate
+        
+        print(location.latitude)
+        print(location.longitude)
+        
+        Group.getRecommendation(group_id: id, latitude: location.latitude, longitude: location.longitude){ result in
+            switch result {
+            case .success(let restaurants):
+                print(restaurants)
+                self.recommendations = restaurants
+                self.tableView.reloadData()
+            case .failure(_):
+                print("File: \(#file)")
+                print("Line: \(#line)")
+                print("failed to get restaurant recommendations")
+            }
+        }
     }
 
 
@@ -57,8 +92,7 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // return ?????
-        return 0
+        return self.recommendations.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -67,7 +101,9 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = UITableViewCell()
+        cell.textLabel?.text = self.recommendations[indexPath.row].name
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
