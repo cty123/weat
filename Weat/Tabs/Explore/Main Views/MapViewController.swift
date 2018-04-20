@@ -20,7 +20,7 @@ class MapViewController: UIViewController, UISearchBarDelegate {
     var defaultLocation: CLLocation?
     var mapView: GMSMapView!
     var placesClient: GMSPlacesClient!
-    var zoomLevel: Float = 12.0
+    var zoomLevel: Float = 16.0
     var searchActive : Bool = false
     var restaurants: [Restaurant] = []
     
@@ -35,43 +35,36 @@ class MapViewController: UIViewController, UISearchBarDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Set Google Maps autocomplete result controller
         resultsViewController = GMSAutocompleteResultsViewController()
         resultsViewController?.delegate = self
-        
         // Initialize search controller for google autocomplete
         searchController = UISearchController(searchResultsController: resultsViewController)
         searchController?.searchResultsUpdater = resultsViewController
         searchController?.hidesNavigationBarDuringPresentation = false
-        
         // Initialize search bar
         let searchBar = searchController?.searchBar
         searchBar?.sizeToFit()
         searchBar?.backgroundImage = UIImage.imageWithColor(color: UIColor(red: 1, green: 0.5871, blue: 0, alpha: 1.0), size: CGSize(width: (searchBar?.frame.width)!,height: (searchBar?.frame.height)!))
-        
         // Initialize subview for search bar
         let subView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 45.0))
-        
         // Add searchbar to view
         subView.addSubview((searchController?.searchBar)!)
         view.addSubview(subView)
-        
         // When UISearchController presents the results view, present it in
         // this view controller, not one further up the chain.
         definesPresentationContext = true
-        
         // Get rid of shadow under navbar
         self.navigationController?.navigationBar.shadowImage = UIImage()
         
-        // Start doing location stuff
+        // Start getting user location
         locationManager = CLLocationManager()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
         locationManager.distanceFilter = 50
         locationManager.delegate = self
         
-        // If we don't have a location yet, we want to start updating the location as soon as possible
+        // If we don't have a location yet, start updating the location
         if(exploreLocations.latitude == nil || exploreLocations.longitude == nil) {
             locationManager.startUpdatingLocation()
         }
@@ -149,8 +142,8 @@ extension MapViewController: CLLocationManagerDelegate {
     
     func dropPins(lat: Double, lng: Double) {
         
-        let url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(String(describing: lat)),\(String(describing: lng))&radius=8000&type=restaurant&key=\(String(describing: kPlacesWebAPIKey))"
-        
+        let url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(String(describing: lat)),\(String(describing: lng))&rankby=distance&type=restaurant&key=\(String(describing: kPlacesWebAPIKey))"
+        print("\(url)")
         Alamofire.request(url, method:.get, parameters:nil).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
@@ -164,6 +157,7 @@ extension MapViewController: CLLocationManagerDelegate {
                         marker.map = self.mapView
                         marker.snippet = restaurant.google_link
                     })
+                    // TODO: Continue search if available
                 }
             case .failure(let error):
                 print(error)

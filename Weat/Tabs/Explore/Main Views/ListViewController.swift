@@ -72,7 +72,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func getNearby(lat: Double, lng: Double) {
-        let url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(String(describing: lat)),\(String(describing: lng))&radius=8000&type=restaurant&key=\(String(describing: kPlacesWebAPIKey))"
+        let url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(String(describing: lat)),\(String(describing: lng))&rankby=distance&type=restaurant&key=\(String(describing: kPlacesWebAPIKey))"
         // Clear restaurants
         restaurants = []
         Alamofire.request(url, method:.get, parameters:nil).validate().responseJSON { response in
