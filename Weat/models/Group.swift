@@ -392,7 +392,7 @@ public class Group{
             case .success(let value):
                 let json = JSON(value)
                 let message = json["message"].stringValue
-                if message == "OK" {
+                if message == "OK" || message == "Not enough user visits" {
                     for restaurant in json["data"].arrayValue{
                         let r = Restaurant()
                         r.name = restaurant["restaurant"]["name"].stringValue
@@ -403,7 +403,7 @@ public class Group{
                     }
                     completion(.success(restaurants))
                 }else{
-                    completion(.failure(AFError.invalidURL(url: url)))
+                    completion(.failure(AFError.invalidURL(url: message)))
                 }
             case .failure(let error):
                 print(error)
