@@ -114,12 +114,11 @@ class PostRatingViewController: UIViewController, UITextFieldDelegate {
         self.sliderService.minimumValue = -1
         self.sliderService.maximumValue = 1
         
-        
-        // init label to name (TODO)
+        // init label to name
         self.labelName.text = (restaurant?.name)!
         self.labelName.textAlignment = .center
         
-        // init textfield, TODO: reword this
+        // init textfield
         self.textField.placeholder = "leave a brief message"
         self.textField.delegate = self
         // @extension- hide keyboard when screen is tapped

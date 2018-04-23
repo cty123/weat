@@ -10,12 +10,22 @@ import UIKit
 import FBSDKLoginKit
 
 class EditProfileViewController: UIViewController {
+    
+    // outlets
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var textFieldName: UITextField!
     @IBOutlet weak var textFieldEmail: UITextField!
     @IBOutlet weak var textFieldPhone: UITextField!
     @IBOutlet weak var textFieldLocation: UITextField!
-    @IBOutlet weak var switchShowArchived: UISwitch!
+    @IBOutlet weak var segmentedControlArchive: UISegmentedControl!
+    @IBOutlet weak var segmentedControlPrivacy: UISegmentedControl!
+    @IBOutlet weak var buttonLogout: UIButton!
+    
+    
+    
+    // vars
+    var segmentsPrivacy = ["Everyone", "Only Me", "Friends"]
+    var segmentsArchive = ["Hide", "Show"]
     
     let loginManager: FBSDKLoginManager = FBSDKLoginManager()
     @IBAction func logout(_ sender: UIButton) {
@@ -24,13 +34,13 @@ class EditProfileViewController: UIViewController {
         let vc = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as UIViewController
         self.present(vc, animated: true, completion: nil)
     }
+    
     // action for closing button
-    @IBAction func action(_ sender: UIBarButtonItem) {
+    @IBAction func pressCancel() {
         self.dismiss(animated: true, completion: nil)
-        UserDefaults.standard.set(self.switchShowArchived.isOn , forKey: "showArchived")
     }
     
-    @IBAction func save(_ sender: UIButton) {
+    @IBAction func save() {
         // TODO: input validation
         var name = self.textFieldName.text
         var email = self.textFieldEmail.text
@@ -60,7 +70,7 @@ class EditProfileViewController: UIViewController {
         user.email = email
         user.phone = phone
         user.location = location
-        user.privacy = 0
+        user.privacy = self.segmentedControlPrivacy.selectedSegmentIndex
         user.updateUserInfo() { result in
             switch result{
             case .success(_):
@@ -70,6 +80,19 @@ class EditProfileViewController: UIViewController {
                 print(error)
                 print("failure")
             }
+            
+            // save showArchived
+            if self.segmentedControlArchive.selectedSegmentIndex == 1 {
+                UserDefaults.standard.set(true , forKey: "showArchived")
+            } else {
+                UserDefaults.standard.set(false , forKey: "showArchived")
+            }
+            
+            
+            // exit
+            self.dismiss(animated: true, completion: nil)
+            
+            
         }
     }
     
@@ -77,12 +100,21 @@ class EditProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let showArchived = UserDefaults.standard.object(forKey: "showArchived"){
+        if let showArchived = UserDefaults.standard.object(forKey: "showArchived") as? Bool{
             // if the key exists
-            self.switchShowArchived.isOn = showArchived as! Bool
+            if showArchived {
+                // show
+                self.segmentedControlArchive.selectedSegmentIndex = 1
+            } else {
+                // hide
+                self.segmentedControlArchive.selectedSegmentIndex = 0
+            }
+        
         } else {
+            // hide
             UserDefaults.standard.set(false, forKey: "showArchived")
-            self.switchShowArchived.isOn = false
+            self.segmentedControlArchive.selectedSegmentIndex = 0
+
         }
         
         // populate fields
@@ -102,8 +134,18 @@ class EditProfileViewController: UIViewController {
             }
         }
         
-        self.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(action))
+        // add buttons
+        self.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(pressCancel))
+        self.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(save))
+        self.buttonLogout.setup(title: "Logout", color: .orange)
         
+        // "hide keyboard when tapped around"
+        self.hideKeyboardWhenTappedAround()
+        
+        // init segmented controls
+        self.segmentedControlPrivacy.setup(segmentNames: self.segmentsPrivacy, color: .orange)
+        self.segmentedControlArchive.setup(segmentNames: self.segmentsArchive, color: .orange)
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
