@@ -74,7 +74,7 @@
                                     <segment title="Second"/>
                                 </segments>
                                 <connections>
-                                    <action selector="segmentChanged:" destination="Q6K-cU-UXP" eventType="valueChanged" id="VdY-ju-Qqs"/>
+                                    <action selector="segmentValueChanged:" destination="Q6K-cU-UXP" eventType="valueChanged" id="Dz4-7F-xow"/>
                                 </connections>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wjB-HY-yg5">

@@ -54,6 +54,7 @@
 		A82D6748208404A300835A94 /* GroupIconViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A82D6746208404A300835A94 /* GroupIconViewController.xib */; };
 		A82D674B2084083A00835A94 /* GroupIconTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82D67492084083A00835A94 /* GroupIconTableViewCell.swift */; };
 		A82D674C2084083A00835A94 /* GroupIconTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A82D674A2084083A00835A94 /* GroupIconTableViewCell.xib */; };
+		A82F4328208E7A97001B64A5 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82F4327208E7A97001B64A5 /* Global.swift */; };
 		A85E9925203FDEB100A95558 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85E9924203FDEB100A95558 /* ProfileViewController.swift */; };
 		A85E992C2040063800A95558 /* FriendRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85E992A2040063800A95558 /* FriendRequestTableViewCell.swift */; };
 		A85E992D2040063800A95558 /* FriendRequestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A85E992B2040063800A95558 /* FriendRequestTableViewCell.xib */; };
@@ -161,6 +162,7 @@
 		A82D6746208404A300835A94 /* GroupIconViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroupIconViewController.xib; sourceTree = "<group>"; };
 		A82D67492084083A00835A94 /* GroupIconTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupIconTableViewCell.swift; sourceTree = "<group>"; };
 		A82D674A2084083A00835A94 /* GroupIconTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroupIconTableViewCell.xib; sourceTree = "<group>"; };
+		A82F4327208E7A97001B64A5 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		A85E9924203FDEB100A95558 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		A85E992A2040063800A95558 /* FriendRequestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestTableViewCell.swift; sourceTree = "<group>"; };
 		A85E992B2040063800A95558 /* FriendRequestTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendRequestTableViewCell.xib; sourceTree = "<group>"; };
@@ -495,6 +497,7 @@
 		E0E572AA2033CB3A00E7822B /* Weat */ = {
 			isa = PBXGroup;
 			children = (
+				A82F4327208E7A97001B64A5 /* Global.swift */,
 				1463088C203E9AC500241DE3 /* APIKeys.swift */,
 				84EE681F203A411500A11D41 /* TableViewCells */,
 				1414F8C72034D5460018C0B7 /* Tabs */,
@@ -849,6 +852,7 @@
 				A8C2ADEF20582F9A009255DC /* PostRatingViewController.swift in Sources */,
 				84EE682E203A41CC00A11D41 /* FriendTableViewCell.swift in Sources */,
 				A86A3FA7207AC2D700E54BDB /* GroupViewController.swift in Sources */,
+				A82F4328208E7A97001B64A5 /* Global.swift in Sources */,
 				1463088F203F9BBC00241DE3 /* Restaurant.swift in Sources */,
 				84EE6835203A42EE00A11D41 /* Extensions.swift in Sources */,
 				148BE60D2056D9C40065FC28 /* MenuViewController.swift in Sources */,

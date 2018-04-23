@@ -50,6 +50,67 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         self.present(vc, animated: true, completion: nil)
     }
     
+    @IBAction func handleRefresh() {
+        switch self.segmentedControl.selectedSegmentIndex {
+        
+        // feed
+        case 0:
+            Feed.getFeed(feed_type: "", completion: {
+                (feed: Feed?) in
+                guard let new_feed = feed else {
+                    print("error")
+                    self.refreshControl.endRefreshing()
+                    return
+                }
+                self.personalFeed = new_feed
+                self.tableView.reloadData()
+                self.refreshControl.endRefreshing()
+
+            })
+            break
+        
+        // friends
+        case 1:
+            let id = String(describing: UserDefaults.standard.integer(forKey: "id"))
+            
+            Friend.getFriends(profile_id: id){ result in
+                switch result{
+                case .success(let friends):
+                    self.friends = friends
+                    self.tableView.reloadData()
+                case .failure(_):
+                    print("File \(#file)")
+                    print("Line \(#line)")
+                    print("error getting friends")
+                }
+                self.refreshControl.endRefreshing()
+            }
+            
+        // favorites
+        case 2:
+            let id = UserDefaults.standard.string(forKey: "id")!
+            User.getUserInfo(profile_id: id){result in
+                switch result {
+                case .success(let user):
+                    self.favorites = user.favorites
+                    self.tableView.reloadData()
+                case .failure(_):
+                    print("File: \(#file)")
+                    print("Line: \(#line)")
+                    print("failed to get user favorites")
+                }
+                self.refreshControl.endRefreshing()
+            }
+        
+        // default
+        default:
+            break
+        }
+    }
+    
+    @IBAction func segmentValueChanged(_ sender: Any) {
+        self.handleRefresh()
+    }
     
     // vars
     var friendLinks: [String] = []          // array of friends' facebook user_id
@@ -57,14 +118,20 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     var personalFeed: Feed? = nil           // feed
     var showArchivedFeedItems = false       // toggle to allow user to see archived feed items
     var favorites: [Restaurant] = []
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: UIControlEvents.valueChanged)
+        return refreshControl
+    }()
     
     // segmented control segments
     let segments = ["Feed", "Friends", "Favorites"]
     
-    // update name location (TODO: remove this)
+    // update name location
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.recommendLabel.text = "0"
+        
         // update showArchivedFeedItems
         let showArchived = UserDefaults.standard.bool(forKey: "showArchived")
         self.showArchivedFeedItems = showArchived
@@ -81,10 +148,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                         self.recommendOrangeDot.image = UIImage(named: "OrangeDot")
                     }
                 case .failure(let error):
+                    
                     print(error)
-                    /*
-                        * Handle error here
-                        */
             }
         }
         
@@ -92,8 +157,6 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         // Set notifications format
         self.notificationsLabel.font = UIFont.boldSystemFont(ofSize: 17.0)
         self.buttonViewFriendRequests.addFullWidthBottomBorderWithColor(color: UIColor.lightGray, width: 0.4)
-        
-        
         
         // Get friend requests
         Friend.pullFriendRequest(){ result in
@@ -104,16 +167,15 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 // Set global friend requests variable
                 profileVars.friendRequests = requests
                 
-                if(requests.count > 0) {
+                if (requests.count > 0) {
                     self.friendOrangeDot.image = UIImage(named: "OrangeDot")
                 } else {
                     self.friendOrangeDot.image = nil
                 }
             case .failure(let error):
+                print("File: \(#file)")
+                print("Line: \(#line)")
                 print(error)
-                /*
-                    * Handle error here
-                    */
             }
         }
     }
@@ -121,22 +183,12 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // get friends
-        let id = String(describing: UserDefaults.standard.integer(forKey: "id"))
+        // get feed
+        self.handleRefresh()
         
-        Friend.getFriends(profile_id: id){ result in
-            switch result{
-            case .success(let friends):
-                self.friends = friends
-            case .failure(_):
-                print("File \(#file)")
-                print("Line \(#line)")
-                print("error getting friends")
+        // add pull to refresh
+        self.tableView.addSubview(self.refreshControl)
 
-            }
-        }
-    
-        
         // init segmented control
         self.segmentedControl.setup(segmentNames: segments, color: UIColor.orange)
         
@@ -149,95 +201,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         self.tableView.dataSource = self
         self.tableView.reloadData()
         
-        // populate profile
-        FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "name, location, picture.type(large)"]).start(completionHandler: { (connection, result, error) -> Void in
-            if (error == nil){
-                
-                
-
-                print(result as Any)
-                
-                // get json
-                let json = JSON(result!)
-                
-                // profile picture
-                let urlString: String = json["picture","data","url"].string!
-                let url = URL(string: urlString)
-                if let data = try? Data(contentsOf: url!) {
-                    self.imageViewProfilePicture.image = UIImage(data: data)!
-                    // Make image circular
-                    self.imageViewProfilePicture.layer.cornerRadius = self.imageViewProfilePicture.frame.size.height / 2;
-                    self.imageViewProfilePicture.layer.masksToBounds = true;
-                    self.imageViewProfilePicture.layer.borderWidth = 0;
-                }
-                
-                // name
-                // self.labelName.text = json["name"].string!
-                
-                // location
-                // ?
-                
-                
-            } else {
-                
-
-                print(error as Any)
-            }
-        })
-        
-    }
-    
-    // when the segment is changed
-    @IBAction func segmentChanged(_ sender: Any) {
-        
-        // TODO: pull to refresh instead
-        switch self.segmentedControl.selectedSegmentIndex {
-        case 0: // feed
-            Feed.getFeed(feed_type: "", completion: {
-                (feed: Feed?) in
-                guard let new_feed = feed else {
-                    print("error")
-                    return
-                }
-                self.personalFeed = new_feed
-                self.tableView.reloadData()
-            })
-            break
-        case 1:
-            let id = String(describing: UserDefaults.standard.integer(forKey: "id"))
-            
-            Friend.getFriends(profile_id: id){ result in
-                switch result{
-                case .success(let friends):
-                    self.friends = friends
-                    self.tableView.reloadData()
-                case .failure(_):
-                    print("File \(#file)")
-                    print("Line \(#line)")
-                    print("error getting friends")
-                    
-                }
-            }
-            break
-        case 2:
-            //
-            let id = UserDefaults.standard.string(forKey: "id")!
-            User.getUserInfo(profile_id: id){result in
-                switch result {
-                case .success(let user):
-                    self.favorites = user.favorites
-                    self.tableView.reloadData()
-                case .failure(_):
-                    print("File: \(#file)")
-                    print("Line: \(#line)")
-                    print("failed to get user favorites")
-                }
-            }
-        default:
-            break
-        }
-        
-        self.tableView.reloadData()
+        //  profile picture
+        self.imageViewProfilePicture.setFacebookProfilePicture(facebook_link: "me")
         
     }
     
