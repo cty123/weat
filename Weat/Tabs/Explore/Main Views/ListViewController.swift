@@ -172,8 +172,11 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         
         let overall_rating = Int((service_rating + food_rating) / 2.0)
-        
-        cell.labelDetail.text = "\(overall_rating)% of users recommend"
+        if (list_obj.rating.food_count_all == 0 && list_obj.rating.service_count_all == 0) {
+            cell.labelDetail.text = "No ratings yet"
+        } else {
+            cell.labelDetail.text = "\(overall_rating)% of users recommend"
+        }
         cell.restaurant = list_obj
         return cell
         
