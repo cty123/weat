@@ -13,5 +13,5 @@ class FeedTableViewCell: UITableViewCell {
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var labelRestaurant: UILabel!
     @IBOutlet weak var labelRating: UILabel! // TODO change to whatever rating should look like
-    
+    var feed_obj: FeedElement?
 }

@@ -33,6 +33,8 @@
 		14E424B92068B0F3000F2057 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E424B82068B0F3000F2057 /* MenuTableViewCell.swift */; };
 		14E424BC206961D8000F2057 /* RatingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E424BA206961D8000F2057 /* RatingTableViewCell.swift */; };
 		14E424BD206961D8000F2057 /* RatingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14E424BB206961D8000F2057 /* RatingTableViewCell.xib */; };
+		14F23E00208E5C93009160A6 /* FeedDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F23DFE208E5C93009160A6 /* FeedDetailViewController.swift */; };
+		14F23E01208E5C93009160A6 /* FeedDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14F23DFF208E5C93009160A6 /* FeedDetailViewController.xib */; };
 		4437886DF57BB2316786CBE5 /* Pods_WeatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E26D6587C8052AB156A919CB /* Pods_WeatTests.framework */; };
 		75413D9749AD3790AD1E90AF /* Pods_Weat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B72BB2C83393A9A9E49E7C9 /* Pods_Weat.framework */; };
 		84EE681A203A3F9800A11D41 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84EE6819203A3F9800A11D41 /* Profile.storyboard */; };
@@ -136,6 +138,8 @@
 		14E424B82068B0F3000F2057 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		14E424BA206961D8000F2057 /* RatingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingTableViewCell.swift; sourceTree = "<group>"; };
 		14E424BB206961D8000F2057 /* RatingTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RatingTableViewCell.xib; sourceTree = "<group>"; };
+		14F23DFE208E5C93009160A6 /* FeedDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDetailViewController.swift; sourceTree = "<group>"; };
+		14F23DFF208E5C93009160A6 /* FeedDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedDetailViewController.xib; sourceTree = "<group>"; };
 		3F5C277665A3A4B2373A20A9 /* Pods-Weat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weat.release.xcconfig"; path = "Pods/Target Support Files/Pods-Weat/Pods-Weat.release.xcconfig"; sourceTree = "<group>"; };
 		46C16D6C64B50763370D8D5E /* Pods-WeatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WeatTests/Pods-WeatTests.release.xcconfig"; sourceTree = "<group>"; };
 		6D9F042A53AB494B0EA93C11 /* Pods-Weat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Weat/Pods-Weat.debug.xcconfig"; sourceTree = "<group>"; };
@@ -237,6 +241,8 @@
 				84EE6829203A41BF00A11D41 /* FeedTableViewCell.xib */,
 				140924C6203D241300D6F8C8 /* FeedViewController.swift */,
 				140924C8203D241E00D6F8C8 /* Feed.storyboard */,
+				14F23DFE208E5C93009160A6 /* FeedDetailViewController.swift */,
+				14F23DFF208E5C93009160A6 /* FeedDetailViewController.xib */,
 			);
 			name = Feed;
 			path = Test;
@@ -626,6 +632,7 @@
 			files = (
 				A8AE7FCB203F9D5B007C9506 /* FriendViewController.xib in Resources */,
 				A8C2ADF020582F9A009255DC /* PostRatingViewController.xib in Resources */,
+				14F23E01208E5C93009160A6 /* FeedDetailViewController.xib in Resources */,
 				A85E9935204008EA00A95558 /* FriendRequestsViewController.xib in Resources */,
 				14179564203D2CC300611D6F /* Checkin.storyboard in Resources */,
 				A85E993D2040501400A95558 /* EditProfileViewController.xib in Resources */,
@@ -818,6 +825,7 @@
 				A8C2ADF320583F3E009255DC /* RecommendToFriendsViewController.swift in Sources */,
 				A82D674B2084083A00835A94 /* GroupIconTableViewCell.swift in Sources */,
 				E06D9A9B205F1C5600D77FDC /* Recommendation.swift in Sources */,
+				14F23E00208E5C93009160A6 /* FeedDetailViewController.swift in Sources */,
 				14503F5720375362007165CF /* FeedElement.swift in Sources */,
 				E02143A0205A0E63005BA160 /* Comment.swift in Sources */,
 				E0E572D12033CD8E00E7822B /* User.swift in Sources */,

@@ -119,22 +119,9 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cell = Bundle.main.loadNibNamed("FeedTableViewCell", owner: self, options: nil)?.first as! FeedTableViewCell
         
         switch self.seg.selectedSegmentIndex {
-            
-            /* var restaurant_name: String
-             var restaurant_id: Int
-             
-             var feed_text: String
-             var feed_id: Int
-             var createdAt: Int
-             
-             var actor_name: String
-             var actor_id: Int
-             
-             var receiver_name: String
-             var receiver_id: Int*/
         case 0: // global feed
             let feed_obj = global_feed.dataUnarchived[indexPath.row]
-            
+            cell.feed_obj = feed_obj
             cell.labelName.text = "\(String(describing: feed_obj.actor_name))"
             cell.labelRestaurant.text = "\(String(describing: feed_obj.restaurant_name))"
             cell.labelRating.text = "\(String(describing: feed_obj.feed_text))"
@@ -142,7 +129,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             
         case 1: // friends feed
             let feed_obj = friends_feed.dataUnarchived[indexPath.row]
-            
+            cell.feed_obj = feed_obj
             cell.labelName.text = "\(String(describing: feed_obj.actor_name))"
             cell.labelRestaurant.text = "\(String(describing: feed_obj.restaurant_name))"
             cell.labelRating.text = "\(String(describing: feed_obj.feed_text))"
@@ -150,6 +137,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             
         case 2: // your feed
             let feed_obj = your_feed.dataUnarchived[indexPath.row]
+            cell.feed_obj = feed_obj
             cell.labelName.text = "\(String(describing: UserDefaults.standard.string(forKey: "name")!))"
             cell.labelRestaurant.text = "\(String(describing: feed_obj.restaurant_name))"
             cell.labelRating.text = "\(String(describing: feed_obj.feed_text))"
@@ -164,6 +152,12 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // keeps a row from being permenantly selected
         tableView.deselectRow(at: indexPath, animated: true)
+        // get this cells' info
+        let cell = tableView.cellForRow(at: indexPath) as! FeedTableViewCell
+        // set new views' info
+        let feedDetailViewController = FeedDetailViewController(nibName: "FeedDetailViewController", bundle: nil)
+        feedDetailViewController.feed_obj = cell.feed_obj
+        self.present(feedDetailViewController, animated: true, completion: nil)
     }
 
 }
