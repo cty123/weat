@@ -173,14 +173,14 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
                 food_rating = Int(rating)
                 foodRatingLabel.text = "\(food_rating)% of people like the food"
             } else {
-                foodRatingLabel.text = ""
+                foodRatingLabel.text = "No food ratings yet"
             }
             if( (restaurant?.rating.service_count_all)! > 0) {
                 let rating = Float((restaurant?.rating.service_good_all)!) / Float((restaurant?.rating.service_count_all)!) * 100
                 service_rating = Int(rating)
                 serviceRatingLabel.text = "\(service_rating)% of people like the service"
             } else {
-                serviceRatingLabel.text = ""
+                serviceRatingLabel.text = "No service ratings yet"
             }
             
             

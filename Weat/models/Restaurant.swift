@@ -60,8 +60,8 @@ class Restaurant {
                     restaurant.longitude = (longitude != nil ? longitude : 0.0)!
                     restaurant.name = (name != nil ? name : "No name...")!
                     restaurant.phone = (phone != nil ? phone : "No phone...")!
-                    switch json["result"]["open_now"].bool {
-                    case true?:
+                    switch json["result"]["opening_hours"]["open_now"].bool {
+                    case true:
                         restaurant.open_now = "Open"
                     default:
                         restaurant.open_now = "Closed"
