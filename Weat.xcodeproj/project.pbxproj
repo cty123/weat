@@ -283,6 +283,7 @@
 		14179565203D2DA100611D6F /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				14F23E02208E7303009160A6 /* Find Friends */,
 				A8EC30052068716900A6DB92 /* Recommendation */,
 				A85E993A2040501400A95558 /* EditProfileViewController.swift */,
 				A85E993B2040501400A95558 /* EditProfileViewController.xib */,
@@ -292,8 +293,6 @@
 				A8AE7FC9203F9D5B007C9506 /* FriendViewController.xib */,
 				A85E9924203FDEB100A95558 /* ProfileViewController.swift */,
 				84EE6819203A3F9800A11D41 /* Profile.storyboard */,
-				145F83E320436F5400FAFEAF /* FindFriendsViewController.swift */,
-				145F83E420436F5400FAFEAF /* FindFriendsViewController.xib */,
 				14125B382044E61A00B612CE /* GlobalProfileVars.swift */,
 			);
 			path = Profile;
@@ -357,6 +356,15 @@
 				148BE60A2056D9A60065FC28 /* Menu */,
 			);
 			path = Explore;
+			sourceTree = "<group>";
+		};
+		14F23E02208E7303009160A6 /* Find Friends */ = {
+			isa = PBXGroup;
+			children = (
+				145F83E320436F5400FAFEAF /* FindFriendsViewController.swift */,
+				145F83E420436F5400FAFEAF /* FindFriendsViewController.xib */,
+			);
+			path = "Find Friends";
 			sourceTree = "<group>";
 		};
 		4B08299DB8E3202C2C1159E4 /* Frameworks */ = {

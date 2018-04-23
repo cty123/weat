@@ -112,12 +112,20 @@ class FindFriendsViewController: UIViewController, UITableViewDelegate, UITableV
         // setup cell
         let cell = Bundle.main.loadNibNamed("FriendTableViewCell", owner: self, options: nil)?.first as! FriendTableViewCell
 
+        cell.addFriendsButton.backgroundColor = UIColor(red: 1, green: 0.5871, blue: 0, alpha: 1.0)
+        cell.addFriendsButton.setTitleColor(UIColor.white, for: UIControlState.normal)
+        cell.addFriendsButton.layer.cornerRadius = 5
+        cell.addFriendsButton.layer.borderWidth = 1
+        cell.addFriendsButton.layer.borderColor = UIColor.white.cgColor
+        cell.parentVC = self
         // TODO: images
         switch self.segmentedControl.selectedSegmentIndex {
         case 0:  // Weat
+            cell.user = self.weatFriends[indexPath.row]
             cell.labelName.text = self.weatFriends[indexPath.row].name
         case 1: // Facebook
             cell.labelName.text = self.facebookNames[indexPath.row]
+            cell.facebook_id = self.facebookLinks[indexPath.row]
         case 2: // Contacts
             break
         default:
