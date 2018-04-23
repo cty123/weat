@@ -109,10 +109,29 @@ extension UIImageView {
             } else {
                 print("File: \(#file)")
                 print("Line: \(#line)")
+                print("failed to get facebook profile picture")
             }
         })
+    }
+    
+    
+    func setFacebookProfilePicture(weat_id: Int) {
+        // backend work around
+        User.getUserInfo(profile_id: String(weat_id)){result in
+            switch result {
+            case .success(let user):
+                self.setFacebookProfilePicture(facebook_link: user.facebook_link!)
+            case .failure(let error):
+                print("File: \(#file)")
+                print("Line: \(#line)")
+                print("failed to get user")
+                print(error)
+            }
+        }
         
     }
+    
+    
     
 
 }
