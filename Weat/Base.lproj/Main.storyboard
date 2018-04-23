@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,17 +18,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lOi-II-eQU">
-                                <rect key="frame" x="140" y="283.5" width="40" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="CoW-6l-xBy">
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <color key="backgroundColor" red="1" green="0.61791780799999996" blue="0.004563432573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="lOi-II-eQU" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="xOd-qt-85l"/>
-                            <constraint firstItem="lOi-II-eQU" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="zbq-Tv-upP"/>
+                            <constraint firstItem="CoW-6l-xBy" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="LzW-iu-Ur6"/>
+                            <constraint firstAttribute="trailing" secondItem="CoW-6l-xBy" secondAttribute="trailing" id="Unn-ya-uVg"/>
+                            <constraint firstItem="CoW-6l-xBy" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="eiz-Ue-ShH"/>
+                            <constraint firstItem="CoW-6l-xBy" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="kXy-CD-7F4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -173,9 +173,10 @@
         <image name="Explore" width="30" height="30"/>
         <image name="Feed" width="30" height="30"/>
         <image name="Groups" width="30" height="30"/>
+        <image name="Logo" width="256" height="256"/>
         <image name="Profile" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="rf3-X4-aDO"/>
+        <segue reference="5FD-CR-cga"/>
     </inferredMetricsTieBreakers>
 </document>
