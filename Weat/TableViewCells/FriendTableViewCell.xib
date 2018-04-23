@@ -32,12 +32,28 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GPl-Cr-Z75">
+                        <rect key="frame" x="244" y="10" width="60" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24" id="Cui-YV-QLq"/>
+                            <constraint firstAttribute="width" constant="60" id="ckF-PW-eI4"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                        <state key="normal" title="Add">
+                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                        <connections>
+                            <action selector="addFriendPressed:" destination="uIW-JX-2uN" eventType="touchUpInside" id="iBs-ZO-Byj"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="GPl-Cr-Z75" secondAttribute="trailing" constant="16" id="3pU-I4-KlA"/>
                     <constraint firstItem="ETg-vM-UoM" firstAttribute="top" secondItem="kRK-n1-vme" secondAttribute="top" constant="2" id="4TB-RA-9G2"/>
                     <constraint firstAttribute="bottom" secondItem="ETg-vM-UoM" secondAttribute="bottom" constant="1.5" id="6J2-Tv-R3b"/>
                     <constraint firstItem="04Z-f4-XQs" firstAttribute="top" secondItem="kRK-n1-vme" secondAttribute="topMargin" id="8aB-ic-g6K"/>
                     <constraint firstItem="04Z-f4-XQs" firstAttribute="bottom" secondItem="kRK-n1-vme" secondAttribute="bottomMargin" id="ImM-Ln-mXU"/>
+                    <constraint firstItem="GPl-Cr-Z75" firstAttribute="centerY" secondItem="kRK-n1-vme" secondAttribute="centerY" id="RNX-jK-qI8"/>
                     <constraint firstItem="04Z-f4-XQs" firstAttribute="leading" secondItem="ETg-vM-UoM" secondAttribute="trailing" constant="8" id="T0R-2R-v2e"/>
                     <constraint firstItem="04Z-f4-XQs" firstAttribute="trailing" secondItem="kRK-n1-vme" secondAttribute="trailingMargin" id="U8g-FV-pV7"/>
                     <constraint firstItem="ETg-vM-UoM" firstAttribute="leading" secondItem="kRK-n1-vme" secondAttribute="leading" constant="2" id="pjH-gk-30P"/>
@@ -45,6 +61,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="uVl-J2-DMD"/>
             <connections>
+                <outlet property="addFriendsButton" destination="GPl-Cr-Z75" id="851-Xo-Rmy"/>
                 <outlet property="imageViewPic" destination="ETg-vM-UoM" id="bSv-wh-XwY"/>
                 <outlet property="labelName" destination="04Z-f4-XQs" id="aML-uJ-cnh"/>
             </connections>
