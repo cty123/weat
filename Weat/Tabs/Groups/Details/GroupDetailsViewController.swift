@@ -201,7 +201,9 @@ class GroupDetailsViewController: UIViewController, UITableViewDataSource, UITab
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = Bundle.main.loadNibNamed("FriendTableViewCell", owner: self, options: nil)?.first as! FriendTableViewCell
         cell.labelName.text = self.members[indexPath.row].name
-        
+        // cell.imageViewPic.setFacebookProfilePicture(facebook_link: self.members[indexPath.row].facebook_link!)
+        cell.imageViewPic.setFacebookProfilePicture(weat_id: self.members[indexPath.row].id!)
+
         return cell
     }
     
