@@ -14,7 +14,6 @@ class PostRatingViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var sliderFood: UISlider!
     @IBOutlet weak var sliderService: UISlider!
     @IBOutlet weak var textField: UITextField!
-    @IBOutlet weak var button: UIButton!
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var navigationBar: UINavigationBar!
@@ -23,18 +22,21 @@ class PostRatingViewController: UIViewController, UITextFieldDelegate {
     var restaurant: Restaurant?
     
     @IBAction func didBeginEditing(_ sender: UITextField) {
+        /*
         UIView.animate(withDuration: 0.3, animations: {
             self.view.frame = CGRect(x:self.view.frame.origin.x, y:self.view.frame.origin.y - 75, width:self.view.frame.size.width, height:self.view.frame.size.height);
-            
         })
+        */
     }
     
     @IBAction func didEndEditing(_ sender: UITextField) {
+        /*
         UIView.animate(withDuration: 0.3, animations: {
             self.view.frame = CGRect(x:self.view.frame.origin.x, y:self.view.frame.origin.y + 75, width:self.view.frame.size.width, height:self.view.frame.size.height);
-            
         })
+        */
     }
+    
     @IBAction func pressCancel(_ sender: UIBarButtonItem) {
         // exit vc
         self.dismiss(animated: true, completion: nil)
@@ -96,6 +98,7 @@ class PostRatingViewController: UIViewController, UITextFieldDelegate {
         
         // add cancel button
         self.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(pressCancel))
+        self.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(postRating))
         
         // Weat colors
         self.sliderFood.tintColor = UIColor.orange
@@ -111,8 +114,6 @@ class PostRatingViewController: UIViewController, UITextFieldDelegate {
         self.sliderService.minimumValue = -1
         self.sliderService.maximumValue = 1
         
-        // init submit button
-        self.button.setup(title: "Submit", color: UIColor.orange)
         
         // init label to name (TODO)
         self.labelName.text = (restaurant?.name)!
@@ -127,6 +128,6 @@ class PostRatingViewController: UIViewController, UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
-        return false;
+        return false
     }
 }
