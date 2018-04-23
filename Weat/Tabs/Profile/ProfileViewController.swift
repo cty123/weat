@@ -127,7 +127,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     // segmented control segments
     let segments = ["Feed", "Friends", "Favorites"]
     
-    // update name location (TODO: remove this)
+    // update name location
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.recommendLabel.text = "0"
@@ -148,10 +148,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                         self.recommendOrangeDot.image = UIImage(named: "OrangeDot")
                     }
                 case .failure(let error):
+                    
                     print(error)
-                    /*
-                        * Handle error here
-                        */
             }
         }
         
@@ -169,16 +167,15 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 // Set global friend requests variable
                 profileVars.friendRequests = requests
                 
-                if(requests.count > 0) {
+                if (requests.count > 0) {
                     self.friendOrangeDot.image = UIImage(named: "OrangeDot")
                 } else {
                     self.friendOrangeDot.image = nil
                 }
             case .failure(let error):
+                print("File: \(#file)")
+                print("Line: \(#line)")
                 print(error)
-                /*
-                    * Handle error here
-                    */
             }
         }
     }
@@ -204,33 +201,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         self.tableView.dataSource = self
         self.tableView.reloadData()
         
-        // populate profile
-        FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "name, location, picture.type(large)"]).start(completionHandler: { (connection, result, error) -> Void in
-            if (error == nil){
-                
-                print(result as Any)
-                
-                // get json
-                let json = JSON(result!)
-                
-                // profile picture
-                let urlString: String = json["picture","data","url"].string!
-                let url = URL(string: urlString)
-                if let data = try? Data(contentsOf: url!) {
-                    self.imageViewProfilePicture.image = UIImage(data: data)!
-                    // Make image circular
-                    self.imageViewProfilePicture.layer.cornerRadius = self.imageViewProfilePicture.frame.size.height / 2;
-                    self.imageViewProfilePicture.layer.masksToBounds = true;
-                    self.imageViewProfilePicture.layer.borderWidth = 0;
-                }
-                
-                
-            } else {
-                
-
-                print(error as Any)
-            }
-        })
+        //  profile picture
+        self.imageViewProfilePicture.setFacebookProfilePicture(facebook_link: "me")
         
     }
     

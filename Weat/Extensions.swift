@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import FBSDKCoreKit
+import SwiftyJSON
 
 extension UIButton {
     func setup(title: String!, color: UIColor) {
@@ -83,4 +85,34 @@ extension UIViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
+}
+
+extension UIImageView {
+    
+    func setFacebookProfilePicture(facebook_link: String) {
+        FBSDKGraphRequest(graphPath: facebook_link, parameters: ["fields": "name, location, picture.type(large)"]).start(completionHandler: { (connection, result, error) -> Void in
+            
+            if (error == nil) {
+                // get json
+                let json = JSON(result!)
+                
+                // get profile string profile picture
+                let urlString: String = json["picture", "data", "url"].string!
+                let url = URL(string: urlString)
+                if let data = try? Data(contentsOf: url!) {
+                    self.image = UIImage(data: data)!
+                    self.layer.cornerRadius = self.frame.size.height / 2;
+                    self.layer.masksToBounds = true;
+                    self.layer.borderWidth = 0;
+                }
+                
+            } else {
+                print("File: \(#file)")
+                print("Line: \(#line)")
+            }
+        })
+        
+    }
+    
+
 }
