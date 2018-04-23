@@ -153,6 +153,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             
         let list_obj = restaurants[indexPath.row]
         
+        cell.labelRank.text = ""
         cell.labelName.text = "\(String(describing: list_obj.name!))"
         if (list_obj.image != nil) {
             cell.imageViewPic.image = list_obj.image!

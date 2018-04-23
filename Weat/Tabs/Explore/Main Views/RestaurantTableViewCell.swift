@@ -13,6 +13,7 @@ class RestaurantTableViewCell: UITableViewCell {
     @IBOutlet weak var imageViewPic: UIImageView!
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var labelDetail: UILabel!
+    @IBOutlet weak var labelRank: UILabel!
     var restaurant: Restaurant!
 }
 
