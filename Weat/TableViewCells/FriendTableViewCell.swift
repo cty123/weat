@@ -15,6 +15,10 @@ class FriendTableViewCell: UITableViewCell {
     var parentVC: UIViewController?
     var user: User?
     var facebook_id: String?
+    
+    
+
+    
     @IBAction func addFriendPressed(_ sender: UIButton) {
         if (user != nil) {
             let user_id = "\((user?.id)!)"
