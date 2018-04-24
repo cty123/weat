@@ -35,7 +35,7 @@
                                     <segment title="Second"/>
                                 </segments>
                                 <connections>
-                                    <action selector="action:" destination="OJU-Ga-pao" eventType="valueChanged" id="v1G-zP-EH9"/>
+                                    <action selector="action" destination="OJU-Ga-pao" eventType="valueChanged" id="cZl-dV-pCK"/>
                                 </connections>
                             </segmentedControl>
                         </subviews>

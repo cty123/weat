@@ -1,5 +1,5 @@
 //
-//  TestViewController.swift
+//  FeedViewController.swift
 //  Weat
 //
 //  Created by Sean Becker on 2/20/18.
@@ -16,9 +16,15 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var seg: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
-    @IBAction func action(_ sender: UISegmentedControl) {
-        switch sender.selectedSegmentIndex
-        {
+
+    
+    @IBAction func action() {
+        self.handleRefresh()
+        self.refreshControl.endRefreshing()
+    }
+    
+    @IBAction func handleRefresh() {
+        switch self.seg.selectedSegmentIndex {
         // TODO: Change this to occur on pull down
         case 0:
             Feed.getFeed(feed_type: "/all", completion: {
@@ -40,6 +46,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                 }
                 self.friends_feed = new_feed
                 self.tableView.reloadData()
+
             })
             
         default:
@@ -54,10 +61,15 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             })
         }
         
-        tableView.reloadData()
     }
     
-    let segments = ["Everyone", "Friends", "You"]
+    let segments = ["Global", "Friends", "You"]
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(action), for: UIControlEvents.valueChanged)
+        return refreshControl
+    }()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,9 +91,10 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.seg.selectedSegmentIndex = 1
         
         // table view init
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.reloadData()
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.reloadData()
+        self.tableView.addSubview(self.refreshControl)
     }
 
     override func didReceiveMemoryWarning() {
