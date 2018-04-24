@@ -88,6 +88,9 @@ class EditProfileViewController: UIViewController {
                 UserDefaults.standard.set(false , forKey: "showArchived")
             }
             
+            // save privacy
+            UserDefaults.standard.set(self.segmentedControlPrivacy.selectedSegmentIndex , forKey: "privacy")
+
             
             // exit
             self.dismiss(animated: true, completion: nil)
@@ -103,6 +106,12 @@ class EditProfileViewController: UIViewController {
         // make orange
         self.navigationBar.makeOrange()
         
+        // init segmented controls
+        self.segmentedControlPrivacy.setup(segmentNames: self.segmentsPrivacy, color: .orange)
+        self.segmentedControlArchive.setup(segmentNames: self.segmentsArchive, color: .orange)
+        
+        
+        // init show archived
         if let showArchived = UserDefaults.standard.object(forKey: "showArchived") as? Bool{
             // if the key exists
             if showArchived {
@@ -118,6 +127,14 @@ class EditProfileViewController: UIViewController {
             UserDefaults.standard.set(false, forKey: "showArchived")
             self.segmentedControlArchive.selectedSegmentIndex = 0
 
+        }
+        
+        // init privacy
+        if let privacy = UserDefaults.standard.object(forKey: "privacy") as? Int {
+            // if the key exist
+            self.segmentedControlPrivacy.selectedSegmentIndex = privacy
+        } else {
+            self.segmentedControlPrivacy.selectedSegmentIndex = 0
         }
         
         // populate fields
@@ -144,15 +161,6 @@ class EditProfileViewController: UIViewController {
         
         // "hide keyboard when tapped around"
         self.hideKeyboardWhenTappedAround()
-        
-        // init segmented controls
-        self.segmentedControlPrivacy.setup(segmentNames: self.segmentsPrivacy, color: .orange)
-        self.segmentedControlArchive.setup(segmentNames: self.segmentsArchive, color: .orange)
-
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
 
     }
 
