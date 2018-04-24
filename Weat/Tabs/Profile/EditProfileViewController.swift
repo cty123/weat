@@ -18,7 +18,7 @@ class EditProfileViewController: UIViewController {
     @IBOutlet weak var textFieldPhone: UITextField!
     @IBOutlet weak var textFieldLocation: UITextField!
     @IBOutlet weak var segmentedControlArchive: UISegmentedControl!
-    @IBOutlet weak var segmentedControlPrivacy: UISegmentedControl!
+    // @IBOutlet weak var segmentedControlPrivacy: UISegmentedControl!
     @IBOutlet weak var buttonLogout: UIButton!
     
     
@@ -70,7 +70,7 @@ class EditProfileViewController: UIViewController {
         user.email = email
         user.phone = phone
         user.location = location
-        user.privacy = self.segmentedControlPrivacy.selectedSegmentIndex
+        user.privacy = 0 // self.segmentedControlPrivacy.selectedSegmentIndex
         user.updateUserInfo() { result in
             switch result{
             case .success(_):
@@ -89,7 +89,7 @@ class EditProfileViewController: UIViewController {
             }
             
             // save privacy
-            UserDefaults.standard.set(self.segmentedControlPrivacy.selectedSegmentIndex , forKey: "privacy")
+            // UserDefaults.standard.set(self.segmentedControlPrivacy.selectedSegmentIndex , forKey: "privacy")
 
             
             // exit
@@ -107,7 +107,7 @@ class EditProfileViewController: UIViewController {
         self.navigationBar.makeOrange()
         
         // init segmented controls
-        self.segmentedControlPrivacy.setup(segmentNames: self.segmentsPrivacy, color: .orange)
+        // self.segmentedControlPrivacy.setup(segmentNames: self.segmentsPrivacy, color: .orange)
         self.segmentedControlArchive.setup(segmentNames: self.segmentsArchive, color: .orange)
         
         
@@ -130,12 +130,14 @@ class EditProfileViewController: UIViewController {
         }
         
         // init privacy
+        /*
         if let privacy = UserDefaults.standard.object(forKey: "privacy") as? Int {
             // if the key exist
             self.segmentedControlPrivacy.selectedSegmentIndex = privacy
         } else {
             self.segmentedControlPrivacy.selectedSegmentIndex = 0
         }
+        */
         
         // populate fields
         let id = UserDefaults.standard.string(forKey: "id")
