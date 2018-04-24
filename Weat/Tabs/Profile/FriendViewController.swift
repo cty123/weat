@@ -309,7 +309,7 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         switch self.segmentedControl.selectedSegmentIndex {
         case 0: // feed
-            cell.labelName.text = UserDefaults.standard.string(forKey: "name")
+            cell.labelName.text = (user?.name)!
             cell.labelRestaurant.text = feed_obj.restaurant_name
             cell.labelRating.text = feed_obj.feed_text
             return cell
