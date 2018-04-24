@@ -93,7 +93,24 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             User.getUserInfo(profile_id: id){result in
                 switch result {
                 case .success(let user):
-                    self.favorites = user.favorites
+                    self.favorites = []
+                    for ele in user.favorites {
+                        Restaurant.getRestaurantInfo(google_link: ele.google_link!) { (restaurant: Restaurant) in
+                            restaurant.getRestaurantRating() { result in
+                                switch result {
+                                case .success(_):
+                                    self.favorites.append(restaurant)
+                                    self.tableView.reloadData()
+                                case .failure(let error):
+                                    print("File: \(#file)")
+                                    print("Line: \(#line)")
+                                    print(error)
+                                }
+                            }
+                        }
+                    
+                    }
+                    
                     self.tableView.reloadData()
                 case .failure(_):
                     print("File: \(#file)")
@@ -249,14 +266,19 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         // 44 is the standard height of a row
-        return 44
+        
+        if self.segmentedControl.selectedSegmentIndex == 2 {
+            let cell = Bundle.main.loadNibNamed("RestaurantTableViewCell", owner: self, options: nil)?.first as! RestaurantTableViewCell
+            return cell.frame.height
+            
+        } else {
+            return 44
+
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // TODO: images
-        
-        
-        
         // check
         var feed_obj: FeedElement
         if let check = self.personalFeed {
@@ -275,9 +297,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             // this might cause a crash, hopefully not
             feed_obj = FeedElement(feed_obj: "")
         }
-        
-
-
+    
         let cell = Bundle.main.loadNibNamed("FeedTableViewCell", owner: self, options: nil)?.first as! FeedTableViewCell
 
         switch self.segmentedControl.selectedSegmentIndex {
@@ -296,7 +316,38 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             let cell = Bundle.main.loadNibNamed("RestaurantTableViewCell", owner: self, options: nil)?.first as! RestaurantTableViewCell
             let restaurant = favorites[indexPath.row]
             cell.labelName.text = restaurant.name
-            cell.labelDetail.text = ""
+            
+            
+            // sean code start
+            let list_obj = self.favorites[indexPath.row]
+            
+            if (list_obj.image != nil) {
+                cell.imageViewPic.image = list_obj.image!
+                cell.imageViewPic.layer.cornerRadius = cell.imageViewPic.frame.size.height / 2;
+                cell.imageViewPic.layer.masksToBounds = true;
+            }
+            
+            var food_rating: Float = 0.0
+            var service_rating: Float = 0.0
+            
+            if(list_obj.rating.food_count_all > 0) {
+                food_rating = (Float(list_obj.rating.food_good_all) / Float(list_obj.rating.food_count_all)) * 100
+            }
+            if(list_obj.rating.service_count_all > 0) {
+                service_rating = (Float(list_obj.rating.service_good_all) / Float(list_obj.rating.service_count_all)) * 100
+            }
+            
+            let overall_rating = Int((service_rating + food_rating) / 2.0)
+            if (list_obj.rating.food_count_all == 0 && list_obj.rating.service_count_all == 0) {
+                cell.labelDetail.text = "No ratings yet"
+            } else {
+                cell.labelDetail.text = "\(overall_rating)% of users recommend"
+            }
+            cell.restaurant = list_obj
+            // sean code end
+            
+            cell.labelRank.text = nil
+            
             return cell
             
         default: // should never happend
