@@ -22,19 +22,15 @@ class PostRatingViewController: UIViewController, UITextFieldDelegate {
     var restaurant: Restaurant?
     
     @IBAction func didBeginEditing(_ sender: UITextField) {
-        /*
         UIView.animate(withDuration: 0.3, animations: {
             self.view.frame = CGRect(x:self.view.frame.origin.x, y:self.view.frame.origin.y - 75, width:self.view.frame.size.width, height:self.view.frame.size.height);
         })
-        */
     }
     
     @IBAction func didEndEditing(_ sender: UITextField) {
-        /*
         UIView.animate(withDuration: 0.3, animations: {
             self.view.frame = CGRect(x:self.view.frame.origin.x, y:self.view.frame.origin.y + 75, width:self.view.frame.size.width, height:self.view.frame.size.height);
         })
-        */
     }
     
     @IBAction func pressCancel(_ sender: UIBarButtonItem) {
