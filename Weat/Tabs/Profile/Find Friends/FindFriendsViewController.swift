@@ -29,7 +29,6 @@ class FindFriendsViewController: UIViewController, UITableViewDelegate, UITableV
     var facebookNames: [String] = []                        // array of names from facebook graph api
     
 
-    
     // action for closing button
     @IBAction func action(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
@@ -116,6 +115,7 @@ class FindFriendsViewController: UIViewController, UITableViewDelegate, UITableV
         // setup cell
         let cell = Bundle.main.loadNibNamed("FriendTableViewCell", owner: self, options: nil)?.first as! FriendTableViewCell
 
+        cell.addFriendsButton.isHidden = false
         cell.addFriendsButton.backgroundColor = UIColor(red: 1, green: 0.5871, blue: 0, alpha: 1.0)
         cell.addFriendsButton.setTitleColor(UIColor.white, for: UIControlState.normal)
         cell.addFriendsButton.layer.cornerRadius = 5
