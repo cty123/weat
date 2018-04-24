@@ -30,6 +30,11 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
     var group: Group = Group()
     let locationManager = CLLocationManager()
     var suggestions: [Restaurant] = []
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: UIControlEvents.valueChanged)
+        return refreshControl
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +52,7 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.tableView.reloadData()
+        self.tableView.addSubview(self.refreshControl)
         
         // locaiton manager setup
         self.locationManager.delegate = self;
@@ -56,6 +62,11 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         // get recommendations
         self.getSuggestions()
+    }
+    
+    @IBAction func handleRefresh() {
+        self.getSuggestions()
+        self.refreshControl.endRefreshing()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -118,6 +129,11 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if self.suggestions.count < indexPath.row + 1 {
+            return UITableViewCell()
+        }
+        
         let cell = Bundle.main.loadNibNamed("RestaurantTableViewCell", owner: self, options: nil)?.first as! RestaurantTableViewCell
         
         let list_obj = suggestions[indexPath.row]
