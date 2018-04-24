@@ -8,10 +8,9 @@ class Feed {
     var data: [FeedElement] = []
     var dataUnarchived: [FeedElement] = []
     
-    static func getFeed(feed_type: String, completion: @escaping (Feed) -> Void) {
+    static func getFeed(feed_type: String, user_id: String, completion: @escaping (Feed) -> Void) {
         let feed = Feed()
         let token = FBSDKAccessToken.current().tokenString!
-        let user_id = UserDefaults.standard.integer(forKey: "id")
         let url = "\(String(WeatAPIUrl))/user/feed\(String(describing: feed_type))?access_token=\(String(describing: token))&profile_id=\(String(describing: user_id))"
         Alamofire.request(url, method:.get).validate().responseJSON { response in
             switch response.result {

@@ -24,10 +24,11 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @IBAction func handleRefresh() {
+        let user_id = UserDefaults.standard.object(forKey: "id") as! Int
         switch self.seg.selectedSegmentIndex {
         // TODO: Change this to occur on pull down
         case 0:
-            Feed.getFeed(feed_type: "/all", completion: {
+            Feed.getFeed(feed_type: "/all", user_id: String(user_id), completion: {
                 (feed: Feed?) in
                 guard let new_feed = feed else {
                     print("error")
@@ -38,7 +39,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             })
             
         case 1:
-            Feed.getFeed(feed_type: "/friends", completion: {
+            Feed.getFeed(feed_type: "/friends", user_id: String(user_id), completion: {
                 (feed: Feed?) in
                 guard let new_feed = feed else {
                     print("error")
@@ -50,7 +51,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             })
             
         default:
-            Feed.getFeed(feed_type: "", completion: {
+            Feed.getFeed(feed_type: "", user_id: String(user_id), completion: {
                 (feed: Feed?) in
                 guard let new_feed = feed else {
                     print("error")
@@ -63,7 +64,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
-    let segments = ["Global", "Friends", "You"]
+    let segments = ["Global", "Friends", "Me"]
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(action), for: UIControlEvents.valueChanged)
@@ -77,8 +78,11 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         // color
         self.navigationBar.makeOrange()
         
+        //
+        let user_id = UserDefaults.standard.object(forKey: "id") as! Int
+        
         // Load in friend feed
-        Feed.getFeed(feed_type: "/friends", completion: {
+        Feed.getFeed(feed_type: "/friends", user_id: String(user_id), completion: {
             (feed: Feed?) in
             guard let new_feed = feed else {
                 print("error")

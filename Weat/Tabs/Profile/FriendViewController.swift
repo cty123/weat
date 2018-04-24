@@ -26,6 +26,79 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBAction func action(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    @IBAction func handleRefresh() {
+        switch self.segmentedControl.selectedSegmentIndex {
+            
+        // feed
+        case 0:
+            Feed.getFeed(feed_type: "", user_id: String(user!.id!), completion: {
+                (feed: Feed?) in
+                guard let new_feed = feed else {
+                    print("error")
+                    self.refreshControl.endRefreshing()
+                    return
+                }
+                self.personalFeed = new_feed
+                self.tableView.reloadData()
+                self.refreshControl.endRefreshing()
+                
+            })
+            break
+            
+        // friends
+        case 1:
+            
+            Friend.getFriends(profile_id: String(user!.id!)){ result in
+                switch result{
+                case .success(let friends):
+                    self.friends = friends
+                    self.tableView.reloadData()
+                case .failure(_):
+                    print("File \(#file)")
+                    print("Line \(#line)")
+                    print("error getting friends")
+                }
+                self.refreshControl.endRefreshing()
+            }
+            
+        // favorites
+        case 2:
+            User.getUserInfo(profile_id: String(user!.id!)){result in
+                switch result {
+                case .success(let user):
+                    self.favorites = []
+                    for ele in user.favorites {
+                        Restaurant.getRestaurantInfo(google_link: ele.google_link!) { (restaurant: Restaurant) in
+                            restaurant.getRestaurantRating() { result in
+                                switch result {
+                                case .success(_):
+                                    self.favorites.append(restaurant)
+                                    self.tableView.reloadData()
+                                case .failure(let error):
+                                    print("File: \(#file)")
+                                    print("Line: \(#line)")
+                                    print(error)
+                                }
+                            }
+                        }
+                        
+                    }
+                    
+                    self.tableView.reloadData()
+                case .failure(_):
+                    print("File: \(#file)")
+                    print("Line: \(#line)")
+                    print("failed to get user favorites")
+                }
+                self.refreshControl.endRefreshing()
+            }
+            
+        // default
+        default:
+            break
+        }
+    }
 
     @IBAction func friendButtonPress(_ sender: UIButton) {
         let friend_id: String = "\((user?.id)!)"
@@ -90,9 +163,16 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var user: User?
     var friends: [User] = []            // array of friend
     var friend_status: Int?
+    var favorites: [Restaurant] = []
+    var personalFeed: Feed? = nil
+    let segments = ["Feed", "Friends", "Favorites"]
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: UIControlEvents.valueChanged)
+        return refreshControl
+    }()
     
-    // segmented control segments
-    let segments = ["Feed", "Friends", /*"Favorites"*/]
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -149,31 +229,14 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         }
         
-        // Todo: make below a global func
-        // Facebook profile picture
-        FBSDKGraphRequest(graphPath: (self.user?.facebook_link)!, parameters: ["fields": "name, location, picture.type(large)"]).start(completionHandler: { (connection, result, error) -> Void in
-            if (error == nil){
-
-                print(result as Any)
-                
-                // get json
-                let json = JSON(result!)
-                
-                // profile picture
-                let urlString: String = json["picture","data","url"].string!
-                let url = URL(string: urlString)
-                if let data = try? Data(contentsOf: url!) {
-                    self.imageViewProfilePic.image = UIImage(data: data)!
-                    self.imageViewProfilePic.layer.cornerRadius = self.imageViewProfilePic.frame.size.height / 2;
-                    self.imageViewProfilePic.layer.masksToBounds = true;
-                    self.imageViewProfilePic.layer.borderWidth = 0;
-                }
-                
-            } else {
-                print(error as Any)
-            }
-        })
+        // set facebook profile picture
+        self.imageViewProfilePic.setFacebookProfilePicture(facebook_link: user!.facebook_link!)
         
+        // tableview stuff
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.addSubview(self.refreshControl)
+        self.handleRefresh()
 
         
     }
@@ -182,7 +245,7 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     // when the segment is changed
     @IBAction func segmentChanged(_ sender: Any) {
-        tableView.reloadData()
+        self.handleRefresh()
     }
     
     // tableview stuff
@@ -194,55 +257,111 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // feed = 0
         switch self.segmentedControl.selectedSegmentIndex {
         case 0:
-            // feed, TODO: set page size
-            
-
-            print("FEED")
+            // check if feed is valid
+            if let ret = self.personalFeed {
+                return ret.dataUnarchived.count
+            } else {
+                // if feed nil, return 0
+                return 0
+            }
         case 1:
-            // friends, TODO: user.friends.size
-            
-
-            print("FRIENDS")
             return self.friends.count
         case 2:
-            // favorites, TODO: user.favorites.size
-            
-
-            print("FAVORITES")
+            return self.favorites.count
         default:
             // should never happend
             break
         }
         
-        // return 0 otherwise
+        // just return 0 otherwise
         return 0
-        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         // 44 is the standard height of a row
-        return 44
+        if self.segmentedControl.selectedSegmentIndex == 2 {
+            let cell = Bundle.main.loadNibNamed("RestaurantTableViewCell", owner: self, options: nil)?.first as! RestaurantTableViewCell
+            return cell.frame.height
+        } else {
+            return 44
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // TODO: images
-        switch self.segmentedControl.selectedSegmentIndex {
+        // check
+        var feed_obj: FeedElement
+        if let check = self.personalFeed {
             
+            if (check.dataUnarchived.count == 0) {
+                // lazy check
+                return UITableViewCell()
+            }
+            
+            feed_obj = check.dataUnarchived[indexPath.row]
+            
+            
+        } else {
+            // this might cause a crash, hopefully not
+            feed_obj = FeedElement(feed_obj: "")
+        }
+        
+        let cell = Bundle.main.loadNibNamed("FeedTableViewCell", owner: self, options: nil)?.first as! FeedTableViewCell
+        
+        switch self.segmentedControl.selectedSegmentIndex {
         case 0: // feed
-            let cell = Bundle.main.loadNibNamed("FeedTableViewCell", owner: self, options: nil)?.first as! FeedTableViewCell
-            cell.labelName.text = "\(String(describing: SimpleData.Users[indexPath.row]))"
-            cell.labelRestaurant.text = "Dummy Restaurant"
+            cell.labelName.text = UserDefaults.standard.string(forKey: "name")
+            cell.labelRestaurant.text = feed_obj.restaurant_name
+            cell.labelRating.text = feed_obj.feed_text
             return cell
             
         case 1: // friends
+            if (self.friends.count == 0) {
+                return UITableViewCell()
+            }
             let cell = Bundle.main.loadNibNamed("FriendTableViewCell", owner: self, options: nil)?.first as! FriendTableViewCell
             cell.labelName.text = self.friends[indexPath.row].name
+            cell.imageViewPic.setFacebookProfilePicture(facebook_link: self.friends[indexPath.row].facebook_link!)
             return cell
             
         case 2: // favorites
+            if (self.favorites.count == 0) {
+                return UITableViewCell()
+            }
             let cell = Bundle.main.loadNibNamed("RestaurantTableViewCell", owner: self, options: nil)?.first as! RestaurantTableViewCell
-            cell.labelName.text = "\(String(describing: SimpleData.Restaurants[indexPath.row]))"
-            cell.labelDetail.text = "\(arc4random_uniform(101))% of people recommend"
+            let restaurant = favorites[indexPath.row]
+            cell.labelName.text = restaurant.name
+            
+            
+            // sean code start
+            let list_obj = self.favorites[indexPath.row]
+            
+            if (list_obj.image != nil) {
+                cell.imageViewPic.image = list_obj.image!
+                cell.imageViewPic.layer.cornerRadius = cell.imageViewPic.frame.size.height / 2;
+                cell.imageViewPic.layer.masksToBounds = true;
+            }
+            
+            var food_rating: Float = 0.0
+            var service_rating: Float = 0.0
+            
+            if(list_obj.rating.food_count_all > 0) {
+                food_rating = (Float(list_obj.rating.food_good_all) / Float(list_obj.rating.food_count_all)) * 100
+            }
+            if(list_obj.rating.service_count_all > 0) {
+                service_rating = (Float(list_obj.rating.service_good_all) / Float(list_obj.rating.service_count_all)) * 100
+            }
+            
+            let overall_rating = Int((service_rating + food_rating) / 2.0)
+            if (list_obj.rating.food_count_all == 0 && list_obj.rating.service_count_all == 0) {
+                cell.labelDetail.text = "No ratings yet"
+            } else {
+                cell.labelDetail.text = "\(overall_rating)% of users recommend"
+            }
+            cell.restaurant = list_obj
+            // sean code end
+            
+            cell.labelRank.text = nil
+            
             return cell
             
         default: // should never happend
@@ -252,10 +371,34 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // open next view controller
-        let friendViewController = FriendViewController(nibName: "FriendViewController", bundle: nil)
-        friendViewController.user = friends[indexPath.row]
-        self.present(friendViewController, animated: true, completion: nil)
+        // friends: open next view controller
+        if (self.segmentedControl.selectedSegmentIndex == 1) {
+            let friendViewController = FriendViewController(nibName: "FriendViewController", bundle: nil)
+            // todo facebook id
+            friendViewController.user = self.friends[indexPath.row]
+            self.present(friendViewController, animated: true, completion: nil)
+        }
+        
+        // favorites: open next view controller
+        if (self.segmentedControl.selectedSegmentIndex == 2) {
+            let restaurant = self.favorites[indexPath.row]
+            Restaurant.getRestaurantInfo(google_link: restaurant.google_link!, completion: { (restaurant: Restaurant) in
+                restaurant.getRestaurant { result in
+                    switch result {
+                    case .success(_):
+                        let vc = RestaurantViewController(nibName: "RestaurantViewController", bundle: nil)
+                        vc.restaurant = restaurant
+                        vc.back_string = "Back"
+                        self.present(vc, animated: true, completion: nil)
+                    case .failure(let error):
+                        print("File: \(#file)")
+                        print("Line: \(#line)")
+                        print("failed to get restaruant details")
+                        print(error)
+                    }
+                }
+            })
+        }
         
         // unselect row
         tableView.deselectRow(at: indexPath, animated: true)

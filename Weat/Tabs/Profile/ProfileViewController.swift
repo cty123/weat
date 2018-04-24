@@ -52,11 +52,12 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     @IBAction func handleRefresh() {
+        let user_id = UserDefaults.standard.object(forKey: "id") as! Int
         switch self.segmentedControl.selectedSegmentIndex {
         
         // feed
         case 0:
-            Feed.getFeed(feed_type: "", completion: {
+            Feed.getFeed(feed_type: "", user_id: String(user_id), completion: {
                 (feed: Feed?) in
                 guard let new_feed = feed else {
                     print("error")
@@ -266,16 +267,12 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         // 44 is the standard height of a row
-        
         if self.segmentedControl.selectedSegmentIndex == 2 {
             let cell = Bundle.main.loadNibNamed("RestaurantTableViewCell", owner: self, options: nil)?.first as! RestaurantTableViewCell
             return cell.frame.height
-            
         } else {
             return 44
-
         }
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -310,6 +307,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         case 1: // friends
             let cell = Bundle.main.loadNibNamed("FriendTableViewCell", owner: self, options: nil)?.first as! FriendTableViewCell
             cell.labelName.text = self.friends[indexPath.row].name
+            cell.imageViewPic.setFacebookProfilePicture(facebook_link: self.friends[indexPath.row].facebook_link!)
             return cell
             
         case 2: // favorites
