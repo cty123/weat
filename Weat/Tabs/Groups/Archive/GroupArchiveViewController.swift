@@ -44,6 +44,10 @@ class GroupArchiveViewController: UIViewController, UITableViewDelegate, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // make orange
+        self.navigationBar.makeOrange()
+        
+        
         Group.getLeft(){ result in
             switch result {
             case .success(let groups):

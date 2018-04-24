@@ -96,6 +96,10 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // make orange
+        self.navigationBar.makeOrange()
+        
         // init segmented control
         self.segmentedControl.setup(segmentNames: segments, color: UIColor.orange)
         

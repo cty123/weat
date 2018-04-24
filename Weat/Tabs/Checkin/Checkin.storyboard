@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GPA-2w-dxL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GPA-2w-dxL">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -60,11 +60,19 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vRq-pO-ThG">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="Check In" id="ncL-Xs-UJL"/>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="c0Y-qY-3hS" firstAttribute="top" secondItem="h3e-ME-bVS" secondAttribute="bottom" constant="8" id="04G-EV-50i"/>
+                            <constraint firstItem="vRq-pO-ThG" firstAttribute="trailing" secondItem="7Ml-Xj-JIv" secondAttribute="trailing" id="1dr-HB-1cu"/>
                             <constraint firstItem="Zm1-w7-abr" firstAttribute="centerY" secondItem="7Ml-Xj-JIv" secondAttribute="centerY" id="7g2-hN-qzc"/>
+                            <constraint firstItem="vRq-pO-ThG" firstAttribute="leading" secondItem="7Ml-Xj-JIv" secondAttribute="leading" id="9yj-ab-e1A"/>
                             <constraint firstItem="c0Y-qY-3hS" firstAttribute="leading" secondItem="44h-Oj-gma" secondAttribute="trailing" constant="13" id="BHx-7p-OV3"/>
                             <constraint firstItem="h3e-ME-bVS" firstAttribute="centerX" secondItem="7Ml-Xj-JIv" secondAttribute="centerX" id="Lim-9a-HWy"/>
                             <constraint firstItem="Zm1-w7-abr" firstAttribute="top" secondItem="7Ul-Xp-Azb" secondAttribute="bottom" constant="8.5" id="MZL-pP-wSD"/>
@@ -73,6 +81,7 @@
                             <constraint firstItem="3U3-C2-fgR" firstAttribute="top" secondItem="h3e-ME-bVS" secondAttribute="bottom" constant="8" id="hHa-o4-USL"/>
                             <constraint firstItem="Zm1-w7-abr" firstAttribute="centerX" secondItem="7Ml-Xj-JIv" secondAttribute="centerX" id="hQe-Am-hn4"/>
                             <constraint firstItem="h3e-ME-bVS" firstAttribute="top" secondItem="Zm1-w7-abr" secondAttribute="bottom" constant="7.5" id="q7M-O5-vuR"/>
+                            <constraint firstItem="vRq-pO-ThG" firstAttribute="top" secondItem="7Ml-Xj-JIv" secondAttribute="top" id="yCS-rM-9C1"/>
                             <constraint firstItem="44h-Oj-gma" firstAttribute="leading" secondItem="3U3-C2-fgR" secondAttribute="trailing" constant="13" id="yeD-9t-2ME"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7Ml-Xj-JIv"/>
@@ -83,6 +92,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="activityIndicator" destination="7Ul-Xp-Azb" id="4zc-Qn-cbd"/>
+                        <outlet property="navigationBar" destination="vRq-pO-ThG" id="P1I-S4-6fa"/>
                         <outlet property="noButton" destination="3U3-C2-fgR" id="g7J-M3-ffg"/>
                         <outlet property="restaurantLabel" destination="h3e-ME-bVS" id="iYf-Np-ZTC"/>
                         <outlet property="yesButton" destination="c0Y-qY-3hS" id="L62-KV-T3N"/>

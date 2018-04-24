@@ -17,20 +17,6 @@ class FriendRequestsViewController: UIViewController, UITableViewDelegate, UITab
     
     // action for closing button
     @IBAction func action(_ sender: UIBarButtonItem) {
-        // respond to all friend requests based on the status
-        /*var i: Int = 0
-        for friend in pendingRequests {
-            
-            let cell = self.tableView.cellForRow(at: IndexPath(row: i, section: 0)) as! FriendRequestTableViewCell
-            print(cell.acceptance)
-            Friend.setFriendRequest(friend_id: String(describing: friend.id), acceptance: cell.acceptance, completion: {
-                (ret: Bool) in
-                print("setFriendRequest returned \(ret)")
-            })
-        
-            i = i + 1
-        }*/
-        
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -40,21 +26,12 @@ class FriendRequestsViewController: UIViewController, UITableViewDelegate, UITab
     //
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // make orange
+        self.navigationBar.makeOrange()
 
         // add close button
         self.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(action))
-        
-        // get requests
-        /*Friend.pullFriendRequest(completion: {
-            (users: [User]?) in
-            
-            // TODO: fix this
-            if (users != nil) {
-                self.pendingRequests = users!
-            } else {
-                print("error getting friend requests")
-            }
-        })*/
         
         self.tableView.dataSource = self
         self.tableView.delegate = self

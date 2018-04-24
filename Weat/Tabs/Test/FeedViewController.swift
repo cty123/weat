@@ -13,6 +13,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     var friends_feed = Feed()
     var your_feed = Feed()
     
+    @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var seg: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
     @IBAction func action(_ sender: UISegmentedControl) {
@@ -60,6 +61,9 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // color
+        self.navigationBar.makeOrange()
         
         // Load in friend feed
         Feed.getFeed(feed_type: "/friends", completion: {

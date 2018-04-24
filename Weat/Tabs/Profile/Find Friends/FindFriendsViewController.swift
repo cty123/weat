@@ -50,6 +50,10 @@ class FindFriendsViewController: UIViewController, UITableViewDelegate, UITableV
     
     
     override func viewDidLoad() {
+        
+        // make orange
+        self.navigationBar.makeOrange()
+        
         super.viewDidLoad()
         self.setFriends()
         self.tableView.delegate = self

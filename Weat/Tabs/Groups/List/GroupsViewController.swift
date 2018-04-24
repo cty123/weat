@@ -61,6 +61,9 @@ class GroupsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // make orange
+        self.navigationBar.makeOrange()
+        
         // add refresh contorl
         self.tableView.addSubview(self.refreshControl)
         

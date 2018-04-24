@@ -44,6 +44,9 @@ class GroupCreateViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        // make orange
+        self.navigationBar.makeOrange()
+        
         // add done button
         self.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(pressDone))
         

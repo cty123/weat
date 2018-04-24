@@ -12,6 +12,7 @@ class FeedDetailViewController: UIViewController {
     @IBOutlet weak var labelActor: UILabel!
     @IBOutlet weak var labelAction: UILabel!
     @IBOutlet weak var labelReceiver: UILabel!
+    @IBOutlet weak var navigationBar: UINavigationBar!
     
     var feed_obj: FeedElement?
     
@@ -21,6 +22,8 @@ class FeedDetailViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.navigationBar.makeOrange()
         labelActor.text = (feed_obj?.actor_name)!
         labelAction.text = (feed_obj?.feed_text)!
         if (feed_obj?.restaurant_name != nil) {

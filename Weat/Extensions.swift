@@ -130,8 +130,17 @@ extension UIImageView {
         }
         
     }
-    
-    
-    
+}
 
+extension UINavigationBar {
+    func makeOrange() {
+        
+        // white text
+        let textAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        self.titleTextAttributes = textAttributes
+        self.tintColor = .white
+
+        // orange body
+        self.barTintColor = .orange
+    }
 }

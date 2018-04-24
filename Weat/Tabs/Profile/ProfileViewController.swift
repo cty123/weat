@@ -27,6 +27,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var friendOrangeDot: UIImageView!
     @IBOutlet weak var recommendLabel: UILabel!
     @IBOutlet weak var recommendOrangeDot: UIImageView!
+    @IBOutlet weak var navigationBar: UINavigationBar!
     
     
     @IBAction func viewFriendRequests(_ sender: Any) {
@@ -182,6 +183,9 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // make orange
+        self.navigationBar.makeOrange()
         
         // get feed
         self.handleRefresh()

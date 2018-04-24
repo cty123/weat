@@ -207,6 +207,7 @@
                         <outlet property="imageViewProfilePicture" destination="VDr-wt-1RC" id="Nw4-7j-xrT"/>
                         <outlet property="labelLocation" destination="uoQ-VD-783" id="jFx-kP-ePm"/>
                         <outlet property="labelName" destination="gWg-LE-nt6" id="gMB-hO-5o7"/>
+                        <outlet property="navigationBar" destination="cDi-WV-oG6" id="kaJ-IP-OO9"/>
                         <outlet property="notificationsLabel" destination="wjB-HY-yg5" id="j31-Ia-aMT"/>
                         <outlet property="recommendLabel" destination="yf4-e0-6XY" id="zEL-32-r6O"/>
                         <outlet property="recommendOrangeDot" destination="CLR-Ug-KSz" id="KQy-J5-z09"/>

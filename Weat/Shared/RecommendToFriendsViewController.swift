@@ -70,6 +70,9 @@ class RecommendToFriendsViewController: UIViewController, UITableViewDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // make orange
+        self.navigationBar.makeOrange()
+        
         // add cancel button
         self.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(pressCancel))
         

@@ -15,6 +15,7 @@
                 <outlet property="labelAction" destination="g9F-87-CLX" id="Mde-1E-9Ja"/>
                 <outlet property="labelActor" destination="qCG-Ub-8kZ" id="7rG-mr-dba"/>
                 <outlet property="labelReceiver" destination="7i7-q0-KjB" id="uFq-V4-f7U"/>
+                <outlet property="navigationBar" destination="DlL-LT-qit" id="jXA-sD-Z55"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

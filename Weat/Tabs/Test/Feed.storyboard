@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="OJU-Ga-pao">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="OJU-Ga-pao">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,8 +18,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fiE-D5-Esa">
+                                <rect key="frame" x="0.0" y="92" width="375" height="575"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2cS-T5-GOg">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="Weat" id="QUD-5M-zWr"/>
+                                </items>
+                            </navigationBar>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="HXN-yD-glH">
-                                <rect key="frame" x="0.0" y="20" width="375" height="29"/>
+                                <rect key="frame" x="0.0" y="65" width="375" height="29"/>
                                 <segments>
                                     <segment title="First"/>
                                     <segment title="Second"/>
@@ -28,20 +38,19 @@
                                     <action selector="action:" destination="OJU-Ga-pao" eventType="valueChanged" id="v1G-zP-EH9"/>
                                 </connections>
                             </segmentedControl>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fiE-D5-Esa">
-                                <rect key="frame" x="0.0" y="56" width="375" height="611"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="HXN-yD-glH" firstAttribute="centerX" secondItem="1bh-Mm-pX3" secondAttribute="centerX" id="2Ie-8p-d4Y"/>
-                            <constraint firstItem="fiE-D5-Esa" firstAttribute="leading" secondItem="1bh-Mm-pX3" secondAttribute="leading" id="FLo-wJ-Iy3"/>
-                            <constraint firstItem="HXN-yD-glH" firstAttribute="width" secondItem="Dxx-XQ-usV" secondAttribute="width" id="GRq-zj-MUA"/>
-                            <constraint firstItem="HXN-yD-glH" firstAttribute="top" secondItem="1bh-Mm-pX3" secondAttribute="top" id="PCp-7e-pTs"/>
-                            <constraint firstItem="fiE-D5-Esa" firstAttribute="top" secondItem="HXN-yD-glH" secondAttribute="bottom" constant="8" id="b0g-oV-RiC"/>
-                            <constraint firstItem="fiE-D5-Esa" firstAttribute="trailing" secondItem="1bh-Mm-pX3" secondAttribute="trailing" id="bYD-vK-nl2"/>
-                            <constraint firstItem="fiE-D5-Esa" firstAttribute="bottom" secondItem="1bh-Mm-pX3" secondAttribute="bottom" id="dJe-ie-63r"/>
+                            <constraint firstAttribute="bottom" secondItem="fiE-D5-Esa" secondAttribute="bottom" id="0oo-Hi-5UE"/>
+                            <constraint firstItem="HXN-yD-glH" firstAttribute="leading" secondItem="1bh-Mm-pX3" secondAttribute="leading" id="AUv-oz-fgf"/>
+                            <constraint firstItem="fiE-D5-Esa" firstAttribute="leading" secondItem="1bh-Mm-pX3" secondAttribute="leading" id="OES-eR-Bxg"/>
+                            <constraint firstItem="2cS-T5-GOg" firstAttribute="trailing" secondItem="1bh-Mm-pX3" secondAttribute="trailing" id="Oq1-O3-p6K"/>
+                            <constraint firstItem="HXN-yD-glH" firstAttribute="top" secondItem="2cS-T5-GOg" secondAttribute="bottom" constant="1" id="bXd-sP-DbD"/>
+                            <constraint firstItem="2cS-T5-GOg" firstAttribute="top" secondItem="1bh-Mm-pX3" secondAttribute="top" id="cmD-v4-nJa"/>
+                            <constraint firstItem="fiE-D5-Esa" firstAttribute="top" secondItem="HXN-yD-glH" secondAttribute="bottom" constant="-1" id="gRH-HW-n94"/>
+                            <constraint firstItem="HXN-yD-glH" firstAttribute="trailing" secondItem="1bh-Mm-pX3" secondAttribute="trailing" id="hEg-Je-8CC"/>
+                            <constraint firstItem="2cS-T5-GOg" firstAttribute="leading" secondItem="1bh-Mm-pX3" secondAttribute="leading" id="qct-yj-nIN"/>
+                            <constraint firstItem="fiE-D5-Esa" firstAttribute="trailing" secondItem="1bh-Mm-pX3" secondAttribute="trailing" id="vRB-2c-XfU"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1bh-Mm-pX3"/>
                     </view>
@@ -50,6 +59,7 @@
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="navigationBar" destination="2cS-T5-GOg" id="4hC-xq-51I"/>
                         <outlet property="seg" destination="HXN-yD-glH" id="bAF-PU-PSo"/>
                         <outlet property="tableView" destination="fiE-D5-Esa" id="9to-ku-agE"/>
                     </connections>

@@ -34,6 +34,9 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // make orange
+        self.navigationBar.makeOrange()
+        
         // add back button
         self.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(pressBack))
         

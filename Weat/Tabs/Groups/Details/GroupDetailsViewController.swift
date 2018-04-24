@@ -131,6 +131,9 @@ class GroupDetailsViewController: UIViewController, UITableViewDataSource, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // make orange
+        self.navigationBar.makeOrange()
+        
         let id = self.group.id!
         
         // setup buttons

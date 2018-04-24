@@ -51,6 +51,9 @@ class GroupIconViewController: UIViewController, UITableViewDataSource, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // make orange
+        self.navigationBar.makeOrange()
 
         // delegate/datasource
         self.tableView.delegate = self

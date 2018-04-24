@@ -100,6 +100,9 @@ class EditProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // make orange
+        self.navigationBar.makeOrange()
+        
         if let showArchived = UserDefaults.standard.object(forKey: "showArchived") as? Bool{
             // if the key exists
             if showArchived {

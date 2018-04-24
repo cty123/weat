@@ -26,6 +26,9 @@ class RecommendedRestaurantsViewController: UIViewController, UITableViewDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // make orange
+        self.navigationBar.makeOrange()
+        
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.reloadData()

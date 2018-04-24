@@ -16,6 +16,7 @@ class CheckinViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var noButton: UIButton!
     @IBOutlet weak var yesButton: UIButton!
+    @IBOutlet weak var navigationBar: UINavigationBar!
     
     var locationManager = CLLocationManager()
     var restaurants: [Restaurant] = []
@@ -46,6 +47,9 @@ class CheckinViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // make orange
+        self.navigationBar.makeOrange()
 
         activityIndicator.hidesWhenStopped = true
         
